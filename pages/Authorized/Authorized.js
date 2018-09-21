@@ -34,7 +34,15 @@ Page({
   },
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
+      console.log(e.detail.userInfo)
       //用户按了允许授权按钮
+      wx.login({
+        //获取code
+        success: function(res){
+          let code = res.code; //返回code
+          console.log(code)
+        },
+      })
       var that = this;
       //插入登录的用户的相关信息到数据库
       wx.request({

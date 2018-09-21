@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/Authorized/Authorized",
     "pages/HomePage/HomePage",
     "pages/DeliveryDetails/DeliveryDetails",
     "pages/Repair/Repair",
@@ -8,7 +9,6 @@
     "pages/RepairOrder/RepairOrder",
     "pages/Order/Order",
     "pages/OrderAddress/OrderAddress",
-    "pages/Authorized/Authorized",
     "pages/CompleteDetails/CompleteDetails",
     "pages/RepairDetails/RepairDetails",
     "pages/RepairDetailsComplete/RepairDetailsComplete",
