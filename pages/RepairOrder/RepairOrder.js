@@ -138,6 +138,12 @@ Page({
       currentTab: e.currentTarget.dataset.idx
     })
   },
+  // 评价跳转页面
+  Evaluate: function () {
+    wx.navigateTo({
+      url: '/pages/Evaluate/Evaluate',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载

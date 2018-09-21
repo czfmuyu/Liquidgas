@@ -26,7 +26,8 @@
     "pages/SublevelAccount/SublevelAccount",
     "pages/Supplier/Supplier",
     "pages/ChangePassword/ChangePassword",
-    "pages/BindingNumber/BindingNumber"
+    "pages/BindingNumber/BindingNumber",
+    "pages/Evaluate/Evaluate"
   ],
   "window": {
     "backgroundTextStyle": "light",

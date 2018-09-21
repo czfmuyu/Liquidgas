@@ -1,0 +1,40 @@
+<view style='margin-top:10rpx;'>
+  <textarea class='area' placeholder='满足你的期望了吗？说说他美中不足的地方吧！' value='{{inpt}}' maxlength="-1" bindinput='changeOrderData'></textarea>
+</view>
+
+
+<view>
+  <view class="stars" bindtap="myStarChoose">
+   <text>描述相符</text>
+    <block wx:for="{{starMap}}" wx:key="{{item}}">
+      <image src='../../images/xxwy.png' wx:if="{{star>=index+1}}" style="padding-right: .5em" class="zan-c-red" data-star="{{index+1}}"></image>
+      <image src='../../images/xxw.png' wx:if="{{star<index+1}}" style="padding-right: .5em" class="zan-c-gray-dark" data-star="{{index+1}}"></image>
+    </block>
+    <text class="zan-c-gray-dark">{{starMap[star-1]}}</text>
+  </view>
+</view>
+
+<view>
+  <view class="stars" bindtap="myStarChoose1">
+   <text>物流服务</text>
+    <block wx:for="{{starMap}}" wx:key="{{item}}">
+      <image src='../../images/xxwy.png' wx:if="{{star1>=index+1}}" style="padding-right: .5em" class="zan-c-red" data-star="{{index+1}}"></image>
+      <image src='../../images/xxw.png' wx:if="{{star1<index+1}}" style="padding-right: .5em" class="zan-c-gray-dark" data-star="{{index+1}}"></image>
+    </block>
+    <text class="zan-c-gray-dark">{{starMap[star1-1]}}</text>
+  </view>
+</view>
+
+
+<view>
+  <view class="stars" bindtap="myStarChoose2">
+   <text>服务态度</text>
+    <block wx:for="{{starMap}}" wx:key="{{item}}">
+      <image src='../../images/xxwy.png' wx:if="{{star2>=index+1}}" style="padding-right: .5em" class="zan-c-red" data-star="{{index+1}}"></image>
+      <image src='../../images/xxw.png' wx:if="{{star2<index+1}}" style="padding-right: .5em" class="zan-c-gray-dark" data-star="{{index+1}}"></image>
+    </block>
+    <text class="zan-c-gray-dark">{{starMap[star2-1]}}</text>
+  </view>
+</view>
+
+<button class='btton' bindtap='submission'>提交</button>

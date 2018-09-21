@@ -161,7 +161,7 @@
             </view>
             <view class="btn-list">
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onQueryBtn">查看详情</view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">待评价</view>
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">待评价</view>
             </view>
         </view>
     </scroll-view>
