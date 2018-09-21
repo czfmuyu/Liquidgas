@@ -1,0 +1,61 @@
+<!--pages/HomePage.wxml-->
+<view class="header_background" catchtap="OrderAddress" style="background-image:url(../../imgs/bj.jpg)">
+    <image class="header_btn" src="../../imgs/btn.png" />
+</view>
+<view class="content_top">
+    <view class="content_ipt">
+        <view class="content_img" >
+            <image src="../../imgs/7_03.png" />
+        </view>
+        <view class="content_input">
+            <text >用气编号:  283647825346835</text>
+        </view>
+    </view>
+</view>
+<view class="content_bottom">
+    <view class="nav">
+        <view class="nav_left" catchtap="Repair">
+            <text >故障维修</text>
+            <image src="../../imgs/7_11.png" />
+        </view>
+        <view class="nav_right">
+            <view class="opinion" catchtap="Opinion">
+                <text >意见反馈</text>
+                <image src="../../imgs/7_07.png" />
+            </view>
+            <view class="security" catchtap="Security">
+                <text >安全宣传</text>
+                <image src="../../imgs/7_14.png" />
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 新用户弹窗 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph" >提示</view>
+    <view class="btn-Album" >请绑定用气编号</view>
+    <view class="modal-ipt">
+        <input 
+            placeholder="用气编号"
+            bindinput="GasNumber" />
+    </view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="onCancel" >取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" >确定</view>
+    </view>
+</view>
+<!-- 新用户弹窗 -->
+<view class="modal-mask" bindtap="hideModaltwo" catchtouchmove="preventTouchMove" wx:if="{{showModalTwo}}"></view>
+<view class="modal-dialog" wx:if="{{showModalTwo}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph" >请选择绑定用气编号</view>
+    <view class="btn-Number" style="border-top: 2rpx solid;">12345648464864</view>
+    <view class="btn-Number" >12345648464864</view>
+    <view class="btn-Number" >12345648464864</view>
+    <view class="modal-footer">
+        <!-- <view class="btn-cancel" bindtap="onCancel" >取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" >确定</view> -->
+    </view>
+</view>

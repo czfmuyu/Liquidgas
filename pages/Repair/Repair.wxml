@@ -1,0 +1,104 @@
+<!-- pages/Repair/Repair.wxml -->
+<scroll-view scroll-y>
+  <view class="emergency">如遇紧急安全情况,请直接拨打客服电话XXXXX</view>
+  <view class="header" hidden="{{isAddress}}">
+    <view class="header_left">
+      <image src="../../imgs/221_03.png" />
+    </view>
+    <view class="header_right">
+      <view class="header_right_top">
+        <view>{{name}}</view>
+        <view>{{phone}}</view>
+      </view>
+      <view class="header_right_bottom">{{address}}</view>
+    </view>
+  </view>
+  <!-- 地址没有数据显示的页面 -->
+  <view class="hidden_header" hidden="{{!isAddress}}">
+    <view class="hidden_header_left">
+      <image src="../../imgs/33_03.png" />
+    </view>
+    <view class="hidden_header_right" bindtap="Add">
+      <image src="../../imgs/44_05.png" />
+    </view>
+  </view>
+  <!-- 新增地址弹框 -->
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph">添加收货地址</view>
+    <view class="user" style="margin-top: 54rpx;">
+      <view class="user_left">
+        <text>收货人</text>
+      </view>
+      <view class="user_right">
+        <input placeholder="请输入收货人姓名" bindinput="userName" />
+      </view>
+    </view>
+    <view class="user" style="margin-top: 54rpx;">
+      <view class="user_left">
+        <text>手机号</text>
+      </view>
+      <view class="user_right">
+        <input placeholder="请输入收货人联系方式" bindinput="userPhone" />
+      </view>
+    </view>
+    <view class="user" style="margin-top: 54rpx;margin-bottom: 54rpx;">
+      <view class="user_left">
+        <text>所在地址</text>
+      </view>
+      <view class="user_right">
+        <input placeholder="请输入收货人地址" bindinput="userAddress" />
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="btn-cancel" bindtap="onCancel">取消</view>
+      <view class="btn-confirm" bindtap="onConfirm">确定</view>
+    </view>
+  </view>
+  <!-- 预定时间弹框 -->
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <image class="content_left" src="../../imgs/221_06.png" />
+        <view class="weui-label">预约时间</view>
+        <view class="content_right">></view>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="weui-input" style="margin-left:239rpx;">{{array[index]}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="guarantee">保修项目</view>
+  <view class="guaranteeList">
+    <view class="guaranteeList_box" wx:for="{{guaranteeList}}" wx:key="guaranteeList" wx:for-item="item">
+      {{item.name}}
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="page-section-title"></view>
+    <view class="textarea-wrp">
+      <textarea auto-focus="true" style="height: 3em" placeholder="具体描述下问题所在" />
+    </view>
+  </view>
+  <!-- 照片上传 -->
+  <view class='picture'>
+    <view>
+      <text>上传照片</text>
+      <text style='color:#f3f3f3;'>（最多上传9张）</text>
+    </view>
+    <view class='picture_flex'>
+      <view class='picture_img' wx:for="{{orderData.images}}" wx:key="index" wx:for-item="item" >
+        <image src='{{item}}' mode='aspectFill' data-index='{{index}}' bindtap='previewImg' data-src='{{item}}'></image>
+        <icon  class='icon' type='clear' bindtap='removeImg' data-img_url='{{item}}'/>
+      </view>
+      <view class='picture_butt' bindtap="chooseimage" wx:if="{{orderData.images.length <=9}}">
+        <image src='../../images/tpsc.jpg'></image>
+      </view>
+    </view>
+
+  </view>
+  <button class="submit" formType="submit" bindtap="Submit">提交</button>
+</scroll-view>

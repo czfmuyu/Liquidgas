@@ -1,0 +1,35 @@
+<!--pages/ReplacePhone/ReplacePhone.wxml-->
+<view class="InformationList" >
+    <view >
+        <text >原有手机号码</text>
+    </view>
+    <view style="margin-left: 30rpx;color: #be201f">
+        <text >{{number}}</text>
+    </view>
+</view>
+<view class="InformationList" >
+    <view >
+        <text >校正码</text>
+    </view>
+    <view class="InformationList_ipt" style="border-right: 2rpx solid #eee;">
+        <input placeholder="请输入校验证码" />
+    </view>
+    <view style="color: #999;" bindtap="bindButtonTap">
+        <text >{{currentTime}}秒后重发</text>
+    </view>
+</view>
+<view class="InformationList"  >
+    <view >
+        <text >更换手机号码</text>
+    </view>
+    <view class="InformationList_ipt" >
+        <input 
+            style="width: 392rpx;"
+            maxlength="11" 
+            placeholder="请输入更换手机号码"
+            bindinput="phoneInput" />
+    </view>
+</view>
+<view class="btn_confirm" bindtap="Confirm" style="background-color: {{color}};">
+    <text >确定</text>
+</view>

@@ -1,0 +1,78 @@
+/* pages/Login.wxss */
+.user{
+    margin: 0 auto;
+    width: 620rpx;
+    height: 70rpx;
+    display:flex;
+    line-height: 70rpx;
+    
+}
+.user_left{
+    width: 160rpx;
+    height: 70rpx;
+    color: #aaaaaa;
+    text-align: center;
+}
+.user_right{
+    width: 480rpx;
+    height: 70rpx;
+}
+.user_right>input{
+    width: 440rpx;
+    height: 70rpx;
+    border-bottom: 2rpx solid #aaaaaa;
+    font-size: 32rpx;
+    padding-left: 28rpx;
+}
+.userBtn{
+    width: 600rpx;
+    height: 72rpx;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.userBtn_left{
+    width: 150rpx;
+    height: 72rpx;
+    display: flex;
+    justify-content: space-between;
+    /* line-height: 72rpx; */
+}
+.Tick{
+    margin-top: 30rpx;
+    width: 24rpx;
+    height: 24rpx;
+    border: 2rpx solid #000;
+    border-radius: 5rpx;
+    font-size: 24rpx;
+    font-weight: 900;
+    color: red;
+}
+.userBtn_right{
+    height: 72rpx;
+    line-height: 72rpx;
+}
+.Ticktext{
+    margin-top: 29rpx;
+    font-size: 24rpx;
+    margin-left: 6rpx;
+    color: #2269d4;
+}
+.loginBtn{
+    width: 578rpx;
+    height: 80rpx;
+    margin: 0 auto;
+    background-color: #2269d4;
+    border-radius: 50rpx;
+    color: #fff;
+    line-height: 80rpx;
+    text-align: center;
+}
+.registerBtn{
+    width: 200rpx;
+    height: 50rpx;
+    margin: 0 auto;
+    font-size: 30rpx;
+    font-weight: 900;
+    color: #2269d4;
+}

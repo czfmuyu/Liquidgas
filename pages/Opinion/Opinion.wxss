@@ -1,0 +1,21 @@
+/* pages/Opinion/Opinion.wxss */
+.section{
+    display:flex;
+    justify-content: center;
+    margin-top: 76rpx;
+}
+.page-section{
+    margin: 54rpx auto;
+    width: 686rpx;
+    height: 275rpx;
+    border:2rpx solid;
+}
+.submit{
+    width: 650rpx;
+    height: 92rpx;
+    display: flex;
+    justify-content: center;
+    background-color: #2269d4;
+    border-radius: 50rpx;
+    color: #fff;
+}

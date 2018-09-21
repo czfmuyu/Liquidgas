@@ -1,0 +1,65 @@
+<!--pages/RepairDetailsComplete.wxml-->
+<scroll-view scroll-y>
+    <view class="header_Order">
+        <view class="Order">
+            <view class="Order_left">
+                <view>维修单号: {{CustomerId}}</view>
+            </view>
+            <view class="Order_right">{{status}}</view>
+        </view>
+    </view>
+     <view class="project">
+        <view class="project_top">维修项目</view>
+        <view class="project_bottom">
+            <view class="project_bottom_box">{{problem}}</view>
+        </view>
+    </view>
+    <view class="details">详情描述</view>
+    <view class="details_text">{{describe}}</view>
+    <view class='img_flex'>
+      <image src='../../images/map1.png'></image>
+      <image src='../../images/map2.png'></image>
+    </view>
+    <view class="details_time">
+        <view>{{date}}</view>
+        <view>{{time}}</view>
+    </view>
+    <view class="details flex" hidden="{{StateControl!==1}}">
+        <view>处理结果</view>
+        <view style="color: #2269d4;">{{OrderTrackList.processing}}</view>
+    </view>
+    <view class="details_text" hidden="{{StateControl!==1}}">{{OrderTrackList.processingtext}}</view>
+    <view class="Repair_time" hidden="{{StateControl!==1}}">
+        <view>处理人: {{OrderTrackList.Operator}}</view>
+        <view class="Repair_time_right">
+            <view style="margin-right: 12rpx;"></view>
+            <view style="margin-left: 12rpx;"></view>
+        </view>
+    </view>
+     <view class="Repair">维修信息</view>
+    <view class="Repair_time">
+        <view>预约时间</view>
+        <view>{{ReserveTime}}</view>
+    </view>
+    <view class="Repair_address">
+        <view class="address">收货地址</view>
+        <view class="address_right">{{Address}}</view>
+    </view>
+    <view class="Repair_time">
+        <view>收货人电话</view>
+        <view>{{Contact}}({{Phone}})</view>
+    </view>
+    <view class="Repair_time">
+        <view>维修工</view>
+        <view class="Repair_time_right">
+            <view style="margin-left: 12rpx;">{{Creator}}</view>
+        </view>
+    </view>
+    <view class="btn" hidden="{{btn!==2}}">
+        <view class="btn_cancel">取消维修单</view>
+        <view class="btn_complete">确认完成</view>
+    </view>
+    <view class="btn" hidden="{{btn!==1}}">
+        <view class="btn_complete">去评价</view>
+    </view>
+</scroll-view>

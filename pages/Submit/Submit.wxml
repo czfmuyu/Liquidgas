@@ -1,0 +1,11 @@
+<!--pages/Submit/Submit.wxml-->
+<view class="header_img">
+    <image src="../../imgs/111_03.png" />
+</view>
+<view class="header_text" style="margin-top: 68rpx;">
+    <text >提交成功</text>
+</view>
+<view class="header_text" style="margin-top: 20rpx;">
+    <text >感谢您对我们的支持和信任</text>
+</view>
+<button class="btn" bindtap="Return">返回首页</button>

@@ -1,0 +1,17 @@
+<!-- pages/AccountSecurity/AccountSecurity.wxml -->
+<view class="securityList" bindtap="Change">
+    <view class="securityList_left">
+        <view class="securityList_top">
+            <view class="securityList_top_text">
+                <text>登录密码修改</text>
+            </view>
+            <view class="securityList_top_text">
+                <text></text>
+            </view>
+        </view>
+        <view class="securityList_bottom">
+            建议您定期修改密码以保护账号安全
+        </view>
+    </view>
+    <view class="securtyList_right">></view>
+</view>

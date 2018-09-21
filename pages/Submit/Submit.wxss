@@ -1,0 +1,23 @@
+/* pages/Submit/Submit.wxss */
+.header_img{
+    margin-top: 138rpx;
+    display:flex;
+    justify-content: center;
+}
+.header_img>image{
+    width: 144rpx;
+    height: 128rpx;
+}
+.header_text{
+    font-size: 32rpx;
+    display:flex;
+    justify-content: center;
+}
+.btn{
+    width: 642rpx;
+    height: 88rpx;
+    background-color: #2269d4;
+    color: #fff;
+    border-radius: 50rpx;
+    margin-top: 88rpx;
+}

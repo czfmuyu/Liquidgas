@@ -1,0 +1,96 @@
+/* pages/My/My.wxss */
+page{
+    background-color: #f7f7f7;
+}
+.header{
+    width: 100%;
+    height: 306rpx;
+    background-color: #2269d4;
+}
+.headPortrait{  
+    width: 167rpx;
+    height: 161rpx;
+    display: flex; 
+    margin: 0 auto;
+    justify-content: center;
+    padding-top: 44rpx;
+}
+.headPortrait>image{
+    width: 167rpx;
+    height: 161rpx;
+    border-radius:50%;  
+}
+.top_text>text{
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 34rpx;
+    margin-top: 30rpx;
+}
+.content_recharge{
+    display: flex;
+    justify-content: space-between;
+    height:116rpx;
+    background-color: #fff;
+    padding: 0 18rpx;
+    box-shadow: inset 0px 1px 0px #e7e7e7, 0px 1px 0px #e7e7e7;
+}
+.recharge{
+    display: flex;
+    flex-direction:column;
+}
+.recharge_text{
+    width: 187rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    text-align: center;
+}
+.recharge_btn{
+    width: 154rpx;
+    height: 116rpx;
+}
+.btn_box{
+    width: 154rpx;
+    height: 70rpx;
+    background-color: #2269d4;
+    color: #fff;
+    border-radius: 50rpx;
+    text-align: center;
+    line-height: 70rpx;
+    margin-top: 24rpx;
+}
+.InformationList{
+    width: 713rpx;
+    height: 92rpx;
+    padding: 0 23rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.InformationList_left{
+    display: flex;
+    height: 92rpx;
+}
+.InformationList_left>image{
+    width: 70rpx;
+    height: 54rpx;
+    margin-top: 23rpx;
+}
+.InformationList_text{
+    width: 300rpx;
+    height: 92rpx;
+    line-height: 92rpx;
+    margin-left: 20rpx;
+}
+.InformationList_right{
+    display: flex;
+    color: #ccc;
+    font-size: 80rpx;
+    line-height: 92rpx;
+}
+.InformationList_right_text{
+    color: #000;
+    font-size: 30rpx;
+    line-height: 92rpx;
+}

@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "供应商推荐",
+    "usingComponents": {
+        "SupplierList":"../../component/SupplierList/SupplierList"
+    }
+}

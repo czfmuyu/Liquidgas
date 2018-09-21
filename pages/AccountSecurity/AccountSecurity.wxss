@@ -1,0 +1,41 @@
+/* pages/AccountSecurity/AccountSecurity.wxss */
+page{
+    background-color: #f4f4f4;
+}
+.securityList{
+    background-color: #fff;
+    height: 174rpx;
+    padding: 0 23rpx;
+    border-bottom: 2rpx solid #eeeeee;
+    display:flex;
+}
+.securityList_left{
+    width: 667rpx;
+    height: 174rpx;
+    display: flex;
+    flex-direction: column;
+}
+.securtyList_right{
+    width: 36rpx;
+    height: 174rpx;
+    line-height: 174rpx;
+    font-size: 66rpx;
+}
+.securityList_top{
+    width: 667rpx;
+    height: 91rpx;
+    display: flex;
+    justify-content: space-between;
+}
+.securityList_top_text{
+    padding-right: 18rpx;
+    margin-top:42rpx;
+    font-size: 36rpx;
+}
+.securityList_bottom{
+    width: 667rpx;
+    height: 83rpx;
+    line-height: 83rpx;
+    font-size: 26rpx;
+    color: #666;
+}

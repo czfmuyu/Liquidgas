@@ -1,0 +1,199 @@
+<!-- pages/RepairOrder/RepairOrder.wxml -->
+<view class="header">
+    <view class="header_ipt">
+        <image src="../../imgs/5_03.png" />
+        <input placeholder="请输入要查询订单编号" bindinput="queryInput" />
+        <view class="header_ipt_x" bindtap="Delete">X</view>
+    </view>
+</view>
+<!-- 导航条 -->
+<view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
+        {{item}}
+    </text>
+</view>
+<!-- 全部订单 -->
+<view hidden="{{currentTab!==0}}">
+    <scroll-view scroll-y>
+        <!-- 待维修 -->
+        <view class="whole" wx:for="{{UntreatedList}}" wx:for-item="item" wx:key="UntreatedList">
+            <view class="whole_top">
+                <view style="color: #999;">维修单号 {{item.CustomerId}}</view>
+                <view style="color: #2269d4;">{{item.status}}</view>
+            </view>
+            <view class="whole_middle">
+                <view class="whole_middle_text">
+                    <view style="margin-left: 18rpx;">{{item.problem}}</view>
+                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+                        {{item.describe}}
+                    </view>
+                </view>
+            </view>
+            <view class="userName">申报人: {{item.Creator}}</view>
+            <view class="whole_bottom">
+                <view class="whole_bottom_left">
+                    <view>申报人:</view>
+                    <view style="margin:0 4rpx;">{{item.date}}</view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+            </view>
+            <view class="btn-list">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn">查看详情</view>
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
+            </view>
+        </view>
+        <!-- 维修完成 -->
+        <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
+            <view class="whole_top">
+                <view style="color: #999;">维修单号 {{item.CustomerId}}</view>
+                <view style="color: {{text2}};">{{item.status}}</view>
+            </view>
+            <view class="whole_middle">
+                <view class="whole_middle_text">
+                    <view style="margin-left: 18rpx;">{{item.problem}}</view>
+                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+                        {{item.describe}}
+                    </view>
+                </view>
+            </view>
+            <view class="userName">申报人: {{item.Creator}}</view>
+            <view class="whole_bottom">
+                <view class="whole_bottom_left">
+                    <view>申报人:</view>
+                    <view style="margin:0 4rpx;">{{item.date}}</view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+            </view>
+            <view class="btn-list">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onQueryBtn">查看详情</view>
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">待评价</view>
+            </view>
+        </view>
+        <!-- 已取消 -->
+        <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
+            <view class="whole_top">
+                <view style="color: #999;">维修单号 {{item.CustomerId}}</view>
+                <view style="color: {{text2}};">{{item.status}}</view>
+            </view>
+            <view class="whole_middle">
+                <view class="whole_middle_text">
+                    <view style="margin-left: 18rpx;">{{item.problem}}</view>
+                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+                        {{item.describe}}
+                    </view>
+                </view>
+            </view>
+            <view class="userName">申报人: {{item.Creator}}</view>
+            <view class="whole_bottom">
+                <view class="whole_bottom_left">
+                    <view>申报人:</view>
+                    <view style="margin:0 4rpx;">{{item.date}}</view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+            </view>
+            <view class="btn-list">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onEvaluate">查看详情</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<!-- 待维修 -->
+<view hidden="{{currentTab!==1}}">
+    <scroll-view scroll-y>
+        <view class="whole" wx:for="{{UntreatedList}}" wx:for-item="item" wx:key="UntreatedList">
+            <view class="whole_top">
+                <view style="color: #999;">维修单号 {{item.CustomerId}}</view>
+                <view style="color: #2269d4;">{{item.status}}</view>
+            </view>
+            <view class="whole_middle">
+                <view class="whole_middle_text">
+                    <view style="margin-left: 18rpx;">{{item.problem}}</view>
+                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+                        {{item.describe}}
+                    </view>
+                </view>
+            </view>
+            <view class="userName">申报人: {{item.Creator}}</view>
+            <view class="whole_bottom">
+                <view class="whole_bottom_left">
+                    <view>申报人:</view>
+                    <view style="margin:0 4rpx;">{{item.date}}</view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+            </view>
+            <view class="btn-list">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn">查看详情</view>
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<!-- 维修完成 -->
+<view hidden="{{currentTab!==2}}">
+    <scroll-view scroll-y>
+        <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
+            <view class="whole_top">
+                <view style="color: #999;">维修单号 {{item.CustomerId}}</view>
+                <view style="color: {{text2}};">{{item.status}}</view>
+            </view>
+            <view class="whole_middle">
+                <view class="whole_middle_text">
+                    <view style="margin-left: 18rpx;">{{item.problem}}</view>
+                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+                        {{item.describe}}
+                    </view>
+                </view>
+            </view>
+            <view class="userName">申报人: {{item.Creator}}</view>
+            <view class="whole_bottom">
+                <view class="whole_bottom_left">
+                    <view>申报人:</view>
+                    <view style="margin:0 4rpx;">{{item.date}}</view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+            </view>
+            <view class="btn-list">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onQueryBtn">查看详情</view>
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">待评价</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<!-- 已取消 -->
+<view hidden="{{currentTab!==3}}">
+    <scroll-view scroll-y>
+        <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
+            <view class="whole_top">
+                <view style="color: #999;">维修单号 {{item.CustomerId}}</view>
+                <view style="color: {{text2}};">{{item.status}}</view>
+            </view>
+            <view class="whole_middle">
+                <view class="whole_middle_text">
+                    <view style="margin-left: 18rpx;">{{item.problem}}</view>
+                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+                        {{item.describe}}
+                    </view>
+                </view>
+            </view>
+            <view class="userName">申报人: {{item.Creator}}</view>
+            <view class="whole_bottom">
+                <view class="whole_bottom_left">
+                    <view>申报人:</view>
+                    <view style="margin:0 4rpx;">{{item.date}}</view>
+                    <view>{{item.time}}</view>
+                </view>
+                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+            </view>
+            <view class="btn-list">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onQueryBtn">查看详情</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

@@ -1,0 +1,22 @@
+/* pages/ReplacePhone/ReplacePhone.wxss */
+.InformationList{
+    height: 106rpx;
+    padding: 0 56rpx;
+    display: flex;
+    line-height: 106rpx;
+    border-bottom: 2rpx solid #eee;
+}
+.InformationList_ipt>input{
+   width: 307rpx;
+   height: 106rpx;
+   padding-left: 20rpx;
+}
+.btn_confirm{
+    width: 640rpx;
+    margin: 72rpx auto;
+    line-height: 90rpx;
+    text-align: center;
+    color: #fff;
+    border-radius: 50rpx;
+}
+

@@ -1,0 +1,54 @@
+/* pages/RepairDetailsComplete.wxss */
+@import "../RepairDetails/RepairDetails.wxss";
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.from{
+    width: 708rpx;
+    padding: 0 20rpx;
+    padding-bottom: 20rpx;
+    background-color: #fff;
+}
+.from_top{
+    display: flex;
+    justify-content: space-between;
+    height: 64rpx;
+    background-color: #f5f5f5;
+    font-size: 28rpx;
+    font-weight: 900;
+    line-height: 64rpx;
+}
+.from_bottom{
+    display: flex;
+    justify-content: space-between;
+    height: 78rpx;
+    line-height: 78rpx;
+    font-size: 28rpx;
+    outline: 2rpx solid #f5f5f5;
+}
+.from_bottom_left{
+    width: 232rpx;
+    height: 78rpx;
+}
+.from_bottom_middle{
+    width: 146rpx;
+    height: 78rpx;
+    text-align: center;
+}
+.from_bottom_right{
+    width: 124rpx;
+    height: 78rpx;
+    text-align: center;
+}
+
+.img_flex{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+.img_flex image{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 20rpx;
+}

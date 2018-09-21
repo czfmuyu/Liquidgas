@@ -1,0 +1,214 @@
+<!-- pages/OrderAddress/OrderAddress.wxml -->
+<!-- 供应商有数据显示页面 -->
+<view class="header" style='border-bottom:2rpx solid #eee;' hidden="{{isSupplier}}">
+    <view class="header_left">
+        <image src="../../imgs/221_03.png" />
+    </view>
+    <view class="header_right">
+        <view class="header_right_top">
+            <view>供应商1</view>
+            <view>{{phone}}</view>
+        </view>
+        <view class="header_right_bottom">{{address}}</view>
+    </view>
+</view>
+<!-- 供应商没有数据显示的页面 -->
+<view class="hidden_header" style='border-bottom:2rpx solid #eee;' hidden="{{!isSupplier}}">
+    <view class="hidden_header_left">
+        <image src="../../imgs/488420311228276237.png" />
+    </view>
+    <view class="hidden_header_right" bindtap="SupplierAdd">
+        <image src="../../imgs/44_05.png" />
+    </view>
+</view> 
+<!-- 地址有数据显示的页面 -->
+<view class="header" hidden="{{isAddress}}">
+    <view class="header_left">
+        <image src="../../imgs/221_03.png" />
+    </view>
+    <view class="header_right">
+        <view class="header_right_top">
+            <view>{{name}}</view>
+            <view>{{phone}}</view>
+        </view>
+        <view class="header_right_bottom">{{address}}</view>
+    </view>
+</view>
+<!-- 地址没有数据显示的页面 -->
+<view class="hidden_header" hidden="{{!isAddress}}">
+    <view class="hidden_header_left">
+        <image src="../../imgs/33_03.png" />
+    </view>
+    <view class="hidden_header_right" bindtap="Add">
+        <image src="../../imgs/44_05.png" />
+    </view>
+</view>
+<!-- 新增地址弹框 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph">添加收货地址</view>
+    <view class="user" style="margin-top: 54rpx;">
+        <view class="user_left">
+            <text>收货人</text>
+        </view>
+        <view class="user_right">
+            <input placeholder="请输入收货人姓名" bindinput="userName" />
+        </view>
+    </view>
+    <view class="user" style="margin-top: 54rpx;">
+        <view class="user_left">
+            <text>手机号</text>
+        </view>
+        <view class="user_right">
+            <input placeholder="请输入收货人联系方式" bindinput="userPhone" />
+        </view>
+    </view>
+    <view class="user" style="margin-top: 54rpx;margin-bottom: 54rpx;">
+        <view class="user_left">
+            <text>所在地址</text>
+        </view>
+        <view class="user_right">
+            <input placeholder="请输入收货人地址" bindinput="userAddress" />
+        </view>
+    </view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="onCancel">取消</view>
+        <view class="btn-confirm" bindtap="onConfirm">确定</view>
+    </view>
+</view>
+<!-- 预定时间弹框 -->
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <image class="content_left" src="../../imgs/221_06.png" />
+            <view class="weui-label">预约时间</view>
+            <view class="content_right">></view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                <view class="weui-input" style="margin-left:239rpx;">{{array[index]}}</view>
+            </picker>
+        </view>
+    </view>
+</view>
+<!-- 预定那天弹框 -->
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+            <image class="content_left" src="../../imgs/221_06.png" />
+            <view class="weui-label">预约那天</view>
+            <view class="content_right">></view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindDayPickerChange" value="{{index2}}" range="{{array2}}">
+                <view class="weui-input" style="margin-left:239rpx;">{{array2[index2]}}</view>
+            </picker>
+        </view>
+    </view>
+</view>
+<!-- 商品选择 -->
+<view class="goods" style=" margin-top: 48rpx;border-bottom: 2rpx solid #eee;" bindtap="goodsDisplay">
+    <view>商品选择</view>
+    <view class="goods_right">
+        <view style="margin-left: 12rpx;"></view>
+        <view class="goods_right_text">></view>
+    </view>
+</view>
+<!-- 商品列表 -->
+<view class="goods" style="padding: 0 52rpx;border-bottom: 2rpx solid #eee;" 
+    wx:for='{{goods}}' 
+    wx:for-item="item" 
+    wx:key="good.list"
+    hidden="{{!isgoods}}">
+    <view>{{item.Name}}</view>
+    <view>￥{{item.Price}}</view>
+    <view class="goods_right">
+        <view style="margin-left: 12rpx;">X{{item.Quantity}}</view>
+        <view class="goods_right_text"></view>
+    </view>
+</view>
+<!-- 商品选择弹框 -->
+<view class="modal-mask" bindtap="goodsHideModal" catchtouchmove="preventTouchMove" wx:if="{{showgoods}}"></view>
+<view class="modal-dialog" wx:if="{{showgoods}}" style=" top:20%;">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph">商品列表</view>
+    <view class="goodsList" wx:for='{{goodslist}}' wx:for-item="item" wx:key="good.name">
+        <view class="goodsList_text">{{item.Name}}</view>
+        <view class="goodsList_text">￥{{item.Price}}/{{item.PrceType}}</view>
+        <view class="Counter">
+            <view class="Counter_left" data-index='{{index}}' catchtap='subtracttap'>-</view>
+            <view class="Counter_middle">
+                <view class='count'data-index='{{index}}'  type='number' bindinput="Quantity">{{item.Quantity}}</view>
+            </view>
+            <view class="Counter_right" data-index="{{index}}" catchtap='addtap'>+</view>
+        </view>
+    </view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="goodsCancel">取消</view>
+        <view class="btn-confirm" bindtap="goodsConfirm">确定</view>
+    </view>
+</view>
+<!-- 支付方式 -->
+<view class="goods" bindtap="goodsPayment">
+    <view>支付方式</view>
+    <view class="goods_right">
+        <view style="margin-left: 12rpx;">{{PaymentName}}</view>
+        <view class="goods_right_text">></view>
+    </view>
+</view>
+<!-- 支付弹框 -->
+<view class="modal-mask" bindtap="PaymenthideModal" catchtouchmove="preventTouchMove" wx:if="{{showPayment}}"></view>
+<view class="modal-dialog" wx:if="{{showPayment}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph">请选择支付方式</view>
+    <view class="page-section page-section-gap">
+        <radio-group class="group" bindchange="radioChange">
+            <view class="label-2" wx:for="{{radioItems}}" wx:key="radioItems">
+                <label class="label-2-text" for="{{item.name}}">
+                    <view >
+                        <image class="online" src="{{item.imgs}}" />
+                    </view>
+                    <text>{{item.name}}</text>
+                </label>
+                <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}"></radio>
+            </view>
+        </radio-group>
+    </view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="PaymentCancel">取消</view>
+        <view class="btn-confirm" bindtap="PaymentConfirm">确定</view>
+    </view>
+</view>
+<!-- 支付方式弹框 -->
+<view class="modal-mask" bindtap="PaymentMethodhideModal" catchtouchmove="preventTouchMove" wx:if="{{showPaymentMethod}}"></view>
+<view class="modal-dialog" wx:if="{{showPaymentMethod}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph">请选择支付方式</view>
+    <view class="page-section page-section-gap">
+        <radio-group class="group" bindchange="PaymentChange">
+            <view class="label-2" wx:for="{{PaymentItems}}" wx:key="PaymentItems">
+                <image class="wx" src="../../imgs/77_03.png"/>
+                <image class="Agriculture" src="../../imgs/77_06.png"/>
+                <image class="investment" src="../../imgs/77_08.png"/>
+                <image class="GS" src="../../imgs/77_10.png"/>
+                <label class="label-2-text" for="{{item.name}}">
+                    <text>{{item.name}}</text>
+                </label>
+                <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}"></radio>
+            </view>
+        </radio-group>
+    </view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="PaymentMethodCancel">取消</view>
+        <view class="btn-confirm" bindtap="PaymentMethodConfirm">确定</view>
+    </view>
+</view>
+<!-- 占位 -->
+<view class="goods" style="background-color: #f5f5f5;"></view>
+<view class="goods" style="background-color: #f5f5f5;"></view>
+<!-- footer确定支付 -->
+<view class="footer">
+    <view class="footer_left">共{{Quantity}}件商品,共￥{{Price}}</view>
+    <view class="footer_right" bindtap="ConfirmSuccess">确定支付</view>
+</view>

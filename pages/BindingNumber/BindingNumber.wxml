@@ -1,0 +1,26 @@
+<view class="content" style="border-bottom: 2rpx solid #f2f2f2;" wx:for="{{numberlist}}" wx:for-item="item" wx:key="numberlist">
+    <view>
+        <text>用气编号</text>
+    </view>
+    <view>
+        <text>{{item.number}}</text>
+    </view>
+</view>
+<view class="btn" bindtap="Gas">新增用气编号</view>
+
+<!-- 新增用气编号弹窗 -->
+<view class="modal-mask" bindtap="GasHideModal" catchtouchmove="preventTouchMove" wx:if="{{GasShowModal}}"></view>
+<view class="modal-dialog" wx:if="{{GasShowModal}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph" >提示</view>
+    <view class="btn-Album" >请输入你要绑定的用气编号</view>
+    <view class="modal-ipt">
+        <input 
+            placeholder="请输入用气编号"
+            bindinput="GasNumber" />
+    </view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="onGasCancel" >取消</view>
+        <view class="btn-confirm" bindtap="onGasConfirm" >确定</view>
+    </view>
+</view>

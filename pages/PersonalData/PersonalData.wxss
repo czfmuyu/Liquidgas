@@ -1,0 +1,130 @@
+/* pages/PersonalData/PersonalData.wxss */
+page{
+    background-color: #f7f7f7;
+}
+.header{
+    height: 196rpx;
+    padding: 0 30rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+.left_text{
+    width: 100rpx;
+    line-height: 196rpx;
+}
+.header_right{
+    width: 184rpx;
+    height: 196rpx;
+    display: flex;
+    line-height: 196rpx;
+}
+.right_img{
+    width: 148rpx;
+    height: 196rpx;
+}
+.right_img>image{
+    width: 148rpx;
+    height: 137rpx;
+    border-radius: 50%;
+    margin-top: 34rpx;
+    margin-left: -40rpx;
+}
+.right_text{
+    color: #ccc;
+    font-size: 80rpx;
+}
+.content{
+    height: 94rpx;
+    padding: 0 30rpx;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    line-height: 94rpx;
+}
+.wrap{
+    display: flex;
+}
+/* 头像弹窗 */
+.show-btn {
+    margin-top: 100rpx;
+    color: #22cc22;
+  }
+  
+  .modal-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    overflow: hidden;
+    z-index: 9000;
+    color: #fff;
+  }
+  
+  .modal-dialog {
+    width: 680rpx;
+    overflow: hidden;
+    position: fixed;
+    top: 45%;
+    left: 0;
+    z-index: 9999;
+    background: #f9f9f9;
+    margin: -180rpx 36rpx;
+    border-radius: 36rpx;
+  }
+  .modal-title {
+    font-size: 36rpx;
+    color: #030303;
+    text-align: center;
+  }
+  .btn-Photograph,
+  .btn-Album{
+      width: 680rpx;
+      height: 89rpx;
+      text-align: center;
+      line-height: 89rpx;
+      color: #666;
+  }
+  .btn-Photograph{
+    font-size: 46rpx;
+    font-weight: 900;
+  }
+  .btn-Album{
+    padding-bottom: 32rpx;
+  }
+  .modal-ipt{
+    padding-bottom: 36rpx;
+    color: #c7c7cc;
+  }
+  .modal-ipt>input{
+      width: 477rpx;
+      height: 50rpx;
+      margin: 0 auto;
+      border:2rpx solid;
+      padding-left: 10rpx;
+  }
+  
+  .modal-footer {
+    display: flex;
+    flex-direction: row;
+    height: 86rpx;
+    border-top: 1px solid #dedede;
+    font-size: 34rpx;
+    line-height: 86rpx;
+  }
+  
+  .btn-cancel {
+    width: 50%;
+    color: #666;
+    text-align: center;
+    border-right: 1px solid #dedede;
+  }
+  .btn-confirm {
+    width: 50%;
+    color: #ec5300;
+    text-align: center;
+  }
+  

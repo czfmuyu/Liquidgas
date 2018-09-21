@@ -1,0 +1,17 @@
+<!-- component/SupplierList/SupplierList.wxml -->
+<view class="SupplierList" >
+    <view class="SupplierList_left">
+        <view>
+            <text class="black">{{Supplier}}</text>
+        </view>
+        <view>
+            <text class="gray">电话：{{SupplierPhone}}</text>
+        </view>
+        <view>
+            <text class="gray">地址：{{SupplierAddress}}</text>
+        </view>
+    </view>
+    <view class="SupplierList_right">
+        <text class="gray">{{SupplierDistance}}</text>
+    </view>
+</view>

@@ -1,0 +1,79 @@
+/* pages/Repair/Repair.wxss */
+@import "../OrderAddress/OrderAddress.wxss";
+@import "../../lib/weui.wxss";
+page{
+    background-color: #fff;
+}
+.emergency{
+    height: 97rpx;
+    padding: 0 26rpx;
+    color: #2269d4;
+    line-height: 97rpx;
+    font-size: 28rpx;
+}
+.guarantee{
+    height: 74rpx;
+    padding: 0 26rpx;
+    line-height: 74rpx;
+}
+.guaranteeList{
+   height: 224rpx; 
+   padding: 0 26rpx;
+   display: flex;
+   flex-wrap: wrap;
+}
+.guaranteeList_box{
+    height: 72rpx;
+    padding: 10rpx 28rpx;
+    background-color: #eee;
+    color: #999;
+    border-radius: 10rpx;
+    margin-left: 32rpx;
+    font-size: 28rpx;
+    line-height: 72rpx;
+}
+.page-section{
+    margin: 54rpx auto;
+    width: 686rpx;
+    height: 275rpx;
+    border:2rpx solid;
+}
+.submit{
+    width: 650rpx;
+    height: 92rpx;
+    display: flex;
+    justify-content: center;
+    background-color: #2269d4;
+    border-radius: 50rpx;
+    color: #fff;
+}
+/* 图片上传 */
+
+.picture{
+  width: 100%;
+  border-bottom: 1rpx solid #f1f1f1;
+  border-top: 1rpx solid #f1f1f1;
+  padding: 20rpx;
+}
+.picture_butt image{
+  width: 200rpx;
+  height: 200rpx;
+ margin: 20rpx;
+}
+.picture_img image{
+  width: 200rpx;
+  height: 200rpx;
+  margin: 20rpx; 
+}
+.picture_flex{
+  display: flex;
+  flex-wrap: wrap;
+}
+.picture_img{
+position: relative;
+}
+.icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+}

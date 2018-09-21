@@ -1,0 +1,4 @@
+<!--pages/Security/Security.wxml-->
+<view class="Security_text">
+    <image src="../../imgs/8_03.png" />
+</view>

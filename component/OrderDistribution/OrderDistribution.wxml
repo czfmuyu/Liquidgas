@@ -1,0 +1,34 @@
+<!-- component/OrderDistribution.wxml -->
+<view class="whole">
+    <view class="whole_top">
+        <view style="color: #999;">订单号 {{item.CustomerId}}</view>
+        <view style="color: #2269d4;">{{item.status}}</view>
+    </view>
+    <view class="whole_middle">
+        <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
+            <view style="margin-left: 18rpx;">{{cell.Name}}</view>
+            <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
+            <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
+        </view>
+    </view>
+    <view class="userName">订购人: {{item.Creator}}</view>
+    <view class="whole_bottom">
+        <view class="whole_bottom_left">
+            <view>共</view>
+            <view style="color: #d4223b;margin:0 4rpx;">{{item.Quantity}}</view>
+            <view>件商品,共计</view>
+        </view>
+        <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;">￥{{item.Price}}</view>
+    </view>
+    <view class="btn-list">
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">
+            取消订单
+        </view>
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails">
+            查看详情
+        </view>
+        <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">
+            确认收货
+        </view>
+    </view>
+</view>

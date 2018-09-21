@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "订气订单",
+    "usingComponents": {
+        "OrderDistribution":"../../component/OrderDistribution/OrderDistribution"
+      }
+}

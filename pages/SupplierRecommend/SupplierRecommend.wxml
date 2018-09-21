@@ -1,0 +1,35 @@
+<!--pages/Supplier/Supplier.wxml-->
+<view class="header">
+    <view class="header_ipt">
+        <image src="../../imgs/5_03.png" />
+        <input placeholder="请输入要查询的内容" bindinput="queryInput" />
+        <view class="header_ipt_x" bindtap="Delete">
+            X
+        </view>
+    </view>
+</view>
+<scroll-view scroll-y>
+    <view>
+        <block wx:for="{{Suppliers}}" wx:key="SupplierList">
+            <SupplierList
+                bindtap="SupplierDialogBtn"
+                data="{{item}}"
+                Supplier="{{item.Supplier}}"
+                SupplierPhone="{{item.SupplierPhone}}"
+                SupplierAddress="{{item.SupplierAddress}}"
+                SupplierDistance="{{item.SupplierDistance}}"/>
+        </block>
+    </view>
+</scroll-view>
+<!-- 供应商选择弹窗 -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class="modal-title"></view>
+    <view class="btn-Photograph" >提示</view>
+    <view class="btn-Album" >确定选择该经营户？</view>
+    <view class="modal-footer">
+        <view class="btn-cancel" bindtap="onCancel" >取消</view>
+        <view class="btn-confirm" bindtap="onConfirm" >确定</view>
+    </view>
+</view>
+

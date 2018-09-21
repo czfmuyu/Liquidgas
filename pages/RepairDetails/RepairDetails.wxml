@@ -1,0 +1,47 @@
+<!-- pages/RepairDetails/RepairDetails.wxml -->
+<scroll-view scroll-y>
+    <view class="header_Order">
+        <view class="Order">
+            <view class="Order_left">
+                <view>维修单号: bx17071910051495</view>
+            </view>
+            <view class="Order_right">未处理</view>
+        </view>
+    </view>
+    <view class="project">
+        <view class="project_top">维修项目</view>
+        <view class="project_bottom">
+            <view class="project_bottom_box">灶具问题</view>
+        </view>
+    </view>
+    <view class="details">详情描述</view>
+    <view class="details_text">打不着火打不着火打不着火打不着火打不着火打不着火打不着火打不着火打不着火打不着火打不着火打不着火</view>
+    
+    <view class="details_time">
+        <view>2018-08-23</view>
+        <view>16:00</view>
+    </view>
+    <view class="Repair">维修信息</view>
+    <view class="Repair_time">
+        <view>预约时间</view>
+        <view>立即出发</view>
+    </view>
+    <view class="Repair_address">
+        <view class="address">维修地址</view>
+        <view class="address_right">浙江省杭州市江千区浙江大学华家池校区西门对面3栋</view>
+    </view>
+    <view class="Repair_time">
+        <view>申报人电话</view>
+        <view>郑菲(15000822230)</view>
+    </view>
+    <view class="Repair_time">
+        <view>维修工</view>
+        <view class="Repair_time_right">
+            <view style="margin-left: 12rpx;">某某某</view>
+        </view>
+    </view>
+    <view class="btn">
+        <view class="btn_cancel">取消订单</view>
+        <view class="btn_complete">维修完成</view>
+    </view>
+</scroll-view>

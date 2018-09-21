@@ -1,0 +1,67 @@
+{
+  "pages": [
+    "pages/HomePage/HomePage",
+    "pages/DeliveryDetails/DeliveryDetails",
+    "pages/Repair/Repair",
+    "pages/My/My",
+    "pages/GasInformation/GasInformation",
+    "pages/RepairOrder/RepairOrder",
+    "pages/Order/Order",
+    "pages/OrderAddress/OrderAddress",
+    "pages/Authorized/Authorized",
+    "pages/CompleteDetails/CompleteDetails",
+    "pages/RepairDetails/RepairDetails",
+    "pages/RepairDetailsComplete/RepairDetailsComplete",
+    "pages/Opinion/Opinion",
+    "pages/Submit/Submit",
+    "pages/Security/Security",
+    "pages/AccountSecurity/AccountSecurity",
+    "pages/Register/Register",
+    "pages/Login/Login",
+    "pages/RetrievePassword/RetrievePassword",
+    "pages/ReceivingAddress/ReceivingAddress",
+    "pages/SupplierRecommend/SupplierRecommend",
+    "pages/ReplacePhone/ReplacePhone",
+    "pages/PersonalData/PersonalData",
+    "pages/SublevelAccount/SublevelAccount",
+    "pages/Supplier/Supplier",
+    "pages/ChangePassword/ChangePassword",
+    "pages/BindingNumber/BindingNumber"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2269d4",
+    "navigationBarTitleText": "液化气",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "color": "black",
+    "selectedColor": "#245cd7",
+    "list": [
+      {
+        "pagePath": "pages/HomePage/HomePage",
+        "text": "首页",
+        "iconPath": "/imgs/ssicon.png",
+        "selectedIconPath": "/imgs/ssicon-hover.png"
+      },
+      {
+        "pagePath": "pages/Order/Order",
+        "text": "订气订单",
+        "iconPath": "/imgs/ddicon.png",
+        "selectedIconPath": "/imgs/ddicon-hover.png"
+      },
+      {
+        "pagePath": "pages/RepairOrder/RepairOrder",
+        "text": "维修订单",
+        "iconPath": "/imgs/ddicon.png",
+        "selectedIconPath": "/imgs/ddicon-hover.png"
+      },
+      {
+        "pagePath": "pages/My/My",
+        "text": "我的",
+        "iconPath": "/imgs/myicon.png",
+        "selectedIconPath": "/imgs/myicon-hover.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+/* pages/Security/Security.wxss */
+.Security_text{
+    width: 661rpx;
+    height: 720rpx;
+    margin:75rpx auto;
+}
+.Security_text>image{
+    width: 661rpx;
+    height: 718rpx;
+}

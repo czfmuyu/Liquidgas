@@ -1,0 +1,2 @@
+/* component/OrderDistribution.wxss */
+@import "../../pages/Order/Order.wxss";

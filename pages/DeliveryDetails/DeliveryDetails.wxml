@@ -1,0 +1,71 @@
+<view class="map_box" wx:if="{{cindex!=2}}" hidden="{{StateControl!==1}}">
+  <map id="navi_map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" markers="{{markers}}" polyline="{{polyline}}" show-location="true"></map>
+</view>
+<view class="bus_box" wx:for="{{transits}}" wx:for-item="i" wx:key="key1" wx:if="{{1}}">
+  <text class="bus_item" wx:for="{{i.transport}}" wx:for-item="j" wx:key="key2">{{j}}</text>
+</view>
+<view class="time_box" hidden="{{StateControl!==1}}">
+  <view class="time_box_left" >
+    <view style="font-size: 30rpx;font-weight: 900;">订单配送中</view>
+    <view style="font-size: 28rpx;color: #2269d4;">请对订单和配送工评价</view>
+  </view>
+  <view class="time_box_right">
+    <image src="../../imgs/76_03.png" />
+  </view>
+</view>
+
+<view class="time_box" hidden="{{StateControl!==2}}">
+  <view class="time_box_left" >
+    <view style="font-size: 30rpx;font-weight: 900;">订单配送已完成</view>
+    <view style="font-size: 28rpx;color: #2269d4;">请对订单和配送工评价</view>
+  </view>
+  <view class="time_box_right">
+    <image src="../../imgs/76_03.png" />
+  </view>
+</view>
+
+<view class="Repair">配件信息</view>
+<view class="from">
+  <view class="from_top">
+    <view style="margin-left: 64rpx;">名称</view>
+    <view>单价</view>
+    <view style="margin-right: 64rpx;">数量</view>
+  </view>
+  <view class="from_bottom" wx:for="{{goodsList}}" wx:for-item="item" wx:key="goodsList">
+    <view class="from_bottom_left" style="margin-left: 20rpx;">{{item.Name}}</view>
+    <view class="from_bottom_middle" style="margin-right: 88rpx;">￥{{item.Price}}/{{item.PrceType}}</view>
+    <view class="from_bottom_right" style="margin-right: 32rpx;">{{item.Quantity}}</view>
+  </view>
+</view>
+<view class="Repair_time" style="border-top: 2rpx solid #f5f5f5;">
+  <view>支付方式</view>
+  <view>{{CreateMode}}</view>
+</view>
+<view class="Repair">配送信息</view>
+<view class="Repair_time">
+  <view>预约时间</view>
+  <view>{{ReserveTime}}</view>
+</view>
+<view class="Repair_address">
+  <view class="address">收货地址</view>
+  <view class="address_right">{{Address}}</view>
+</view>
+<view class="Repair_time">
+  <view>收货人电话</view>
+  <view>{{Contact}}({{Phone}})</view>
+</view>
+<view class="Repair_time">
+  <view>配送工</view>
+  <view class="Repair_time_right">
+    <view style="color:#2269d4;margin-right: 12rpx;"></view>
+    <view style="margin-left: 12rpx;">{{OrderTrackList.Operator}}</view>
+  </view>
+</view>
+<view class="btn" hidden="{{btn!==1}}">
+  <view class="btn_cancel">取消订单</view>
+  <view class="btn_complete">确认收货</view>
+</view> 
+
+<view class="btn" hidden="{{btn!==2}}">
+  <view class="btn_complete">去评价</view>
+</view> 
