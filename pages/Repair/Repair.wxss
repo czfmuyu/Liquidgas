@@ -77,3 +77,46 @@ position: relative;
   top: 0;
   right: 0;
 }
+/* 维修订单 */
+.Repair{
+    background-color: #fff;
+  }
+  .RepairProblem{
+    padding: 0 20rpx;
+    /* height: 206rpx; */
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .Problem_box{
+    height: 46rpx;
+    padding: 12rpx 20rpx;
+    font-size: 28rpx;
+    border-radius: 20rpx;
+    margin-right: 40rpx;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+  }
+  .section{
+    display:flex;
+    justify-content: center;
+    margin-top: 76rpx;
+  }
+  .page-section{
+    margin: 54rpx auto;
+    width: 686rpx;
+    height: 275rpx;
+    border:2rpx solid;
+  }
+  .textarea-wrp>textarea{
+    width: 342px;
+    height: 135px;
+  }
+  .submit{
+    width: 650rpx;
+    height: 92rpx;
+    display: flex;
+    justify-content: center;
+    background-color: #2269d4;
+    border-radius: 50rpx;
+    color: #fff;
+  }

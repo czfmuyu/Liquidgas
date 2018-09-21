@@ -71,10 +71,10 @@
       </view>
     </view>
   </view>
-  <view class="guarantee">保修项目</view>
-  <view class="guaranteeList">
-    <view class="guaranteeList_box" wx:for="{{guaranteeList}}" wx:key="guaranteeList" wx:for-item="item">
-      {{item.name}}
+  <view style="margin:10rpx 0rpx 20rpx 20rpx;">报修项目</view>
+  <view class="RepairProblem">
+    <view class="Problem_box" bindtap="Discoloration" data-index='{{index}}' wx:for="{{problemlist}}" wx:for-item="item" wx:key="problemlist" style="background-color: {{item.background}};color: {{item.color}};">
+      {{item.problem}}
     </view>
   </view>
   <view class="page-section">
@@ -90,15 +90,14 @@
       <text style='color:#f3f3f3;'>（最多上传9张）</text>
     </view>
     <view class='picture_flex'>
-      <view class='picture_img' wx:for="{{orderData.images}}" wx:key="index" wx:for-item="item" >
+      <view class='picture_img' wx:for="{{orderData.images}}" wx:key="index" wx:for-item="item">
         <image src='{{item}}' mode='aspectFill' data-index='{{index}}' bindtap='previewImg' data-src='{{item}}'></image>
-        <icon  class='icon' type='clear' bindtap='removeImg' data-img_url='{{item}}'/>
+        <icon class='icon' type='clear' bindtap='removeImg' data-img_url='{{item}}' />
       </view>
       <view class='picture_butt' bindtap="chooseimage" wx:if="{{orderData.images.length <=9}}">
         <image src='../../images/tpsc.jpg'></image>
       </view>
     </view>
-
   </view>
   <button class="submit" formType="submit" bindtap="Submit">提交</button>
 </scroll-view>

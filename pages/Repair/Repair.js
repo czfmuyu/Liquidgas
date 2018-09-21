@@ -26,12 +26,58 @@ Page({
     name: "",
     phone: "15000822230",
     address: "浙江省杭州市江千区浙江大学华家池校区西门对面3栋11楼402室",
+    problemlist: [//维修问题
+      {
+        problem: "气质问题",
+        state: false,
+        background: "#EEE",
+        color: "#666",
+      },
+      {
+        problem: "灶具问题",
+        state: false,
+        background: "#EEE",
+        color: "#666",
+      },
+      {
+        problem: "漏气问题",
+        state: false,
+        background: "#EEE",
+        color: "#666",
+      },
+      {
+        problem: "钢瓶阀门问题",
+        state: false,
+        background: "#EEE",
+        color: "#666",
+      },
+    ],
     guaranteeList:[{name:"气质问题"},{name:"灶具问题"},{name:"漏气问题"},{name:"钢瓶阀门问题"}],
     // 图片
     orderData: {
       
       images: []
     },
+  },
+  Discoloration(e) {
+    const index = e.target.dataset.index;
+    let state = this.data.problemlist[index].state;
+    let problemlist=this.data.problemlist
+    if (state === false) {
+      problemlist[index].state=true;
+      problemlist[index].background="#154CC0";
+      problemlist[index].color="#fff";
+      this.setData({
+        problemlist
+      })
+    } else {
+      problemlist[index].state=false;
+      problemlist[index].background="#EEE";
+      problemlist[index].color="#666";
+      this.setData({
+        problemlist
+      })
+    }
   },
   
   Submit(){
