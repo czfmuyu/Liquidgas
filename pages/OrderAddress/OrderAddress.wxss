@@ -235,6 +235,15 @@ page{
 .goodsList_text{
     font-size: 24rpx;
 }
+.title{
+    display: flex;
+}
+.title>view{
+    width: 33.33%;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+}
 .Counter{
     width: 215rpx;
     height: 55rpx;

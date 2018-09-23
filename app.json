@@ -1,21 +1,14 @@
 {
   "pages": [
-<<<<<<< HEAD
-=======
     "pages/HomePage/HomePage",
+    "pages/OrderAddress/OrderAddress",
     "pages/Repair/Repair",
->>>>>>> 54b76935a3afcfe98a504c168bfd7bc307be4880
     "pages/Login/Login",
     "pages/PersonalData/PersonalData",
     "pages/RepairDetails/RepairDetails",
     "pages/My/My",
     "pages/Authorized/Authorized",
     "pages/DeliveryDetails/DeliveryDetails",
-<<<<<<< HEAD
-    "pages/Repair/Repair",
-    "pages/My/My",
-=======
->>>>>>> 54b76935a3afcfe98a504c168bfd7bc307be4880
     "pages/GasInformation/GasInformation",
     "pages/RepairOrder/RepairOrder",
     "pages/Order/Order",
@@ -34,8 +27,8 @@
     "pages/Supplier/Supplier",
     "pages/ChangePassword/ChangePassword",
     "pages/BindingNumber/BindingNumber",
-    "pages/Evaluate/Evaluate",
-    "pages/OrderAddress/OrderAddress"
+    "pages/Evaluate/Evaluate"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,3 +1,5 @@
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/GasOrders/NewGasOrder`//一键订气上传接口
 const utils = require("../../utils/util.js")
 Page({
 
@@ -6,6 +8,7 @@ Page({
    */
   data: {
     array: [
+      '立即出发',
       '08:00-09:00',
       '09:00-10:00',
       '10:00-11:00',
@@ -75,14 +78,15 @@ Page({
     ],
     PaymentItems: [//支付方式选择
       { name: '微信零钱', checked: true },
-      { name: '农业银行储蓄卡', checked: false },
-      { name: '招商银行储蓄卡', checked: false },
-      { name: '中国工商银行储蓄卡', checked: false },
     ],
     OptionsBox: [//瓶和公斤选择
       { name: '瓶', checked: true },
       { name: '公斤', checked: false }
     ],
+    ProductId: "",
+    AccountId: "",
+    CustomerId: "",
+    EnterpriseId: "",
     PaymentName: "",
     EnterpriseName: "",
     EnterprisePhone: "13000822230",
@@ -90,7 +94,12 @@ Page({
     CustomerName: "",
     CustomerPhone: "15000822230",
     CustomerAddress: "浙江省杭州市江千区浙江大学华家池校区西门对面3栋11楼402室",
+    CustomerLatitude: "",
+    CustomerLongitude: "",
     commodityList: "",
+    Times: "",
+    day: "",
+    OrderItems: ""
   },
   /**
   * 生命周期函数--监听页面加载
@@ -132,9 +141,10 @@ Page({
         if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
           for (let i = 0; i < res.data[0].CustomerDetails.length; i++) {
             let obj = {
-              Quantity: res.data[0].CustomerDetails[i].Quantity,
-              Price: res.data[0].CustomerDetails[i].UnitPrice,
-              ProductName: res.data[0].CustomerDetails[i].ProductName,
+              Quantity: utils.Decrypt(res.data[0].CustomerDetails[i].Quantity),
+              Price: utils.Decrypt(res.data[0].CustomerDetails[i].UnitPrice),
+              ProductName: utils.Decrypt(res.data[0].CustomerDetails[i].ProductName),
+              ProductId: res.data[0].CustomerDetails[i].ProductId
             }
             arr.push(obj)
           }
@@ -144,9 +154,10 @@ Page({
         } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
           for (let i = 0; i < res.data[0].CustomerDetails.length; i++) {
             let obj = {
-              Quantity: res.data[0].CustomerDetails[i].Quantity,
-              Price: res.data[0].CustomerDetails[i].KilogramPrice,
-              ProductName: res.data[0].CustomerDetails[i].ProductName,
+              Quantity: utils.Decrypt(res.data[0].CustomerDetails[i].Quantity),
+              Price: utils.Decrypt(res.data[0].CustomerDetails[i].KilogramPrice),
+              ProductName: utils.Decrypt(res.data[0].CustomerDetails[i].ProductName),
+              ProductId: res.data[0].CustomerDetails[i].ProductId
             }
             arr.push(obj)
           }
@@ -161,6 +172,11 @@ Page({
           EnterpriseName: res.data[0].EnterpriseName,
           EnterprisePhone: res.data[0].EnterprisePhone[0],
           EnterpriseAddress: res.data[0].EnterpriseAddress,
+          CustomerId: res.data[0].CustomerId,
+          EnterpriseId: res.data[0].EnterpriseId,
+          CustomerLatitude: res.data[0].CustomerLatitude,
+          CustomerLongitude: res.data[0].CustomerLongitude,
+          AccountId: res.data[0].AccountId,
         })
       },
     })
@@ -189,7 +205,97 @@ Page({
 
   //确定支付点击事件
   ConfirmSuccess() {
-    console.log(this.data)
+    let OptionsBox = this.data.OptionsBox
+    let PrceType
+    let SubscribeTime
+    if (OptionsBox[0].checked === true) {//购买模式判断
+      PrceType = 0
+    }
+    else if (OptionsBox[1].checked === true) {
+      PrceType = 10
+    };
+    let array = this.data.array
+    let time = "";
+    if (array[this.data.index] === "立即出发") {//预约时间判断
+      time = 0
+      SubscribeTime=""
+    }
+    else if (array[this.data.index] !== "立即出发") {
+      time = 10
+      let Times = utils.formatTime1(new Date());
+      let day = Times.slice(0, 10)
+      SubscribeTime=day +" "+ this.data.array[this.data.index]
+    };
+    let PayMethod = this.data.radioItems
+    let payment
+    if (PayMethod[0].checked === true) {
+      payment = 0
+    } else if (PayMethod[1].checked === true) {
+      payment = 100
+    }
+    let commodityList = this.data.commodityList
+    let array1=[];
+    if (OptionsBox[0].checked === true) {//瓶
+      for (let k = 0; k < commodityList.length; k++) {
+        if (commodityList[k].Quantity > 0) {
+          let OrderItems = {
+            Price: utils.Encryption(commodityList[k].Price),
+            Quantity: utils.Encryption(commodityList[k].Quantity),
+            ProductId: utils.Encryption(commodityList[k].ProductId),
+            Kilogram:0
+          }
+          array1.push(OrderItems)
+          this.setData({
+            OrderItems: array1
+          })
+        }
+      }
+    } else if (OptionsBox[1].checked === true) {
+      for (let l = 0; l < commodityList.length; l++) {
+        if (commodityList[l].Quantity > 0) {
+          let OrderItems = {
+            Price: utils.Encryption(commodityList[l].Price),
+            Quantity: utils.Encryption(commodityList[l].Quantity),
+            ProductId: utils.Encryption(commodityList[l].ProductId),
+            Kilogram:0
+          }
+          array1.push(OrderItems)
+          this.setData({
+            OrderItems: array1
+          })
+        }
+      }
+    }
+    console.log(this.data.OrderItems)
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        EnterpriseId: this.data.EnterpriseId,
+        CustomerId: this.data.CustomerId,
+        Price: utils.Encryption(this.data.Price),
+        Quantity: utils.Encryption(this.data.Quantity),
+        Contact:  utils.Encryption(this.data.CustomerName),
+        Phone: utils.Encryption(this.data.CustomerPhone),
+        Address: utils.Encryption(this.data.CustomerAddress),
+        Longitude: this.data.CustomerLatitude,
+        Latitude: this.data.CustomerLongitude,
+        GasBuyMode: PrceType,
+        DistributionMode: time,
+        SubscribeTime: SubscribeTime,
+        PayMethod: payment,
+        AccountId: this.data.AccountId,
+        OrderItems: this.data.OrderItems,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log(res)
+      },
+    })
     // wx.switchTab({
     //   url: "/pages/Order/Order",
     // })
@@ -332,13 +438,11 @@ Page({
     let OptionsBox = this.data.OptionsBox
     let addpayment = this.data.addpayment
     if (OptionsBox[1].checked === true && OptionsBox[0].checked === false) {
-      for (let i = 0; i < commodityList.length; i++) {
-        if (commodityList[i].Quantity > 0 ) {
-          radio.splice(0, 1);
-          this.setData({
-            radioItems: radio,
-          })
-        }
+      if (radio.length == 2) {
+        radio.splice(0, 1);
+        this.setData({
+          radioItems: radio,
+        })
       }
     }
     else if (OptionsBox[0].checked === true && OptionsBox[1].checked === false) {

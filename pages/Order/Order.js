@@ -2,7 +2,7 @@
 let app = getApp()
 const baseUrl = app.globalData.baseUrl
 const utils = require("../../utils/util.js")
-const baseUrls = `${baseUrl}/Api/Login/AccountLogin`//登录接口
+const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrderInfo`//获取订单详情接口
 Page({
 
   /**
@@ -292,32 +292,31 @@ Page({
     }
 
   },
-
+  GetGasOrderInfo(){
+    wx.request({
+      url: baseUrls,
+      data: {},
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        // success
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(baseUrl)
-    wx.request({
-      url: baseUrls,
-      data: {
-        Sign: "",
-        Phone: utils.Encryption(),
-        Password: utils.Encryption()
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'GET',
-      success: function (res) {
-        
-        if (res.data.Code == 200) {
-          
-        } else {
-         
-        }
-      },
-    })
+   
   },
 
   /**

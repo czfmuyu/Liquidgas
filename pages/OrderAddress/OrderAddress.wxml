@@ -145,6 +145,11 @@
             </label>
         </radio-group>
     </view>
+    <view class="title">
+        <view>商品名称</view>
+        <view>单价</view>
+        <view>瓶数</view>
+    </view>
     <view class="goodsList" wx:for='{{commodityList}}' wx:for-item="item" wx:key="commodityList">
         <view class="goodsList_text">{{item.ProductName}}</view>
         <view class="goodsList_text">￥{{item.Price}}</view>
@@ -201,9 +206,6 @@
         <radio-group class="group" bindchange="PaymentChange">
             <view class="label-2" wx:for="{{PaymentItems}}" wx:key="PaymentItems">
                 <image class="wx" src="../../imgs/77_03.png"/>
-                <image class="Agriculture" src="../../imgs/77_06.png"/>
-                <image class="investment" src="../../imgs/77_08.png"/>
-                <image class="GS" src="../../imgs/77_10.png"/>
                 <label class="label-2-text" for="{{item.name}}">
                     <text>{{item.name}}</text>
                 </label>
