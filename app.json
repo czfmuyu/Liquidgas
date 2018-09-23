@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/Login/Login",
-    "pages/Authorized/Authorized",
     "pages/HomePage/HomePage",
+    "pages/Authorized/Authorized",
     "pages/DeliveryDetails/DeliveryDetails",
     "pages/Repair/Repair",
     "pages/My/My",

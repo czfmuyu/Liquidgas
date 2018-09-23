@@ -96,7 +96,7 @@ Page({
             console.log(res.data.Data)
           },
         })
-        wx.navigateTo({//找回密码页面
+        wx.navigateTo({//登录页面
           url: "/pages/Login/Login"
         })
       } else {

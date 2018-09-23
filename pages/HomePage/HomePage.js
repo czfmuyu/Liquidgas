@@ -1,3 +1,5 @@
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
 // pages/HomePage.js
 Page({
 
@@ -34,7 +36,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+   this.ObtainStorage()
    this.Tips()
+  },
+  //获取AccountId本地储存并获取个人数据
+  ObtainStorage(){
+    wx.getStorage({
+      key: 'AccountId',
+      success:res=>{
+        console.log(res.data.AccountId)
+        wx.request({//获取个人信息请求
+          url: baseUrls,
+          data: {
+            Sign:"",
+            AccountId:res.data.AccountId,
+          },
+          method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+          // header: {}, // 设置请求的 header
+          success: function(res){
+            console.log(res)
+            wx.setStorage({//个人信息存本地
+              key: '个人信息',
+              data:res.data.Data,
+              success: function(res){
+              },
+            })
+          },
+        })
+      }
+    })
   },
   Tips(){
     let newuser = this.data.newuser

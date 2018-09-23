@@ -45,6 +45,23 @@ Page({
         console.log(res.data.Code)
         console.log(res.data.Msg)
         console.log(res.data.Data)
+        if(res.data.Code==200){
+          wx.setStorage({
+            key: 'AccountId',
+            data: utils.Decrypt(res.data.Data),
+            success: () => {
+              wx.switchTab({
+                url: '/pages/HomePage/HomePage'
+              })
+            }
+          });
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          });
+        }
       },
     })
   },
@@ -72,13 +89,6 @@ Page({
     wx.navigateTo({//注册密码页面
       url: "/pages/Register/Register"
     })
-  },
-  //登录点击事件
-  Login(){
-    this.test()
-    // wx.switchTab({//主页面
-    //   url: '/pages/HomePage/HomePage'
-    // })
   },
 
   /**
