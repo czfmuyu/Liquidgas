@@ -1,8 +1,0 @@
-diff a/app.json b/app.json	(rejected hunks)
-@@ -1,5 +1,6 @@
- {
-   "pages": [
-+    "pages/Authorized/Authorized",
-     "pages/HomePage/HomePage",
-     "pages/DeliveryDetails/DeliveryDetails",
-     "pages/Repair/Repair",

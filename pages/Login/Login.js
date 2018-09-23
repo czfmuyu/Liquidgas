@@ -75,7 +75,6 @@ Page({
       this.setData({
         Tick:"√"
       })
-      
     }
   },
   //找回密码点击事件
