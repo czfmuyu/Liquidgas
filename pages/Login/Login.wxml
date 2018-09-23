@@ -4,7 +4,7 @@
         <text >用户名</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入手机号/用气编号" />
+        <input placeholder="请输入手机号/用气编号" data-text="name" bindblur="userName"/>
     </view>
 </view>
 <view class="user"style="margin-top: 54rpx;">
@@ -12,7 +12,7 @@
         <text >登录密码</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入密码" />
+        <input placeholder="请输入密码" type="password" data-text="password" bindblur="password"/>
     </view>
 </view>
 <view class="userBtn" style="margin-top: 30rpx;">
@@ -28,7 +28,7 @@
         <text class="Ticktext">忘记密码?</text>
     </view>
 </view>
-<view class="loginBtn" style="margin-top: 70rpx;" bindtap="Login">登录</view>
+<view class="loginBtn" style="margin-top: 70rpx;" bindtap="onLogin">登录</view>
 <view class="registerBtn"style="margin-top: 28rpx;" bindtap="Register">
     <text >没有账号?注册</text>
 </view>

@@ -1,12 +1,52 @@
-// pages/Login.js
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/Login/AccountLogin`//登录接口
+const utils=require("../../utils/util.js")
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    Tick:""
-  
+    Tick:"",
+    Phone:"",
+    Password:""
+  },
+  userName(e){
+    console.log(e.detail.value)
+    this.setData({
+      Phone:e.detail.value
+    })
+  },
+  password(e){
+    this.setData({
+      Password:e.detail.value
+    })
+  },
+  //登录点击事件
+  onLogin(){
+    let Phone=this.data.Phone
+    let Password=this.data.Password
+    console.log(Phone,Password)
+    console.log("in")
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign:"",
+        Phone:utils.Encryption(Phone),
+        Password:utils.Encryption(Password)
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'post',
+      success: function(res){
+        console.log(res)
+        console.log(res.data.Code)
+        console.log(res.data.Msg)
+        console.log(res.data.Data)
+      },
+    })
   },
   //点击记住密码打钩事件
   Tick(){
@@ -35,9 +75,10 @@ Page({
   },
   //登录点击事件
   Login(){
-    wx.switchTab({//主页面
-      url: '/pages/HomePage/HomePage'
-    })
+    this.test()
+    // wx.switchTab({//主页面
+    //   url: '/pages/HomePage/HomePage'
+    // })
   },
 
   /**

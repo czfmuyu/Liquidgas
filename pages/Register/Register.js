@@ -1,4 +1,7 @@
-// pages/Register/Register.js
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//登录接
+const utils=require("../../utils/util.js")
+var app = getApp()
 Page({
 
   /**
@@ -8,18 +11,30 @@ Page({
     text: "获取验证码",
     currentTime: 60, //倒计时
     disabled: false, //按钮是否禁用
-    Tick:"",
+    Tick: "",
+    Name: "",
+    Phone: "",
+    Password: "",
+    confirmPassword: "",
+    VerificationCode: ""
+  },
+  UserReg(e) {
+    let data = this.data
+    let value = e.detail.value
+    let index = e.target.dataset.text
+    data[index] = value
+    console.log(data)
   },
   //点击条款打钩事件
-  Tick(){
-    let T=this.data.Tick
-    if(T==="√"){
+  Tick() {
+    let T = this.data.Tick
+    if (T === "√") {
       this.setData({
-        Tick:""
+        Tick: ""
       })
-    }else{
+    } else {
       this.setData({
-        Tick:"√"
+        Tick: "√"
       })
     }
   },
@@ -55,13 +70,43 @@ Page({
     }
   },
   //注册点击事件
-  Register(){
-    let Tick=this.data.Tick
-    if(Tick==="√"){
-      wx.navigateTo({//找回密码页面
-        url: "/pages/Login/Login"
-      })
-    }else{
+  Register() {
+    let this_=this
+    let Tick = this_.data.Tick
+    if (Tick === "√") {
+      if (this_.data.Password === this_.data.confirmPassword) {
+        console.log("注册成功")
+        wx.request({
+          url: baseUrls,
+          data: {
+            Sign: "",
+            Name: utils.Encryption(this_.data.Name),
+            Phone: utils.Encryption(this_.data.Phone),
+            Password: utils.Encryption(this_.data.Password),
+            VerificationCode: utils.Encryption(this_.data.VerificationCode)
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: 'post',
+          success: function (res) {
+            console.log(res)
+            console.log(res.data.Code)
+            console.log(res.data.Msg)
+            console.log(res.data.Data)
+          },
+        })
+        wx.navigateTo({//找回密码页面
+          url: "/pages/Login/Login"
+        })
+      } else {
+        wx.showToast({
+          title: '密码不一致',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    } else {
       wx.showToast({
         title: '未同意条款',
         icon: 'none',
@@ -74,55 +119,55 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

@@ -1,5 +1,6 @@
 //app.js
 App({
+ 
   onLaunch: function () {
     var that = this;
     wx.login({
@@ -14,8 +15,6 @@ App({
     });
   },
   globalData: {
-    openid: 0,
-    wx_url_1: 'https://api.weixin.qq.com/sns/jscode2session?appid=自己的APPID&secret=自己的SECRET&js_code=',
-    wx_url_2: '&grant_type=authorization_code'
+    baseUrl:"http://192.168.0.66:2599"
   }
 })

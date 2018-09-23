@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/Login/Login",
     "pages/Authorized/Authorized",
     "pages/HomePage/HomePage",
     "pages/DeliveryDetails/DeliveryDetails",
@@ -17,7 +18,6 @@
     "pages/Security/Security",
     "pages/AccountSecurity/AccountSecurity",
     "pages/Register/Register",
-    "pages/Login/Login",
     "pages/RetrievePassword/RetrievePassword",
     "pages/ReceivingAddress/ReceivingAddress",
     "pages/SupplierRecommend/SupplierRecommend",

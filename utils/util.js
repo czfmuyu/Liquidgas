@@ -29,22 +29,30 @@ function formatLocation(longitude, latitude) {
     latitude: latitude.toString().split('.')
   }
 }
-
+//加密
+function Encryption(data) {
+  return data
+}
+//解密
+function Decrypt(data) {
+  return data
+}
+function imgpreview(data_evnt, imgarrs) {  //图片预览
+  //获取当前图片的下标
+  var index = data_evnt.currentTarget.dataset.index;
+  //所有图片
+  var imgs = imgarrs;
+  wx.previewImage({
+    //当前显示图片
+    current: imgs[index],
+    //所有图片
+    urls: imgs
+  })
+}
 module.exports = {
   formatTime: formatTime,
   formatLocation: formatLocation,
-
-
-  imgpreview(data_evnt, imgarrs) {  //图片预览
-    //获取当前图片的下标
-    var index = data_evnt.currentTarget.dataset.index;
-    //所有图片
-    var imgs = imgarrs;
-    wx.previewImage({
-      //当前显示图片
-      current: imgs[index],
-      //所有图片
-      urls: imgs
-    })
-  },
+  Encryption:Encryption,
+  Decrypt:Decrypt,
+  imgpreview:imgpreview,
 }
