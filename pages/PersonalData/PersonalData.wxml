@@ -4,7 +4,7 @@
         <text>姓名</text>
     </view>
     <view class="wrap">
-        <text>郑菲</text>
+        <text>{{AccountName}}</text>
         <view style="margin-left: 16rpx;">
             <text class="right_text">></text>
         </view>
@@ -15,7 +15,7 @@
         <text>联系方式</text>
     </view>
     <view>
-        <text>18909369848</text>
+        <text>{{AccountPhone}}</text>
     </view>
 </view>
 

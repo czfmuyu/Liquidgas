@@ -6,10 +6,10 @@
     </view>
     <view class="header_right">
         <view class="header_right_top">
-            <view>供应商1</view>
-            <view>{{phone}}</view>
+            <view>{{EnterpriseName}}</view>
+            <view>{{EnterprisePhone}}</view>
         </view>
-        <view class="header_right_bottom">{{address}}</view>
+        <view class="header_right_bottom">{{EnterpriseAddress}}</view>
     </view>
 </view>
 <!-- 供应商没有数据显示的页面 -->
@@ -28,10 +28,10 @@
     </view>
     <view class="header_right">
         <view class="header_right_top">
-            <view>{{name}}</view>
-            <view>{{phone}}</view>
+            <view>{{CustomerName}}</view>
+            <view>{{CustomerPhone}}</view>
         </view>
-        <view class="header_right_bottom">{{address}}</view>
+        <view class="header_right_bottom">{{CustomerAddress}}</view>
     </view>
 </view>
 <!-- 地址没有数据显示的页面 -->
@@ -121,7 +121,7 @@
     wx:for-item="item" 
     wx:key="good.list"
     hidden="{{!isgoods}}">
-    <view>{{item.Name}}</view>
+    <view>{{item.ProductName}}</view>
     <view>￥{{item.Price}}</view>
     <view class="goods_right">
         <view style="margin-left: 12rpx;">X{{item.Quantity}}</view>
@@ -133,9 +133,17 @@
 <view class="modal-dialog" wx:if="{{showgoods}}" style=" top:20%;">
     <view class="modal-title"></view>
     <view class="btn-Photograph">商品列表</view>
-    <view class="goodsList" wx:for='{{goodslist}}' wx:for-item="item" wx:key="good.name">
-        <view class="goodsList_text">{{item.Name}}</view>
-        <view class="goodsList_text">￥{{item.Price}}/{{item.PrceType}}</view>
+    <view class="OptionsBox">
+        <radio-group name="radio-group" wx:for="{{OptionsBox}}" wx:key="OptionsBox" bindchange="OptionsBox">
+            <label>
+                <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />
+                 {{item.name}}
+            </label>
+        </radio-group>
+    </view>
+    <view class="goodsList" wx:for='{{commodityList}}' wx:for-item="item" wx:key="commodityList">
+        <view class="goodsList_text">{{item.ProductName}}</view>
+        <view class="goodsList_text">￥{{item.Price}}</view>
         <view class="Counter">
             <view class="Counter_left" data-index='{{index}}' catchtap='subtracttap'>-</view>
             <view class="Counter_middle">

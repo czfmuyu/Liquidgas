@@ -56,7 +56,7 @@ Page({
           success: function(res){
             console.log(res)
             wx.setStorage({//个人信息存本地
-              key: '个人信息',
+              key: 'Information',
               data:res.data.Data,
               success: function(res){
               },

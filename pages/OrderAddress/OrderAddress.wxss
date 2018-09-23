@@ -218,6 +218,12 @@ page{
 }
 
 /* 商品选择弹框 */
+.OptionsBox{
+    padding: 0 24rpx;
+    height: 100rpx;
+    display:flex;
+    justify-content: center;
+}
 .goodsList{
     padding: 0 24rpx;
     height: 108rpx;

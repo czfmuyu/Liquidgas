@@ -8,6 +8,20 @@ Page({
     NameShowModal: false,//名称弹框控制
     PhoneShowModal: false,//电话弹框控制
   },
+  //获取本地储存
+  getData(){
+    let this_=this
+    wx.getStorage({
+      key: 'Information',
+      success: function(res){
+        console.log(res.data)
+        // this_.setData({
+        //   AccountName:utils.Decrypt(res.data[0].AccountName),
+        //   AccountPhone:utils.Decrypt(res.data[0].AccountPhone)
+        // })
+      },
+    })
+  },
   /**
      * 电话弹窗
      */

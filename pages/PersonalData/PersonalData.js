@@ -1,4 +1,5 @@
-// pages/PersonalData/PersonalData.js
+
+const utils=require("../../utils/util.js")
 Page({
 
   /**
@@ -6,14 +7,29 @@ Page({
    */
   data: {
     NameShowModal: false,//弹框按钮操控
-    address:""
+    AccountName:"",
+    AccountPhone:"",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getData()
+  },
+  //获取本地储存
+  getData(){
+    let this_=this
+    wx.getStorage({
+      key: 'Information',
+      success: function(res){
+        console.log(res.data)
+        this_.setData({
+          AccountName:utils.Decrypt(res.data[0].AccountName),
+          AccountPhone:utils.Decrypt(res.data[0].AccountPhone)
+        })
+      },
+    })
   },
 
   /**
