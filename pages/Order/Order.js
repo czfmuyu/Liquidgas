@@ -1,5 +1,8 @@
 // pages/Order/Order.js
 let app = getApp()
+const baseUrl = app.globalData.baseUrl
+const utils = require("../../utils/util.js")
+const baseUrls = `${baseUrl}/Api/Login/AccountLogin`//登录接口
 Page({
 
   /**
@@ -30,24 +33,6 @@ Page({
             PrceType: "瓶",
             Quantity: 3,
           },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
         ]
       },
       {
@@ -71,24 +56,7 @@ Page({
             PrceType: "瓶",
             Quantity: 3,
           },
-          {
-            Name: "商品2",
-            Price: 1230,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 12330,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
+      
         ]
       },
       {
@@ -108,24 +76,6 @@ Page({
         goodsList: [
           {
             Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
             Price: 120,
             PrceType: "瓶",
             Quantity: 3,
@@ -155,24 +105,6 @@ Page({
             PrceType: "瓶",
             Quantity: 3,
           },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
         ]
       },
       {
@@ -196,24 +128,6 @@ Page({
             PrceType: "瓶",
             Quantity: 3,
           },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
         ]
       },
       {
@@ -233,24 +147,6 @@ Page({
         goodsList: [
           {
             Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
             Price: 120,
             PrceType: "瓶",
             Quantity: 3,
@@ -280,24 +176,6 @@ Page({
             PrceType: "瓶",
             Quantity: 3,
           },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
         ]
       },
       {
@@ -321,24 +199,6 @@ Page({
             PrceType: "瓶",
             Quantity: 3,
           },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
         ]
       },
       {
@@ -358,24 +218,6 @@ Page({
         goodsList: [
           {
             Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品2",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 2,
-          },
-          {
-            Name: "商品3",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-          {
-            Name: "商品4",
             Price: 120,
             PrceType: "瓶",
             Quantity: 3,
@@ -455,7 +297,27 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log(baseUrl)
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        Phone: utils.Encryption(),
+        Password: utils.Encryption()
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      success: function (res) {
+        
+        if (res.data.Code == 200) {
+          
+        } else {
+         
+        }
+      },
+    })
   },
 
   /**

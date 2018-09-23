@@ -13,7 +13,6 @@ Page({
     Password:""
   },
   userName(e){
-    console.log(e.detail.value)
     this.setData({
       Phone:e.detail.value
     })
@@ -91,12 +90,31 @@ Page({
       url: "/pages/Register/Register"
     })
   },
-
+// 用户登录过直接登录
+loginload:function(){
+  wx.switchTab({
+    url: '/pages/HomePage/HomePage'
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let _this=this
+    // 获取本地缓存
+    wx.getStorage({
+      key: 'AccountId',
+      success: function(res) {
+        if(res.data){
+          _this.loginload()
+        }else{
+          wx.showToast({
+            title: "请先登录",
+            duration: 2000
+          })
+        }
+      },
+    })
   },
 
   /**

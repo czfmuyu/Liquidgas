@@ -96,7 +96,6 @@ Page({
 
 // 表单提交=========================
   Submit() {
-    console.log(this.data.frolist.images)
     let imglent = this.data.frolist.images
     if (imglent.length<1){
       wx.showToast({
@@ -233,29 +232,32 @@ Page({
   chooseWxImage: function(type) {
     var _this = this;
     wx.chooseImage({
-      count: 9, // 默认9
-      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有
-      success: function(res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths;
-        var imgs = _this.data.frolist.images;
-        for (var i = 0; i < tempFilePaths.length; i++) {
-          if (imgs.length >= 9) {
-            _this.setData({
-              "frolist.images": imgs
-            });
-            return false;
-          } else {
-            imgs.push(tempFilePaths[i]);
+      count: 1,
+      sizeType: ['compressed'],
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths;
+        console.log(tempFilePaths)
+        wx.uploadFile({
+          url: "http://192.168.0.185:2599/Api/Files/UploadImg",
+          // 要上传的文件资源
+          filePath: tempFilePaths[0],
+          // 对应的key值
+          name: 'image',
+          success: function (res) {
+            console.log(res)
+            imgarr.push(tempFilePaths)
+            res.imgurl = imgarr
+            console.log(imgarr)
+            console.log(res.imgurl)
+            // tempFilePaths
+            // res.imgurl.push(tempFilePaths)
+            if (typeof callback == 'function') {
+              callback(res);
+            }
           }
-        }
-        //  console.log(imgs);
-        _this.setData({
-          "frolist.images": imgs
-        });
+        })
       }
-    });
+    })
   },
 
 
@@ -343,3 +345,28 @@ Page({
 
   }
 })
+
+// wx.chooseImage({
+//   count: 9, // 默认9
+//   sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+//   sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有
+//   success: function (res) {
+//     // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+//     var tempFilePaths = res.tempFilePaths;
+//     var imgs = _this.data.frolist.images;
+//     for (var i = 0; i < tempFilePaths.length; i++) {
+//       if (imgs.length >= 9) {
+//         _this.setData({
+//           "frolist.images": imgs
+//         });
+//         return false;
+//       } else {
+//         imgs.push(tempFilePaths[i]);
+//       }
+//     }
+//     //  console.log(imgs);
+//     _this.setData({
+//       "frolist.images": imgs
+//     });
+//   }
+// });

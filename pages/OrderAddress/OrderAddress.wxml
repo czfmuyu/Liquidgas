@@ -1,4 +1,4 @@
-<!-- pages/OrderAddress/OrderAddress.wxml -->
+
 <!-- 供应商有数据显示页面 -->
 <view class="header" style='border-bottom:2rpx solid #eee;' hidden="{{isSupplier}}">
     <view class="header_left">
@@ -12,15 +12,17 @@
         <view class="header_right_bottom">{{address}}</view>
     </view>
 </view>
+
 <!-- 供应商没有数据显示的页面 -->
-<view class="hidden_header" style='border-bottom:2rpx solid #eee;' hidden="{{!isSupplier}}">
+<view class="hidden_header" style='border-bottom:2rpx solid #eee;' bindtap="SupplierAdd" hidden="{{!isSupplier}}">
     <view class="hidden_header_left">
         <image src="../../imgs/488420311228276237.png" />
     </view>
-    <view class="hidden_header_right" bindtap="SupplierAdd">
+    <view class="hidden_header_right" >
         <image src="../../imgs/44_05.png" />
     </view>
 </view> 
+
 <!-- 地址有数据显示的页面 -->
 <view class="header" hidden="{{isAddress}}">
     <view class="header_left">
@@ -34,15 +36,17 @@
         <view class="header_right_bottom">{{address}}</view>
     </view>
 </view>
+
 <!-- 地址没有数据显示的页面 -->
-<view class="hidden_header" hidden="{{!isAddress}}">
+<view class="hidden_header" hidden="{{!isAddress}}" bindtap="Add">
     <view class="hidden_header_left">
         <image src="../../imgs/33_03.png" />
     </view>
-    <view class="hidden_header_right" bindtap="Add">
+    <view class="hidden_header_right" >
         <image src="../../imgs/44_05.png" />
     </view>
 </view>
+
 <!-- 新增地址弹框 -->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">

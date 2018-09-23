@@ -1,11 +1,10 @@
 {
   "pages": [
-    "pages/Repair/Repair",
     "pages/Login/Login",
     "pages/HomePage/HomePage",
     "pages/Authorized/Authorized",
     "pages/DeliveryDetails/DeliveryDetails",
-   
+    "pages/Repair/Repair",
     "pages/My/My",
     "pages/GasInformation/GasInformation",
     "pages/RepairOrder/RepairOrder",
