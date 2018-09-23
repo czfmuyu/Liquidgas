@@ -7,18 +7,18 @@
     </view>
     <view class="header_right">
       <view class="header_right_top">
-        <view>{{name}}</view>
-        <view>{{phone}}</view>
+        <view>{{frolist.name}}</view>
+        <view>{{frolist.phone}}</view>
       </view>
-      <view class="header_right_bottom">{{address}}</view>
+      <view class="header_right_bottom">{{frolist.address}}</view>
     </view>
   </view>
   <!-- 地址没有数据显示的页面 -->
-  <view class="hidden_header" hidden="{{!isAddress}}">
+  <view class="hidden_header" hidden="{{!isAddress}}" bindtap="Add">
     <view class="hidden_header_left">
       <image src="../../imgs/33_03.png" />
     </view>
-    <view class="hidden_header_right" bindtap="Add">
+    <view class="hidden_header_right" >
       <image src="../../imgs/44_05.png" />
     </view>
   </view>
@@ -40,7 +40,7 @@
         <text>手机号</text>
       </view>
       <view class="user_right">
-        <input placeholder="请输入收货人联系方式" bindinput="userPhone" />
+        <input placeholder="请输入收货人联系方式" maxlength='11' bindinput="userPhone" />
       </view>
     </view>
     <view class="user" style="margin-top: 54rpx;margin-bottom: 54rpx;">
@@ -48,7 +48,7 @@
         <text>所在地址</text>
       </view>
       <view class="user_right">
-        <input placeholder="请输入收货人地址" bindinput="userAddress" />
+        <input placeholder="请输入收货人地址" maxlength='25' bindinput="userAddress" />
       </view>
     </view>
     <view class="modal-footer">
@@ -66,7 +66,7 @@
       </view>
       <view class="weui-cell__bd">
         <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-          <view class="weui-input" style="margin-left:239rpx;">{{array[index]}}</view>
+          <view class="weui-input" style="margin-left:239rpx;">{{frolist.time}}</view>
         </picker>
       </view>
     </view>
@@ -80,7 +80,7 @@
   <view class="page-section">
     <view class="page-section-title"></view>
     <view class="textarea-wrp">
-      <textarea auto-focus="true" style="height: 3em" placeholder="具体描述下问题所在" />
+      <textarea style="padding:10rpx;" data-type='text' placeholder="具体描述下问题所在" bindinput="textm"/>
     </view>
   </view>
   <!-- 照片上传 -->
@@ -90,11 +90,11 @@
       <text style='color:#f3f3f3;'>（最多上传9张）</text>
     </view>
     <view class='picture_flex'>
-      <view class='picture_img' wx:for="{{orderData.images}}" wx:key="index" wx:for-item="item">
+      <view class='picture_img' wx:for="{{frolist.images}}" wx:key="index" wx:for-item="item">
         <image src='{{item}}' mode='aspectFill' data-index='{{index}}' bindtap='previewImg' data-src='{{item}}'></image>
         <icon class='icon' type='clear' bindtap='removeImg' data-img_url='{{item}}' />
       </view>
-      <view class='picture_butt' bindtap="chooseimage" wx:if="{{orderData.images.length <=9}}">
+      <view class='picture_butt' bindtap="chooseimage" wx:if="{{frolist.images.length <=9}}">
         <image src='../../images/tpsc.jpg'></image>
       </view>
     </view>

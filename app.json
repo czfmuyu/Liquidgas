@@ -1,15 +1,14 @@
 {
   "pages": [
-    "pages/OrderAddress/OrderAddress",
-    "pages/Login/Login",
     "pages/HomePage/HomePage",
-    "pages/GasInformation/GasInformation",
+    "pages/Repair/Repair",
+    "pages/Login/Login",
     "pages/PersonalData/PersonalData",
     "pages/RepairDetails/RepairDetails",
     "pages/My/My",
     "pages/Authorized/Authorized",
     "pages/DeliveryDetails/DeliveryDetails",
-    "pages/Repair/Repair",
+    "pages/GasInformation/GasInformation",
     "pages/RepairOrder/RepairOrder",
     "pages/Order/Order",
     "pages/CompleteDetails/CompleteDetails",
@@ -27,7 +26,8 @@
     "pages/Supplier/Supplier",
     "pages/ChangePassword/ChangePassword",
     "pages/BindingNumber/BindingNumber",
-    "pages/Evaluate/Evaluate"
+    "pages/Evaluate/Evaluate",
+    "pages/OrderAddress/OrderAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",
