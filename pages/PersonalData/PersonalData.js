@@ -25,8 +25,8 @@ Page({
       success: function(res){
         console.log(res.data)
         this_.setData({
-          AccountName:utils.Decrypt(res.data[0].AccountName),
-          AccountPhone:utils.Decrypt(res.data[0].AccountPhone)
+          AccountName:utils.Decrypt(res.data.AccountName),
+          AccountPhone:utils.Decrypt(res.data.AccountPhone)
         })
       },
     })

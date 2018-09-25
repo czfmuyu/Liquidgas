@@ -1,2 +1,31 @@
 /* pages/GasInformation/GasInformation.wxss */
 @import "../PersonalData/PersonalData.wxss";
+.btn{
+  width: 90%;
+  margin: 50rpx auto;
+  background-color: #6348da;
+  height: 80rpx;
+  border-radius: 50rpx 50rpx;
+  color:white;
+}
+
+text{
+  font-size: 28rpx;
+}
+.wraps{
+  display: flex;
+  
+  
+}
+.textfont{
+  width: 400rpx;
+   word-wrap:break-word; 
+   word-break:break-all; 
+}
+.contents{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  background-color: white
+}

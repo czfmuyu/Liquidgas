@@ -11,3 +11,9 @@
     height: 100rpx;
     border:2rpx solid;
   }
+  .page-body{
+    padding: 20rpx;
+  }
+  .inputsty{
+    padding-left: 10rpx;
+  }

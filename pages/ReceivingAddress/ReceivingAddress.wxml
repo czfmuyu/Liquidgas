@@ -7,20 +7,16 @@
             </block>
             <block wx:if="{{hasLocation === true}}">
                 <text class="page-body-text">{{locationAddress}}</text>
-                <!-- <view class="page-body-text-location">
-            <text>E: {{location.longitude[0]}}°{{location.longitude[1]}}′</text>
-            <text>N: {{location.latitude[0]}}°{{location.latitude[1]}}′</text>
-          </view> -->
             </block>
             <view class="ipt">
-                <text>请完善您的地址</text>
-                <input placeholder="如几栋几单元几号" />
+                <text>请完善您的地址:</text>
+                <input class='inputsty' data-text='text' placeholder="如几栋几单元几号" bindinput="assignment"/>
             </view>
         </view>
         <view class="btn-area">
             <button type="primary" bindtap="chooseLocation">选择位置</button>
             <button bindtap="clear">清空</button>
-            <button bindtap="clear">保存</button>
+            <button bindtap="keep">保存</button>
         </view>
     </view>
 </view>

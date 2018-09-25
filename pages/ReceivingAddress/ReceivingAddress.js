@@ -8,12 +8,14 @@ Page({
    */
   data: {
     hasLocation: false,
+    location:"",
+    locationAddress:"",
+    address:""
   },
   chooseLocation: function () {
     var that = this
     wx.chooseLocation({
       success: function (res) {
-        console.log(res)
         that.setData({
           hasLocation: true,
           location: formatLocation(res.longitude, res.latitude),
@@ -21,10 +23,35 @@ Page({
         })
       }
     })
+
   },
   clear: function () {
     this.setData({
       hasLocation: false
+    })
+  },
+  // 获取用户输入地址
+  assignment:function(e){
+    let _this=this
+    let text = e.detail.value
+    _this.setData({
+      address:text
+    })
+
+  },
+  keep:function(){
+    let _this=this
+    let addressD = _this.data.address
+    let location = _this.data.locationAddress
+    let locations = location + addressD
+    let longitude = _this.data.location
+    console.log(longitude)
+    let longitudes = longitude.longitude[0] + "." + longitude.longitude[1]
+    let latitudes = longitude.latitude[0] + "." + longitude.latitude[1]
+
+
+    wx.navigateTo({
+      url: '/pages/GasInformation/GasInformation?locations=' + locations + "&index=" + 1 + "&longitudes=" + longitudes + "&latitudes=" + latitudes,
     })
   },
   /**

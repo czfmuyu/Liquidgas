@@ -1,67 +1,62 @@
 <view class="content" bindtap="ReplaceName">
-    <view>
-        <text>名称</text>
+  <view>
+    <text>名称</text>
+  </view>
+  <view class="wrap">
+    <text>{{information.storename}}</text>
+    <view style="margin-left: 16rpx;">
+      <text class="right_text">></text>
     </view>
-    <view class="wrap">
-        <text>某某店</text>
-        <view style="margin-left: 16rpx;">
-            <text class="right_text">></text>
-        </view>
-    </view>
+  </view>
 </view>
 <!-- 名称弹窗 -->
 <view class="modal-mask" bindtap="NameHideModal" catchtouchmove="preventTouchMove" wx:if="{{NameShowModal}}"></view>
 <view class="modal-dialog" wx:if="{{NameShowModal}}">
-    <view class="modal-title"></view>
-    <view class="btn-Photograph" >提示</view>
-    <view class="btn-Album" >请输入你要更改的名称</view>
-    <view class="modal-ipt">
-        <input 
-            placeholder="请输入名称"
-            bindinput="GasNumber" />
-    </view>
-    <view class="modal-footer">
-        <view class="btn-cancel" bindtap="onNameCancel" >取消</view>
-        <view class="btn-confirm" bindtap="onNameConfirm" >确定</view>
-    </view>
+  <view class="modal-title"></view>
+  <view class="btn-Photograph">提示</view>
+  <view class="btn-Album">请输入你要更改的名称</view>
+  <view class="modal-ipt">
+    <input placeholder="请输入名称" data-type='text' bindblur="GasNumber" />
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onNameCancel">取消</view>
+    <view class="btn-confirm" bindtap="onNameConfirm">确定</view>
+  </view>
 </view>
 <view class="content" bindtap="Phone">
-    <view>
-        <text>联系电话</text>
+  <view>
+    <text>联系电话</text>
+  </view>
+  <view class="wrap">
+    <text>{{information.telephone}}</text>
+    <view style="margin-left: 16rpx;">
+      <text class="right_text">></text>
     </view>
-    <view class="wrap">
-        <text>13325679980</text>
-        <view style="margin-left: 16rpx;">
-            <text class="right_text">></text>
-        </view>
-    </view>
+  </view>
 </view>
 <!-- 电话弹窗 -->
 <view class="modal-mask" bindtap="PhoneHideModal" catchtouchmove="preventTouchMove" wx:if="{{PhoneShowModal}}"></view>
 <view class="modal-dialog" wx:if="{{PhoneShowModal}}">
-    <view class="modal-title"></view>
-    <view class="btn-Photograph" >提示</view>
-    <view class="btn-Album" >请输入你要更改的电话</view>
-    <view class="modal-ipt">
-        <input 
-            placeholder="请输入电话"
-            bindinput="GasNumber" />
-    </view>
-    <view class="modal-footer">
-        <view class="btn-cancel" bindtap="onPhoneCancel" >取消</view>
-        <view class="btn-confirm" bindtap="onPhoneConfirm" >确定</view>
-    </view>
+  <view class="modal-title"></view>
+  <view class="btn-Photograph">提示</view>
+  <view class="btn-Album">请输入你要更改的电话</view>
+  <view class="modal-ipt">
+    <input placeholder="请输入电话" data-type='text' bindblur="GasNumbers" />
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onPhoneCancel">取消</view>
+    <view class="btn-confirm" bindtap="onPhoneConfirm">确定</view>
+  </view>
 </view>
-<view class="content" bindtap="address">
-    <view>
-        <text>地址</text>
-    </view>
-    <view class="wrap">
-        <text>某某市某某街某某栋</text>
-        <view style="margin-left: 16rpx;">
-            <text class="right_text">></text>
-        </view>
-    </view>
+<view class="contents" bindtap="address">
+  <view>
+    <text>地址</text>
+  </view>
+  <view class="wraps">
+    <text class='textfont'>{{information.address}}</text>
+  </view>
+  <view style="margin-left: 16rpx;">
+    <text class="right_text">></text>
+  </view>
 </view>
-<view class="btn">提交</view>
-
+<button class="btn" bindtap='submission'>提交</button>

@@ -20,22 +20,20 @@ Page({
       // 页码
       pageIndex: "1",
       // 反回条数
-      pageSize: "10",
+      pageSize: "5",
       // 查询关键字
       queryKeyword: "",
       // 状态列表
       status: "-1",
     },
-    // 解密列表
-    whole:[{
-
-    }],
+    // 全部列表
+    whole: [],
     // 待维修
-    UntreatedList:[],
+    UntreatedList: [],
     // 维修完成
-    ProcessedList:[],
+    ProcessedList: [],
     // 取消
-    EvaluateList:[]
+    EvaluateList: []
 
 
   },
@@ -55,7 +53,7 @@ Page({
       duration: 2000
     })
   },
-  
+
   //全部页面详情
   queryBtn(e) {
     let orderId = e.currentTarget.dataset.orderid
@@ -88,16 +86,7 @@ Page({
   onLoad: function(options) {
     let _this = this
     // 获取订单
-    _this.getmaintenance()
-    // for (let i = 0; i < this.data.ProcessedList.length; i++) {
-    //   let status = this.data.ProcessedList[i].status
-    //   if (status === "已处理") {
-    //     this.setData({
-    //       text2: "#d45d22",
-    //       text3: '去评价'
-    //     })
-    //   }
-    // }
+     _this.getmaintenance()
   },
   // 获取维修订单列表
   getmaintenance: function() {
@@ -122,28 +111,39 @@ Page({
       method: 'GET',
       success: function(res) {
         let orderData = res.data.Data
-        // for (let k = 0; orderData.length>0;k++){
+        _this.setData({
+          whole: orderData
+        })
+        // for (var i = 0; orderData.length>i;i++){
+        //   let name = util.Decrypt(orderData[i].CustomerName) 
+        //   let Ph = util.Decrypt(orderData[i].Phone) 
+        //   let Addr = util.Decrypt(orderData[i].Address) 
+        //   let Cont = util.Decrypt(orderData[i].Contact) 
         //   _this.setData({
-
+        //     "whole.CustomerName": name,
+        //     "whole.Phone": Ph,
+        //     "whole.Address": Addr,
+        //     "whole.Contact": Cont,
         //   })
         // }
-        console.log(orderData)
-        let datalist=[]
-        let datalist1=[]
-        let datalist2=[]
         
-        for (let i = 0; orderData.length>i; i++){
-          if (orderData[i].Status==0){   //待维修
+        
+        let datalist = []
+        let datalist1 = []
+        let datalist2 = []
+
+        for (let i = 0; orderData.length > i; i++) {
+          if (orderData[i].Status == 0) { //待维修
             datalist.push(orderData[i])
             _this.setData({
               UntreatedList: datalist
             })
-          } else if (orderData[i].Status == 30){  //维修完成
+          } else if (orderData[i].Status == 30) { //维修完成
             datalist1.push(orderData[i])
             _this.setData({
               ProcessedList: datalist1
             })
-          }else if(orderData[i].Status == 100){ //取消
+          } else if (orderData[i].Status == 100) { //取消
             datalist2.push(orderData[i])
             _this.setData({
               EvaluateList: datalist2
@@ -186,14 +186,37 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    let _this = this
+    _this.getmaintenance()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 1000
+    });
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    let _this=this
+    let a=2
+    let page=_this.data.parameter.pageIndex
+    let Size = _this.data.parameter.pageSize
+    let Size1= Number(Size)
+        page++
+    let Sizes = Size1+a
+        _this.setData({
+          "parameter.pageIndex": page,
+          "parameter.pageSize": Sizes
+        })
+    _this.getmaintenance()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 1000
+    });
+    console.log(_this.data.parameter.pageSize)
   },
 
   /**

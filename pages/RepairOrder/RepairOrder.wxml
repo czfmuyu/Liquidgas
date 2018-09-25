@@ -1,55 +1,73 @@
 <!-- pages/RepairOrder/RepairOrder.wxml -->
 <view class="header">
-    <view class="header_ipt">
-        <image src="../../imgs/5_03.png" />
-        <input placeholder="请输入要查询订单编号" bindinput="queryInput" />
-        <view class="header_ipt_x" bindtap="Delete">X</view>
-    </view>
+  <view class="header_ipt">
+    <image src="../../imgs/5_03.png" />
+    <input placeholder="请输入要查询订单编号" bindinput="queryInput" />
+    <view class="header_ipt_x" bindtap="Delete">X</view>
+  </view>
 </view>
 <!-- 导航条 -->
 <view class="navbar">
-    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">
         {{item}}
     </text>
 </view>
 <!-- 全部订单 -->
 <view hidden="{{currentTab!==0}}">
-    <scroll-view scroll-y>
-        <!-- 待维修 -->
-        <view class="whole" wx:for="{{UntreatedList}}" wx:for-item="item" wx:key="UntreatedList">
-            <view class="whole_top">
-                <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
+  <scroll-view scroll-y>
+    <!-- 待维修 -->
+    <view class="whole" wx:for="{{whole}}" wx:for-item="item" wx:key="UntreatedList">
+      <view class="whole_top">
+        <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
 
-                <view style="color: #2269d4;" wx:if="{item.RepairResult==0}}">未维修</view>
-               <view style="color: #2269d4;" wx:elif="{item.RepairResult==10}}">维修完成</view>
-               <view style="color: #2269d4;" wx:else>无法维修</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text">
-                    <view style="margin-left: 18rpx;">维修描述</view>
-                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
-                        {{item.ProblemDescription}}
-                    </view>
-                </view>
-            </view>
-            <view class="userName">申报人: {{item.Contact}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>申报时间:</view>
-                    <view style="margin:0 4rpx;">{{item.FormatSubscribeTime}}</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
-            </view>
-            <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn" data-orderId='{{item.ID}}' >查看详情</view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
-            </view>
+        <view style="color: #2269d4;" wx:if="{item.RepairResult==0}}">未维修</view>
+        <view style="color: #2269d4;" wx:elif="{item.RepairResult==10}}">维修完成</view>
+        <view style="color: #2269d4;" wx:else>无法维修</view>
+      </view>
+      <view class="whole_middle">
+        <view class="whole_middle_text">
+          <view style="margin-left: 18rpx;">维修描述</view>
+          <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+            {{item.ProblemDescription}}
+          </view>
+        </view>
+      </view>
+      <view class="userName">申报人: {{item.Contact}}</view>
+      <view class="whole_bottom">
+        <view class="whole_bottom_left">
+          <view>申报时间:</view>
+          <view style="margin:0 4rpx;">{{item.FormatSubscribeTime}}</view>
+        </view>
+        <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+      </view>
+
+      <!-- 待维修 -->
+      <view wx:if="{{item.Status==0}}">
+        <view class="btn-list">
+          <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
+          <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn" data-orderId='{{item.ID}}'>查看详情</view>
+          <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
+        </view>
+      </view>
+      <!-- 维修完成 -->
+      <view wx:elif="{{item.Status==30}}">
+        <view class="btn-list">
+          <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
+          <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">待评价</view>
+        </view>
+      </view>
+      <!-- 取消 -->
+      <view wx:elif="{{item.Status==100}}">
+        <view class="btn-list">
+          <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
         </view>
 
+      </view>
+    </view>
 
-        <!-- 维修完成 -->
-        <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
+
+    <!-- 维修完成 -->
+    <!-- <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
             <view class="whole_top">
                 <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
                 <view style="color: {{text2}};">维修完成</view>
@@ -70,13 +88,12 @@
                 <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
             </view>
             <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">待评价</view>
+                
             </view>
-        </view>
+        </view> -->
 
-        <!-- 已取消 -->
-        <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
+    <!-- 已取消 -->
+    <!-- <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
             <view class="whole_top">
                 <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
                 <view style="color: {{text2}};">已取消</view>
@@ -97,102 +114,102 @@
                 <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
             </view>
             <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
+                
             </view>
-        </view>
-    </scroll-view>
+        </view> -->
+  </scroll-view>
 </view>
 
 <!-- 待维修 -->
 <view hidden="{{currentTab!==1}}">
-    <scroll-view scroll-y>
-               <view class="whole" wx:for="{{UntreatedList}}" wx:for-item="item" wx:key="UntreatedList">
-            <view class="whole_top">
-                <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
+  <scroll-view scroll-y>
+    <view class="whole" wx:for="{{UntreatedList}}" wx:for-item="item" wx:key="UntreatedList">
+      <view class="whole_top">
+        <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
 
-                <view style="color: #2269d4;" wx:if="{item.RepairResult==0}}">未维修</view>
-               <view style="color: #2269d4;" wx:elif="{item.RepairResult==10}}">维修完成</view>
-               <view style="color: #2269d4;" wx:else>无法维修</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text">
-                    <view style="margin-left: 18rpx;">维修描述</view>
-                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
-                        {{item.ProblemDescription}}
-                    </view>
-                </view>
-            </view>
-            <view class="userName">申报人: {{item.Contact}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>申报时间:{{item.FormatSubscribeTime}}</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
-            </view>
-            <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn" data-orderId='{{item.ID}}'>查看详情</view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
-            </view>
+        <view style="color: #2269d4;" wx:if="{item.RepairResult==0}}">未维修</view>
+        <view style="color: #2269d4;" wx:elif="{item.RepairResult==10}}">维修完成</view>
+        <view style="color: #2269d4;" wx:else>无法维修</view>
+      </view>
+      <view class="whole_middle">
+        <view class="whole_middle_text">
+          <view style="margin-left: 18rpx;">维修描述</view>
+          <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+            {{item.ProblemDescription}}
+          </view>
         </view>
-    </scroll-view>
+      </view>
+      <view class="userName">申报人: {{item.Contact}}</view>
+      <view class="whole_bottom">
+        <view class="whole_bottom_left">
+          <view>申报时间:{{item.FormatSubscribeTime}}</view>
+        </view>
+        <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+      </view>
+      <view class="btn-list">
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn" data-orderId='{{item.ID}}'>查看详情</view>
+        <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
 <!-- 维修完成 -->
 <view hidden="{{currentTab!==2}}">
-    <scroll-view scroll-y>
-        <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
-            <view class="whole_top">
-                <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
-                <view style="color: {{text2}};">维修完成</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text">
-                    <view style="margin-left: 18rpx;">维修描述</view>
-                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
-                        {{item.ProblemDescription}}
-                    </view>
-                </view>
-            </view>
-            <view class="userName">申报人: {{item.Contact}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>申报时间:{{item.FormatSubscribeTime}}</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
-            </view>
-            <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">去评价</view>
-            </view>
+  <scroll-view scroll-y>
+    <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
+      <view class="whole_top">
+        <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
+        <view style="color: {{text2}};">维修完成</view>
+      </view>
+      <view class="whole_middle">
+        <view class="whole_middle_text">
+          <view style="margin-left: 18rpx;">维修描述</view>
+          <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+            {{item.ProblemDescription}}
+          </view>
         </view>
-    </scroll-view>
+      </view>
+      <view class="userName">申报人: {{item.Contact}}</view>
+      <view class="whole_bottom">
+        <view class="whole_bottom_left">
+          <view>申报时间:{{item.FormatSubscribeTime}}</view>
+        </view>
+        <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+      </view>
+      <view class="btn-list">
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
+        <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">去评价</view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
 <!-- 已取消 -->
 <view hidden="{{currentTab!==3}}">
-    <scroll-view scroll-y>
-        <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
-            <view class="whole_top">
-                <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
-                <view style="color: {{text2}};">已取消</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text">
-                    <view style="margin-left: 18rpx;">维修描述</view>
-                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
-                        {{item.ProblemDescription}}
-                    </view>
-                </view>
-            </view>
-            <view class="userName">申报人: {{item.Contact}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>申报时间:{{item.FormatSubscribeTime}}</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
-            </view>
-            <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
-            </view>
+  <scroll-view scroll-y>
+    <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
+      <view class="whole_top">
+        <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
+        <view style="color: {{text2}};">已取消</view>
+      </view>
+      <view class="whole_middle">
+        <view class="whole_middle_text">
+          <view style="margin-left: 18rpx;">维修描述</view>
+          <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
+            {{item.ProblemDescription}}
+          </view>
         </view>
-    </scroll-view>
+      </view>
+      <view class="userName">申报人: {{item.Contact}}</view>
+      <view class="whole_bottom">
+        <view class="whole_bottom_left">
+          <view>申报时间:{{item.FormatSubscribeTime}}</view>
+        </view>
+        <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
+      </view>
+      <view class="btn-list">
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
