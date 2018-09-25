@@ -68,7 +68,7 @@ Page({
     wx.setStorage({
       key: 'index',
       data: index,
-      success: function(res){
+      success: function (res) {
         // success
       },
     })
@@ -89,16 +89,20 @@ Page({
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function (res) {
-            console.log(res.data.Data)
+            console.log(res.data)
             let data = res.data.Data
             let arr = [];
-            for (let i = 0; i < res.data.Data.length; i++) {
-              arr.push(res.data.Data[i].GasNo)
+            if (res.data.Data == null) {
+              return
+            } else {
+              for (let i = 0; i < res.data.Data.length; i++) {
+                arr.push(res.data.Data[i].GasNo)
+              }
+              console.log(arr)
+              this_.setData({
+                GasNo: arr
+              })
             }
-            console.log(arr)
-            this_.setData({
-              GasNo: arr
-            })
             this_.Tips()
             if (res.data.Data.length > 0 && res.data.Data.length < 2) {
               console.log("in")
@@ -171,18 +175,6 @@ Page({
     this.setData({
       showModaltwo: false
     });
-  },
-  /**
-   * 对话框取消按钮点击事件
-   */
-  onCancel: function () {
-    this.hideModalTwo();
-  },
-  /**
-   * 对话框确认按钮点击事件
-   */
-  onConfirm: function () {
-    this.hideModalTwo();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

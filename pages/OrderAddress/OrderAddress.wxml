@@ -38,7 +38,7 @@
 </view>
 
 <!-- 地址没有数据显示的页面 -->
-<view class="hidden_header" hidden="{{!isAddress}}" bindtap="Add">
+<view class="hidden_header" hidden="{{!isAddress}}" bindtap="Addaddress">
     <view class="hidden_header_left">
         <image src="../../imgs/33_03.png" />
     </view>

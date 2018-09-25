@@ -106,6 +106,7 @@ Page({
   */
   onLoad() {
     this.getData()
+    this.userData()
   },
   //用户数据判断
   userData(){
@@ -604,10 +605,19 @@ Page({
   /**
    * 地址无数据隐藏页面弹框
    */
-  Add() {
-    this.setData({
-      showModal: true,
+  Addaddress() {
+    wx.navigateTo({
+      url: '/pages/GasInformation/GasInformation',
     })
+    let number=0;
+    wx.setStorage({
+      key: 'page',
+      data: number,
+      success: function(res){
+        // success
+      },
+    })
+    
   },
 
 

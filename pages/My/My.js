@@ -77,6 +77,14 @@ Page({
     wx.navigateTo({//用气信息页面
       url: "/pages/GasInformation/GasInformation",
     })
+    let number=1;
+    wx.setStorage({
+      key: 'page',
+      data: number,
+      success: function(res){
+        // success
+      },
+    })
   },
   PersonalData() {
     wx.navigateTo({//个人信息页面
