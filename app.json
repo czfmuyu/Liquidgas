@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/Order/Order",
     "pages/HomePage/HomePage",
     "pages/OrderAddress/OrderAddress",
     "pages/Repair/Repair",
@@ -11,7 +12,6 @@
     "pages/DeliveryDetails/DeliveryDetails",
     "pages/GasInformation/GasInformation",
     "pages/RepairOrder/RepairOrder",
-    "pages/Order/Order",
     "pages/CompleteDetails/CompleteDetails",
     "pages/RepairDetailsComplete/RepairDetailsComplete",
     "pages/Opinion/Opinion",
@@ -28,9 +28,9 @@
     "pages/ChangePassword/ChangePassword",
     "pages/BindingNumber/BindingNumber",
     "pages/Evaluate/Evaluate"
-    
   ],
   "window": {
+    "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2269d4",
     "navigationBarTitleText": "液化气",

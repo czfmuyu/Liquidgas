@@ -2,235 +2,210 @@
 let app = getApp()
 const baseUrl = app.globalData.baseUrl
 const utils = require("../../utils/util.js")
-const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrderInfo`//获取订单详情接口
+const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders`//获取订单列表接口
+let Num = 2;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    navbar: ['全部订单', '配送中','已完成','已取消'],
+    navbar: ['全部订单', '配送中', '已完成', '已取消'],
     currentTab: 0,
-    DeliveryList: [
-      {
-        CustomerId: "874356382",
-        status: "配送中",
-        Creator:"王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"在线支付",
-        ReserveTime:"08:00-09:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-      {
-        CustomerId: "874356382",
-        status: "配送中",
-        Creator: "张某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"09:00-10:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 12330,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-      
-        ]
-      },
-      {
-        CustomerId: "874356382",
-        status: "配送中",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      }
-    ],
-    CompleteList: [
-      {
-        CustomerId: "874356382",
-        status: "已完成",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-      {
-        CustomerId: "874356382",
-        status: "已完成",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-      {
-        CustomerId: "874356382",
-        status: "已完成",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-    ],
-    EvaluateList: [
-      {
-        CustomerId: "874356382",
-        status: "已取消",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-      {
-        CustomerId: "874356382",
-        status: "已取消",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-      {
-        CustomerId: "874356382",
-        status: "已取消",
-        Creator: "王某某",
-        Quantity: 11,
-        Price: 1200,
-        CreateMode:"货到付款",
-        ReserveTime:"14:00-15:00",
-        OrderTrackList:[
-          {
-            Operator:"李某某",
-            OperateTime:"14:00",
-          }
-        ],
-        goodsList: [
-          {
-            Name: "商品1",
-            Price: 120,
-            PrceType: "瓶",
-            Quantity: 3,
-          },
-        ]
-      },
-    ],
+    wholeList: [],
+    DeliveryList: [],
+    CompleteList: [],
+    EvaluateList: [],
     text: "btn",
     text2: "margin-right:12rpx;border: 2rpx solid #999;",
-    text3: '取消订单'
+    text3: '取消订单',
+    searchKeyword: '',  //需要搜索的字符
+    searchPageNum: 1,   // 设置加载的第几次，默认是第一次
+    callbackcount: 3,      //返回数据的个数
   },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 2000
+    });
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+    this.setData({
+      callbackcount:3
+    })
+    let count=this.data.callbackcount * Num
+    this.setData({
+      searchPageNum: this.data.searchPageNum,
+      callbackcount: count
+    })
+    Num++;
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 2000
+    });
+  },
+  //输入框事件，每输入一个字符，就会触发一次
+  bindKeywordInput: function (e) {
+    this.setData({
+      searchKeyword: e.detail.value
+    })
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+  },
+  //输入框清空事件
+  Delete(){
+    this.setData({
+      searchKeyword:""
+    })
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+  },
+  //取消订单信息
+  EvaluateList(){
+    let this_ = this
+    let searchKeyword = this_.data.searchKeyword
+    let searchPageNum = this_.data.searchPageNum
+    let callbackcount = this_.data.callbackcount
+    wx.request({
+      url: baseUrls,
+      data: {
+        sign: "",
+        pageIndex: searchPageNum,
+        pageSize: callbackcount,
+        queryKeyword: searchKeyword,
+        status: 100
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        this_.setData({
+          EvaluateList: res.data.Data
+        })
+      },
+    })
+  },
+  //已完成信息
+  CompleteList(){
+    let this_ = this
+    let searchKeyword = this_.data.searchKeyword
+    let searchPageNum = this_.data.searchPageNum
+    let callbackcount = this_.data.callbackcount
+    wx.request({
+      url: baseUrls,
+      data: {
+        sign: "",
+        pageIndex: searchPageNum,
+        pageSize: callbackcount,
+        queryKeyword: searchKeyword,
+        status: 30
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        this_.setData({
+          CompleteList: res.data.Data
+        })
+      },
+    })
+  },
+  //配送中订单信息
+  DeliveryList(){
+    let this_ = this
+    let searchKeyword = this_.data.searchKeyword
+    let searchPageNum = this_.data.searchPageNum
+    let callbackcount = this_.data.callbackcount
+    wx.request({
+      url: baseUrls,
+      data: {
+        sign: "",
+        pageIndex: searchPageNum,
+        pageSize: callbackcount,
+        queryKeyword: searchKeyword,
+        status: 0
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        this_.setData({
+          DeliveryList: res.data.Data
+        })
+      },
+    })
+  },
+  //请求全部订单信息
+  wholeInfo() {
+    let this_ = this
+    let searchKeyword = this_.data.searchKeyword
+    let searchPageNum = this_.data.searchPageNum
+    let callbackcount = this_.data.callbackcount
+    wx.request({
+      url: baseUrls,
+      data: {
+        sign: "",
+        pageIndex: searchPageNum,
+        pageSize: callbackcount,
+        queryKeyword: searchKeyword,
+        status: -1
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        this_.setData({
+          wholeList: res.data.Data
+        })
+      },
+    })
+  },
+  //点击搜索按钮,触发事件
+  keywordSearch(e) {
+    this.setData({
+      searchPageNum: 1,   //第一次加载，设置1
+    })
+  },
+
   //确认收货点击事件
-  onconfirm(){
+  onconfirm() {
     wx.showToast({
       title: '确认成功',
       icon: 'success',
@@ -238,29 +213,17 @@ Page({
     })
   },
   //删除订单点击事件
-  onCancel(){
+  onCancel() {
     wx.showToast({
       title: '取消成功',
       icon: 'success',
       duration: 2000
     })
   },
-  //已完成详情跳转
-  CompleteDetails(){
+  //详情跳转
+  deliveryDetails(e) {
     wx.navigateTo({
-      url: "/pages/DeliveryDetails/DeliveryDetails",
-    })
-  },
-  //配送详情跳转
-  deliveryDetails(){
-    wx.navigateTo({
-      url: "/pages/DeliveryDetails/DeliveryDetails",
-    })
-  },
-  //待评价详情跳转
-  EvaluateDetails(){
-    wx.navigateTo({
-      url: "/pages/DeliveryDetails/DeliveryDetails",
+      url: "/pages/DeliveryDetails/DeliveryDetails?id="+e.currentTarget.dataset.id,
     })
   },
   //导航控制
@@ -270,53 +233,17 @@ Page({
     })
   },
   // 评价跳转页面
-  Evaluate:function(){
+  Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    for (let i = 0; i < this.data.CompleteList.length; i++) {
-      let status = this.data.CompleteList[i].status
-      if (status === "已完成") {
-        this.setData({
-          text: "",
-          text2: "",
-          text3: ''
-        })
-      }
-    }
-
-  },
-  GetGasOrderInfo(){
-    wx.request({
-      url: baseUrls,
-      data: {},
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function(res){
-        // success
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
-  },
-  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+
   },
 
   /**
@@ -339,21 +266,6 @@ Page({
   onUnload: function () {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

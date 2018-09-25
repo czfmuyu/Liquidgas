@@ -2,7 +2,7 @@
 <view class="header">
     <view class="header_ipt">
         <image src="../../imgs/5_03.png" />
-        <input placeholder="请输入要查询订单编号" bindinput="queryInput" />
+        <input placeholder="请输入要查询订单编号" bindblur="bindKeywordInput" value="{{searchKeyword}}" />
         <view class="header_ipt_x" bindtap="Delete">X</view>
     </view>
 </view>
@@ -14,21 +14,18 @@
 </view>
 <!-- 全部订单 -->
 <view hidden="{{currentTab!==0}}">
-    <scroll-view scroll-y>
-        <!-- 配送状态 -->
-        <view class="whole" wx:for="{{DeliveryList}}" wx:for-item="item" wx:key="DeliveryList">
+    <scroll-view scroll-y scroll-y="{{true}}" scroll-top="{{scrollTop}}" lower-threshold="50">
+        <!-- 全部订单 -->
+        <view class="whole" wx:for="{{wholeList}}" wx:for-item="item" wx:key="wholeList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.CustomerId}}</view>
-                <view style="color: #2269d4;">{{item.status}}</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
-                    <view style="margin-left: 18rpx;">{{cell.Name}}</view>
-                    <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
-                    <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
+                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 30}}">
+                    配送中
                 </view>
+                <view style="color: #2269d4;" wx:elif="{{item.Status==30}}">已完成</view>
+                <view style="color: #2269d4;" wx:else>已取消</view>
             </view>
-            <view class="userName">订购人: {{item.Creator}}</view>
+            <view class="userName">订购人: {{item.CustomerName}}</view>
             <view class="whole_bottom">
                 <view class="whole_bottom_left">
                     <view>共</view>
@@ -39,78 +36,30 @@
                     ￥{{item.Price}}
                 </view>
             </view>
-            <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">
-                    取消订单
+            <view>
+                <view class="btn-list" wx:if="{{item.Status>= 0 && item.Status< 30}}">
+                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">
+                        取消订单
+                    </view>
+                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
+                        查看详情
+                    </view>
+                    <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">
+                        确认收货
+                    </view>
                 </view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails">
-                    查看详情
+                <view class="btn-list" wx:elif="{{item.Status==30}}">
+                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
+                        查看详情
+                    </view>
+                    <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">
+                        待评价
+                    </view>
                 </view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">
-                    确认收货
-                </view>
-            </view>
-        </view>
-        <!-- 已完成状态 -->
-        <view class="whole" wx:for="{{CompleteList}}" wx:for-item="item" wx:key="CompleteList">
-            <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.CustomerId}}</view>
-                <view style="color: #2269d4;">{{item.status}}</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
-                    <view style="margin-left: 18rpx;">{{cell.Name}}</view>
-                    <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
-                    <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
-                </view>
-            </view>
-            <view class="userName">订购人: {{item.Creator}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>共</view>
-                    <view style="color: #d4223b;margin:0 4rpx;">{{item.Quantity}}</view>
-                    <view>件商品,共计</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;">
-                    ￥{{item.Price}}
-                </view>
-            </view>
-            <view class="btn-list">
-                <view class="{{text}}" style="{{text2}}">{{text3}}</view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="CompleteDetails">
-                    查看详情
-                </view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;">待评价</view>
-            </view>
-        </view>
-        <!-- 已取消 -->
-        <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
-            <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.CustomerId}}</view>
-                <view style="color: #2269d4;">{{item.status}}</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
-                    <view style="margin-left: 18rpx;">{{cell.Name}}</view>
-                    <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
-                    <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
-                </view>
-            </view>
-            <view class="userName">订购人: {{item.Creator}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>共</view>
-                    <view style="color: #d4223b;margin:0 4rpx;">{{item.Quantity}}</view>
-                    <view>件商品,共计</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;">
-                    ￥{{item.Price}}
-                </view>
-            </view>
-            <view class="btn-list">
-                <view class="{{text}}" style="{{text2}}">{{text3}}</view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="EvaluateDetails">
-                    查看详情
+                <view class="btn-list" wx:else>
+                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
+                        查看详情
+                    </view>
                 </view>
             </view>
         </view>
@@ -119,20 +68,15 @@
 <!-- 配送中 -->
 <view hidden="{{currentTab!==1}}">
     <!-- 配送状态 -->
-    <scroll-view scroll-y>
+    <scroll-view>
         <view class="whole" wx:for="{{DeliveryList}}" wx:for-item="item" wx:key="DeliveryList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.CustomerId}}</view>
-                <view style="color: #2269d4;">{{item.status}}</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
-                    <view style="margin-left: 18rpx;">{{cell.Name}}</view>
-                    <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
-                    <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
+                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 30}}">
+                    配送中
                 </view>
             </view>
-            <view class="userName">订购人: {{item.Creator}}</view>
+            <view class="userName">订购人: {{item.CustomerName}}</view>
             <view class="whole_bottom">
                 <view class="whole_bottom_left">
                     <view>共</view>
@@ -143,11 +87,11 @@
                     ￥{{item.Price}}
                 </view>
             </view>
-            <view class="btn-list">
+            <view class="btn-list" wx:if="{{item.Status>= 0 && item.Status< 30}}">
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">
                     取消订单
                 </view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
                 <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">
@@ -163,17 +107,10 @@
     <scroll-view scroll-y>
         <view class="whole" wx:for="{{CompleteList}}" wx:for-item="item" wx:key="CompleteList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.CustomerId}}</view>
-                <view style="color: #2269d4;">{{item.status}}</view>
+                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #2269d4;" wx:if="{{item.Status==30}}">已完成</view>
             </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
-                    <view style="margin-left: 18rpx;">{{cell.Name}}</view>
-                    <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
-                    <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
-                </view>
-            </view>
-            <view class="userName">订购人: {{item.Creator}}</view>
+            <view class="userName">订购人: {{item.CustomerName}}</view>
             <view class="whole_bottom">
                 <view class="whole_bottom_left">
                     <view>共</view>
@@ -185,7 +122,7 @@
                 </view>
             </view>
             <view class="btn-list">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="CompleteDetails">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
                 <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">待评价</view>
@@ -196,20 +133,12 @@
 <!-- 已取消 -->
 <view hidden="{{currentTab!==3}}">
     <scroll-view scroll-y>
-        <!-- 已取消 -->
         <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.CustomerId}}</view>
-                <view style="color: #2269d4;">{{item.status}}</view>
+                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #2269d4;" wx:if="{{item.Status==100}}">已取消</view>
             </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text" wx:for="{{item.goodsList}}" wx:for-item="cell" wx:key="goodsList">
-                    <view style="margin-left: 18rpx;">{{cell.Name}}</view>
-                    <view>￥{{cell.Price}}/{{cell.PrceType}}</view>
-                    <view style="margin-right: 18rpx;">X{{cell.Quantity}}</view>
-                </view>
-            </view>
-            <view class="userName">订购人: {{item.Creator}}</view>
+            <view class="userName">订购人: {{item.CustomerName}}</view>
             <view class="whole_bottom">
                 <view class="whole_bottom_left">
                     <view>共</view>
@@ -221,8 +150,7 @@
                 </view>
             </view>
             <view class="btn-list">
-                <view class="{{text}}" style="{{text2}}">{{text3}}</view>
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="CompleteDetails">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
             </view>

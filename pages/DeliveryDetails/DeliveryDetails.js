@@ -1,6 +1,8 @@
 let util = require('../../utils/util.js');
-let wechat = require("../../utils/wechat");
 let amap = require("../../utils/amap");
+let app = getApp()
+const baseUrl = app.globalData.baseUrl;
+const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrderInfo`//获取订单详情接口
 Page({
   data: {
     //地图参数
@@ -15,11 +17,10 @@ Page({
     name: "",
     desc: "",
     //每个状态的显示和隐藏
-    StateControl:0,
-    btn:0,
+    StateControl: 0,
+    btn: 0,
     //模拟数据
     CustomerId: "874356382",
-    status: "配送中",
     Creator: "王某某",
     Quantity: 11,
     Price: 1200,
@@ -28,54 +29,11 @@ Page({
     Address: "浙江省杭州市江千区浙江大学华家池校区西门对面三栋",
     Contact: "郑菲",
     Phone: "15000822230",
-    OrderTrackList: {
-      Operator: "李某某",
-      OperateTime: "14:00",
-    },
-    goodsList: [
-      {
-        Name: "商品1",
-        Price: 120,
-        PrceType: "瓶",
-        Quantity: 3,
-      },
-      {
-        Name: "商品2",
-        Price: 120,
-        PrceType: "公斤",
-        Quantity: 2,
-      },
-      {
-        Name: "商品3",
-        Price: 120,
-        PrceType: "瓶",
-        Quantity: 3,
-      },
-      {
-        Name: "商品4",
-        Price: 120,
-        PrceType: "公斤",
-        Quantity: 3,
-      },
-    ]
+    OrderTrackList: [],
+    goodsList:[],
   },
-  onLoad(e) {
-    //数据判断页面改动
-    if (this.data.status === "配送中") {
-      this.setData({
-        StateControl:1,
-        btn:1
-      })
-    } else if (this.data.status === "待评价") {
-      this.setData({
-        StateControl:2,
-        btn:2
-      })
-    } else {
-      this.setData({
-        StateControl:2,
-      })
-    }
+  onLoad(options) {
+    this.queryDetails(options)
     //地图逻辑
     // console.log(e)
     // let { latitude, longitude, latitude2, longitude2, city, name, desc } = e;
@@ -109,6 +67,60 @@ Page({
     this.getRoute();
 
 
+  },
+  //页面判断改变
+  Pagechange(){
+     // 数据判断页面改动
+     if (this.data.OrderTrackList.Status <30) {//配送中
+      console.log("配送中")
+      this.setData({
+        StateControl: 1,
+        btn: 1
+      })
+    } else if (this.data.OrderTrackList.Status =30) {//配送完成
+      console.log("配送完成")
+      this.setData({
+        StateControl: 2,
+        btn: 2
+      })
+    } else {
+      this.setData({//取消订单
+        StateControl: 3,
+        btn:3
+      })
+    }
+  },
+  //查询订单详情
+  queryDetails(options) {
+    let this_=this
+    console.log(options.id)
+    wx.request({
+      url: baseUrls,
+      data: {
+        sign: "",
+        orderId: options.id
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data.Data)
+        this_.setData({
+          OrderTrackList:res.data.Data,
+          goodsList:res.data.Data.OrderItems
+        })
+        console.log(this_.data.OrderTrackList)
+        this_.Pagechange()
+      },
+    }) 
+  },
+   // 评价跳转页面
+   Evaluate: function () {
+    wx.navigateTo({
+      url: '/pages/Evaluate/Evaluate',
+    })
   },
   changeType(e) {
     let { id } = e.target.dataset;
