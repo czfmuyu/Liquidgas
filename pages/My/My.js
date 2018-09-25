@@ -60,6 +60,13 @@ Page({
     this.setData({
       data:data[index]
     })
+    wx.setStorage({
+      key: 'Information',
+      data:data[index],
+      success: function(res){
+        // success
+      },
+    })
   },
   SublevelAccount() {
     wx.navigateTo({//子账号页面
