@@ -51,7 +51,7 @@ Page({
 
 
     wx.navigateTo({
-      url: '/pages/GasInformation/GasInformation?locations=' + locations + "&index=" + 1 + "&longitudes=" + longitudes + "&latitudes=" + latitudes,
+      url: '/pages/GasInformation/GasInformation?locations=' + locations + "&longitudes=" + longitudes + "&latitudes=" + latitudes,
     })
   },
   /**

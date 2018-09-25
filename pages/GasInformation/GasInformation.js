@@ -9,11 +9,48 @@ Page({
     PhoneShowModal: false, //电话弹框控制
     addlist: "1",
     index: 0,
+    longitudes:"",
+    latitudes:"",
+
     information: {
       storename: "",
       telephone: "",
       address: "",
     }
+  },
+  /**
+  * 生命周期函数--监听页面加载
+  */
+  onLoad: function (options) {
+    this.page()
+
+    let _this = this
+    console.log(options)
+    _this.getData()
+
+    let longitudes = options.longitudes
+    let latitudes = options.latitudes
+    let address = options.locations
+
+    _this.setData({
+      addlist: address,
+      longitudes: longitudes,
+      latitudes: latitudes,
+    })
+  },
+
+  //获取页面传的值
+  page(){
+  let this_=this
+    wx.getStorage({
+      key: 'page',
+      success: function(res) {
+        console.log(res.data)
+        this_.setData({
+          index:res.data
+        })
+      },
+    })
   },
   //获取本地储存
   getData() {
@@ -39,23 +76,47 @@ Page({
   // 提交地址
   submission() {
   let indexs=this.data.index
+    let name = this.data.information.storename
+    let phone = this.data.information.telephone
+    let longitudes = this.data.longitudes
+    let latitudes = this.data.latitudes
+    let address = this.data.information.address
+  // 本地储存
+    wx.setStorage({
+      key: 'address',
+      data: {
+        longitudes,
+        latitudes,
+        address,
+        phone,
+        name
+      },
+    })
     if(indexs==0){
+      console.log("in")
       wx.navigateTo({
         url: '/pages/OrderAddress/OrderAddress',
       })
     }else{
-      wx.navigateTo({
-        url: '/pages/GasInformation/GasInformation',
+      console.log("i")
+        wx.switchTab({
+        url: '/pages/My/My',
       })
     }
   },
   // 获取姓名
   GasNumber:function(e){
-    console.log(e)
+    let value = e.detail.value
+    this.setData({
+      "information.storename": value
+    })
   },
   // 获取电话
   GasNumbers:function(e){
-console.log(e)
+    let value = e.detail.value
+    this.setData({
+      "information.telephone": value
+    })
     },
   /**
    * 电话弹窗
@@ -136,31 +197,7 @@ console.log(e)
     this.NameHideModal();
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    let _this = this
-    console.log(options)
-    let indexs = options.index
-    let longitudes = options.longitudes
-    let latitudes = options.latitudes
-    _this.getData()
-    let address = options.locations
-    wx.setStorage({
-      key: 'address',
-      data: {
-        longitudes,
-        latitudes,
-        address,
-      },
-    })
-    _this.setData({
-      addlist: address,
-      indexs: indexs,
-    })
-  },
-
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
