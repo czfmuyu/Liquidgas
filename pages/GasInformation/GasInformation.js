@@ -7,16 +7,12 @@ Page({
   data: {
     NameShowModal: false, //名称弹框控制
     PhoneShowModal: false, //电话弹框控制
-    addlist: "1",
     index: 0,
-    longitudes:"",
-    latitudes:"",
-
-    information: {
-      storename: "",
-      telephone: "",
-      address: "",
-    }
+    longitudes: "",
+    latitudes: "",
+    storename: "",
+    telephone: "",
+    address: "",
   },
   /**
   * 生命周期函数--监听页面加载
@@ -33,21 +29,21 @@ Page({
     let address = options.locations
 
     _this.setData({
-      addlist: address,
+      address: address,
       longitudes: longitudes,
       latitudes: latitudes,
     })
   },
 
   //获取页面传的值
-  page(){
-  let this_=this
+  page() {
+    let this_ = this
     wx.getStorage({
       key: 'page',
-      success: function(res) {
+      success: function (res) {
         console.log(res.data)
         this_.setData({
-          index:res.data
+          index: res.data
         })
       },
     })
@@ -57,31 +53,27 @@ Page({
     let _this = this
     wx.getStorage({
       key: 'Information',
-      success: function(res) {
+      success: function (res) {
         let storename = res.data.AccountName
         let telephone = res.data.AccountPhone
         let address = res.data.CustomerAddress
-        let addlist = _this.data.addlist
         _this.setData({
-          "information.storename": storename,
-          "information.telephone": telephone,
-          "information.address": address
-        })
-        _this.setData({
-          "information.address": addlist
+          storename: storename,
+          telephone: telephone,
+          address: address,
         })
       },
     })
   },
   // 提交地址
   submission() {
-  let indexs=this.data.index
-    let name = this.data.information.storename
-    let phone = this.data.information.telephone
+    let indexs = this.data.index
+    let name = this.data.storename
+    let phone = this.data.telephone
     let longitudes = this.data.longitudes
     let latitudes = this.data.latitudes
-    let address = this.data.information.address
-  // 本地储存
+    let address = this.data.address
+    // 本地储存
     wx.setStorage({
       key: 'address',
       data: {
@@ -92,32 +84,32 @@ Page({
         name
       },
     })
-    if(indexs==0){
+    if (indexs == 0) {
       console.log("in")
       wx.navigateTo({
         url: '/pages/OrderAddress/OrderAddress',
       })
-    }else{
+    } else {
       console.log("i")
-        wx.switchTab({
+      wx.switchTab({
         url: '/pages/My/My',
       })
     }
   },
   // 获取姓名
-  GasNumber:function(e){
+  GasNumber: function (e) {
     let value = e.detail.value
     this.setData({
-      "information.storename": value
+      storename: value
     })
   },
   // 获取电话
-  GasNumbers:function(e){
+  GasNumbers: function (e) {
     let value = e.detail.value
     this.setData({
-      "information.telephone": value
+      telephone: value
     })
-    },
+  },
   /**
    * 电话弹窗
    */
@@ -129,11 +121,11 @@ Page({
   /**
    * 电话弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 电话隐藏模态对话框
    */
-  PhoneHideModal: function() {
+  PhoneHideModal: function () {
     this.setData({
       PhoneShowModal: false
     });
@@ -141,13 +133,13 @@ Page({
   /**
    * 电话对话框取消按钮点击事件
    */
-  onPhoneCancel: function() {
+  onPhoneCancel: function () {
     this.PhoneHideModal();
   },
   /**
    * 电话对话框确认按钮点击事件
    */
-  onPhoneConfirm: function() {
+  onPhoneConfirm: function () {
     this.PhoneHideModal();
   },
 
@@ -175,11 +167,11 @@ Page({
   /**
    * 名称弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 名称隐藏模态对话框
    */
-  NameHideModal: function() {
+  NameHideModal: function () {
     this.setData({
       NameShowModal: false
     });
@@ -187,63 +179,63 @@ Page({
   /**
    * 名称对话框取消按钮点击事件
    */
-  onNameCancel: function() {
+  onNameCancel: function () {
     this.NameHideModal();
   },
   /**
    * 名称对话框确认按钮点击事件
    */
-  onNameConfirm: function() {
+  onNameConfirm: function () {
     this.NameHideModal();
   },
 
- 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

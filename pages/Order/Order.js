@@ -22,6 +22,7 @@ Page({
     searchKeyword: '',  //需要搜索的字符
     searchPageNum: 1,   // 设置加载的第几次，默认是第一次
     callbackcount: 3,      //返回数据的个数
+    CustomerId:"",
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -41,6 +42,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
+    let CustomerId=this.data.CustomerId
+    console.log(CustomerId)
     this.setData({
       callbackcount:3
     })
@@ -79,19 +82,36 @@ Page({
     this.DeliveryList()
     this.CompleteList()
     this.EvaluateList()
+    
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad(options) {
     this.wholeInfo()
     this.DeliveryList()
     this.CompleteList()
     this.EvaluateList()
+    this.CustomerId()
+    
+  },
+  CustomerId(){
+    const this_=this
+    wx.getStorage({
+      key: 'Information',
+      success: function(res){
+        console.log(res.data.CustomerId)
+        this_.setData({
+          CustomerId:res.data.CustomerId
+        })
+      },
+    })
   },
   //取消订单信息
   EvaluateList(){
     let this_ = this
+    let CustomerId=this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -99,6 +119,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
+        CustomerId:CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -123,6 +144,7 @@ Page({
   //已完成信息
   CompleteList(){
     let this_ = this
+    let CustomerId=this_.data.CustomerId
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -130,6 +152,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
+        CustomerId:CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -154,6 +177,7 @@ Page({
   //配送中订单信息
   DeliveryList(){
     let this_ = this
+    let CustomerId=this_.data.CustomerId
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -161,6 +185,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
+        CustomerId:CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -185,6 +210,8 @@ Page({
   //请求全部订单信息
   wholeInfo() {
     let this_ = this
+    let CustomerId=this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -192,6 +219,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
+        CustomerId:CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -203,6 +231,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res.data.Data)
         let data=res.data.Data
         for(let i=0;i<data[i].length;i++){
           utils.Decrypt(data[i].CustomerName)
@@ -259,21 +288,18 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**

@@ -3,7 +3,7 @@
     <text>名称</text>
   </view>
   <view class="wrap">
-    <text>{{information.storename}}</text>
+    <text>{{storename}}</text>
     <view style="margin-left: 16rpx;">
       <text class="right_text">></text>
     </view>
@@ -28,7 +28,7 @@
     <text>联系电话</text>
   </view>
   <view class="wrap">
-    <text>{{information.telephone}}</text>
+    <text>{{telephone}}</text>
     <view style="margin-left: 16rpx;">
       <text class="right_text">></text>
     </view>
@@ -53,7 +53,7 @@
     <text>地址</text>
   </view>
   <view class="wraps">
-    <text class='textfont'>{{information.address}}</text>
+    <text class='textfont'>{{address}}</text>
   </view>
   <view style="margin-left: 16rpx;">
     <text class="right_text">></text>
