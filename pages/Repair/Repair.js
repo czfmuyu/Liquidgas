@@ -1,5 +1,12 @@
 // pages/Repair/Repair.js
 var util = require('../../utils/util.js');
+let app = getApp()
+const baseUrl = app.globalData.baseUrl
+// 发送照片
+const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairLabels`
+// 提交维修订单
+const baseUrlBd = `${baseUrl}/Api/RepairOrders/NewRepairOrder`
+		
 
 Page({
   /**
@@ -7,7 +14,7 @@ Page({
    */
   data: {
     array: [
-      '08:00-09:00',
+      '立即出发',
       '09:00-10:00',
       '10:00-11:00',
       '11:00-12:00',
@@ -25,78 +32,59 @@ Page({
     isAddress: true, //控制地址隐藏显示
     // 要提交的数据
     frolist: {
-      name: "",
-      phone: "",
-      address: "",
+      Contact: "",
+      Phone: "",
+      Address: "",
       // 预约时间
-      time:"08:00-09:00",
+      SubscribeTime:"立即出发",
       // 维修描述
-      multitetx:"",
-      // 上传图片
-      images:[]
-    },
+      ProblemDescription:"",
+      // 照片编码
+      PhotoIds:"1",
+      // 企业编号
+      EnterpriseId:"",
+      // 用户编号
+      CustomerId:"",
+      // 经纬度
+      Longitude:"",
+      Latitude:"",
+      // 用户唯一编码
+      AccountId:"",
+      // 维修编号
+      RepairLabelIds:"",
+      // 服务模式
+      ServiceMode:"0",
 
-    problemlist: [ //维修问题
-      {
-        problem: "气质问题",
-        state: false,
-        background: "#EEE",
-        color: "#666",
-      },
-      {
-        problem: "灶具问题",
-        state: false,
-        background: "#EEE",
-        color: "#666",
-      },
-      {
-        problem: "漏气问题",
-        state: false,
-        background: "#EEE",
-        color: "#666",
-      },
-      {
-        problem: "钢瓶阀门问题",
-        state: false,
-        background: "#EEE",
-        color: "#666",
-      },
-    ],
-    guaranteeList: [{
-      name: "气质问题"
-    }, {
-      name: "灶具问题"
-    }, {
-      name: "漏气问题"
-    }, {
-      name: "钢瓶阀门问题"
-    }],
-   
+      images: [],
+    },
+    guaranteeList:[],
+  //  判断选项状态
+    changeType:1,
+    sss:""
   },
-  Discoloration(e) {
-    const index = e.target.dataset.index;
-    let state = this.data.problemlist[index].state;
-    let problemlist = this.data.problemlist
-    if (state === false) {
-      problemlist[index].state = true;
-      problemlist[index].background = "#154CC0";
-      problemlist[index].color = "#fff";
-      this.setData({
-        problemlist
-      })
-    } else {
-      problemlist[index].state = false;
-      problemlist[index].background = "#EEE";
-      problemlist[index].color = "#666";
-      this.setData({
-        problemlist
-      })
-    }
-  },
+ 
 
 // 表单提交=========================
   Submit() {
-    let imglent = this.data.frolist.images
+    let _this=this
+    let imglent = _this.data.frolist.images
+    let frolists = _this.data.frolist
+
+    console.log(frolists)
+    let Contact = frolists.Contact
+    let Phone = frolists.Phone
+    let Address = frolists.Address
+    let SubscribeTime = frolists.SubscribeTime
+    let ProblemDescription = frolists.ProblemDescription
+    let ServiceMode = frolists.ServiceMode
+    let RepairLabelIds = frolists.RepairLabelIds
+    let PhotoIds = frolists.PhotoIds
+    let AccountId = frolists.AccountId
+    let Longitude = frolists.Longitude
+    let Latitude = frolists.Latitude
+    let CustomerId = frolists.CustomerId
+    let EnterpriseId = frolists.EnterpriseId
+    
     if (imglent.length<1){
       wx.showToast({
         title: "请添加照片",
@@ -104,18 +92,109 @@ Page({
       })
       return false
     }
+    wx.request({
+      url: baseUrlBd,
+      data: {
+        Sign: "",
+        Contact: util.Encryption(Contact)  ,
+        Phone: util.Encryption(Phone)  ,
+        Address: util.Encryption(Address) ,
+        SubscribeTime: SubscribeTime,
+        ProblemDescription: ProblemDescription,
+        AccountId: AccountId,
+        PhotoIds: PhotoIds,
+        RepairLabelIds: RepairLabelIds,
+        ServiceMode: ServiceMode,
+        Latitude: Latitude,
+        Longitude: Longitude,
+        CustomerId: CustomerId,
+        EnterpriseId: EnterpriseId,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        if (res.data.Code == 200) {
+        } else {
+          console.log("错误")
+        }
+      },
+    })
     wx.switchTab({ //主页面
       url: '/pages/HomePage/HomePage'
     })
   },
+// 获取点的什么维修事项===================
+  Discoloration:function(e){
+    let _this=this
+    let index = e.target.dataset.index-1
+    let list = _this.data.guaranteeList
+    if (list[index].Enabled==true){
+      list[index].Enabled=false
+    } else{
+      list[index].Enabled=true
+    }
+    _this.setData({
+      guaranteeList: list
+    })
+
+    for (let i=0; i<_this.data.guaranteeList.length; i++){
+      if (_this.data.guaranteeList[i].Enabled==false){
+        let ss = _this.data.guaranteeList[i].ID
+        _this.setData({
+          "frolist.RepairLabelIds":ss
+        })
+      }
+    }
+
+    // _this.setData({
+    //   "frolist.RepairLabelIds": index,
+    // })
+  },
+
+
+// 获取报修项目
+repair:function(){
+  let _this=this
+  wx.request({
+    url: baseUrls,
+    data:{},
+    header: {
+      'content-type': 'application/json'
+    },
+    method: 'GET',
+    success: function (res) {
+      let guaranteeList=res.data.Data
+      console.log(guaranteeList)
+      if (res.data.Code == 200) {
+        _this.setData({
+          guaranteeList: guaranteeList
+        })
+      } else {
+        console.log("错误")
+      }
+    },
+  })
+},
+
   //获取用户选择时间
   bindPickerChange: function(e) {
     let timelist = this.data.array
     let index = e.detail.value
+    let timelists = timelist[index]
+    if (timelists=="立即出发"){
+      this.setData({
+        "frolist.ServiceMode":10
+      })
+    }
     this.setData({
-      "frolist.time": timelist[index]
+      "frolist.SubscribeTime": timelists
     })
   },
+  // 获取用户选择立即出发
+
   /**
    * 地址弹出框蒙层截断touchmove事件
    */
@@ -137,19 +216,19 @@ Page({
 // 用户名称
   userName(e) {
     this.setData({
-      "frolist.name": e.detail.value
+      "frolist.Contact": e.detail.value
     })
   },
   // 用户电话
   userPhone(e) {
     this.setData({
-      "frolist.phone": e.detail.value
+      "frolist.Phone": e.detail.value
     })
   },
   // 用户地址
   userAddress(e) {
     this.setData({
-      "frolist.address": e.detail.value
+      "frolist.Address": e.detail.value
     })
   },
   // 获取故障描述
@@ -157,9 +236,10 @@ Page({
     let _this=this
     let textm = e.detail.value
     _this.setData({
-      "frolist.multitetx": textm
+      "frolist.ProblemDescription": textm
     })
   },
+
   /**
    * 地址对话框确认按钮点击事件
    */
@@ -236,7 +316,11 @@ Page({
       sizeType: ['compressed'],
       success: function (res) {
         let tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths)
+        var imgs = _this.data.frolist.images;
+        imgs.push(tempFilePaths[0]);
+        _this.setData({
+          "frolist.images":imgs
+        })
         wx.uploadFile({
           url: "http://192.168.0.185:2599/Api/Files/UploadImg",
           // 要上传的文件资源
@@ -284,8 +368,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let frolist = this.data.frolist
-    if (frolist.name == "") { //判断是否有数据页面切换
+   
+    let _this = this
+    _this.repair()
+    // 获取本地缓存
+    wx.getStorage({
+      key: 'Information',
+      success: function (res) {
+        let name = res.data[0].AccountName
+        
+        let phone = res.data[0].AccountPhone
+        let address = res.data[0].CustomerAddress
+        // 企业编号
+        let EnterpriseId = res.data[0].EnterpriseId
+        // 用户编码
+        let CustomerId = res.data[0].CustomerId
+        // 经纬度
+        let Longitude = res.data[0].CustomerLongitude
+        let Latitude = res.data[0].CustomerLatitude
+        // 用户唯一编码
+        let AccountId = res.data[0].AccountId
+     
+        // name1:util.Decrypt(name)
+        // phone1: util.Decrypt(phone)
+        // address1: util.Decrypt(address)
+        _this.setData({
+          "frolist.Contact": name,
+          "frolist.Phone": phone,
+          "frolist.Address": address,
+          "frolist.EnterpriseId": EnterpriseId,
+          "frolist.CustomerId": CustomerId,
+          "frolist.Longitude": Longitude,
+          "frolist.Latitude": Latitude,
+          "frolist.AccountId": AccountId,
+        })
+      },
+    })
+    let frolist1 = _this.data.frolist
+    if (frolist1.Contact !== "") { //判断是否有数据页面切换
       this.setData({
         isAddress: true,
       })

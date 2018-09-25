@@ -7,13 +7,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    information:{
+      // 用气编号
+      GasNo:"",
+
+    }
   },
    /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.ObtainStorage()
+    let _this=this
+    _this.ObtainStorage()
+    _this.gasuse()
+
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage(){
@@ -38,6 +45,19 @@ Page({
               },
             })
           },
+        })
+      }
+    })
+  },
+  // 获取本地信息用气编号
+  gasuse:function(){
+    let _this=this
+    wx.getStorage({
+      key:"Information",
+      success:res=>{
+        let GasNo = res.data[0].GasNo
+        _this.setData({
+          "information.GasNo": GasNo
         })
       }
     })

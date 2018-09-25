@@ -16,7 +16,11 @@ Page({
       {
         phone: '18355458975'
       },
-    ]
+    ],
+    // 相关信息
+    information:{
+      
+    }
   },
   //弹框电话选择
   onList(e) {
@@ -74,6 +78,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let _this=this
+    wx.getStorage({
+      key: "Information",
+      success: res => {
+        let EnterpriseName = res.data[0].EnterpriseName
+        _this.setData({
+          "information.EnterpriseName": EnterpriseName
+        })
+      }
+    })
 
   },
 

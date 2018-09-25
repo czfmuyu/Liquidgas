@@ -3,9 +3,14 @@
     <view class="header_Order">
         <view class="Order">
             <view class="Order_left">
-                <view>维修单号: {{CustomerId}}</view>
+                <view>维修单号: {{detailedlist.Serialnumber}}</view>
             </view>
-            <view class="Order_right">{{status}}</view>
+            <view class="Order_right" wx:if="{{detailedlist.Status==0}}" >待处理</view>
+             <view class="Order_right" wx:elif="{{detailedlist.Status==10}}" >订单确认</view>
+              <view class="Order_right" wx:elif="{{detailedlist.Status==11}}" >分配完成</view>
+              <view class="Order_right" wx:elif="{{detailedlist.Status==20}}" >维修出发</view>
+              <view class="Order_right" wx:elif="{{detailedlist.Status==30}}" >维修完成</view>
+              <view class="Order_right" wx:else="{{detailedlist.Status==100}}" >订单取消</view>
         </view>
     </view>
      <view class="project">
@@ -15,22 +20,23 @@
         </view>
     </view>
     <view class="details">详情描述</view>
-    <view class="details_text">{{describe}}</view>
+    <view class="details_text">{{detailedlist.ProblemDescription}}</view>
     <view class='img_flex'>
       <image src='../../images/map1.png'></image>
       <image src='../../images/map2.png'></image>
     </view>
     <view class="details_time">
-        <view>{{date}}</view>
-        <view>{{time}}</view>
+       <view>{{detailedlist.FormatSubscribeTime}}</view>
     </view>
     <view class="details flex" hidden="{{StateControl!==1}}">
         <view>处理结果</view>
-        <view style="color: #2269d4;">{{OrderTrackList.processing}}</view>
+        <view class="Order_right" wx:if="{{detailedlist.RepairResult==0}}" >已处理</view>
+             <view class="Order_right" wx:elif="{{detailedlist.RepairResult==10}}" >维修完成</view>
+              <view class="Order_right" else="{{detailedlist.RepairResult==20}}" >无法维修</view>
     </view>
-    <view class="details_text" hidden="{{StateControl!==1}}">{{OrderTrackList.processingtext}}</view>
+    <view class="details_text" hidden="{{StateControl!==1}}">{{detailedlist.RepairOpinion}}</view>
     <view class="Repair_time" hidden="{{StateControl!==1}}">
-        <view>处理人: {{OrderTrackList.Operator}}</view>
+        <view>处理人: {{detailedlist.ServiceUserName}}</view>
         <view class="Repair_time_right">
             <view style="margin-right: 12rpx;"></view>
             <view style="margin-left: 12rpx;"></view>
@@ -39,20 +45,20 @@
      <view class="Repair">维修信息</view>
     <view class="Repair_time">
         <view>预约时间</view>
-        <view>{{ReserveTime}}</view>
+        <view>{{detailedlist.FormatSubscribeTime}}</view>
     </view>
     <view class="Repair_address">
         <view class="address">收货地址</view>
-        <view class="address_right">{{Address}}</view>
+        <view class="address_right">{{detailedlist.Address}}</view>
     </view>
     <view class="Repair_time">
         <view>收货人电话</view>
-        <view>{{Contact}}({{Phone}})</view>
+        <view>{{detailedlist.Contact}}:{{detailedlist.Phone}}</view>
     </view>
     <view class="Repair_time">
         <view>维修工</view>
         <view class="Repair_time_right">
-            <view style="margin-left: 12rpx;">{{Creator}}</view>
+            <view style="margin-left: 12rpx;">{{detailedlist.ServiceUserName}}</view>
         </view>
     </view>
     <view class="btn" hidden="{{btn!==2}}">
@@ -60,6 +66,6 @@
         <view class="btn_complete">确认完成</view>
     </view>
     <view class="btn" hidden="{{btn!==1}}">
-        <view class="btn_complete">去评价</view>
+        <view class="btn_complete" bindtap='Evaluate'>去评价</view>
     </view>
 </scroll-view>

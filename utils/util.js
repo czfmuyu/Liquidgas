@@ -15,23 +15,6 @@ function formatTime(time) {
   }).join(':')
 }
 
-function formatTime1(date) {
-  var year = date.getFullYear()
-  var month = date.getMonth() + 1
-  var day = date.getDate()
- 
-  var hour = date.getHours()
-  var minute = date.getMinutes()
-  var second = date.getSeconds()
- 
-  return [year, month, day].map(formatNumber1).join('/') + ' ' + [hour, minute, second].map(formatNumber1).join(':')
-}
- 
-function formatNumber1(n) {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
-
 function formatLocation(longitude, latitude) {
   if (typeof longitude === 'string' && typeof latitude === 'string') {
     longitude = parseFloat(longitude)
@@ -113,7 +96,6 @@ module.exports = {
   Decrypt:Decrypt,
   imgpreview:imgpreview,
   uploadImg: uploadImg,
-  formatTime1:formatTime1,
-  formatNumber1:formatNumber1,
+
 
 }

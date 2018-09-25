@@ -54,7 +54,6 @@ Page({
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function(res){
-            console.log(res)
             wx.setStorage({//个人信息存本地
               key: 'Information',
               data:res.data.Data,
