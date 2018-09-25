@@ -7,10 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    index: 0,//用气编号切换索引
     showModal: false,
     newuser: true,
     showModalTwo: false,
-    user: true,
+    user: false,
+    GasNo: []
   },
   OrderAddress() {
     wx.navigateTo({//订气地址页面
@@ -36,43 +38,98 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-   this.ObtainStorage()
-   this.Tips()
+    this.ObtainStorage()
+  },
+  //用气编号选择点击事件
+  onGasNo(e) {
+    let index = e.currentTarget.dataset.index;
+    let GasNo = this.data.GasNo;
+    let Gas = [];
+    Gas.push(GasNo[index])
+    this.setData({
+      GasNo: Gas,
+      showModalTwo: false,
+      index: index
+    })
+    wx.getStorage({//选中的用气编号数据替换
+      key: 'Information',
+      success: function (res) {
+        let data = res.data[index]
+        console.log(data)
+        wx.setStorage({
+          key: 'Information',
+          data: data,
+          success: function (res) {
+            // success
+          },
+        })
+      },
+    })
+    wx.setStorage({
+      key: 'index',
+      data: index,
+      success: function(res){
+        // success
+      },
+    })
   },
   //获取AccountId本地储存并获取个人数据
-  ObtainStorage(){
+  ObtainStorage() {
+    let this_ = this
     wx.getStorage({
       key: 'AccountId',
-      success:res=>{
+      success: res => {
         console.log(res.data.AccountId)
         wx.request({//获取个人信息请求
           url: baseUrls,
           data: {
-            Sign:"",
-            AccountId:res.data.AccountId,
+            Sign: "",
+            AccountId: res.data.AccountId,
           },
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
-          success: function(res){
-            wx.setStorage({//个人信息存本地
-              key: 'Information',
-              data:res.data.Data,
-              success: function(res){
-              },
+          success: function (res) {
+            console.log(res.data.Data)
+            let data = res.data.Data
+            let arr = [];
+            for (let i = 0; i < res.data.Data.length; i++) {
+              arr.push(res.data.Data[i].GasNo)
+            }
+            console.log(arr)
+            this_.setData({
+              GasNo: arr
             })
+            this_.Tips()
+            if (res.data.Data.length > 0 && res.data.Data.length < 2) {
+              console.log("in")
+              wx.setStorage({//个人信息存本地
+                key: 'Information',
+                data: data[0],
+                success: function (res) {
+                },
+              })
+            } else {
+              console.log('i')
+              console.log(data)
+              wx.setStorage({//个人信息存本地
+                key: 'Information',
+                data: data,
+                success: function (res) {
+                },
+              })
+            }
+
           },
         })
       }
     })
   },
-  Tips(){
-    let newuser = this.data.newuser
-    let user = this.data.user
-    if (newuser === false) {
+  Tips() {
+    if (this.data.GasNo.length == 0) {
       this.setData({
         showModal: true
       })
-    }else if(newuser === true && user === false) {
+    } else if (this.data.GasNo.length > 1) {
       this.setData({
         showModalTwo: true
       })

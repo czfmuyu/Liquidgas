@@ -110,8 +110,12 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function(res){
+        let data=res.data.Data
+        for(let i=0;i<data[i].length;i++){
+          utils.Decrypt(data[i].CustomerName)
+        }
         this_.setData({
-          EvaluateList: res.data.Data
+          EvaluateList: data
         })
       },
     })
@@ -137,8 +141,12 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function(res){
+        let data=res.data.Data
+        for(let i=0;i<data[i].length;i++){
+          utils.Decrypt(data[i].CustomerName)
+        }
         this_.setData({
-          CompleteList: res.data.Data
+          CompleteList: data
         })
       },
     })
@@ -164,8 +172,12 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function(res){
+        let data=res.data.Data
+        for(let i=0;i<data[i].length;i++){
+          utils.Decrypt(data[i].CustomerName)
+        }
         this_.setData({
-          DeliveryList: res.data.Data
+          DeliveryList:data
         })
       },
     })
@@ -191,8 +203,12 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        let data=res.data.Data
+        for(let i=0;i<data[i].length;i++){
+          utils.Decrypt(data[i].CustomerName)
+        }
         this_.setData({
-          wholeList: res.data.Data
+          wholeList:data
         })
       },
     })

@@ -1,4 +1,4 @@
-let util = require('../../utils/util.js');
+let utils = require('../../utils/util.js');
 let amap = require("../../utils/amap");
 let app = getApp()
 const baseUrl = app.globalData.baseUrl;
@@ -72,13 +72,11 @@ Page({
   Pagechange(){
      // 数据判断页面改动
      if (this.data.OrderTrackList.Status <30) {//配送中
-      console.log("配送中")
       this.setData({
         StateControl: 1,
         btn: 1
       })
     } else if (this.data.OrderTrackList.Status =30) {//配送完成
-      console.log("配送完成")
       this.setData({
         StateControl: 2,
         btn: 2
@@ -93,7 +91,6 @@ Page({
   //查询订单详情
   queryDetails(options) {
     let this_=this
-    console.log(options.id)
     wx.request({
       url: baseUrls,
       data: {
@@ -106,12 +103,20 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data.Data)
+        let data=res.data.Data
+        utils.Decrypt(data.Address)
+        utils.Decrypt(data.Contact)
+        utils.Decrypt(data.Phone)
+        let OrderItems=res.data.Data.OrderItems
+        for(let i=0;i<OrderItems.length;i++){
+          utils.Decrypt(OrderItems.ProductName)
+          utils.Decrypt(OrderItems.Price)
+          utils.Decrypt(OrderItems.Quantity)
+        }
         this_.setData({
-          OrderTrackList:res.data.Data,
-          goodsList:res.data.Data.OrderItems
+          OrderTrackList:data,
+          goodsList:OrderItems
         })
-        console.log(this_.data.OrderTrackList)
         this_.Pagechange()
       },
     }) 

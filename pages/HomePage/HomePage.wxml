@@ -8,7 +8,7 @@
             <image src="../../imgs/7_03.png" />
         </view>
         <view class="content_input">
-            <text >用气编号:  283647825346835</text>
+            <text >用气编号:  {{GasNo[0]}}</text>
         </view>
     </view>
 </view>
@@ -51,11 +51,7 @@
 <view class="modal-dialog" wx:if="{{showModalTwo}}">
     <view class="modal-title"></view>
     <view class="btn-Photograph" >请选择绑定用气编号</view>
-    <view class="btn-Number" style="border-top: 2rpx solid;">12345648464864</view>
-    <view class="btn-Number" >12345648464864</view>
-    <view class="btn-Number" >12345648464864</view>
+    <view class="btn-Number" style="border-top: 2rpx solid;" wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}" bindtap="onGasNo">{{item}}</view>
     <view class="modal-footer">
-        <!-- <view class="btn-cancel" bindtap="onCancel" >取消</view>
-        <view class="btn-confirm" bindtap="onConfirm" >确定</view> -->
     </view>
 </view>

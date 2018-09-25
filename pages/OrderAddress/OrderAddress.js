@@ -30,10 +30,10 @@ Page({
     index: 0,
     index2: 0,
     showModal: false,//控制地址弹框按钮
-    isAddress: true,//控制地址隐藏显示
+    isAddress: false,//控制地址隐藏显示
     showgoods: false,//控制商品弹框隐藏显示
     isgoods: false,//控制商品列表的显示隐藏
-    isSupplier: true,//控制供应商隐藏显示
+    isSupplier: false,//控制供应商隐藏显示
     showPayment: false,//控制支付弹框按钮
     showPaymentMethod: false,//控制支付方式弹框按钮
     goodslist: [
@@ -89,11 +89,11 @@ Page({
     EnterpriseId: "",
     PaymentName: "",
     EnterpriseName: "",
-    EnterprisePhone: "13000822230",
-    EnterpriseAddress: "浙江省杭州市江千区浙江大学华家池校区西门对面3栋11楼402室",
+    EnterprisePhone: "",
+    EnterpriseAddress: "",
     CustomerName: "",
-    CustomerPhone: "15000822230",
-    CustomerAddress: "浙江省杭州市江千区浙江大学华家池校区西门对面3栋11楼402室",
+    CustomerPhone: "",
+    CustomerAddress: "",
     CustomerLatitude: "",
     CustomerLongitude: "",
     commodityList: "",
@@ -106,8 +106,11 @@ Page({
   */
   onLoad() {
     this.getData()
-    let AccountName = this.data.AccountName
-    if (AccountName === "") {//判断地址是否有数据页面切换
+  },
+  //用户数据判断
+  userData(){
+    let CustomerName = this.data.CustomerName
+    if (CustomerName == "") {//判断地址是否有数据页面切换
       this.setData({
         isAddress: true,
       })
@@ -117,8 +120,8 @@ Page({
       })
     }
     //判断供应商是否有数据页面切换
-    let SupplierName = this.data.SupplierName
-    if (SupplierName === "") {
+    let EnterpriseName = this.data.EnterpriseName
+    if (EnterpriseName == "") {
       this.setData({
         isSupplier: true,
       })
@@ -134,17 +137,16 @@ Page({
     wx.getStorage({
       key: 'Information',
       success: function (res) {
-        console.log(res.data)
         //判断用户选择的是瓶还是公斤
         let arr = []
         let OptionsBox = this_.data.OptionsBox
         if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-          for (let i = 0; i < res.data[0].CustomerDetails.length; i++) {
+          for (let i = 0; i < res.data.CustomerDetails.length; i++) {
             let obj = {
-              Quantity: utils.Decrypt(res.data[0].CustomerDetails[i].Quantity),
-              Price: utils.Decrypt(res.data[0].CustomerDetails[i].UnitPrice),
-              ProductName: utils.Decrypt(res.data[0].CustomerDetails[i].ProductName),
-              ProductId: res.data[0].CustomerDetails[i].ProductId
+              Quantity: utils.Decrypt(res.data.CustomerDetails[i].Quantity),
+              Price: utils.Decrypt(res.data.CustomerDetails[i].UnitPrice),
+              ProductName: utils.Decrypt(res.data.CustomerDetails[i].ProductName),
+              ProductId: res.data.CustomerDetails[i].ProductId
             }
             arr.push(obj)
           }
@@ -152,12 +154,12 @@ Page({
             commodityList: arr
           })
         } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-          for (let i = 0; i < res.data[0].CustomerDetails.length; i++) {
+          for (let i = 0; i < res.data.CustomerDetails.length; i++) {
             let obj = {
-              Quantity: utils.Decrypt(res.data[0].CustomerDetails[i].Quantity),
-              Price: utils.Decrypt(res.data[0].CustomerDetails[i].KilogramPrice),
-              ProductName: utils.Decrypt(res.data[0].CustomerDetails[i].ProductName),
-              ProductId: res.data[0].CustomerDetails[i].ProductId
+              Quantity: utils.Decrypt(res.data.CustomerDetails[i].Quantity),
+              Price: utils.Decrypt(res.data.CustomerDetails[i].KilogramPrice),
+              ProductName: utils.Decrypt(res.data.CustomerDetails[i].ProductName),
+              ProductId: res.data.CustomerDetails[i].ProductId
             }
             arr.push(obj)
           }
@@ -166,20 +168,22 @@ Page({
           })
         }
         this_.setData({
-          CustomerName: utils.Decrypt(res.data[0].CustomerName),
-          CustomerPhone: utils.Decrypt(res.data[0].CustomerPhone),
-          CustomerAddress: utils.Decrypt(res.data[0].CustomerAddress),
-          EnterpriseName: res.data[0].EnterpriseName,
-          EnterprisePhone: res.data[0].EnterprisePhone[0],
-          EnterpriseAddress: res.data[0].EnterpriseAddress,
-          CustomerId: res.data[0].CustomerId,
-          EnterpriseId: res.data[0].EnterpriseId,
-          CustomerLatitude: res.data[0].CustomerLatitude,
-          CustomerLongitude: res.data[0].CustomerLongitude,
-          AccountId: res.data[0].AccountId,
+          CustomerName: utils.Decrypt(res.data.CustomerName),
+          CustomerPhone: utils.Decrypt(res.data.CustomerPhone),
+          CustomerAddress: utils.Decrypt(res.data.CustomerAddress),
+          EnterpriseName: res.data.EnterpriseName,
+          EnterprisePhone: res.data.EnterprisePhone[0],
+          EnterpriseAddress: res.data.EnterpriseAddress,
+          CustomerId: res.data.CustomerId,
+          EnterpriseId: res.data.EnterpriseId,
+          CustomerLatitude: res.data.CustomerLatitude,
+          CustomerLongitude: res.data.CustomerLongitude,
+          AccountId: res.data.AccountId,
         })
+        this_.userData()
       },
     })
+   
   },
   //瓶和公斤选项框点击事件
   OptionsBox: function (e) {

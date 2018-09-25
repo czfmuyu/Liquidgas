@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/Login/Login",
     "pages/Order/Order",
     "pages/HomePage/HomePage",
     "pages/OrderAddress/OrderAddress",
     "pages/Repair/Repair",
-    "pages/Login/Login",
     "pages/PersonalData/PersonalData",
     "pages/RepairDetails/RepairDetails",
     "pages/My/My",
