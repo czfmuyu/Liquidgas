@@ -4,7 +4,7 @@
         <text >供应商名称</text>
     </view>
     <view >
-        <text class="text">供应商1</text>
+        <text class="text">{{EnterpriseName}}</text>
     </view>
 </view>
 <view class="DetailsList" style="border-bottom: 2rpx solid #f2f2f2;">
@@ -12,7 +12,7 @@
         <text >地址</text>
     </view>
     <view >
-        <text class="text">成都市龙泉驿区某某镇某某街</text>
+        <text class="text">{{EnterpriseAddress}}</text>
     </view>
 </view>
 <view class="DetailsList" bindtap="phoneList">
@@ -21,7 +21,7 @@
     </view>
     <view class="DetailsList_right">
         <view class="text">
-            <text ></text>
+            <text >{{EnterprisePhone}}</text>
         </view>
         <view class="text_right">
             >

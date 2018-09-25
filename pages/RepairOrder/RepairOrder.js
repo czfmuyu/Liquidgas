@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    ShowModal: false,//弹框按钮操控
     navbar: ['全部订单', '待维修', '维修完成', '已取消'],
     currentTab: 0,
     text2: "#2269d4",
@@ -25,6 +26,8 @@ Page({
       queryKeyword: "",
       // 状态列表
       status: "-1",
+      // id
+      customerId: ""
     },
     // 全部列表
     whole: [],
@@ -45,14 +48,7 @@ Page({
       duration: 2000
     })
   },
-  //删除订单点击事件
-  onCancel() {
-    wx.showToast({
-      title: '取消成功',
-      icon: 'success',
-      duration: 2000
-    })
-  },
+  
 
   //全部页面详情
   queryBtn(e) {
@@ -86,20 +82,26 @@ Page({
   onLoad: function(options) {
     let _this = this
     // 获取订单
-     _this.getmaintenance()
+    _this.getmaintenance()
+    _this.UntreatedList()
+    _this.ProcessedList()
+    _this.EvaluateList()
+    _this.getID()
   },
-  // 获取维修订单列表
+  // 获取维修全部订单列表
   getmaintenance: function() {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
     let pageSizes = parameterlist.pageSize
     let queryKeywords = parameterlist.queryKeyword
+    let customerId = parameterlist.customerId
     let statuss = parameterlist.status
     wx.request({
       url: baseUrls,
       data: {
         Sign: "",
+        CustomerId: customerId,
         pageIndex: pageIndexs,
         pageSize: pageSizes,
         queryKeyword: queryKeywords,
@@ -126,34 +128,169 @@ Page({
         //     "whole.Contact": Cont,
         //   })
         // }
-        
-        
-        let datalist = []
-        let datalist1 = []
-        let datalist2 = []
 
-        for (let i = 0; orderData.length > i; i++) {
-          if (orderData[i].Status == 0) { //待维修
-            datalist.push(orderData[i])
-            _this.setData({
-              UntreatedList: datalist
-            })
-          } else if (orderData[i].Status == 30) { //维修完成
-            datalist1.push(orderData[i])
-            _this.setData({
-              ProcessedList: datalist1
-            })
-          } else if (orderData[i].Status == 100) { //取消
-            datalist2.push(orderData[i])
-            _this.setData({
-              EvaluateList: datalist2
-            })
-          }
-        }
+
+        // let datalist = []
+        // let datalist1 = []
+        // let datalist2 = []
+
+        // for (let i = 0; orderData.length > i; i++) {
+        //   if (orderData[i].Status == 0) { //待维修
+        //     datalist.push(orderData[i])
+        //     _this.setData({
+        //       UntreatedList: datalist
+        //     })
+        //   } else if (orderData[i].Status == 30) { //维修完成
+        //     datalist1.push(orderData[i])
+        //     _this.setData({
+        //       ProcessedList: datalist1
+        //     })
+        //   } else if (orderData[i].Status == 100) { //取消
+        //     datalist2.push(orderData[i])
+        //     _this.setData({
+        //       EvaluateList: datalist2
+        //     })
+        //   }
+        // }
+
       },
     })
   },
+// 调用配送中定单
+  UntreatedList: function () {
+    let _this = this
+    let parameterlist = _this.data.parameter
+    let pageIndexs = parameterlist.pageIndex
+    let pageSizes = parameterlist.pageSize
+    let queryKeywords = parameterlist.queryKeyword
+    let customerId = parameterlist.customerId
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        CustomerId: customerId,
+        pageIndex: pageIndexs,
+        pageSize: pageSizes,
+        queryKeyword: queryKeywords,
+        status: 10,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      success: function (res) {
+        let orderData = res.data.Data
+        _this.setData({
+          UntreatedList: orderData
+        })
+      },
+    })
+  },
+  // 维修完成订单
+  ProcessedList: function () {
+    let _this = this
+    let parameterlist = _this.data.parameter
+    let pageIndexs = parameterlist.pageIndex
+    let pageSizes = parameterlist.pageSize
+    let queryKeywords = parameterlist.queryKeyword
+    let customerId = parameterlist.customerId
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        CustomerId: customerId,
+        pageIndex: pageIndexs,
+        pageSize: pageSizes,
+        queryKeyword: queryKeywords,
+        status: 30,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      success: function (res) {
+        let orderData = res.data.Data
+        _this.setData({
+          ProcessedList: orderData
+        })
+      },
+    })
+  },
+  // 取消订单
+  EvaluateList: function () {
+    let _this = this
+    let parameterlist = _this.data.parameter
+    let pageIndexs = parameterlist.pageIndex
+    let pageSizes = parameterlist.pageSize
+    let queryKeywords = parameterlist.queryKeyword
+    let customerId = parameterlist.customerId
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        CustomerId: customerId,
+        pageIndex: pageIndexs,
+        pageSize: pageSizes,
+        queryKeyword: queryKeywords,
+        status: 100,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      success: function (res) {
+        let orderData = res.data.Data
+        console.log(orderData)
+        _this.setData({
+          EvaluateList: orderData
+        })
+      },
+    })
+  },
+  // 获取本地id
+  getID: function() {
+    let _this=this
+    wx.getStorage({
+      key: 'Information',
+      success: function(res) {
+        let id = res.data.CustomerId
+        _this.setData({
+          "parameter.CustomerId": id
+        })
 
+      },
+    })
+  },
+  /**
+       * 联系电话弹窗
+       */
+  phoneList() {
+
+    this.setData({
+      ShowModal: true
+    })
+  },
+
+  /**
+   * 隐藏模态对话框
+   */
+  HideModal: function () {
+    this.setData({
+      ShowModal: false
+    });
+  },
+  /**
+   * 对话框取消按钮点击事件
+   */
+  onCancel: function () {
+    this.HideModal();
+  },
+  /**
+   * 对话框确认按钮点击事件
+   */
+  onConfirm: function () {
+    this.HideModal();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -188,6 +325,9 @@ Page({
   onPullDownRefresh: function() {
     let _this = this
     _this.getmaintenance()
+    _this.UntreatedList()
+    _this.ProcessedList()
+    _this.EvaluateList()
     wx.showToast({
       title: "加载中",
       icon: 'loading',
@@ -199,24 +339,27 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    let _this=this
-    let a=2
-    let page=_this.data.parameter.pageIndex
+    let _this = this
+    let a = 2
+    let page = _this.data.parameter.pageIndex
     let Size = _this.data.parameter.pageSize
-    let Size1= Number(Size)
-        page++
-    let Sizes = Size1+a
-        _this.setData({
-          "parameter.pageIndex": page,
-          "parameter.pageSize": Sizes
-        })
+    let Size1 = Number(Size)
+    page++
+    let Sizes = Size1 + a
+    _this.setData({
+      "parameter.pageIndex": page,
+      "parameter.pageSize": Sizes
+    })
     _this.getmaintenance()
+    _this.UntreatedList()
+    _this.ProcessedList()
+    _this.EvaluateList()
     wx.showToast({
       title: "加载中",
       icon: 'loading',
       duration: 1000
     });
-    console.log(_this.data.parameter.pageSize)
+    
   },
 
   /**

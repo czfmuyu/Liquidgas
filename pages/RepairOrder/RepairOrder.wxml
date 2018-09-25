@@ -44,7 +44,7 @@
       <!-- 待维修 -->
       <view wx:if="{{item.Status==0}}">
         <view class="btn-list">
-          <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
+          <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="phoneList">取消维修单</view>
           <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn" data-orderId='{{item.ID}}'>查看详情</view>
           <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
         </view>
@@ -64,59 +64,6 @@
 
       </view>
     </view>
-
-
-    <!-- 维修完成 -->
-    <!-- <view class="whole" wx:for="{{ProcessedList}}" wx:for-item="item" wx:key="UntreatedList">
-            <view class="whole_top">
-                <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
-                <view style="color: {{text2}};">维修完成</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text">
-                    <view style="margin-left: 18rpx;">维修描述</view>
-                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
-                        {{item.ProblemDescription}}
-                    </view>
-                </view>
-            </view>
-            <view class="userName">申报人: {{item.Contact}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>申报时间:{{item.FormatSubscribeTime}}</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
-            </view>
-            <view class="btn-list">
-                
-            </view>
-        </view> -->
-
-    <!-- 已取消 -->
-    <!-- <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
-            <view class="whole_top">
-                <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
-                <view style="color: {{text2}};">已取消</view>
-            </view>
-            <view class="whole_middle">
-                <view class="whole_middle_text">
-                    <view style="margin-left: 18rpx;">维修描述</view>
-                    <view style="margin-left: 18rpx;margin-top: 22rpx;color: #999;">
-                        {{item.ProblemDescription}}
-                    </view>
-                </view>
-            </view>
-            <view class="userName">申报人: {{item.Contact}}</view>
-            <view class="whole_bottom">
-                <view class="whole_bottom_left">
-                    <view>申报时间:{{item.FormatSubscribeTime}}</view>
-                </view>
-                <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
-            </view>
-            <view class="btn-list">
-                
-            </view>
-        </view> -->
   </scroll-view>
 </view>
 
@@ -147,7 +94,7 @@
         <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
       </view>
       <view class="btn-list">
-        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">取消维修单</view>
+        <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="phoneList">取消维修单</view>
         <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="queryBtn" data-orderId='{{item.ID}}'>查看详情</view>
         <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onconfirm">确认完成</view>
       </view>
@@ -212,4 +159,18 @@
       </view>
     </view>
   </scroll-view>
+</view>
+
+<!-- 取消意见 -->
+<view class="modal-mask" bindtap="HideModal" catchtouchmove="preventTouchMove" wx:if="{{ShowModal}}"></view>
+<view class="modal-dialog" wx:if="{{ShowModal}}">
+   <view>
+   <view class='qux'>请输入取消原因</view>
+   <textarea class='textfont' placeholder='请填写取消原因'>
+   </textarea>
+   </view>
+   <view class='butt'>
+   <view class='butttext textcolor'bindtap="onCancel" >取消</view>
+   <view class='butttext textcolor1' bindtap='onConfirm'>提交</view>
+   </view>
 </view>

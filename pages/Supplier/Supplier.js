@@ -6,6 +6,13 @@ Page({
    */
   data: {
     ShowModal: false,//弹框按钮操控
+    // 姓名
+    EnterpriseName:"",
+    // 地址
+    EnterpriseAddress:"",
+    // 电话
+    EnterprisePhone:"",
+
     phoneList: [
       {
         phone: '15355458975'
@@ -17,10 +24,7 @@ Page({
         phone: '18355458975'
       },
     ],
-    // 相关信息
-    information:{
-      
-    }
+    
   },
   //弹框电话选择
   onList(e) {
@@ -82,9 +86,13 @@ Page({
     wx.getStorage({
       key: "Information",
       success: res => {
-        let EnterpriseName = res.data[0].EnterpriseName
+        let EnterpriseName = res.data.EnterpriseName
+        let EnterpriseAddress = res.data.EnterpriseAddress
+        let EnterprisePhone = res.data.CustomerPhone
         _this.setData({
-          "information.EnterpriseName": EnterpriseName
+          EnterpriseName: EnterpriseName,
+          EnterpriseAddress: EnterpriseAddress,
+          EnterprisePhone: EnterprisePhone
         })
       }
     })
