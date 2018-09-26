@@ -1,4 +1,4 @@
-// pages/GasInformation/GasInformation.js
+
 Page({
 
   /**
@@ -18,16 +18,21 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    this.page()
     this.getData()
-    let longitudes = options.longitudes
-    let latitudes = options.latitudes
-    let address = options.locations
-    this.setData({
-      address: address,
-      longitudes: longitudes,
-      latitudes: latitudes,
-    })
+    this.page()
+    if (options.length>1){
+      let longitudes = options.longitudes
+      let latitudes = options.latitudes
+      let address = options.locations
+      this.setData({
+        address: address,
+        longitudes: longitudes,
+        latitudes: latitudes,
+      })
+    }else{
+      return false
+    }
+   
   },
 
   //获取页面传的值
@@ -36,7 +41,6 @@ Page({
     wx.getStorage({
       key: 'page',
       success: function (res) {
-        console.log(res.data)
         this_.setData({
           index: res.data
         })
@@ -49,7 +53,6 @@ Page({
     wx.getStorage({
       key: 'Information',
       success: function (res) {
-        console.log(res)
         let storename = res.data.AccountName
         let telephone = res.data.AccountPhone
         let address = res.data.CustomerAddress
@@ -197,7 +200,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

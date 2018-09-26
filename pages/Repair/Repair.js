@@ -70,6 +70,7 @@ Page({
   Submit() {
     let _this=this
     let frolists = _this.data.frolist
+    console.log(frolists)
     let Contact = frolists.Contact
     let Phone = frolists.Phone
     let Address = frolists.Address
@@ -322,7 +323,7 @@ repair:function(){
   chooseWxImage: function(type) {
     var _this = this;
     wx.chooseImage({
-      count: 1,
+      count: 9,
       sizeType: ['compressed'],
       success: function (res) {
         let tempFilePaths = res.tempFilePaths;
@@ -338,26 +339,28 @@ repair:function(){
           // 对应的key值
           name: 'image',
           success: function (res) {
+            console.log(res)
             let data=res.data
             let imglist = JSON.parse(data);
             let datalist = imglist.Data
+            console.log(datalist)
               _this.setData({
                 "frolist.PhotoIds": datalist
               })
           
-            // _this.pushlist(datalist)
+            _this.pushlist(datalist)
           }
         })
       }
     })
   },
-  // pushlist: function (datalist){
-  //   let imgsz = []
-  //   imgsz.push(datalist)
-  //   let inghao = imgsz.join(",")
-  //   console.log(imgsz)
-  //   console.log(inghao)
-  // },
+  pushlist: function (datalist){
+    let imgsz = []
+    imgsz.push(datalist)
+    let inghao = imgsz.join(",")
+    console.log(imgsz)
+    console.log(inghao)
+  },
 
   /**
    * 移除图片

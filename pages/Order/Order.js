@@ -3,9 +3,9 @@ let app = getApp()
 const baseUrl = app.globalData.baseUrl
 const utils = require("../../utils/util.js")
 const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders` //获取订单列表接口
-const cancel = `${baseUrl}/Api/RepairOrders/GasOrderCancel` //获取订单列表接口
+const cancel = `${baseUrl}/Api/GasOrders/GasOrderCancel` //取消订单
 // 确ren
-const Confirm = `${baseUrl}/Api/RepairOrders/GasOrderConfirml` //获取订单列表接口
+const Confirm = `${baseUrl}/Api/GasOrders/GasOrderConfirm` //确认订单
 
 let Num = 2;
 Page({
@@ -179,6 +179,7 @@ Page({
   wholeInfo() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -262,6 +263,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
+    let CustomerId = this.data.CustomerId
     let count = this.data.callbackcount * Num
     this.setData({
       searchPageNum: this.data.searchPageNum,
@@ -312,6 +314,7 @@ Page({
     let orderId = _this.data.ID
     // tu款说明
     let Explain = _this.data.getdata
+    console.log(Explain + tomerId + orderId)
     if (Explain !== "") {
       wx.request({
         url: cancel,
@@ -324,13 +327,12 @@ Page({
         header: {
           'content-type': 'application/json'
         },
-        method: 'GET',
+        method: 'POST',
         success: function(res) {
-          // let orderData = res.data.Data
-          // _this.setData({
-          //   ProcessedList: orderData
-          // })
-
+          wx.showToast({
+            title: "取消成功！",
+            duration: 2000
+          });
         },
       })
     } else {
@@ -338,6 +340,7 @@ Page({
         title: "请填写取消原因",
         duration: 1000
       });
+      return false
     }
     // 隐藏弹框
     this.HideModal()
@@ -373,10 +376,10 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        // let orderData = res.data.Data
-        // _this.setData({
-        //   ProcessedList: orderData
-        // })
+        wx.showToast({
+          title: "取消成功！欢迎下次光临",
+          duration: 2000
+        });
 
       },
     })

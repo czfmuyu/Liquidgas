@@ -125,22 +125,28 @@ Page({
   //用户数据判断
   userData() {
     let CustomerName = this.data.CustomerName
+    console.log(CustomerName)
     if (CustomerName == "" || CustomerName == undefined) {//判断地址是否有数据页面切换
+     
       this.setData({
         isAddress: true,
       })
     } else {
+     
       this.setData({
         isAddress: false,
       })
     }
     //判断供应商是否有数据页面切换
     let EnterpriseName = this.data.EnterpriseName
+    console.log(EnterpriseName)
     if (EnterpriseName == "" || EnterpriseName == undefined) {
+     
       this.setData({
         isSupplier: true,
       })
     } else {
+     
       this.setData({
         isSupplier: false,
       })
@@ -211,6 +217,7 @@ Page({
         changed['OptionsBox[' + i + '].checked'] = false
       }
     }
+    console.log(changed)
     this.setData(changed)
     this.getData()
   },
@@ -240,7 +247,7 @@ Page({
     }
     else if (array[this.data.index] !== "立即出发") {
       time = 10
-      let Times = utils.formatTime(new Date());
+      let Times = utils.formatTime1(new Date());
       let day = Times.slice(0, 10)
       SubscribeTime = day + " " + this.data.array[this.data.index]
     };
@@ -284,6 +291,7 @@ Page({
         }
       }
     }
+    console.log(this.data.OrderItems)
     wx.request({
       url: baseUrls,
       data: {
@@ -355,6 +363,7 @@ Page({
         changed['PaymentItems[' + i + '].checked'] = false
       }
     }
+    console.log(changed)
     this.setData(changed)
   },
   //支付选项框点击事件
@@ -368,6 +377,7 @@ Page({
         changed['radioItems[' + i + '].checked'] = false
       }
     }
+    console.log(changed)
     this.setData(changed)
   },
   /**
@@ -449,6 +459,7 @@ Page({
       }
     }
     let radio = this.data.radioItems;
+    console.log(radio.length)
     let OptionsBox = this.data.OptionsBox
     let addpayment = this.data.addpayment
     if (OptionsBox[1].checked === true && OptionsBox[0].checked === false) {
@@ -543,6 +554,7 @@ Page({
   },
   //预约时间Picker索引值
   bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
@@ -550,6 +562,7 @@ Page({
 
   //预约那天Picker索引值
   bindDayPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index2: e.detail.value
     })
