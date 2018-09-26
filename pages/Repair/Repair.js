@@ -30,7 +30,7 @@ Page({
       '19:00-20:00',
     ], //预定时间弹框
     index: 0,
-    showModal: false, //控制地址弹框按钮
+
     isAddress: true, //控制地址隐藏显示
     // 要提交的数据
     frolist: {
@@ -114,7 +114,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         if (res.data.Code == 200) {
           wx.showToast({
             title: "保修成功",
@@ -134,7 +134,7 @@ Page({
 
   },
   // 获取点的什么维修事项===================
-  Discoloration: function (e) {
+  Discoloration: function(e) {
     let _this = this
     let index = e.target.dataset.index - 1
     let list = _this.data.guaranteeList
@@ -163,7 +163,7 @@ Page({
 
 
   // 获取报修项目
-  repair: function () {
+  repair: function() {
     let _this = this
     wx.request({
       url: baseUrls,
@@ -172,7 +172,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         let guaranteeList = res.data.Data
         if (res.data.Code == 200) {
           _this.setData({
@@ -186,7 +186,7 @@ Page({
   },
 
   //获取用户选择时间
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     let timelist = this.data.array
     let index = e.detail.value
     let timelists = timelist[index]
@@ -208,11 +208,11 @@ Page({
   /**
    * 地址弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function () { },
+  preventTouchMove: function() {},
   /**
    * 地址隐藏模态对话框
    */
-  hideModal: function () {
+  hideModal: function() {
     this.setData({
       showModal: false
     });
@@ -220,7 +220,7 @@ Page({
   /**
    * 地址对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: function() {
     this.hideModal();
   },
   // 用户名称
@@ -242,7 +242,7 @@ Page({
     })
   },
   // 获取故障描述
-  textm: function (e) {
+  textm: function(e) {
     let _this = this
     let textm = e.detail.value
     _this.setData({
@@ -255,10 +255,10 @@ Page({
    */
 
   // 表单验证正确后才可以隐藏表格
-  onConfirm: function () {
+  onConfirm: function() {
     let fomlist = this.data.frolist
     let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-    if (!fomlist.name || !fomlist.phone || !fomlist.address) {
+    if (!fomlist.Contact || !fomlist.Phone || !fomlist.Address) {
       wx.showToast({
         title: '请完整填写信息',
 
@@ -284,15 +284,17 @@ Page({
    * 地址无数据隐藏页面弹框
    */
   Add() {
-    this.setData({
-      showModal: true,
+    let num = 2
+    wx.setStorageSync("page", num)
+    wx.navigateTo({
+      url: '/pages/GasInformation/GasInformation',
     })
   },
 
   /**
    * 上传图片
    */
-  uploadImg: function () {
+  uploadImg: function() {
     let _this = this;
     let imgs = _this.data.frolist.images;
     if (imgs.length >= 9) {
@@ -302,12 +304,12 @@ Page({
     _this.chooseimage()
   },
   //选择相机还是本地图片
-  chooseimage: function () {
+  chooseimage: function() {
     var that = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#2168d3",
-      success: function (res) {
+      success: function(res) {
         if (!res.cancel) {
           if (res.tapIndex == 0) {
             that.chooseWxImage('album')
@@ -320,12 +322,12 @@ Page({
     })
   },
 
-  chooseWxImage: function (type) {
+  chooseWxImage: function(type) {
     var _this = this;
     wx.chooseImage({
       count: 9,
       sizeType: ['compressed'],
-      success: function (res) {
+      success: function(res) {
         let tempFilePaths = res.tempFilePaths;
         var imgs = _this.data.frolist.images;
         imgs.push(tempFilePaths[0]);
@@ -338,7 +340,7 @@ Page({
           filePath: tempFilePaths[0],
           // 对应的key值
           name: 'image',
-          success: function (res) {
+          success: function(res) {
             console.log(res)
             let data = res.data
             let imglist = JSON.parse(data);
@@ -348,18 +350,16 @@ Page({
               "frolist.PhotoIds": datalist
             })
 
-            _this.pushlist(datalist)
+            // _this.pushlist(datalist)
           }
         })
       }
     })
   },
-  pushlist: function (datalist) {
+  pushlist: function(datalist) {
     let imgsz = []
     imgsz.push(datalist)
     let inghao = imgsz.join(",")
-    console.log(imgsz)
-    console.log(inghao)
   },
 
   /**
@@ -374,7 +374,7 @@ Page({
     })
   },
   // 图片预览
-  previewImg: function (e) {
+  previewImg: function(e) {
     var data_evnt = e; //将函数事件对象传入 ，以及图片获取到的数组 
     util.imgpreview(data_evnt, this.data.frolist.images)
   },
@@ -384,44 +384,40 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
     let _this = this
-    _this.repair()
+    _this.repair() //获取保修项目
+    let data = wx.getStorageSync('address')
+    console.log(data)
+    _this.setData({
+      "frolist.Address": data.address,
+      "frolist.Latitude": data.latitudes,
+      "frolist.Longitude": data.longitudes,
+      "frolist.Contact": data.name,
+      "frolist.Phone": data.phone,
+    })
+
     // 获取本地缓存
     wx.getStorage({
       key: 'Information',
-      success: function (res) {
-        let name = res.data.AccountName
-
-        let phone = res.data.AccountPhone
-        let address = res.data.CustomerAddress
+      success: function(res) {
         // 企业编号
         let EnterpriseId = res.data.EnterpriseId
         // 用户编码
         let CustomerId = res.data.CustomerId
-        // 经纬度
-        let Longitude = res.data.CustomerLongitude
-        let Latitude = res.data.CustomerLatitude
         // 用户唯一编码
         let AccountId = res.data.AccountId
-
         // name1:util.Decrypt(name)
         // phone1: util.Decrypt(phone)
         // address1: util.Decrypt(address)
         _this.setData({
-          "frolist.Contact": name,
-          "frolist.Phone": phone,
-          "frolist.Address": address,
           "frolist.EnterpriseId": EnterpriseId,
           "frolist.CustomerId": CustomerId,
-          "frolist.Longitude": Longitude,
-          "frolist.Latitude": Latitude,
           "frolist.AccountId": AccountId,
         })
       },
     })
-    let frolist1 = _this.data.Contact
+    let frolist1 = _this.data.frolist
     console.log(frolist1.Contact)
     if (frolist1.Contact == "" || frolist1.Contact == undefined) { //判断是否有数据页面切换
       this.setData({
@@ -434,77 +430,5 @@ Page({
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
-
-// wx.chooseImage({
-//   count: 9, // 默认9
-//   sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-//   sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有
-//   success: function (res) {
-//     // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-//     var tempFilePaths = res.tempFilePaths;
-//     var imgs = _this.data.frolist.images;
-//     for (var i = 0; i < tempFilePaths.length; i++) {
-//       if (imgs.length >= 9) {
-//         _this.setData({
-//           "frolist.images": imgs
-//         });
-//         return false;
-//       } else {
-//         imgs.push(tempFilePaths[i]);
-//       }
-//     }
-//     //  console.log(imgs);
-//     _this.setData({
-//       "frolist.images": imgs
-//     });
-//   }
-// });

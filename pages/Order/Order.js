@@ -288,6 +288,7 @@ Page({
     let getdatas = e.detail.value
     _this.setData({
       getdata: getdatas
+      
     })
   },
   /**

@@ -23,7 +23,7 @@
     </view>
   </view>
   <!-- 新增地址弹框 -->
-  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <!-- <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
   <view class="modal-dialog" wx:if="{{showModal}}">
     <view class="modal-title"></view>
     <view class="btn-Photograph">添加收货地址</view>
@@ -55,7 +55,7 @@
       <view class="btn-cancel" bindtap="onCancel">取消</view>
       <view class="btn-confirm" bindtap="onConfirm">确定</view>
     </view>
-  </view>
+  </view> -->
   <!-- 预定时间弹框 -->
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell weui-cell_input">
