@@ -89,6 +89,30 @@ function imgpreview(data_evnt, imgarrs) {  //图片预览
     }
   })
 }
+	/**
+	 * 错误消息提示
+	 */
+  function showError(err_msg,url) {
+    wx.showModal({
+      title: '错误提示',
+      content: err_msg,
+      showCancel: false,
+      confirmColor: "#72bf5e",
+      success: res=>{
+        if(url){
+          if(url.indexOf('user/index') > -1){
+            wx.switchTab({
+              url: url,
+            })
+          }else{
+            wx.navigateTo({
+              url: url,
+            })
+          }
+        }
+      }
+    })
+  }
 module.exports = {
   formatTime: formatTime,
   formatLocation: formatLocation,
@@ -96,6 +120,6 @@ module.exports = {
   Decrypt:Decrypt,
   imgpreview:imgpreview,
   uploadImg: uploadImg,
-
+  showError: showError
 
 }

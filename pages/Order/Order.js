@@ -2,9 +2,12 @@
 let app = getApp()
 const baseUrl = app.globalData.baseUrl
 const utils = require("../../utils/util.js")
-const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders`//获取订单列表接口
+const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders` //获取订单列表接口
+const cancel = `${baseUrl}/Api/RepairOrders/GasOrderCancel` //获取订单列表接口
+// 确ren
+const Confirm = `${baseUrl}/Api/RepairOrders/GasOrderConfirml` //获取订单列表接口
+
 let Num = 2;
-const Urls = `${baseUrl}/Api/RepairOrders/GasOrderCancel`//取消订单接口
 Page({
 
   /**
@@ -21,18 +24,21 @@ Page({
     text: "btn",
     text2: "margin-right:12rpx;border: 2rpx solid #999;",
     text3: '取消订单',
-    searchKeyword: '',  //需要搜索的字符
-    searchPageNum: 1,   // 设置加载的第几次，默认是第一次
-    callbackcount: 3,      //返回数据的个数
+    searchKeyword: '', //需要搜索的字符
+    searchPageNum: 1, // 设置加载的第几次，默认是第一次
+    callbackcount: 3, //返回数据的个数
     CustomerId: "",
+    // 取消原因
+    getdata: "",
+    // 取消订单id
+    ID: "",
+    // 唯一订单编号
+    Serialnumber: "",
 
-    ID:"",
-    Serialnumber:"",
-    getdata:''
   },
 
   //输入框事件，每输入一个字符，就会触发一次
-  bindKeywordInput: function (e) {
+  bindKeywordInput: function(e) {
     this.setData({
       searchKeyword: e.detail.value
     })
@@ -65,16 +71,15 @@ Page({
 
   },
   CustomerId() {
-    let data=wx.getStorageSync('Information')
+    let data = wx.getStorageSync('Information')
     this.setData({
-      CustomerId:data.CustomerId
+      CustomerId: data.CustomerId
     })
   },
   //取消订单信息
   EvaluateList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -93,7 +98,7 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
@@ -108,7 +113,6 @@ Page({
   CompleteList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -127,7 +131,7 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
@@ -161,9 +165,8 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
         let data = res.data.Data
-        console.log(data)
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
@@ -196,7 +199,7 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
 
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
@@ -232,13 +235,13 @@ Page({
     })
   },
   //导航控制
-  navbarTap: function (e) {
+  navbarTap: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
   },
   // 评价跳转页面
-  Evaluate: function () {
+  Evaluate: function() {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
@@ -280,21 +283,20 @@ Page({
     });
 
   },
-// 获取取消原因
-getdata: function(e) {
-  let _this = this
-  let getdatas = e.detail.value
-  _this.setData({
-    getdata: getdatas
-  })
-},
 
+  // 获取取消原因
+  getdata: function(e) {
+    let _this = this
+    let getdatas = e.detail.value
+    _this.setData({
+      getdata: getdatas
+    })
+  },
   /**
-     * 显示输入狂
-     */
+   * 显示输入狂
+   */
   phoneList(e) {
     let _this = this
-    console.log(e)
     let id = e.target.dataset.orderid
     let orderID = e.target.dataset.serial
     _this.setData({
@@ -304,34 +306,37 @@ getdata: function(e) {
     })
   },
   /**
-     * 对话框确认按钮点击事件
-     */
-  onConfirm() {
+   * 对话框确认按钮点击事件
+   */
+  onConfirm: function(e) {
     let _this = this
     // 订单
-    let OrderId = _this.data.Serialnumber
+    let tomerId = _this.data.Serialnumber
     // 用户
-    let CustomerId = _this.data.ID
- 
-    console.log(OrderId)
-    console.log(CustomerId)
+    let orderId = _this.data.ID
     // tu款说明
     let Explain = _this.data.getdata
+    console.log(Explain + tomerId + orderId)
     if (Explain !== "") {
       wx.request({
-        url: Urls,
+        url: cancel,
         data: {
           Sign: "",
-          OrderId: OrderId,
-          CustomerId: CustomerId,
+          OrderId: orderId,
+          CustomerId: tomerId,
           Explain: Explain
         },
         header: {
           'content-type': 'application/json'
         },
-        method: 'post',
-        success: function (res) {
+        method: 'GET',
+        success: function(res) {
           console.log(res)
+          // let orderData = res.data.Data
+          // _this.setData({
+          //   ProcessedList: orderData
+          // })
+
         },
       })
     } else {
@@ -347,7 +352,7 @@ getdata: function(e) {
   /**
    * 隐藏模态对话框
    */
-  HideModal: function () {
+  HideModal: function() {
     this.setData({
       ShowModal: false
     });
@@ -355,38 +360,62 @@ getdata: function(e) {
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: function() {
     this.HideModal();
   },
+  // 确认订单
+  Confirm: function(e) {
+    let Orderid = e.currentTarget.dataset.orderid
+    let Customerid = e.currentTarget.dataset.serial
+    console.log(e)
+    wx.request({
+      url: Confirm,
+      data: {
+        Sign: "",
+        OrderId: Orderid,
+        CustomerId: Customerid,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log(res)
+        // let orderData = res.data.Data
+        // _this.setData({
+        //   ProcessedList: orderData
+        // })
+
+      },
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  },
+  onHide: function() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -311,10 +311,7 @@ Page({
             });
             _this.UntreatedList()
           }else{
-            wx.showToast({
-              title: "请从新提交",
-              duration: 1000
-            });
+            util.showError("提交有误请从新提交")
             return false
           }
         },
@@ -361,8 +358,8 @@ Page({
 
 // 确认订单
   Confirm:function(e){
-    let Orderid = e.currentTarget.dataset.order
-    let Customerid = e.currentTarget.dataset.orderid
+    let Orderid = e.currentTarget.dataset.orderid
+    let Customerid = e.currentTarget.dataset.serial
     wx.request({
       url: Confirm,
       data: {

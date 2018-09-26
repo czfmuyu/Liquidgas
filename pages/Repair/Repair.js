@@ -42,7 +42,7 @@ Page({
       // 维修描述
       ProblemDescription:"",
       // 照片编码
-      PhotoIds:"1",
+      PhotoIds:"",
       // 企业编号
       EnterpriseId:"",
       // 用户编号
@@ -69,8 +69,8 @@ Page({
 // 表单提交=========================
   Submit() {
     let _this=this
-    let imglent = _this.data.frolist.images
     let frolists = _this.data.frolist
+    console.log(frolists)
     let Contact = frolists.Contact
     let Phone = frolists.Phone
     let Address = frolists.Address
@@ -85,7 +85,7 @@ Page({
     let CustomerId = frolists.CustomerId
     let EnterpriseId = frolists.EnterpriseId
     
-    if (imglent.length<1){
+    if (frolists.images.length<1){
       wx.showToast({
         title: "请添加照片",
         duration: 2000
@@ -115,16 +115,23 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res)
         if (res.data.Code == 200) {
+          wx.showToast({
+            title: "保修成功",
+            duration: 1000
+          });
+          wx.switchTab({ //主页面
+            url: '/pages/HomePage/HomePage'
+          })
         } else {
-          console.log("错误")
+          wx.showToast({
+            title: "保修成功",
+            duration: 1000
+          });
         }
       },
     })
-    wx.switchTab({ //主页面
-      url: '/pages/HomePage/HomePage'
-    })
+   
   },
 // 获取点的什么维修事项===================
   Discoloration:function(e){
@@ -167,7 +174,6 @@ repair:function(){
     method: 'GET',
     success: function (res) {
       let guaranteeList=res.data.Data
-      console.log(guaranteeList)
       if (res.data.Code == 200) {
         _this.setData({
           guaranteeList: guaranteeList
@@ -185,6 +191,10 @@ repair:function(){
     let index = e.detail.value
     let timelists = timelist[index]
     if (timelists=="立即出发"){
+      this.setData({
+        "frolist.ServiceMode":0
+      })
+    }else{
       this.setData({
         "frolist.ServiceMode":10
       })
@@ -305,6 +315,7 @@ repair:function(){
             that.chooseWxImage('camera')
           }
         }
+        
       }
     })
   },
@@ -328,22 +339,26 @@ repair:function(){
           // 对应的key值
           name: 'image',
           success: function (res) {
-            console.log(res)
-            imgarr.push(tempFilePaths)
-            res.imgurl = imgarr
-            console.log(imgarr)
-            console.log(res.imgurl)
-            // tempFilePaths
-            // res.imgurl.push(tempFilePaths)
-            if (typeof callback == 'function') {
-              callback(res);
-            }
+            let data=res.data
+            let imglist = JSON.parse(data);
+            let datalist = imglist.Data
+              _this.setData({
+                "frolist.PhotoIds": datalist
+              })
+          
+            // _this.pushlist(datalist)
           }
         })
       }
     })
   },
-
+  // pushlist: function (datalist){
+  //   let imgsz = []
+  //   imgsz.push(datalist)
+  //   let inghao = imgsz.join(",")
+  //   console.log(imgsz)
+  //   console.log(inghao)
+  // },
 
   /**
    * 移除图片
