@@ -105,8 +105,24 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad() {
-    this.getData()
-    this.userData()
+    let this_=this
+    this_.getData()
+    wx.getStorage({
+      key: 'address',
+      success: function(res){
+        console.log(res)
+        this_.setData({
+          CustomerAddress:res.data.address,
+          CustomerLatitude:res.data.latitudes,
+          CustomerLongitude:res.data.longitude,
+          CustomerName:res.data.name,
+          CustomerPhone:res.data.phone
+        })
+        console.log(this_.data.CustomerName)
+        this_.userData()
+      },
+    })
+    
   },
   //用户数据判断
   userData(){

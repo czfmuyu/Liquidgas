@@ -22,47 +22,9 @@ Page({
     searchKeyword: '',  //需要搜索的字符
     searchPageNum: 1,   // 设置加载的第几次，默认是第一次
     callbackcount: 3,      //返回数据的个数
-    CustomerId:"",
+    CustomerId: "",
   },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-    this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
-    wx.showToast({
-      title: "加载中",
-      icon: 'loading',
-      duration: 2000
-    });
-  },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-    let CustomerId=this.data.CustomerId
-    console.log(CustomerId)
-    this.setData({
-      callbackcount:3
-    })
-    let count=this.data.callbackcount * Num
-    this.setData({
-      searchPageNum: this.data.searchPageNum,
-      callbackcount: count
-    })
-    Num++;
-    this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
-    wx.showToast({
-      title: "加载中",
-      icon: 'loading',
-      duration: 2000
-    });
-  },
+
   //输入框事件，每输入一个字符，就会触发一次
   bindKeywordInput: function (e) {
     this.setData({
@@ -72,45 +34,46 @@ Page({
     this.DeliveryList()
     this.CompleteList()
     this.EvaluateList()
+
   },
   //输入框清空事件
-  Delete(){
+  Delete() {
     this.setData({
-      searchKeyword:""
+      searchKeyword: ""
     })
     this.wholeInfo()
     this.DeliveryList()
     this.CompleteList()
     this.EvaluateList()
-    
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
     this.CustomerId()
-    
+
   },
-  CustomerId(){
-    const this_=this
+  CustomerId() {
+    const this_ = this
     wx.getStorage({
       key: 'Information',
-      success: function(res){
-        console.log(res.data.CustomerId)
+      success: function (res) {
+        let CustomerId = res.data.CustomerId;
         this_.setData({
-          CustomerId:res.data.CustomerId
+          CustomerId: CustomerId
         })
+        this_.wholeInfo()
+        this_.DeliveryList()
+        this_.CompleteList()
+        this_.EvaluateList()
       },
     })
   },
   //取消订单信息
-  EvaluateList(){
+  EvaluateList() {
     let this_ = this
-    let CustomerId=this_.data.CustomerId
+    let CustomerId = this_.data.CustomerId
     console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
@@ -119,7 +82,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId:CustomerId,
+        CustomerId: CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -130,9 +93,9 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res){
-        let data=res.data.Data
-        for(let i=0;i<data[i].length;i++){
+      success: function (res) {
+        let data = res.data.Data
+        for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
         this_.setData({
@@ -142,9 +105,10 @@ Page({
     })
   },
   //已完成信息
-  CompleteList(){
+  CompleteList() {
     let this_ = this
-    let CustomerId=this_.data.CustomerId
+    let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -152,7 +116,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId:CustomerId,
+        CustomerId: CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -163,9 +127,9 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res){
-        let data=res.data.Data
-        for(let i=0;i<data[i].length;i++){
+      success: function (res) {
+        let data = res.data.Data
+        for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
         this_.setData({
@@ -175,9 +139,10 @@ Page({
     })
   },
   //配送中订单信息
-  DeliveryList(){
+  DeliveryList() {
     let this_ = this
-    let CustomerId=this_.data.CustomerId
+    let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -185,7 +150,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId:CustomerId,
+        CustomerId: CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -196,13 +161,14 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res){
-        let data=res.data.Data
-        for(let i=0;i<data[i].length;i++){
+      success: function (res) {
+        let data = res.data.Data
+        console.log(data)
+        for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
         this_.setData({
-          DeliveryList:data
+          DeliveryList: data
         })
       },
     })
@@ -210,7 +176,7 @@ Page({
   //请求全部订单信息
   wholeInfo() {
     let this_ = this
-    let CustomerId=this_.data.CustomerId
+    let CustomerId = this_.data.CustomerId
     console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
@@ -219,7 +185,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId:CustomerId,
+        CustomerId: CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -231,21 +197,15 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res.data.Data)
-        let data=res.data.Data
-        for(let i=0;i<data[i].length;i++){
+
+        let data = res.data.Data
+        for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
         this_.setData({
-          wholeList:data
+          wholeList: data
         })
       },
-    })
-  },
-  //点击搜索按钮,触发事件
-  keywordSearch(e) {
-    this.setData({
-      searchPageNum: 1,   //第一次加载，设置1
     })
   },
 
@@ -268,7 +228,7 @@ Page({
   //详情跳转
   deliveryDetails(e) {
     wx.navigateTo({
-      url: "/pages/DeliveryDetails/DeliveryDetails?id="+e.currentTarget.dataset.id,
+      url: "/pages/DeliveryDetails/DeliveryDetails?id=" + e.currentTarget.dataset.id,
     })
   },
   //导航控制
@@ -282,6 +242,43 @@ Page({
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 2000
+    });
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+    let CustomerId = this.data.CustomerId
+    console.log(CustomerId)
+    let count = this.data.callbackcount * Num
+    this.setData({
+      searchPageNum: this.data.searchPageNum,
+      callbackcount: count,
+    })
+    Num++;
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 2000
+    });
+
   },
 
   /**
