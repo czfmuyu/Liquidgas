@@ -38,7 +38,7 @@
             </view>
             <view>
                 <view class="btn-list" wx:if="{{item.Status>= 0 && item.Status< 30}}">
-                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="phoneList">
+                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.CustomerId}}' data-serial='{{item.Serialnumber}}' bindtap="phoneList">
                         取消订单
                     </view>
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
@@ -88,7 +88,7 @@
                 </view>
             </view>
             <view class="btn-list" wx:if="{{item.Status>= 0 && item.Status< 30}}">
-                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">
+                <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.CustomerId}}' data-serial='{{item.Serialnumber}}' bindtap="phoneList">
                     取消订单
                 </view>
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">

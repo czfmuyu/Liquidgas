@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    ShowModal: false, //弹框按钮操控
     navbar: ['全部订单', '配送中', '已完成', '已取消'],
     currentTab: 0,
     wholeList: [],
@@ -53,9 +54,9 @@ Page({
   onLoad(options) {
     this.CustomerId()
     this.wholeInfo()
-    // this.DeliveryList()
-    // this.CompleteList()
-    // this.EvaluateList()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
 
   },
   CustomerId() {
@@ -68,6 +69,7 @@ Page({
   EvaluateList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -101,6 +103,7 @@ Page({
   CompleteList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -134,6 +137,7 @@ Page({
   DeliveryList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -154,6 +158,7 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         let data = res.data.Data
+        console.log(data)
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
@@ -167,6 +172,7 @@ Page({
   wholeInfo() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
+    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -186,6 +192,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
@@ -249,6 +256,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
+    let CustomerId = this.data.CustomerId
+    console.log(CustomerId)
     let count = this.data.callbackcount * Num
     this.setData({
       searchPageNum: this.data.searchPageNum,
@@ -265,6 +274,79 @@ Page({
       duration: 2000
     });
 
+  },
+
+
+  /**
+     * 显示输入狂
+     */
+  phoneList(e) {
+    let _this = this
+    let id = e.target.dataset.orderid
+    let orderID = e.target.dataset.order
+    _this.setData({
+      ShowModal: true,
+      ID: id,
+      Serialnumber: orderID
+    })
+  },
+  /**
+     * 对话框确认按钮点击事件
+     */
+  onConfirm: function (e) {
+    let _this = this
+    // 订单
+    let OrderId = _this.data.Serialnumber
+    // 用户
+    let CustomerId = _this.data.ID
+    // tu款说明
+    let Explain = _this.data.getdata
+    console.log(Explain)
+    if (Explain !== "") {
+      wx.request({
+        url: cancel,
+        data: {
+          Sign: "",
+          OrderId: OrderId,
+          CustomerId: CustomerId,
+          Explain: Explain
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'GET',
+        success: function (res) {
+          console.log(res)
+          // let orderData = res.data.Data
+          // _this.setData({
+          //   ProcessedList: orderData
+          // })
+
+        },
+      })
+    } else {
+      wx.showToast({
+        title: "请填写取消原因",
+        duration: 1000
+      });
+    }
+    // 隐藏弹框
+    this.HideModal()
+  },
+
+  /**
+   * 隐藏模态对话框
+   */
+  HideModal: function () {
+    this.setData({
+      ShowModal: false
+    });
+  },
+  /**
+   * 对话框取消按钮点击事件
+   */
+  onCancel: function () {
+    this.HideModal();
   },
 
   /**

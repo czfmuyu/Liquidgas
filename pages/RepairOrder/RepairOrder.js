@@ -305,12 +305,12 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          console.log(res.data.Data)
           if (res.data.Data){
             wx.showToast({
               title: "提交成功",
               duration: 1000
             });
+            _this.UntreatedList()
           }else{
             wx.showToast({
               title: "请从新提交",
@@ -318,7 +318,6 @@ Page({
             });
             return false
           }
-          
         },
       })
     }else{

@@ -10,27 +10,16 @@ Page({
     EnterpriseName:"",
     // 地址
     EnterpriseAddress:"",
-    // 电话
-    EnterprisePhone:"",
-
-    phoneList: [
-      {
-        phone: '15355458975'
-      },
-      {
-        phone: '13355458975'
-      },
-      {
-        phone: '18355458975'
-      },
-    ],
-    
+    // 电话列表
+    EnterprisePhone:[],
+    // 显示电话
+    Phone:"",
   },
   //弹框电话选择
   onList(e) {
     var index = e.target.dataset.index;
     wx.makePhoneCall({
-      phoneNumber: this.data.phoneList[index].phone,
+      phoneNumber: this.data.EnterprisePhone[index],
       success(res) {
         console.log("拨打电话成功")
       },
@@ -38,6 +27,15 @@ Page({
         console.log("拨打电话失败")
       }
     })
+  },
+  Phone:function(){
+    let _this=this
+    let phonelist = _this.data.EnterprisePhone
+    if(phonelist.length>0){
+      _this.setData({
+        Phone:phonelist[0]
+      })
+    }
   },
   /**
      * 联系电话弹窗
@@ -88,7 +86,7 @@ Page({
       success: res => {
         let EnterpriseName = res.data.EnterpriseName
         let EnterpriseAddress = res.data.EnterpriseAddress
-        let EnterprisePhone = res.data.CustomerPhone
+        let EnterprisePhone = res.data.EnterprisePhone
         _this.setData({
           EnterpriseName: EnterpriseName,
           EnterpriseAddress: EnterpriseAddress,
@@ -96,14 +94,15 @@ Page({
         })
       }
     })
-
+// 判断显示电话
+    _this.Phone()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.Phone()
   },
 
   /**

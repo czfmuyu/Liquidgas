@@ -1,46 +1,41 @@
 <!--pages/Supplier/Supplier.wxml-->
 <view class="DetailsList" style="margin-top: 10rpx;border-bottom: 2rpx solid #f2f2f2;">
-    <view >
-        <text >供应商名称</text>
-    </view>
-    <view >
-        <text class="text">{{EnterpriseName}}</text>
-    </view>
+  <view>
+    <text>供应商名称</text>
+  </view>
+  <view>
+    <text class="text">{{EnterpriseName}}</text>
+  </view>
 </view>
 <view class="DetailsList" style="border-bottom: 2rpx solid #f2f2f2;">
-    <view >
-        <text >地址</text>
-    </view>
-    <view >
-        <text class="text">{{EnterpriseAddress}}</text>
-    </view>
+  <view>
+    <text>地址</text>
+  </view>
+  <view>
+    <text class="text">{{EnterpriseAddress}}</text>
+  </view>
 </view>
 <view class="DetailsList" bindtap="phoneList">
-    <view >
-        <text >联系电话</text>
+  <view>
+    <text>联系电话</text>
+  </view>
+  <view class="DetailsList_right">
+    <view class="text">
+      <text>{{Phone}}</text>
     </view>
-    <view class="DetailsList_right">
-        <view class="text">
-            <text >{{EnterprisePhone}}</text>
-        </view>
-        <view class="text_right">
-            >
-        </view>
+    <view class="text_right">
+      >
     </view>
+  </view>
 </view>
 
 <!-- 电话弹窗 -->
 <view class="modal-mask" bindtap="HideModal" catchtouchmove="preventTouchMove" wx:if="{{ShowModal}}"></view>
 <view class="modal-dialog" wx:if="{{ShowModal}}">
-    <view class="modal-title"></view>
-    <view class="btn-Photograph" >联系电话</view>
-    <view class="btn-Album" 
-        wx:for="{{phoneList}}" 
-        wx:for-item="item"
-        wx:key="phoneList"
-        data-index="{{index}}"
-        bindtap="onList">{{item.phone}}</view>
-    <view class="modal-footer">
-        <view class="btn-Album" bindtap="onCancel" >取消</view>
-    </view>
+  <view class="modal-title"></view>
+  <view class="btn-Photograph">联系电话</view>
+  <view class="btn-Album" wx:for="{{EnterprisePhone}}" wx:for-item="item" wx:key="phoneList" data-index="{{index}}" bindtap="onList">{{item}}</view>
+  <view class="modal-footer">
+    <view class="btn-Album" bindtap="onCancel">取消</view>
+  </view>
 </view>

@@ -69,8 +69,6 @@ Page({
     let _this=this
     let imglent = _this.data.frolist.images
     let frolists = _this.data.frolist
-
-    console.log(frolists)
     let Contact = frolists.Contact
     let Phone = frolists.Phone
     let Address = frolists.Address
