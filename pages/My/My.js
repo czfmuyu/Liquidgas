@@ -10,6 +10,7 @@ Page({
     // 用气编号
     Obtain: [],
     index: 0,
+    Gas:""
   },
   /**
   * 生命周期函数--监听页面加载
@@ -36,11 +37,12 @@ Page({
           url: baseUrls,
           data: {
             Sign: "",
-            AccountId: res.data.AccountId,
+            AccountId: res.data.long.AccountId,
           },
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function (res) {
+            console.log(res.data.Data.length)
               for (let i = 0; i < res.data.Data.length; i++) {//把子账号信息存储本地
                 if (res.data.Data[i].IsMainAccount == false) {
                   let data = res.data.Data[i]

@@ -43,6 +43,7 @@ Page({
       },
       method: 'post',
       success: function(res) {
+        console.log(res.data.Data)
         let k = _this.data.k
         if (res.data.Code == 200) {
           

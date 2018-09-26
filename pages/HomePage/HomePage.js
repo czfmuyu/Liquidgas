@@ -75,14 +75,16 @@ Page({
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
     let this_ = this
+
     wx.getStorage({
       key: 'AccountId',
       success: res => {
+        console.log(res.data.long.AccountId)
         wx.request({//获取个人信息请求
           url: baseUrls,
           data: {
             Sign: "",
-            AccountId: res.data.AccountId,
+            AccountId: res.data.long.AccountId,
           },
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header

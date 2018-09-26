@@ -4,8 +4,7 @@
         <image src="../../imgs/u=1934952861,3453579486&fm=27&gp=0.jpg" />
     </view>
     <view class="top_text" >
-        <text wx:if="{{information.GasNo}}">用气编号: {{information.GasNo}} </text>
-        <text wx:else>用气编号:{{Gas}} </text>
+        <text >用气编号:{{Gas}} </text>
     </view>
 </view>
 <view class="InformationList" bindtap="PersonalData" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
