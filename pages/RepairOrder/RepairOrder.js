@@ -285,7 +285,6 @@ Page({
   onConfirm: function(e) {
     let _this = this
     // 订单
-    console.log(e)
     let tomerId = _this.data.Serialnumber
     // 用户
     let orderId=_this.data.ID

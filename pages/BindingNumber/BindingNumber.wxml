@@ -3,7 +3,7 @@
         <text>用气编号</text>
     </view>
     <view>
-        <text>{{item.number}}</text>
+        <text>{{item}}</text>
     </view>
 </view>
 <view class="btn" bindtap="Gas">新增用气编号</view>
@@ -17,7 +17,7 @@
     <view class="modal-ipt">
         <input 
             placeholder="请输入用气编号"
-            bindinput="GasNumber" />
+            bindinput="GasNumber" data-inpt='text'/>
     </view>
     <view class="modal-footer">
         <view class="btn-cancel" bindtap="onGasCancel" >取消</view>

@@ -95,7 +95,7 @@ bindtap="Discoloration" data-index='{{item.ID}}' wx:for="{{guaranteeList}}" wx:f
         <image src='{{item}}' mode='aspectFill' data-index='{{index}}' bindtap='previewImg' data-src='{{item}}'></image>
         <icon class='icon' type='clear' bindtap='removeImg' data-img_url='{{item}}' />
       </view>
-      <view class='picture_butt' bindtap="chooseimage" wx:if="{{frolist.images.length <=9}}">
+      <view class='picture_butt' bindtap="uploadImg" wx:if="{{frolist.images.length <=9}}">
         <image src='../../images/tpsc.jpg'></image>
       </view>
     </view>

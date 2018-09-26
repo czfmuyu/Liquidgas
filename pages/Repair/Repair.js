@@ -2,10 +2,12 @@
 var util = require('../../utils/util.js');
 let app = getApp()
 const baseUrl = app.globalData.baseUrl
-// 发送照片
+// 获取维修项目
 const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairLabels`
 // 提交维修订单
 const baseUrlBd = `${baseUrl}/Api/RepairOrders/NewRepairOrder`
+// 提交照片
+const Urlsimg = `${baseUrl}/Api/Files/UploadImg`
 		
 
 Page({
@@ -320,7 +322,7 @@ repair:function(){
           "frolist.images":imgs
         })
         wx.uploadFile({
-          url: "http://192.168.0.185:2599/Api/Files/UploadImg",
+          url: Urlsimg,
           // 要上传的文件资源
           filePath: tempFilePaths[0],
           // 对应的key值
