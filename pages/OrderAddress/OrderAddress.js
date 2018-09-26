@@ -91,7 +91,7 @@ Page({
     EnterpriseName: "",
     EnterprisePhone: "",
     EnterpriseAddress: "",
-    EnterpriseProducts:'',
+    EnterpriseProducts: '',
     CustomerName: "",
     CustomerPhone: "",
     CustomerAddress: "",
@@ -106,6 +106,10 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad() {
+    let AccountId=wx.getStorageSync('AccountId')
+    this.setData({
+      AccountId:AccountId.long.AccountId
+    })
     let data = wx.getStorageSync('address')
     this.setData({
       CustomerAddress: data.address,
@@ -114,26 +118,70 @@ Page({
       CustomerName: data.name,
       CustomerPhone: data.phone,
     })
-    let Supplier = wx.getStorageSync('Supplier')
-    this.setData({
-      EnterpriseName: Supplier.Name,
-      EnterprisePhone: Supplier.Phone,
-      EnterpriseAddress: Supplier.Address,
-    })
     this.getData()
     this.userData()
+    this.Supplier()
+  },
+  Supplier() {
+    let this_ = this
+    wx.getStorage({
+      key: 'Supplier',
+      success: function (res) {
+        let arr = []
+        let OptionsBox = this_.data.OptionsBox
+        if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
+          console.log("i")
+          for (let i = 0; i < res.data.EnterpriseProducts.length; i++) {
+            let obj = {
+              Quantity: 0,
+              Price: res.data.EnterpriseProducts[i].UnitPrice,
+              ProductName: res.data.EnterpriseProducts[i].ProductName,
+              ProductId: res.data.EnterpriseProducts[i].ProductId
+            }
+            arr.push(obj)
+          }
+          console.log(arr)
+          this_.setData({
+            commodityList: arr
+          })
+        } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
+          console.log("in")
+          for (let j = 0; j < res.data.EnterpriseProducts.length; j++) {
+            let obj = {
+              Quantity: 0,
+              Price: res.data.EnterpriseProducts[j].KilogramPrice,
+              ProductName: res.data.EnterpriseProducts[j].ProductName,
+              ProductId: res.data.EnterpriseProducts[j].ProductId
+            }
+            arr.push(obj)
+          }
+          console.log(arr)
+          this_.setData({
+            commodityList: arr
+          })
+        }
+        this_.setData({
+          EnterpriseName: res.data.Name,
+          EnterprisePhone: res.data.Phone,
+          EnterpriseAddress: res.data.Address,
+          EnterpriseProducts: res.data.EnterpriseProducts,
+          EnterpriseId:res.data.ID,
+          ProductId:res.data.ProductId
+        })
+        this_.userData()
+      }
+    })
   },
   //用户数据判断
   userData() {
     let CustomerName = this.data.CustomerName
     console.log(CustomerName)
     if (CustomerName == "" || CustomerName == undefined) {//判断地址是否有数据页面切换
-     
       this.setData({
         isAddress: true,
       })
     } else {
-     
+
       this.setData({
         isAddress: false,
       })
@@ -142,12 +190,12 @@ Page({
     let EnterpriseName = this.data.EnterpriseName
     console.log(EnterpriseName)
     if (EnterpriseName == "" || EnterpriseName == undefined) {
-     
+
       this.setData({
         isSupplier: true,
       })
     } else {
-     
+
       this.setData({
         isSupplier: false,
       })
@@ -176,12 +224,12 @@ Page({
             commodityList: arr
           })
         } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-          for (let i = 0; i < res.data.CustomerDetails.length; i++) {
+          for (let j = 0; j < res.data.CustomerDetails.length; j++) {
             let obj = {
-              Quantity: utils.Decrypt(res.data.CustomerDetails[i].Quantity),
-              Price: utils.Decrypt(res.data.CustomerDetails[i].KilogramPrice),
-              ProductName: utils.Decrypt(res.data.CustomerDetails[i].ProductName),
-              ProductId: res.data.CustomerDetails[i].ProductId
+              Quantity: utils.Decrypt(res.data.CustomerDetails[j].Quantity),
+              Price: utils.Decrypt(res.data.CustomerDetails[j].KilogramPrice),
+              ProductName: utils.Decrypt(res.data.CustomerDetails[j].ProductName),
+              ProductId: res.data.CustomerDetails[j].ProductId
             }
             arr.push(obj)
           }
@@ -221,6 +269,7 @@ Page({
     console.log(changed)
     this.setData(changed)
     this.getData()
+    this.Supplier()
   },
   //供应商点击跳转供应商列表
   SupplierAdd() {
