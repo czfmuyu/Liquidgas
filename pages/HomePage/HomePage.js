@@ -9,7 +9,7 @@ Page({
   data: {
     index: 0,//用气编号切换索引
     showModal: false,
-    newuser: true,
+    newuser: false,
     showModalTwo: false,
     user: false,
     GasNo: []
@@ -87,6 +87,7 @@ Page({
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function (res) {
+            console.log(res)
             let data = res.data.Data
             let arr = [];
             if (res.data.Data == null) {
@@ -122,15 +123,16 @@ Page({
     })
   },
   Tips() {
-    if (this.data.GasNo.length == 0) {
-      this.setData({
-        showModal: true
-      })
-    } else if (this.data.GasNo.length > 1) {
+    console.log(this.data.GasNo)
+    if (this.data.GasNo.length > 1) {
       this.setData({
         showModalTwo: true
       })
-    }
+    }else{
+      this.setData({
+        showModal: true
+      })
+    } 
   },
   /**
    * 弹出框蒙层截断touchmove事件

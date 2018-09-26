@@ -1,93 +1,13 @@
-<view class="header">
-    <view class="headPortrait" >
-        <image src="../../imgs/u=1934952861,3453579486&fm=27&gp=0.jpg" />
-    </view>
-    <view class="top_text" >
-        <text >用气编号:  {{Gas}}</text>
+<view>
+    <view class="content" bindtap="ReplaceName">
+        <view>
+            <text>{{Information.AccountName}}</text>
+        </view>
+        <view class="wrap">
+            <text>{{Information.AccountPhone}}</text>
+            <view style="margin-left: 16rpx;">
+                <view style="color:#2269d4;">删除绑定</view>
+            </view>
+        </view>
     </view>
 </view>
-<view class="InformationList" bindtap="SonPersonalData" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
-    <view class="InformationList_left">
-        <image src="../../imgs/personalData.png" />
-        <view class="InformationList_text">
-            <text >个人中心</text>
-        </view>
-    </view>
-    <view class="InformationList_right">
-        <view class="InformationList_right_text">
-            <text ></text>
-        </view>
-        >
-    </view>
-</view>
-<view class="InformationList" bindtap="SonGasInformation" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
-    <view class="InformationList_left">
-        <image src="../../imgs/gas.png" />
-        <view class="InformationList_text">
-            <text >用气信息</text>
-        </view>
-    </view>
-    <view class="InformationList_right">
-        <view class="InformationList_right_text">
-            <text ></text>
-        </view>
-        >
-    </view>
-</view>
-<view class="InformationList" bindtap="SonSupplier">
-    <view class="InformationList_left">
-        <image src="../../imgs/Supplier.png" />
-        <view class="InformationList_text">
-            <text >供应商信息</text>
-        </view>
-    </view>
-    <view class="InformationList_right">
-        <view class="InformationList_right_text">
-            <text ></text>
-        </view>
-        >
-    </view>
-</view>
-<view class="InformationList" bindtap="SonBindingNumber">
-    <view class="InformationList_left">
-        <image src="../../imgs/binding.png" />
-        <view class="InformationList_text">
-            <text >绑定用气编号</text>
-        </view>
-    </view>
-    <view class="InformationList_right">
-        <view class="InformationList_right_text">
-            <text ></text>
-        </view>
-        >
-    </view>
-</view>
-<view class="InformationList" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;" bindtap="SonAccountSecurity">
-    <view class="InformationList_left">
-        <image src="../../imgs/security.png" />
-        <view class="InformationList_text">
-            <text >账号安全</text>
-        </view>
-    </view>
-    <view class="InformationList_right">
-        <view class="InformationList_right_text">
-            <text ></text>
-        </view>
-        >
-    </view>
-</view>
-<view class="InformationList" bindtap="SonCancellation">
-    <view class="InformationList_left">
-        <image src="../../imgs/quit.png" />
-        <view class="InformationList_text">
-            <text >退出</text>
-        </view>
-    </view>
-    <view class="InformationList_right">
-        <view class="InformationList_right_text">
-            <text ></text>
-        </view>
-        >
-    </view>
-</view>
-<view class="btn">删除绑定</view>

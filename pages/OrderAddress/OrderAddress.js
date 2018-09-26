@@ -322,9 +322,9 @@ Page({
         console.log(res)
       },
     })
-    // wx.switchTab({
-    //   url: "/pages/Order/Order",
-    // })
+    wx.switchTab({
+      url: "/pages/Order/Order",
+    })
   },
 
   /**
