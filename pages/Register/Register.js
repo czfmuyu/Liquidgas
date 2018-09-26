@@ -88,11 +88,12 @@ Page({
           },
           method: 'post',
           success: function (res) {
+            wx.switchTab({//登录页面
+              url: "/pages/HomePage/HomePage"
+            })
           },
         })
-        wx.navigateTo({//登录页面
-          url: "/pages/Login/Login"
-        })
+        
       } else {
         wx.showToast({
           title: '密码不一致',

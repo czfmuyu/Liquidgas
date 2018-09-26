@@ -18,8 +18,9 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    this.getData()
-    this.page()
+    let _this=this
+    _this.getData()
+    _this.page()
       let longitudes = options.longitudes
       let latitudes = options.latitudes
       let address = options.locations
@@ -52,7 +53,8 @@ Page({
       success: function (res) {
         let storename = res.data.AccountName
         let telephone = res.data.AccountPhone
-        let address = res.data.CustomerAddress
+        let address = res.data.address
+        console.log(address)
         _this.setData({
           storename: storename,
           telephone: telephone,
@@ -125,22 +127,39 @@ Page({
   /**
    * 电话隐藏模态对话框
    */
-  PhoneHideModal: function () {
-    this.setData({
-      PhoneShowModal: false
-    });
-  },
+ 
   /**
    * 电话对话框取消按钮点击事件
    */
   onPhoneCancel: function () {
-    this.PhoneHideModal();
+    this.setData({
+      telephone: "",
+      PhoneShowModal: false
+    });
   },
   /**
    * 电话对话框确认按钮点击事件
    */
   onPhoneConfirm: function () {
-    this.PhoneHideModal();
+    this.setData({
+      PhoneShowModal: false
+    });
+    let name = this.data.storename
+    let phone = this.data.telephone
+    let longitudes = this.data.longitudes
+    let latitudes = this.data.latitudes
+    let address = this.data.address
+    // 本地储存
+    wx.setStorage({
+      key: 'address',
+      data: {
+        longitudes,
+        latitudes,
+        address,
+        phone,
+        name
+      },
+    })
   },
 
 
@@ -168,25 +187,40 @@ Page({
    * 名称弹出框蒙层截断touchmove事件
    */
   preventTouchMove: function () { },
-  /**
-   * 名称隐藏模态对话框
-   */
-  NameHideModal: function () {
-    this.setData({
-      NameShowModal: false
-    });
-  },
+  
   /**
    * 名称对话框取消按钮点击事件
    */
   onNameCancel: function () {
-    this.NameHideModal();
+    
+    this.setData({
+      storename: "",
+      NameShowModal: false
+    });
   },
   /**
    * 名称对话框确认按钮点击事件
    */
   onNameConfirm: function () {
-    this.NameHideModal();
+    this.setData({
+      NameShowModal: false
+    });
+    let name = this.data.storename
+    let phone = this.data.telephone
+    let longitudes = this.data.longitudes
+    let latitudes = this.data.latitudes
+    let address = this.data.address
+    // 本地储存
+    wx.setStorage({
+      key: 'address',
+      data: {
+        longitudes,
+        latitudes,
+        address,
+        phone,
+        name
+      },
+    })
   },
 
 
@@ -194,14 +228,27 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    let _this = this
+    wx.getStorage({
+      key: 'address',
+      success: function (res) {
+        let name = res.data.name
+        let phone = res.data.phone
+        let address = res.data.address
+        _this.setData({
+          storename: name,
+          telephone: phone,
+          address: address
+        })
+      },
+    })
   },
 
   /**

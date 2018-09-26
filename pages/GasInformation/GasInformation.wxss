@@ -29,3 +29,6 @@ text{
   padding: 20rpx;
   background-color: white
 }
+input{
+  color: #000;
+}

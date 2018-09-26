@@ -386,11 +386,6 @@ Page({
       method: 'POST',
       success: function(res) {
         console.log(res)
-        // let orderData = res.data.Data
-        // _this.setData({
-        //   ProcessedList: orderData
-        // })
-
       },
     })
   },
