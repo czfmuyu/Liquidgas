@@ -5,7 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-  },
+    Gas:"",
+  },/**
+  * 生命周期函数--监听页面加载
+  */
+ onLoad: function (options) {
+   let data=wx.getStorageSync('Subaccount')
+   console.log(data)
+   wx.setStorageSync('Information', data)
+  this.setData({
+    Gas:data.GasNo,
+  })
+ },
   
   SonGasInformation(){
     wx.navigateTo({//用气信息页面
@@ -62,12 +73,7 @@ Page({
   onConfirm: function () {
     this.hideModal();
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
   
-  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

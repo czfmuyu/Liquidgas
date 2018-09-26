@@ -19,16 +19,11 @@ Page({
   */
   onLoad: function (options) {
     this.page()
-
-    let _this = this
-    console.log(options)
-    _this.getData()
-
+    this.getData()
     let longitudes = options.longitudes
     let latitudes = options.latitudes
     let address = options.locations
-
-    _this.setData({
+    this.setData({
       address: address,
       longitudes: longitudes,
       latitudes: latitudes,
@@ -54,6 +49,7 @@ Page({
     wx.getStorage({
       key: 'Information',
       success: function (res) {
+        console.log(res)
         let storename = res.data.AccountName
         let telephone = res.data.AccountPhone
         let address = res.data.CustomerAddress
