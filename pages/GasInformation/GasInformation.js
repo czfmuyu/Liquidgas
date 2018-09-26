@@ -85,10 +85,14 @@ Page({
       wx.navigateTo({
         url: '/pages/OrderAddress/OrderAddress',
       })
-    } else {
+    } else if(indexs == 1){
       console.log("i")
       wx.switchTab({
         url: '/pages/My/My',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/Register/Register',
       })
     }
   },

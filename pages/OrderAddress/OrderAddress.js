@@ -91,6 +91,7 @@ Page({
     EnterpriseName: "",
     EnterprisePhone: "",
     EnterpriseAddress: "",
+    EnterpriseProducts:'',
     CustomerName: "",
     CustomerPhone: "",
     CustomerAddress: "",
@@ -117,7 +118,7 @@ Page({
     this.setData({
       EnterpriseName: Supplier.Name,
       EnterprisePhone: Supplier.Phone,
-      EnterpriseAddress: Supplier.Address
+      EnterpriseAddress: Supplier.Address,
     })
     this.getData()
     this.userData()
