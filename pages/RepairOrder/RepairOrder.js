@@ -5,7 +5,7 @@ const baseUrl = app.globalData.baseUrl
 const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairOrders`
 // 取消订单接口
 const cancel = `${baseUrl}/Api/RepairOrders/RepairOrderCancel`
-			// 确认订单
+// 确认订单
 const Confirm = `${baseUrl}/Api/RepairOrders/RepairOrderConfirm`
 
 Page({
@@ -23,7 +23,7 @@ Page({
     // 取消订单id
     ID: "",
     // 唯一订单编号
-    Serialnumber:"",
+    Serialnumber: "",
     // 携带参数
     parameter: {
       // 页码
@@ -36,8 +36,7 @@ Page({
       status: "-1",
       // id
       customerId: "",
-     
-      
+
     },
     // 全部列表
     whole: [],
@@ -97,6 +96,20 @@ Page({
     _this.ProcessedList()
     _this.EvaluateList()
     _this.getID()
+  },
+  // 搜索
+  queryInput: function(e) {
+    let _this=this
+    let text = e.detail.value
+  _this.setData({
+    queryKeyword: text
+  })
+    _this.getmaintenance()
+    _this.UntreatedList()
+    _this.ProcessedList()
+    _this.EvaluateList()
+    _this.getID()
+    console.log("11")
   },
   // 获取维修全部订单列表
   getmaintenance: function() {
@@ -262,8 +275,8 @@ Page({
     wx.getStorage({
       key: 'Information',
       success: function(res) {
+        console.log(res)
         let id = res.data.CustomerId
-        console.log(id+"ddsddfd")
         _this.setData({
           "parameter.CustomerId": id
         })
@@ -287,10 +300,10 @@ Page({
     // 订单
     let tomerId = _this.data.Serialnumber
     // 用户
-    let orderId=_this.data.ID
-// 取消订单说明orderId
+    let orderId = _this.data.ID
+    // 取消订单说明orderId
     let Explain = _this.data.getdata
-    if (Explain!==""){
+    if (Explain !== "") {
       wx.request({
         url: cancel,
         data: {
@@ -303,20 +316,20 @@ Page({
           'content-type': 'application/json'
         },
         method: 'POST',
-        success: function (res) {
-          if (res.data.Data){
+        success: function(res) {
+          if (res.data.Data) {
             wx.showToast({
               title: "提交成功",
               duration: 1000
             });
             _this.UntreatedList()
-          }else{
+          } else {
             util.showError("提交有误请从新提交")
             return false
           }
         },
       })
-    }else{
+    } else {
       wx.showToast({
         title: "请填写取消原因",
         duration: 1000
@@ -356,8 +369,8 @@ Page({
   },
 
 
-// 确认订单
-  Confirm:function(e){
+  // 确认订单
+  Confirm: function(e) {
     let Orderid = e.currentTarget.dataset.orderid
     let Customerid = e.currentTarget.dataset.serial
     wx.request({
@@ -371,7 +384,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         // let orderData = res.data.Data
         // _this.setData({

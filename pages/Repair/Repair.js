@@ -261,7 +261,6 @@ Page({
     if (!fomlist.Contact || !fomlist.Phone || !fomlist.Address) {
       wx.showToast({
         title: '请完整填写信息',
-
         duration: 2000
       })
       return false
@@ -418,7 +417,7 @@ Page({
       },
     })
     let frolist1 = _this.data.frolist
-    console.log(frolist1.Contact)
+
     if (frolist1.Contact == "" || frolist1.Contact == undefined) { //判断是否有数据页面切换
       this.setData({
         isAddress: true,

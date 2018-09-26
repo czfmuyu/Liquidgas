@@ -2,7 +2,7 @@
 <view class="header">
   <view class="header_ipt">
     <image src="../../imgs/5_03.png" />
-    <input placeholder="请输入要查询订单编号" bindinput="queryInput" />
+    <input placeholder="请输入要查询订单编号" bindinput="queryInput" data-type='text'/>
     <view class="header_ipt_x" bindtap="Delete">X</view>
   </view>
 </view>
