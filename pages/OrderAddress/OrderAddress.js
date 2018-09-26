@@ -107,6 +107,7 @@ Page({
   onLoad() {
     let this_=this
     this_.getData()
+    this_.userData()
     wx.getStorage({
       key: 'address',
       success: function(res){

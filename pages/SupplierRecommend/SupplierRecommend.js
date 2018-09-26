@@ -1,4 +1,6 @@
-// pages/Supplier/Supplier.js
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/GasOrders/NewGasOrder`//一键订气上传接口
+const utils = require("../../utils/util.js")// pages/Supplier/Supplier.js
 Page({
 
   /**

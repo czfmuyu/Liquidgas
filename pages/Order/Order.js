@@ -52,22 +52,16 @@ Page({
    */
   onLoad(options) {
     this.CustomerId()
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
 
   },
   CustomerId() {
-    const this_ = this
-    wx.getStorage({
-      key: 'Information',
-      success: function (res) {
-        let CustomerId = res.data.CustomerId;
-        this_.setData({
-          CustomerId: CustomerId
-        })
-        this_.wholeInfo()
-        this_.DeliveryList()
-        this_.CompleteList()
-        this_.EvaluateList()
-      },
+    let data=wx.getStorageSync('Information')
+    this.setData({
+      CustomerId:data.CustomerId
     })
   },
   //取消订单信息

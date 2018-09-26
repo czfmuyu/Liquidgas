@@ -1,6 +1,6 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
-// pages/My/My.js
+let app = getApp()
 Page({
 
   /**
