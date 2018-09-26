@@ -20,31 +20,22 @@ Page({
   onLoad: function (options) {
     this.getData()
     this.page()
-    if (options.length>1){
-      let longitudes = options.longitudes
-      let latitudes = options.latitudes
-      let address = options.locations
-      this.setData({
-        address: address,
-        longitudes: longitudes,
-        latitudes: latitudes,
-      })
-    }else{
-      return false
-    }
-   
+    let longitudes = options.longitudes
+    let latitudes = options.latitudes
+    let address = options.locations
+    this.setData({
+      address: address,
+      longitudes: longitudes,
+      latitudes: latitudes,
+    })
+
   },
 
   //获取页面传的值
   page() {
-    let this_ = this
-    wx.getStorage({
-      key: 'page',
-      success: function (res) {
-        this_.setData({
-          index: res.data
-        })
-      },
+    let index = wx.getStorageSync('page')
+    this.setData({
+      index: index
     })
   },
   //获取本地储存
@@ -84,14 +75,16 @@ Page({
       },
     })
     if (indexs == 0) {
-      console.log("in")
       wx.navigateTo({
         url: '/pages/OrderAddress/OrderAddress',
       })
-    } else {
-      console.log("i")
+    } else if (indexs == 1) {
       wx.switchTab({
         url: '/pages/My/My',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/Register/Register',
       })
     }
   },
@@ -200,7 +193,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**

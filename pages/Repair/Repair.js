@@ -8,7 +8,7 @@ const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairLabels`
 const baseUrlBd = `${baseUrl}/Api/RepairOrders/NewRepairOrder`
 // 提交照片
 const Urlsimg = `${baseUrl}/Api/Files/UploadImg`
-		
+
 
 Page({
   /**
@@ -38,37 +38,37 @@ Page({
       Phone: "",
       Address: "",
       // 预约时间
-      SubscribeTime:"立即出发",
+      SubscribeTime: "立即出发",
       // 维修描述
-      ProblemDescription:"",
+      ProblemDescription: "",
       // 照片编码
-      PhotoIds:"",
+      PhotoIds: "",
       // 企业编号
-      EnterpriseId:"",
+      EnterpriseId: "",
       // 用户编号
-      CustomerId:"",
+      CustomerId: "",
       // 经纬度
-      Longitude:"",
-      Latitude:"",
+      Longitude: "",
+      Latitude: "",
       // 用户唯一编码
-      AccountId:"",
+      AccountId: "",
       // 维修编号
-      RepairLabelIds:"",
+      RepairLabelIds: "",
       // 服务模式
-      ServiceMode:"0",
+      ServiceMode: "0",
 
       images: [],
     },
-    guaranteeList:[],
-  //  判断选项状态
-    changeType:1,
-    sss:""
+    guaranteeList: [],
+    //  判断选项状态
+    changeType: 1,
+    sss: ""
   },
- 
 
-// 表单提交=========================
+
+  // 表单提交=========================
   Submit() {
-    let _this=this
+    let _this = this
     let frolists = _this.data.frolist
     console.log(frolists)
     let Contact = frolists.Contact
@@ -84,8 +84,8 @@ Page({
     let Latitude = frolists.Latitude
     let CustomerId = frolists.CustomerId
     let EnterpriseId = frolists.EnterpriseId
-    
-    if (frolists.images.length<1){
+
+    if (frolists.images.length < 1) {
       wx.showToast({
         title: "请添加照片",
         duration: 2000
@@ -96,9 +96,9 @@ Page({
       url: baseUrlBd,
       data: {
         Sign: "",
-        Contact: util.Encryption(Contact)  ,
-        Phone: util.Encryption(Phone)  ,
-        Address: util.Encryption(Address) ,
+        Contact: util.Encryption(Contact),
+        Phone: util.Encryption(Phone),
+        Address: util.Encryption(Address),
         SubscribeTime: SubscribeTime,
         ProblemDescription: ProblemDescription,
         AccountId: AccountId,
@@ -131,27 +131,27 @@ Page({
         }
       },
     })
-   
+
   },
-// 获取点的什么维修事项===================
-  Discoloration:function(e){
-    let _this=this
-    let index = e.target.dataset.index-1
+  // 获取点的什么维修事项===================
+  Discoloration: function (e) {
+    let _this = this
+    let index = e.target.dataset.index - 1
     let list = _this.data.guaranteeList
-    if (list[index].Enabled==true){
-      list[index].Enabled=false
-    } else{
-      list[index].Enabled=true
+    if (list[index].Enabled == true) {
+      list[index].Enabled = false
+    } else {
+      list[index].Enabled = true
     }
     _this.setData({
       guaranteeList: list
     })
 
-    for (let i=0; i<_this.data.guaranteeList.length; i++){
-      if (_this.data.guaranteeList[i].Enabled==false){
+    for (let i = 0; i < _this.data.guaranteeList.length; i++) {
+      if (_this.data.guaranteeList[i].Enabled == false) {
         let ss = _this.data.guaranteeList[i].ID
         _this.setData({
-          "frolist.RepairLabelIds":ss
+          "frolist.RepairLabelIds": ss
         })
       }
     }
@@ -162,41 +162,41 @@ Page({
   },
 
 
-// 获取报修项目
-repair:function(){
-  let _this=this
-  wx.request({
-    url: baseUrls,
-    data:{},
-    header: {
-      'content-type': 'application/json'
-    },
-    method: 'GET',
-    success: function (res) {
-      let guaranteeList=res.data.Data
-      if (res.data.Code == 200) {
-        _this.setData({
-          guaranteeList: guaranteeList
-        })
-      } else {
-        console.log("错误")
-      }
-    },
-  })
-},
+  // 获取报修项目
+  repair: function () {
+    let _this = this
+    wx.request({
+      url: baseUrls,
+      data: {},
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'GET',
+      success: function (res) {
+        let guaranteeList = res.data.Data
+        if (res.data.Code == 200) {
+          _this.setData({
+            guaranteeList: guaranteeList
+          })
+        } else {
+          console.log("错误")
+        }
+      },
+    })
+  },
 
   //获取用户选择时间
-  bindPickerChange: function(e) {
+  bindPickerChange: function (e) {
     let timelist = this.data.array
     let index = e.detail.value
     let timelists = timelist[index]
-    if (timelists=="立即出发"){
+    if (timelists == "立即出发") {
       this.setData({
-        "frolist.ServiceMode":0
+        "frolist.ServiceMode": 0
       })
-    }else{
+    } else {
       this.setData({
-        "frolist.ServiceMode":10
+        "frolist.ServiceMode": 10
       })
     }
     this.setData({
@@ -208,11 +208,11 @@ repair:function(){
   /**
    * 地址弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 地址隐藏模态对话框
    */
-  hideModal: function() {
+  hideModal: function () {
     this.setData({
       showModal: false
     });
@@ -220,10 +220,10 @@ repair:function(){
   /**
    * 地址对话框取消按钮点击事件
    */
-  onCancel: function() {
+  onCancel: function () {
     this.hideModal();
   },
-// 用户名称
+  // 用户名称
   userName(e) {
     this.setData({
       "frolist.Contact": e.detail.value
@@ -242,8 +242,8 @@ repair:function(){
     })
   },
   // 获取故障描述
-  textm:function(e){
-    let _this=this
+  textm: function (e) {
+    let _this = this
     let textm = e.detail.value
     _this.setData({
       "frolist.ProblemDescription": textm
@@ -253,15 +253,15 @@ repair:function(){
   /**
    * 地址对话框确认按钮点击事件
    */
-  
+
   // 表单验证正确后才可以隐藏表格
-  onConfirm: function() {
+  onConfirm: function () {
     let fomlist = this.data.frolist
     let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
     if (!fomlist.name || !fomlist.phone || !fomlist.address) {
       wx.showToast({
         title: '请完整填写信息',
-       
+
         duration: 2000
       })
       return false
@@ -269,7 +269,7 @@ repair:function(){
     if (!telphone.test(fomlist.phone)) {
       wx.showToast({
         title: '电话输入有误',
-        
+
         duration: 2000
       })
       return false
@@ -292,7 +292,7 @@ repair:function(){
   /**
    * 上传图片
    */
-  uploadImg: function() {
+  uploadImg: function () {
     let _this = this;
     let imgs = _this.data.frolist.images;
     if (imgs.length >= 9) {
@@ -302,12 +302,12 @@ repair:function(){
     _this.chooseimage()
   },
   //选择相机还是本地图片
-  chooseimage: function() {
+  chooseimage: function () {
     var that = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#2168d3",
-      success: function(res) {
+      success: function (res) {
         if (!res.cancel) {
           if (res.tapIndex == 0) {
             that.chooseWxImage('album')
@@ -315,12 +315,12 @@ repair:function(){
             that.chooseWxImage('camera')
           }
         }
-        
+
       }
     })
   },
 
-  chooseWxImage: function(type) {
+  chooseWxImage: function (type) {
     var _this = this;
     wx.chooseImage({
       count: 9,
@@ -330,7 +330,7 @@ repair:function(){
         var imgs = _this.data.frolist.images;
         imgs.push(tempFilePaths[0]);
         _this.setData({
-          "frolist.images":imgs
+          "frolist.images": imgs
         })
         wx.uploadFile({
           url: Urlsimg,
@@ -340,21 +340,21 @@ repair:function(){
           name: 'image',
           success: function (res) {
             console.log(res)
-            let data=res.data
+            let data = res.data
             let imglist = JSON.parse(data);
             let datalist = imglist.Data
             console.log(datalist)
-              _this.setData({
-                "frolist.PhotoIds": datalist
-              })
-          
+            _this.setData({
+              "frolist.PhotoIds": datalist
+            })
+
             _this.pushlist(datalist)
           }
         })
       }
     })
   },
-  pushlist: function (datalist){
+  pushlist: function (datalist) {
     let imgsz = []
     imgsz.push(datalist)
     let inghao = imgsz.join(",")
@@ -374,7 +374,7 @@ repair:function(){
     })
   },
   // 图片预览
-  previewImg: function(e) {
+  previewImg: function (e) {
     var data_evnt = e; //将函数事件对象传入 ，以及图片获取到的数组 
     util.imgpreview(data_evnt, this.data.frolist.images)
   },
@@ -384,8 +384,8 @@ repair:function(){
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-   
+  onLoad: function (options) {
+
     let _this = this
     _this.repair()
     // 获取本地缓存
@@ -393,7 +393,7 @@ repair:function(){
       key: 'Information',
       success: function (res) {
         let name = res.data.AccountName
-        
+
         let phone = res.data.AccountPhone
         let address = res.data.CustomerAddress
         // 企业编号
@@ -405,7 +405,7 @@ repair:function(){
         let Latitude = res.data.CustomerLatitude
         // 用户唯一编码
         let AccountId = res.data.AccountId
-     
+
         // name1:util.Decrypt(name)
         // phone1: util.Decrypt(phone)
         // address1: util.Decrypt(address)
@@ -421,8 +421,9 @@ repair:function(){
         })
       },
     })
-    let frolist1 = _this.data.frolist
-    if (frolist1.Contact !== "") { //判断是否有数据页面切换
+    let frolist1 = _this.data.Contact
+    console.log(frolist1.Contact)
+    if (frolist1.Contact == "" || frolist1.Contact == undefined) { //判断是否有数据页面切换
       this.setData({
         isAddress: true,
       })
@@ -436,49 +437,49 @@ repair:function(){
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
