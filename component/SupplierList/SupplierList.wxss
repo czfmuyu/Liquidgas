@@ -1,25 +1,2 @@
 /* component/SupplierList/SupplierList.wxss */
-.SupplierList{
-    height: 170rpx;
-    padding: 0 16rpx;
-    display: flex;
-    flex-direction: row;
-    border: 2rpx solid #f5f5f5;
-}
-.black{
-    font-size: 28rpx;
-}
-.gray{
-    font-size: 26rpx;
-    color: #666;
-}
-.SupplierList_left{
-    width: 632rpx;
-    height: 170rpx;
-}
-.SupplierList_right{
-    width: 85rpx;
-    height: 170rpx;
-    text-align: center;
-    line-height:170rpx; 
-}
+

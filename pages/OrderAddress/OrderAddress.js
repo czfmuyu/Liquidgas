@@ -123,6 +123,13 @@ Page({
         this_.userData()
       },
     })
+    let Supplier=wx.getStorageSync('Supplier')
+    console.log(Supplier)
+    this_.setData({
+      EnterpriseName:Supplier.Name,
+      EnterprisePhone:Supplier.Phone,
+      EnterpriseAddress:Supplier.Address
+    })
     
   },
   //用户数据判断

@@ -1,5 +1,5 @@
 const { baseUrl } = getApp().globalData
-const baseUrls = `${baseUrl}/Api/GasOrders/NewGasOrder`//一键订气上传接口
+const baseUrls = `${baseUrl}/Api/Enterprises/GetEnterpriseDistance`//获取位置对应距离最近企业信息接口
 const utils = require("../../utils/util.js")// pages/Supplier/Supplier.js
 Page({
 
@@ -8,57 +8,18 @@ Page({
    */
   data: {
     showModal: false,//弹框按钮操控
-    Suppliers: [
-      {
-        Supplier: "旧宫供应商",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-      {
-        Supplier: "旧宫供应商1",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-      {
-        Supplier: "旧宫供应商2",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-      {
-        Supplier: "旧宫供应商3",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-      {
-        Supplier: "旧宫供应商4",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-      {
-        Supplier: "旧宫供应商5",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-      {
-        Supplier: "旧宫供应商6",
-        SupplierPhone: "67475845",
-        SupplierAddress: "大兴区旧宫镇清理路碧海公园北旧宫供应商",
-        SupplierDistance: "13.6km"
-      },
-    ],
+    Suppliers: [],
+    TotalCount:5 ,//返回数据条数
+    index:"",
   },
    /**
      * 弹窗
      */
-    SupplierDialogBtn () {
+    SupplierDialogBtn (e) {
+      console.log(e.currentTarget.dataset.index)
       this.setData({
-        showModal: true
+        showModal: true,
+        index:e.currentTarget.dataset.index
       })
     },
     /**
@@ -84,6 +45,8 @@ Page({
      * 对话框确认按钮点击事件
      */
     onConfirm: function () {
+      console.log(this.data.Suppliers[this.data.index])
+      wx.setStorageSync('Supplier', this.data.Suppliers[this.data.index])
       this.hideModal();
       wx.navigateTo({
         url: '/pages/OrderAddress/OrderAddress',
@@ -93,9 +56,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getSupplierInfo()
   },
-
+  getSupplierInfo(){
+    let this_=this
+    let data=wx.getStorageSync('address')
+    let TotalCount=this.data.TotalCount
+    console.log(data)
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign:"",
+        TotalCount:TotalCount,
+        MyLatitude:data.latitudes,
+        MyLongitude:data.longitudes,
+      },
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        console.log(res.data.Data)
+        let data=res.data.Data
+        for(let i=0;i<data.length;i++){
+          let Distance=Math.round(data[i].Distance)
+          data[i].Distance=Distance
+        }
+        this_.setData({
+          Suppliers:data
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -9,16 +9,21 @@
     </view>
 </view>
 <scroll-view scroll-y>
-    <view>
-        <block wx:for="{{Suppliers}}" wx:key="SupplierList">
-            <SupplierList
-                bindtap="SupplierDialogBtn"
-                data="{{item}}"
-                Supplier="{{item.Supplier}}"
-                SupplierPhone="{{item.SupplierPhone}}"
-                SupplierAddress="{{item.SupplierAddress}}"
-                SupplierDistance="{{item.SupplierDistance}}"/>
-        </block>
+    <view class="SupplierList" bindtap="SupplierDialogBtn" data-index="{{index}}" wx:for="{{Suppliers}}" wx:for-item="item" wx:key="SupplierList">
+        <view class="SupplierList_left">
+            <view>
+                <text class="black">{{item.Name}}</text>
+            </view>
+            <view>
+                <text class="gray">电话：{{item.Phone}}</text>
+            </view>
+            <view>
+                <text class="gray">地址：{{item.Address}}</text>
+            </view>
+        </view>
+        <view class="SupplierList_right">
+            <text class="gray">{{item.Distance}}km</text>
+        </view>
     </view>
 </scroll-view>
 <!-- 供应商选择弹窗 -->

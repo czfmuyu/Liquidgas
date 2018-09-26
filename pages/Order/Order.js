@@ -88,6 +88,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res)
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
