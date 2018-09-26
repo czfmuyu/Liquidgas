@@ -92,7 +92,7 @@ Page({
       })
     }else{
       wx.navigateTo({
-        url: '/pages/Register/Register',
+        url: '/pages/Repair/Repair',
       })
     }
   },
