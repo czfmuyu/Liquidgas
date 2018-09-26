@@ -41,7 +41,6 @@ Page({
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function (res) {
-            console.log(res)
             for (let i = 0; i < res.data.Data.length; i++) {//把子账号信息存储本地
               if (res.data.Data[i].IsMainAccount == false) {
                 let data=res.data.Data[i]
@@ -61,9 +60,7 @@ Page({
   index() {
     let data = this.data.Obtain
     let index = this.data.index;
-    console.log(data)
     wx.setStorageSync('wholeGas', data)
-    console.log(index)
     this.setData({
       data: data[index]
     })

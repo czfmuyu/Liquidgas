@@ -70,7 +70,6 @@ Page({
   Submit() {
     let _this=this
     let frolists = _this.data.frolist
-    console.log(frolists)
     let Contact = frolists.Contact
     let Phone = frolists.Phone
     let Address = frolists.Address

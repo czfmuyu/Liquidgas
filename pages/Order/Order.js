@@ -146,7 +146,6 @@ Page({
   DeliveryList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -180,7 +179,6 @@ Page({
   wholeInfo() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -264,8 +262,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    let CustomerId = this.data.CustomerId
-    console.log(CustomerId)
     let count = this.data.callbackcount * Num
     this.setData({
       searchPageNum: this.data.searchPageNum,
@@ -316,7 +312,6 @@ Page({
     let orderId = _this.data.ID
     // tu款说明
     let Explain = _this.data.getdata
-    console.log(Explain + tomerId + orderId)
     if (Explain !== "") {
       wx.request({
         url: cancel,
@@ -331,7 +326,6 @@ Page({
         },
         method: 'GET',
         success: function(res) {
-          console.log(res)
           // let orderData = res.data.Data
           // _this.setData({
           //   ProcessedList: orderData
@@ -367,7 +361,6 @@ Page({
   Confirm: function(e) {
     let Orderid = e.currentTarget.dataset.orderid
     let Customerid = e.currentTarget.dataset.serial
-    console.log(e)
     wx.request({
       url: Confirm,
       data: {
@@ -380,7 +373,6 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        console.log(res)
         // let orderData = res.data.Data
         // _this.setData({
         //   ProcessedList: orderData

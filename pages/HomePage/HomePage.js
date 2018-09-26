@@ -55,7 +55,6 @@ Page({
       key: 'Information',
       success: function (res) {
         let data = res.data[index]
-        console.log(data)
         wx.setStorage({
           key: 'Information',
           data: data,
@@ -79,7 +78,6 @@ Page({
     wx.getStorage({
       key: 'AccountId',
       success: res => {
-        console.log(res.data.AccountId)
         wx.request({//获取个人信息请求
           url: baseUrls,
           data: {
@@ -89,7 +87,6 @@ Page({
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function (res) {
-            console.log(res.data)
             let data = res.data.Data
             let arr = [];
             if (res.data.Data == null) {
@@ -98,14 +95,12 @@ Page({
               for (let i = 0; i < res.data.Data.length; i++) {
                 arr.push(res.data.Data[i].GasNo)
               }
-              console.log(arr)
               this_.setData({
                 GasNo: arr
               })
             }
             this_.Tips()
             if (res.data.Data.length > 0 && res.data.Data.length < 2) {
-              console.log("in")
               wx.setStorage({//个人信息存本地
                 key: 'Information',
                 data: data[0],
@@ -113,8 +108,6 @@ Page({
                 },
               })
             } else {
-              console.log('i')
-              console.log(data)
               wx.setStorage({//个人信息存本地
                 key: 'Information',
                 data: data,

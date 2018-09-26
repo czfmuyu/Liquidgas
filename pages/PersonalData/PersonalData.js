@@ -23,7 +23,6 @@ Page({
     wx.getStorage({
       key: 'Information',
       success: function(res){
-        console.log(res.data)
         this_.setData({
           AccountName:utils.Decrypt(res.data.AccountName),
           AccountPhone:utils.Decrypt(res.data.AccountPhone)

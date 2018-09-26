@@ -23,7 +23,6 @@ Page({
     let value = e.detail.value
     let index = e.target.dataset.text
     data[index] = value
-    console.log(data)
   },
   //点击条款打钩事件
   Tick() {
@@ -75,7 +74,6 @@ Page({
     let Tick = this_.data.Tick
     if (Tick === "√") {
       if (this_.data.Password === this_.data.confirmPassword) {
-        console.log("注册成功")
         wx.request({
           url: baseUrls,
           data: {
@@ -90,10 +88,6 @@ Page({
           },
           method: 'post',
           success: function (res) {
-            console.log(res)
-            console.log(res.data.Code)
-            console.log(res.data.Msg)
-            console.log(res.data.Data)
           },
         })
         wx.navigateTo({//登录页面

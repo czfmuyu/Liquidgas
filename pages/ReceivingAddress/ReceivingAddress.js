@@ -45,7 +45,6 @@ Page({
     let location = _this.data.locationAddress
     let locations = location + addressD
     let longitude = _this.data.location
-    console.log(longitude)
     let longitudes = longitude.longitude[0] + "." + longitude.longitude[1]
     let latitudes = longitude.latitude[0] + "." + longitude.latitude[1]
 
