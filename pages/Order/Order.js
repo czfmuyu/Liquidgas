@@ -4,6 +4,7 @@ const baseUrl = app.globalData.baseUrl
 const utils = require("../../utils/util.js")
 const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders`//获取订单列表接口
 let Num = 2;
+const Urls = `${baseUrl}/Api/RepairOrders/GasOrderCancel`//取消订单接口
 Page({
 
   /**
@@ -24,6 +25,10 @@ Page({
     searchPageNum: 1,   // 设置加载的第几次，默认是第一次
     callbackcount: 3,      //返回数据的个数
     CustomerId: "",
+
+    ID:"",
+    Serialnumber:"",
+    getdata:''
   },
 
   //输入框事件，每输入一个字符，就会触发一次
@@ -275,15 +280,23 @@ Page({
     });
 
   },
-
+// 获取取消原因
+getdata: function(e) {
+  let _this = this
+  let getdatas = e.detail.value
+  _this.setData({
+    getdata: getdatas
+  })
+},
 
   /**
      * 显示输入狂
      */
   phoneList(e) {
     let _this = this
+    console.log(e)
     let id = e.target.dataset.orderid
-    let orderID = e.target.dataset.order
+    let orderID = e.target.dataset.serial
     _this.setData({
       ShowModal: true,
       ID: id,
@@ -293,18 +306,20 @@ Page({
   /**
      * 对话框确认按钮点击事件
      */
-  onConfirm: function (e) {
+  onConfirm() {
     let _this = this
     // 订单
     let OrderId = _this.data.Serialnumber
     // 用户
     let CustomerId = _this.data.ID
+ 
+    console.log(OrderId)
+    console.log(CustomerId)
     // tu款说明
     let Explain = _this.data.getdata
-    console.log(Explain)
     if (Explain !== "") {
       wx.request({
-        url: cancel,
+        url: Urls,
         data: {
           Sign: "",
           OrderId: OrderId,
@@ -314,14 +329,9 @@ Page({
         header: {
           'content-type': 'application/json'
         },
-        method: 'GET',
+        method: 'post',
         success: function (res) {
           console.log(res)
-          // let orderData = res.data.Data
-          // _this.setData({
-          //   ProcessedList: orderData
-          // })
-
         },
       })
     } else {

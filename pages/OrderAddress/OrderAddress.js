@@ -105,52 +105,48 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad() {
-    let this_=this
-    this_.getData()
-    this_.userData()
-    wx.getStorage({
-      key: 'address',
-      success: function(res){
-        console.log(res)
-        this_.setData({
-          CustomerAddress:res.data.address,
-          CustomerLatitude:res.data.latitudes,
-          CustomerLongitude:res.data.longitude,
-          CustomerName:res.data.name,
-          CustomerPhone:res.data.phone
-        })
-        console.log(this_.data.CustomerName)
-        this_.userData()
-      },
+    let data = wx.getStorageSync('address')
+    this.setData({
+      CustomerAddress: data.address,
+      CustomerLatitude: data.latitudes,
+      CustomerLongitude: data.longitude,
+      CustomerName: data.name,
+      CustomerPhone: data.phone,
     })
-    let Supplier=wx.getStorageSync('Supplier')
-    console.log(Supplier)
-    this_.setData({
-      EnterpriseName:Supplier.Name,
-      EnterprisePhone:Supplier.Phone,
-      EnterpriseAddress:Supplier.Address
+    let Supplier = wx.getStorageSync('Supplier')
+    this.setData({
+      EnterpriseName: Supplier.Name,
+      EnterprisePhone: Supplier.Phone,
+      EnterpriseAddress: Supplier.Address
     })
-    
+    this.getData()
+    this.userData()
   },
   //用户数据判断
-  userData(){
+  userData() {
     let CustomerName = this.data.CustomerName
-    if (CustomerName == "") {//判断地址是否有数据页面切换
+    console.log(CustomerName)
+    if (CustomerName == "" || CustomerName == undefined) {//判断地址是否有数据页面切换
+      console.log("无数据")
       this.setData({
         isAddress: true,
       })
     } else {
+      console.log("有数据")
       this.setData({
         isAddress: false,
       })
     }
     //判断供应商是否有数据页面切换
     let EnterpriseName = this.data.EnterpriseName
-    if (EnterpriseName == "") {
+    console.log(EnterpriseName)
+    if (EnterpriseName == "" || EnterpriseName == undefined) {
+      console.log("无数据") 
       this.setData({
         isSupplier: true,
       })
     } else {
+      console.log("有数据")
       this.setData({
         isSupplier: false,
       })
@@ -208,7 +204,7 @@ Page({
         this_.userData()
       },
     })
-   
+
   },
   //瓶和公斤选项框点击事件
   OptionsBox: function (e) {
@@ -247,13 +243,13 @@ Page({
     let time = "";
     if (array[this.data.index] === "立即出发") {//预约时间判断
       time = 0
-      SubscribeTime=""
+      SubscribeTime = ""
     }
     else if (array[this.data.index] !== "立即出发") {
       time = 10
       let Times = utils.formatTime1(new Date());
       let day = Times.slice(0, 10)
-      SubscribeTime=day +" "+ this.data.array[this.data.index]
+      SubscribeTime = day + " " + this.data.array[this.data.index]
     };
     let PayMethod = this.data.radioItems
     let payment
@@ -263,7 +259,7 @@ Page({
       payment = 100
     }
     let commodityList = this.data.commodityList
-    let array1=[];
+    let array1 = [];
     if (OptionsBox[0].checked === true) {//瓶
       for (let k = 0; k < commodityList.length; k++) {
         if (commodityList[k].Quantity > 0) {
@@ -271,7 +267,7 @@ Page({
             Price: utils.Encryption(commodityList[k].Price),
             Quantity: utils.Encryption(commodityList[k].Quantity),
             ProductId: utils.Encryption(commodityList[k].ProductId),
-            Kilogram:0
+            Kilogram: 0
           }
           array1.push(OrderItems)
           this.setData({
@@ -286,7 +282,7 @@ Page({
             Price: utils.Encryption(commodityList[l].Price),
             Quantity: utils.Encryption(commodityList[l].Quantity),
             ProductId: utils.Encryption(commodityList[l].ProductId),
-            Kilogram:0
+            Kilogram: 0
           }
           array1.push(OrderItems)
           this.setData({
@@ -304,7 +300,7 @@ Page({
         CustomerId: this.data.CustomerId,
         Price: utils.Encryption(this.data.Price),
         Quantity: utils.Encryption(this.data.Quantity),
-        Contact:  utils.Encryption(this.data.CustomerName),
+        Contact: utils.Encryption(this.data.CustomerName),
         Phone: utils.Encryption(this.data.CustomerPhone),
         Address: utils.Encryption(this.data.CustomerAddress),
         Longitude: this.data.CustomerLatitude,
@@ -633,15 +629,15 @@ Page({
     wx.navigateTo({
       url: '/pages/GasInformation/GasInformation',
     })
-    let number=0;
+    let number = 0;
     wx.setStorage({
       key: 'page',
       data: number,
-      success: function(res){
+      success: function (res) {
         // success
       },
     })
-    
+
   },
 
 

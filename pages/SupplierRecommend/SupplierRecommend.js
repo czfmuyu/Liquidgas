@@ -1,6 +1,6 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Enterprises/GetEnterpriseDistance`//获取位置对应距离最近企业信息接口
-const utils = require("../../utils/util.js")// pages/Supplier/Supplier.js
+const utils = require("../../utils/util.js")
 Page({
 
   /**

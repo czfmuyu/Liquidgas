@@ -9,18 +9,18 @@ Page({
   data: {
     // 用气编号
     Obtain: [],
-    index:0,
+    index: 0,
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    let this_=this
+    let this_ = this
     wx.getStorage({
       key: 'index',
       success: function (res) {
         this_.setData({
-          index:res.data
+          index: res.data
         })
       },
     })
@@ -42,6 +42,12 @@ Page({
           // header: {}, // 设置请求的 header
           success: function (res) {
             console.log(res)
+            for (let i = 0; i < res.data.Data.length; i++) {//把子账号信息存储本地
+              if (res.data.Data[i].IsMainAccount == false) {
+                let data=res.data.Data[i]
+                wx.setStorageSync('Subaccount', data)
+              }
+            }
             this_.setData({
               Obtain: res.data.Data
             })
@@ -50,20 +56,20 @@ Page({
         })
       }
     })
-   
+
   },
   index() {
-    let data=this.data.Obtain
-    let index=this.data.index;
+    let data = this.data.Obtain
+    let index = this.data.index;
     console.log(data)
     console.log(index)
     this.setData({
-      data:data[index]
+      data: data[index]
     })
     wx.setStorage({
       key: 'Information',
-      data:data[index],
-      success: function(res){
+      data: data[index],
+      success: function (res) {
         // success
       },
     })
@@ -77,11 +83,11 @@ Page({
     wx.navigateTo({//用气信息页面
       url: "/pages/GasInformation/GasInformation",
     })
-    let number=1;
+    let number = 1;
     wx.setStorage({
       key: 'page',
       data: number,
-      success: function(res){
+      success: function (res) {
         // success
       },
     })

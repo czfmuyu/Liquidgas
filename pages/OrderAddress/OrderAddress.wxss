@@ -25,10 +25,8 @@ page{
 }
 .header_right_top{
     width: 666rpx;
-    height: 84rpx;
     display: flex;
     justify-content: space-between;
-    line-height: 84rpx;
     font-size: 36rpx;
     padding: 0 12rpx;
 }
