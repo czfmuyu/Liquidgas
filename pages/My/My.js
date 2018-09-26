@@ -41,17 +41,17 @@ Page({
           method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           // header: {}, // 设置请求的 header
           success: function (res) {
-            for (let i = 0; i < res.data.Data.length; i++) {//把子账号信息存储本地
-              if (res.data.Data[i].IsMainAccount == false) {
-                let data=res.data.Data[i]
-                wx.setStorageSync('Subaccount', data)
+              for (let i = 0; i < res.data.Data.length; i++) {//把子账号信息存储本地
+                if (res.data.Data[i].IsMainAccount == false) {
+                  let data = res.data.Data[i]
+                  wx.setStorageSync('Subaccount', data)
+                }
               }
-            }
-            this_.setData({
-              Obtain: res.data.Data
-            })
-            this_.index()
-          },
+              this_.setData({
+                Obtain: res.data.Data
+              })
+              this_.index()
+          }
         })
       }
     })
@@ -63,7 +63,7 @@ Page({
     wx.setStorageSync('wholeGas', data)
     this.setData({
       data: data[index],
-      Gas:data[index].GasNo
+      Gas: data[index].GasNo
     })
     wx.setStorage({
       key: 'Information',

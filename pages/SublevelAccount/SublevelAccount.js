@@ -5,62 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Gas:"",
+    Information:"",
   },/**
   * 生命周期函数--监听页面加载
   */
  onLoad: function (options) {
-   let data=wx.getStorageSync('Subaccount')
-   console.log(data)
-   wx.setStorageSync('Information', data)
+  let data=wx.getStorageSync('Information')
   this.setData({
-    Gas:data.GasNo,
+    Information:data
   })
  },
-  
-  SonGasInformation(){
-    wx.navigateTo({//用气信息页面
-      url: "/pages/GasInformation/GasInformation",
-    })
-  },
-  SonPersonalData(){
-    wx.navigateTo({//个人信息页面
-      url: "/pages/PersonalData/PersonalData"
-    }) 
-  },
-  SonSupplier(){
-    wx.navigateTo({//供应商信息页面
-      url: "/pages/Supplier/Supplier"
-    }) 
-  },
-  SonBindingNumber(){
-    wx.navigateTo({//绑定用气编号页面
-      url: "/pages/BindingNumber/BindingNumber"
-    }) 
-  },
-  SonAccountSecurity(){
-    wx.navigateTo({//账号安全页面
-      url: "/pages/AccountSecurity/AccountSecurity"
-    }) 
-  },
-  SonCancellation(){
-    wx.navigateTo({//授权登录页面
-      url: "/pages/Authorized/Authorized"
-    }) 
-  },
-  /**
-   * 弹出框蒙层截断touchmove事件
-   */
-  preventTouchMove: function () {
-  },
-  /**
-   * 隐藏模态对话框
-   */
-  hideModal: function () {
-    this.setData({
-      showModal: false
-    });
-  },
   /**
    * 对话框取消按钮点击事件
    */
