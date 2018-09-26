@@ -53,9 +53,9 @@ Page({
   onLoad(options) {
     this.CustomerId()
     this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
+    // this.DeliveryList()
+    // this.CompleteList()
+    // this.EvaluateList()
 
   },
   CustomerId() {
@@ -68,7 +68,6 @@ Page({
   EvaluateList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -88,7 +87,6 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res)
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
@@ -103,7 +101,6 @@ Page({
   CompleteList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -137,7 +134,6 @@ Page({
   DeliveryList() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -158,7 +154,6 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         let data = res.data.Data
-        console.log(data)
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
         }
@@ -172,7 +167,6 @@ Page({
   wholeInfo() {
     let this_ = this
     let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -192,7 +186,6 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-
         let data = res.data.Data
         for (let i = 0; i < data[i].length; i++) {
           utils.Decrypt(data[i].CustomerName)
@@ -256,8 +249,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    let CustomerId = this.data.CustomerId
-    console.log(CustomerId)
     let count = this.data.callbackcount * Num
     this.setData({
       searchPageNum: this.data.searchPageNum,
