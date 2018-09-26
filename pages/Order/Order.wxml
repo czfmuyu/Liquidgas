@@ -38,7 +38,7 @@
             </view>
             <view>
                 <view class="btn-list" wx:if="{{item.Status>= 0 && item.Status< 30}}">
-                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="onCancel">
+                    <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="phoneList">
                         取消订单
                     </view>
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
@@ -156,4 +156,19 @@
             </view>
         </view>
     </scroll-view>
+</view>
+
+
+<!-- 取消意见 -->
+<view class="modal-mask" bindtap="HideModal" catchtouchmove="preventTouchMove" wx:if="{{ShowModal}}"></view>
+<view class="modal-dialog" wx:if="{{ShowModal}}">
+   <view>
+   <view class='qux'>请输入取消原因</view>
+   <textarea class='textfont' data-type='text' placeholder='请填写取消原因' bindinput='getdata'>
+   </textarea>
+   </view>
+   <view class='butt'>
+   <view class='butttext textcolor'bindtap="onCancel" >取消</view>
+   <view class='butttext textcolor1' bindtap='onConfirm'>提交</view>
+   </view>
 </view>

@@ -375,19 +375,19 @@ repair:function(){
     wx.getStorage({
       key: 'Information',
       success: function (res) {
-        let name = res.data[0].AccountName
+        let name = res.data.AccountName
         
-        let phone = res.data[0].AccountPhone
-        let address = res.data[0].CustomerAddress
+        let phone = res.data.AccountPhone
+        let address = res.data.CustomerAddress
         // 企业编号
-        let EnterpriseId = res.data[0].EnterpriseId
+        let EnterpriseId = res.data.EnterpriseId
         // 用户编码
-        let CustomerId = res.data[0].CustomerId
+        let CustomerId = res.data.CustomerId
         // 经纬度
-        let Longitude = res.data[0].CustomerLongitude
-        let Latitude = res.data[0].CustomerLatitude
+        let Longitude = res.data.CustomerLongitude
+        let Latitude = res.data.CustomerLatitude
         // 用户唯一编码
-        let AccountId = res.data[0].AccountId
+        let AccountId = res.data.AccountId
      
         // name1:util.Decrypt(name)
         // phone1: util.Decrypt(phone)

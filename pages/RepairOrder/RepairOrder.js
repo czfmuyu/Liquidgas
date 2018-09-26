@@ -3,19 +3,27 @@ var util = require('../../utils/util.js');
 const baseUrl = app.globalData.baseUrl
 // 获取维修订单
 const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairOrders`
+// 取消订单接口
+const cancel = `${baseUrl}/Api/RepairOrders/RepairOrderCancel`
+			// 确认订单
+const Confirm = `${baseUrl}/Api/RepairOrders/RepairOrderConfirm`
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    ShowModal: false,//弹框按钮操控
+    ShowModal: false, //弹框按钮操控
     navbar: ['全部订单', '待维修', '维修完成', '已取消'],
     currentTab: 0,
     text2: "#2269d4",
     text3: "确认完成",
-
-
+    // 取消原因
+    getdata: "",
+    // 取消订单id
+    ID: "",
+    // 唯一订单编号
+    Serialnumber:"",
     // 携带参数
     parameter: {
       // 页码
@@ -27,7 +35,9 @@ Page({
       // 状态列表
       status: "-1",
       // id
-      customerId: ""
+      customerId: "",
+     
+      
     },
     // 全部列表
     whole: [],
@@ -48,7 +58,7 @@ Page({
       duration: 2000
     })
   },
-  
+
 
   //全部页面详情
   queryBtn(e) {
@@ -156,8 +166,8 @@ Page({
       },
     })
   },
-// 调用配送中定单
-  UntreatedList: function () {
+  // 调用配送中定单
+  UntreatedList: function() {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -178,7 +188,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         let orderData = res.data.Data
         _this.setData({
           UntreatedList: orderData
@@ -187,7 +197,7 @@ Page({
     })
   },
   // 维修完成订单
-  ProcessedList: function () {
+  ProcessedList: function() {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -208,7 +218,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         let orderData = res.data.Data
         _this.setData({
           ProcessedList: orderData
@@ -217,7 +227,7 @@ Page({
     })
   },
   // 取消订单
-  EvaluateList: function () {
+  EvaluateList: function() {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -238,9 +248,8 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function (res) {
+      success: function(res) {
         let orderData = res.data.Data
-        console.log(orderData)
         _this.setData({
           EvaluateList: orderData
         })
@@ -249,11 +258,12 @@ Page({
   },
   // 获取本地id
   getID: function() {
-    let _this=this
+    let _this = this
     wx.getStorage({
       key: 'Information',
       success: function(res) {
         let id = res.data.CustomerId
+        console.log(id+"ddsddfd")
         _this.setData({
           "parameter.CustomerId": id
         })
@@ -261,20 +271,84 @@ Page({
       },
     })
   },
-  /**
-       * 联系电话弹窗
-       */
-  phoneList() {
-
-    this.setData({
-      ShowModal: true
+  // 获取取消原因
+  getdata: function(e) {
+    let _this = this
+    let getdatas = e.detail.value
+    _this.setData({
+      getdata: getdatas
     })
   },
+  /**
+   * 对话框确认按钮点击事件
+   */
+  onConfirm: function(e) {
+    let _this = this
+    // 订单
+    console.log(e)
+    let tomerId = _this.data.Serialnumber
+    // 用户
+    let orderId=_this.data.ID
+// 取消订单说明orderId
+    let Explain = _this.data.getdata
+    if (Explain!==""){
+      wx.request({
+        url: cancel,
+        data: {
+          Sign: "",
+          OrderId: orderId,
+          CustomerId: tomerId,
+          Explain: Explain
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+        success: function (res) {
+          console.log(res.data.Data)
+          if (res.data.Data){
+            wx.showToast({
+              title: "提交成功",
+              duration: 1000
+            });
+          }else{
+            wx.showToast({
+              title: "请从新提交",
+              duration: 1000
+            });
+            return false
+          }
+          
+        },
+      })
+    }else{
+      wx.showToast({
+        title: "请填写取消原因",
+        duration: 1000
+      });
+    }
+    // 隐藏弹框
+    this.HideModal()
+  },
+  /**
+   * 显示输入狂取消按键
+   */
+  phoneList(e) {
+    let _this = this
+    let id = e.target.dataset.orderid
+    let orderID = e.target.dataset.serial
+    _this.setData({
+      ShowModal: true,
+      ID: id,
+      Serialnumber: orderID
+    })
+  },
+
 
   /**
    * 隐藏模态对话框
    */
-  HideModal: function () {
+  HideModal: function() {
     this.setData({
       ShowModal: false
     });
@@ -282,14 +356,35 @@ Page({
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: function() {
     this.HideModal();
   },
-  /**
-   * 对话框确认按钮点击事件
-   */
-  onConfirm: function () {
-    this.HideModal();
+
+
+// 确认订单
+  Confirm:function(e){
+    let Orderid = e.currentTarget.dataset.order
+    let Customerid = e.currentTarget.dataset.orderid
+    wx.request({
+      url: Confirm,
+      data: {
+        Sign: "",
+        OrderId: Orderid,
+        CustomerId: Customerid,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        // let orderData = res.data.Data
+        // _this.setData({
+        //   ProcessedList: orderData
+        // })
+
+      },
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -359,7 +454,7 @@ Page({
       icon: 'loading',
       duration: 1000
     });
-    
+
   },
 
   /**
