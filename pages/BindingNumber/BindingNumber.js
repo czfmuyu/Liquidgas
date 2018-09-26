@@ -7,7 +7,7 @@ Page({
   data: {
     GasShowModal: false, //弹框按钮操控
     numberlist:[],
-    numbers: ""
+    numbers: "",
   },
   /**
    * 名字弹窗
@@ -64,11 +64,18 @@ Page({
   // 获取本地储存用气编号
   gasuse: function() {
     wx.getStorage({
-      key: "Information",
+      key: "wholeGas",
       success: res => {
-        let gasuse = res.data.GasNo
+        console.log(res.data)
         let gasuses = []
-        gasuses.push(gasuse)
+        if(res.data.length>0){
+          for(let i=0;i<res.data.length;i++){
+            gasuses.push(res.data[i].GasNo)
+          }
+        }else{
+          gasuse = res.data.GasNo
+          gasuses.push(gasuse)
+        }
         this.setData({
           "numberlist": gasuses
         })

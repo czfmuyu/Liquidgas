@@ -62,7 +62,8 @@ Page({
     let index = this.data.index;
     wx.setStorageSync('wholeGas', data)
     this.setData({
-      data: data[index]
+      data: data[index],
+      Gas:data[index].GasNo
     })
     wx.setStorage({
       key: 'Information',
