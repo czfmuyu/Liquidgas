@@ -1,6 +1,7 @@
-const { baseUrl, Orderaddress,CustomerList } = getApp().globalData
+let { baseUrl, Orderaddress,CustomerList } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Enterprises/GetEnterpriseDistance`//获取位置对应距离最近企业信息接口
 const utils = require("../../utils/util.js")
+let app=getApp().globalData
 Page({
 
   /**
@@ -44,8 +45,9 @@ Page({
   /**
    * 对话框确认按钮点击事件
    */
-  onConfirm () {
-    wx.setStorageSync('Suppliers', this.data.Suppliers[this.data.index])
+  onConfirm: function () {
+    console.log(this.data.Suppliers[this.data.index])
+    app.CustomerList=this.data.Suppliers[this.data.index]
     this.hideModal();
     wx.navigateTo({
       url: '/pages/OrderAddress/OrderAddress',

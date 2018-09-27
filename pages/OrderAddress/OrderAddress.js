@@ -1,5 +1,6 @@
-let { baseUrl, Orderaddress, CustomerList, CustomerId } = getApp().globalData
-const baseUrls = `${baseUrl}/Api/GasOrders/NewGasOrder`//一键订气上传接口
+let { Orderaddress} = getApp().globalData
+var app = getApp().globalData
+const baseUrls = app.baseUrl+'/Api/GasOrders/NewGasOrder'//一键订气上传接口
 const utils = require("../../utils/util.js")
 Page({
 
@@ -106,9 +107,8 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad() {
-    console.log(CustomerId.AccountId)
     this.setData({//新用户没有值获取填该账户的ID
-      AccountId:CustomerId.AccountId
+      AccountId:app.CustomerId.AccountId
     })
     this.setData({//新用户没有值获取填写好的值
       CustomerAddress: Orderaddress.Address,
@@ -122,18 +122,17 @@ Page({
 
   },
   Supplier() {
-    let CustomerList = wx.getStorageSync('Suppliers')
-    console.log(CustomerList)
+    console.log(app.CustomerList)
     let arr = []
     let OptionsBox = this.data.OptionsBox
     if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
       console.log("i")
-      for (let i = 0; i < CustomerList.EnterpriseProducts.length; i++) {
+      for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
         let obj = {
           Quantity: 0,
-          Price: CustomerList.EnterpriseProducts[i].UnitPrice,
-          ProductName: CustomerList.EnterpriseProducts[i].ProductName,
-          ProductId: CustomerList.EnterpriseProducts[i].ProductId
+          Price: app.CustomerList.EnterpriseProducts[i].UnitPrice,
+          ProductName: app.CustomerList.EnterpriseProducts[i].ProductName,
+          ProductId: app.CustomerList.EnterpriseProducts[i].ProductId
         }
         arr.push(obj)
       }
@@ -143,12 +142,12 @@ Page({
       })
     } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
       console.log("in")
-      for (let j = 0; j < CustomerList.EnterpriseProducts.length; j++) {
+      for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
         let obj = {
           Quantity: 0,
-          Price: CustomerList.EnterpriseProducts[j].KilogramPrice,
-          ProductName: CustomerList.EnterpriseProducts[j].ProductName,
-          ProductId: CustomerList.EnterpriseProducts[j].ProductId
+          Price: app.CustomerList.EnterpriseProducts[j].KilogramPrice,
+          ProductName: app.CustomerList.EnterpriseProducts[j].ProductName,
+          ProductId: app.CustomerList.EnterpriseProducts[j].ProductId
         }
         arr.push(obj)
       }
@@ -158,12 +157,12 @@ Page({
       })
     }
     this.setData({
-      EnterpriseName: CustomerList.Name,
-      EnterprisePhone: CustomerList.Phone,
-      EnterpriseAddress: CustomerList.Address,
-      EnterpriseProducts: CustomerList.EnterpriseProducts,
-      EnterpriseId: CustomerList.ID,
-      ProductId: CustomerList.ProductId
+      EnterpriseName: app.CustomerList.Name,
+      EnterprisePhone: app.CustomerList.Phone,
+      EnterpriseAddress: app.CustomerList.Address,
+      EnterpriseProducts: app.CustomerList.EnterpriseProducts,
+      EnterpriseId: app.CustomerList.ID,
+      ProductId: app.CustomerList.ProductId
     })
     this.userData()
   },
@@ -366,9 +365,9 @@ Page({
         console.log(res)
       },
     })
-    // wx.switchTab({
-    //   url: "/pages/Order/Order",
-    // })
+    wx.switchTab({
+      url: "/pages/Order/Order",
+    })
   },
 
   /**

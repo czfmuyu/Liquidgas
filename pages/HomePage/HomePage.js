@@ -1,5 +1,6 @@
-let { baseUrl, CustomerId, Customer } = getApp().globalData
+let { baseUrl} = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
+let app=getApp().globalData
 // pages/HomePage.js
 Page({
 
@@ -79,7 +80,7 @@ Page({
       url: baseUrls,
       data: {
         Sign: "",
-        AccountId: CustomerId.AccountId,
+        AccountId: app.CustomerId.AccountId,
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header

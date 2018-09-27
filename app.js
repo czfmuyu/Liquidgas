@@ -18,7 +18,7 @@ App({
     baseUrl: "http://192.168.0.66:2599",
     CustomerId:"",
     Customer:"",
-    CustomerList:1,
+    CustomerList:null,
     Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude:""},
   }
 })

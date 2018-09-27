@@ -38,7 +38,7 @@ Page({
   },
 
   //输入框事件，每输入一个字符，就会触发一次
-  bindKeywordInput: function(e) {
+  bindKeywordInput: function (e) {
     this.setData({
       searchKeyword: e.detail.value
     })
@@ -98,10 +98,16 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res) {
+      success: function (res) {
         let data = res.data.Data
-        for (let i = 0; i < data[i].length; i++) {
-          utils.Decrypt(data[i].CustomerName)
+        console.log(data)
+        console.log(data[0].CustomerName)
+        if (data.lengty > 0) {
+          for (let i = 0; i < data[i].length; i++) {
+            utils.Decrypt(data[i].CustomerName)
+          }
+        } else if (data.lengty == 0) {
+          utils.Decrypt(data[0].CustomerName)
         }
         this_.setData({
           EvaluateList: data
@@ -131,10 +137,14 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res) {
+      success: function (res) {
         let data = res.data.Data
-        for (let i = 0; i < data[i].length; i++) {
-          utils.Decrypt(data[i].CustomerName)
+        if (data.lengty > 0) {
+          for (let i = 0; i < data[i].length; i++) {
+            utils.Decrypt(data[i].CustomerName)
+          }
+        } else if (data.lengty == 0) {
+          utils.Decrypt(data[0].CustomerName)
         }
         this_.setData({
           CompleteList: data
@@ -164,10 +174,14 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res) {
+      success: function (res) {
         let data = res.data.Data
-        for (let i = 0; i < data[i].length; i++) {
-          utils.Decrypt(data[i].CustomerName)
+        if (data.lengty > 0) {
+          for (let i = 0; i < data[i].length; i++) {
+            utils.Decrypt(data[i].CustomerName)
+          }
+        } else if (data.lengty == 0) {
+          utils.Decrypt(data[0].CustomerName)
         }
         this_.setData({
           DeliveryList: data
@@ -198,11 +212,15 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res) {
+      success: function (res) {
 
         let data = res.data.Data
-        for (let i = 0; i < data[i].length; i++) {
-          utils.Decrypt(data[i].CustomerName)
+        if (data.lengty > 0) {
+          for (let i = 0; i < data[i].length; i++) {
+            utils.Decrypt(data[i].CustomerName)
+          }
+        } else if (data.lengty == 0) {
+          utils.Decrypt(data[0].CustomerName)
         }
         this_.setData({
           wholeList: data
@@ -234,13 +252,13 @@ Page({
     })
   },
   //导航控制
-  navbarTap: function(e) {
+  navbarTap: function (e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
   },
   // 评价跳转页面
-  Evaluate: function() {
+  Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
@@ -283,12 +301,11 @@ Page({
   },
 
   // 获取取消原因
-  getdata: function(e) {
+  getdata: function (e) {
     let _this = this
     let getdatas = e.detail.value
     _this.setData({
       getdata: getdatas
-      
     })
   },
   /**
@@ -307,7 +324,7 @@ Page({
   /**
    * 对话框确认按钮点击事件
    */
-  onConfirm: function(e) {
+  onConfirm: function (e) {
     let _this = this
     // 订单
     let tomerId = _this.data.Serialnumber
@@ -329,7 +346,7 @@ Page({
           'content-type': 'application/json'
         },
         method: 'POST',
-        success: function(res) {
+        success: function (res) {
           wx.showToast({
             title: "取消成功！",
             duration: 2000
@@ -350,7 +367,7 @@ Page({
   /**
    * 隐藏模态对话框
    */
-  HideModal: function() {
+  HideModal: function () {
     this.setData({
       ShowModal: false
     });
@@ -358,11 +375,11 @@ Page({
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function() {
+  onCancel: function () {
     this.HideModal();
   },
   // 确认订单
-  Confirm: function(e) {
+  Confirm: function (e) {
     let Orderid = e.currentTarget.dataset.orderid
     let Customerid = e.currentTarget.dataset.serial
     wx.request({
@@ -376,7 +393,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'POST',
-      success: function(res) {
+      success: function (res) {
         wx.showToast({
           title: "取消成功！欢迎下次光临",
           duration: 2000
@@ -390,28 +407,36 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function () { 
+  },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function () { 
+    this.DeliveryList()
+    this.wholeInfo()
+    this.CompleteList()
+    this.EvaluateList()
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function () { 
+    
+  },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
