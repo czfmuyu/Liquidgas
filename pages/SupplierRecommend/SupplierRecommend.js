@@ -1,4 +1,4 @@
-const { baseUrl } = getApp().globalData
+const { baseUrl, Orderaddress,CustomerList } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Enterprises/GetEnterpriseDistance`//获取位置对应距离最近企业信息接口
 const utils = require("../../utils/util.js")
 Page({
@@ -9,79 +9,77 @@ Page({
   data: {
     showModal: false,//弹框按钮操控
     Suppliers: [],
-    TotalCount:5 ,//返回数据条数
-    index:"",
+    TotalCount: 5,//返回数据条数
+    index: "",
   },
-   /**
-     * 弹窗
-     */
-    SupplierDialogBtn (e) {
-      console.log(e.currentTarget.dataset.index)
-      this.setData({
-        showModal: true,
-        index:e.currentTarget.dataset.index
-      })
-    },
-    /**
-     * 弹出框蒙层截断touchmove事件
-     */
-    preventTouchMove: function () {
-    },
-    /**
-     * 隐藏模态对话框
-     */
-    hideModal: function () {
-      this.setData({
-        showModal: false
-      });
-    },
-    /**
-     * 对话框取消按钮点击事件
-     */
-    onCancel: function () {
-      this.hideModal();
-    },
-    /**
-     * 对话框确认按钮点击事件
-     */
-    onConfirm: function () {
-      console.log(this.data.Suppliers[this.data.index])
-      wx.setStorageSync('Supplier', this.data.Suppliers[this.data.index])
-      this.hideModal();
-      wx.navigateTo({
-        url: '/pages/OrderAddress/OrderAddress',
-      })
-    },
+  /**
+    * 弹窗
+    */
+  SupplierDialogBtn(e) {
+    console.log(e.currentTarget.dataset.index)
+    this.setData({
+      showModal: true,
+      index: e.currentTarget.dataset.index
+    })
+  },
+  /**
+   * 弹出框蒙层截断touchmove事件
+   */
+  preventTouchMove: function () {
+  },
+  /**
+   * 隐藏模态对话框
+   */
+  hideModal: function () {
+    this.setData({
+      showModal: false
+    });
+  },
+  /**
+   * 对话框取消按钮点击事件
+   */
+  onCancel: function () {
+    this.hideModal();
+  },
+  /**
+   * 对话框确认按钮点击事件
+   */
+  onConfirm () {
+    wx.setStorageSync('Suppliers', this.data.Suppliers[this.data.index])
+    this.hideModal();
+    wx.navigateTo({
+      url: '/pages/OrderAddress/OrderAddress',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getSupplierInfo()
   },
-  getSupplierInfo(){
-    let this_=this
-    let data=wx.getStorageSync('address')
-    let TotalCount=this.data.TotalCount
-    console.log(data)
+  getSupplierInfo() {
+    let this_ = this;
+    let {Longitude,Latitude } = Orderaddress;
+    let TotalCount = this.data.TotalCount;
     wx.request({
       url: baseUrls,
       data: {
-        Sign:"",
-        TotalCount:TotalCount,
-        MyLatitude:data.latitudes,
-        MyLongitude:data.longitudes,
+        Sign: "",
+        TotalCount: TotalCount,
+        MyLatitude: Latitude,
+        MyLongitude: Longitude,
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res){
+      success: function (res) {
         console.log(res.data.Data)
-        let data=res.data.Data
-        for(let i=0;i<data.length;i++){
-          let Distance=Math.round(data[i].Distance)
-          data[i].Distance=Distance
+        let data = res.data.Data
+        for (let i = 0; i < data.length; i++) {
+          let Distance = Math.round(data[i].Distance)
+          data[i].Distance = Distance
         }
         this_.setData({
-          Suppliers:data
+          Suppliers: data
         })
       }
     })

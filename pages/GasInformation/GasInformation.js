@@ -64,6 +64,7 @@ Page({
   submission() {
 
     console.log(Orderaddress)
+    let indexs=this.data.index
     if (indexs == 0) {
       wx.navigateTo({
         url: '/pages/OrderAddress/OrderAddress',

@@ -1,4 +1,4 @@
-const { baseUrl } = getApp().globalData
+let { baseUrl, Orderaddress, CustomerList, CustomerId } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/GasOrders/NewGasOrder`//一键订气上传接口
 const utils = require("../../utils/util.js")
 Page({
@@ -106,71 +106,66 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad() {
-    let AccountId=wx.getStorageSync('AccountId')
-    this.setData({
-      AccountId:AccountId.long.AccountId
+    console.log(CustomerId.AccountId)
+    this.setData({//新用户没有值获取填该账户的ID
+      AccountId:CustomerId.AccountId
     })
-    let data = wx.getStorageSync('address')
-    this.setData({
-      CustomerAddress: data.address,
-      CustomerLatitude: data.latitudes,
-      CustomerLongitude: data.longitude,
-      CustomerName: data.name,
-      CustomerPhone: data.phone,
+    this.setData({//新用户没有值获取填写好的值
+      CustomerAddress: Orderaddress.Address,
+      CustomerLatitude: Orderaddress.Latitude,
+      CustomerLongitude: Orderaddress.Longitude,
+      CustomerName: Orderaddress.Contact,
+      CustomerPhone: Orderaddress.Phone,
     })
     this.getData()
     this.userData()
-    this.Supplier()
+
   },
   Supplier() {
-    let this_ = this
-    wx.getStorage({
-      key: 'Supplier',
-      success: function (res) {
-        let arr = []
-        let OptionsBox = this_.data.OptionsBox
-        if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-          console.log("i")
-          for (let i = 0; i < res.data.EnterpriseProducts.length; i++) {
-            let obj = {
-              Quantity: 0,
-              Price: res.data.EnterpriseProducts[i].UnitPrice,
-              ProductName: res.data.EnterpriseProducts[i].ProductName,
-              ProductId: res.data.EnterpriseProducts[i].ProductId
-            }
-            arr.push(obj)
-          }
-          console.log(arr)
-          this_.setData({
-            commodityList: arr
-          })
-        } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-          console.log("in")
-          for (let j = 0; j < res.data.EnterpriseProducts.length; j++) {
-            let obj = {
-              Quantity: 0,
-              Price: res.data.EnterpriseProducts[j].KilogramPrice,
-              ProductName: res.data.EnterpriseProducts[j].ProductName,
-              ProductId: res.data.EnterpriseProducts[j].ProductId
-            }
-            arr.push(obj)
-          }
-          console.log(arr)
-          this_.setData({
-            commodityList: arr
-          })
+    let CustomerList = wx.getStorageSync('Suppliers')
+    console.log(CustomerList)
+    let arr = []
+    let OptionsBox = this.data.OptionsBox
+    if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
+      console.log("i")
+      for (let i = 0; i < CustomerList.EnterpriseProducts.length; i++) {
+        let obj = {
+          Quantity: 0,
+          Price: CustomerList.EnterpriseProducts[i].UnitPrice,
+          ProductName: CustomerList.EnterpriseProducts[i].ProductName,
+          ProductId: CustomerList.EnterpriseProducts[i].ProductId
         }
-        this_.setData({
-          EnterpriseName: res.data.Name,
-          EnterprisePhone: res.data.Phone,
-          EnterpriseAddress: res.data.Address,
-          EnterpriseProducts: res.data.EnterpriseProducts,
-          EnterpriseId:res.data.ID,
-          ProductId:res.data.ProductId
-        })
-        this_.userData()
+        arr.push(obj)
       }
+      console.log(arr)
+      this.setData({
+        commodityList: arr
+      })
+    } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
+      console.log("in")
+      for (let j = 0; j < CustomerList.EnterpriseProducts.length; j++) {
+        let obj = {
+          Quantity: 0,
+          Price: CustomerList.EnterpriseProducts[j].KilogramPrice,
+          ProductName: CustomerList.EnterpriseProducts[j].ProductName,
+          ProductId: CustomerList.EnterpriseProducts[j].ProductId
+        }
+        arr.push(obj)
+      }
+      console.log(arr)
+      this.setData({
+        commodityList: arr
+      })
+    }
+    this.setData({
+      EnterpriseName: CustomerList.Name,
+      EnterprisePhone: CustomerList.Phone,
+      EnterpriseAddress: CustomerList.Address,
+      EnterpriseProducts: CustomerList.EnterpriseProducts,
+      EnterpriseId: CustomerList.ID,
+      ProductId: CustomerList.ProductId
     })
+    this.userData()
   },
   //用户数据判断
   userData() {
@@ -371,9 +366,9 @@ Page({
         console.log(res)
       },
     })
-    wx.switchTab({
-      url: "/pages/Order/Order",
-    })
+    // wx.switchTab({
+    //   url: "/pages/Order/Order",
+    // })
   },
 
   /**
@@ -702,7 +697,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.Supplier()
   },
 
   /**
