@@ -105,22 +105,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let _this = this
-    // 获取本地缓存
-    wx.getStorage({
-      key: 'AccountId',
-      success: function(res) {
-    // 判断是否记住密码
-        if (res.data.k==10) {
-          _this.loginload()
-        } else {
-          wx.showToast({
-            title: "请先登录",
-            duration: 2000
-          })
-        }
-      },
-    })
+    // let _this = this
+    // // 获取本地缓存
+    // wx.getStorage({
+    //   key: 'AccountId',
+    //   success: function(res) {
+    // // 判断是否记住密码
+    //     if (res.data.k==10) {
+    //       _this.loginload()
+    //     } else {
+    //       wx.showToast({
+    //         title: "请先登录",
+    //         duration: 2000
+    //       })
+    //     }
+    //   },
+    // })
   },
 
   /**
