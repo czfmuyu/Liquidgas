@@ -1,18 +1,16 @@
-const {
-  baseUrl
+let {
+  baseUrl,
+  CustomerId
 } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Login/AccountLogin` //登录接口
 const utils = require("../../utils/util.js")
-var app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    Tick: "",
-    // 记住密码的值是10
-    k:"",
     Phone: "",
     Password: ""
   },
@@ -28,9 +26,8 @@ Page({
   },
   //登录点击事件
   onLogin() {
-    let _this=this
-    let Phone = _this.data.Phone
-    let Password = _this.data.Password
+    let Phone = this.data.Phone
+    let Password = this.data.Password
     wx.request({
       url: baseUrls,
       data: {
@@ -42,46 +39,14 @@ Page({
         'content-type': 'application/json'
       },
       method: 'post',
-      success: function(res) {
-        console.log(res.data.Data)
-        let k = _this.data.k
-        if (res.data.Code == 200) {
-          
-          wx.setStorage({
-            key: 'AccountId',
-            data: {
-              long: utils.Decrypt(res.data.Data),
-              k:k,
-            },
-            success: () => {
-              wx.switchTab({
-                url: '/pages/HomePage/HomePage'
-              })
-            }
-          });
-        } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 2000
-          });
-        }
+      success:res=> {
+        CustomerId=res.data.Data
+        console.log(CustomerId)
       },
     })
-  },
-  //点击记住密码打钩事件
-  Tick() {
-    let T = this.data.Tick
-    if (T === "√") {
-      this.setData({
-        Tick: ""
-      })
-    } else {
-      this.setData({
-        Tick: "√",
-        k:10
-      })
-    }
+    wx.switchTab({
+      url: '/pages/HomePage/HomePage'
+    })
   },
   //找回密码点击事件
   RetrievePassword() {
@@ -95,32 +60,11 @@ Page({
       url: "/pages/Register/Register"
     })
   },
-  // 用户登录过直接登录
-  loginload: function() {
-    wx.switchTab({
-      url: '/pages/HomePage/HomePage'
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // let _this = this
-    // // 获取本地缓存
-    // wx.getStorage({
-    //   key: 'AccountId',
-    //   success: function(res) {
-    // // 判断是否记住密码
-    //     if (res.data.k==10) {
-    //       _this.loginload()
-    //     } else {
-    //       wx.showToast({
-    //         title: "请先登录",
-    //         duration: 2000
-    //       })
-    //     }
-    //   },
-    // })
+   
   },
 
   /**

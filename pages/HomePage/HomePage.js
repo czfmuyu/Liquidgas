@@ -1,4 +1,4 @@
-const { baseUrl } = getApp().globalData
+let { baseUrl, CustomerId, Customer } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
 // pages/HomePage.js
 Page({
@@ -75,53 +75,46 @@ Page({
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
     let this_ = this
+    wx.request({//获取个人信息请求
+      url: baseUrls,
+      data: {
+        Sign: "",
+        AccountId: CustomerId.AccountId,
+      },
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log(res)
+        let data = res.data.Data
+        let arr = [];
+        if (res.data.Data == null) {
+          return
+        } else {
+          for (let i = 0; i < res.data.Data.length; i++) {
+            arr.push(res.data.Data[i].GasNo)
+          }
+          this_.setData({
+            GasNo: arr
+          })
+        }
+        this_.Tips()
+        if (res.data.Data.length > 0 && res.data.Data.length < 2) {
+          wx.setStorage({//个人信息存本地
+            key: 'Information',
+            data: data[0],
+            success: function (res) {
+            },
+          })
+        } else {
+          wx.setStorage({//个人信息存本地
+            key: 'Information',
+            data: data,
+            success: function (res) {
+            },
+          })
+        }
 
-    wx.getStorage({
-      key: 'AccountId',
-      success: res => {
-        console.log(res.data.long.AccountId)
-        wx.request({//获取个人信息请求
-          url: baseUrls,
-          data: {
-            Sign: "",
-            AccountId: res.data.long.AccountId,
-          },
-          method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-          // header: {}, // 设置请求的 header
-          success: function (res) {
-            console.log(res)
-            let data = res.data.Data
-            let arr = [];
-            if (res.data.Data == null) {
-              return
-            } else {
-              for (let i = 0; i < res.data.Data.length; i++) {
-                arr.push(res.data.Data[i].GasNo)
-              }
-              this_.setData({
-                GasNo: arr
-              })
-            }
-            this_.Tips()
-            if (res.data.Data.length > 0 && res.data.Data.length < 2) {
-              wx.setStorage({//个人信息存本地
-                key: 'Information',
-                data: data[0],
-                success: function (res) {
-                },
-              })
-            } else {
-              wx.setStorage({//个人信息存本地
-                key: 'Information',
-                data: data,
-                success: function (res) {
-                },
-              })
-            }
-
-          },
-        })
-      }
+      },
     })
   },
   Tips() {
@@ -130,11 +123,11 @@ Page({
       this.setData({
         showModalTwo: true
       })
-    }else{
+    } else {
       this.setData({
         showModal: true
       })
-    } 
+    }
   },
   /**
    * 弹出框蒙层截断touchmove事件

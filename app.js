@@ -16,7 +16,9 @@ App({
   },
   globalData: {
     baseUrl: "http://192.168.0.66:2599",
+    CustomerId:"",
     Customer:"",
     CustomerList:"",
+    Orderaddress:"",
   }
 })
