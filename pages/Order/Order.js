@@ -347,6 +347,9 @@ Page({
         },
         method: 'POST',
         success: function (res) {
+          _this.DeliveryList()
+          _this.wholeInfo()
+          _this.EvaluateList()
           wx.showToast({
             title: "取消成功！",
             duration: 2000
@@ -361,7 +364,7 @@ Page({
       return false
     }
     // 隐藏弹框
-    this.HideModal()
+    _this.HideModal()
   },
 
   /**
@@ -378,8 +381,9 @@ Page({
   onCancel: function () {
     this.HideModal();
   },
-  // 确认订单
+  // 确认收货
   Confirm: function (e) {
+    let this_=this
     let Orderid = e.currentTarget.dataset.orderid
     let Customerid = e.currentTarget.dataset.serial
     wx.request({
@@ -394,8 +398,11 @@ Page({
       },
       method: 'POST',
       success: function (res) {
+        this_.DeliveryList()
+        this_.wholeInfo()
+        this_.CompleteList()
         wx.showToast({
-          title: "取消成功！欢迎下次光临",
+          title: "确认成功",
           duration: 2000
         });
 
@@ -407,13 +414,13 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () { 
+  onReady: function () {
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () { 
+  onShow: function () {
     this.DeliveryList()
     this.wholeInfo()
     this.CompleteList()
@@ -423,8 +430,8 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () { 
-    
+  onHide: function () {
+
   },
 
   /**

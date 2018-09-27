@@ -1,6 +1,6 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
-let app = getApp()
+let app = getApp().globalData
 Page({
 
   /**
@@ -8,71 +8,15 @@ Page({
    */
   data: {
     // 用气编号
-    Obtain: [],
     index: 0,
-    Gas:""
+    Gas: ""
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    let this_ = this
-    wx.getStorage({
-      key: 'index',
-      success: function (res) {
-        this_.setData({
-          index: res.data
-        })
-      },
-    })
-    this_.ObtainStorage()
-  },
-  //获取AccountId本地储存并获取个人数据
-  ObtainStorage() {
-    let this_ = this
-    wx.getStorage({
-      key: 'AccountId',
-      success: res => {
-        wx.request({//获取个人信息请求
-          url: baseUrls,
-          data: {
-            Sign: "",
-            AccountId: res.data.long.AccountId,
-          },
-          method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-          // header: {}, // 设置请求的 header
-          success: function (res) {
-            console.log(res.data.Data.length)
-              for (let i = 0; i < res.data.Data.length; i++) {//把子账号信息存储本地
-                if (res.data.Data[i].IsMainAccount == false) {
-                  let data = res.data.Data[i]
-                  wx.setStorageSync('Subaccount', data)
-                }
-              }
-              this_.setData({
-                Obtain: res.data.Data
-              })
-              this_.index()
-          }
-        })
-      }
-    })
-
-  },
-  index() {
-    let data = this.data.Obtain
-    let index = this.data.index;
-    wx.setStorageSync('wholeGas', data)
     this.setData({
-      data: data[index],
-      Gas: data[index].GasNo
-    })
-    wx.setStorage({
-      key: 'Information',
-      data: data[index],
-      success: function (res) {
-        // success
-      },
+      Gas: app.Customer.GasNo
     })
   },
   SublevelAccount() {

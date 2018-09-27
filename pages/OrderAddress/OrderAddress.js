@@ -1,6 +1,6 @@
-let { Orderaddress} = getApp().globalData
+let { Orderaddress } = getApp().globalData
 var app = getApp().globalData
-const baseUrls = app.baseUrl+'/Api/GasOrders/NewGasOrder'//一键订气上传接口
+const baseUrls = app.baseUrl + '/Api/GasOrders/NewGasOrder'//一键订气上传接口
 const utils = require("../../utils/util.js")
 Page({
 
@@ -108,7 +108,7 @@ Page({
   */
   onLoad() {
     this.setData({//新用户没有值获取填该账户的ID
-      AccountId:app.CustomerId.AccountId
+      AccountId: app.CustomerId.AccountId
     })
     this.setData({//新用户没有值获取填写好的值
       CustomerAddress: Orderaddress.Address,
@@ -197,57 +197,50 @@ Page({
   },
   //取出本地信息方法
   getData() {
-    let this_ = this
-    wx.getStorage({
-      key: 'Information',
-      success: function (res) {
-        //判断用户选择的是瓶还是公斤
-        let arr = []
-        let OptionsBox = this_.data.OptionsBox
-        if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-          for (let i = 0; i < res.data.CustomerDetails.length; i++) {
-            let obj = {
-              Quantity: utils.Decrypt(res.data.CustomerDetails[i].Quantity),
-              Price: utils.Decrypt(res.data.CustomerDetails[i].UnitPrice),
-              ProductName: utils.Decrypt(res.data.CustomerDetails[i].ProductName),
-              ProductId: res.data.CustomerDetails[i].ProductId
-            }
-            arr.push(obj)
-          }
-          this_.setData({
-            commodityList: arr
-          })
-        } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-          for (let j = 0; j < res.data.CustomerDetails.length; j++) {
-            let obj = {
-              Quantity: utils.Decrypt(res.data.CustomerDetails[j].Quantity),
-              Price: utils.Decrypt(res.data.CustomerDetails[j].KilogramPrice),
-              ProductName: utils.Decrypt(res.data.CustomerDetails[j].ProductName),
-              ProductId: res.data.CustomerDetails[j].ProductId
-            }
-            arr.push(obj)
-          }
-          this_.setData({
-            commodityList: arr
-          })
+    //判断用户选择的是瓶还是公斤
+    let arr = []
+    let OptionsBox = this.data.OptionsBox
+    if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
+      for (let i = 0; i < app.Customer.CustomerDetails.length; i++) {
+        let obj = {
+          Quantity: utils.Decrypt(app.Customer.CustomerDetails[i].Quantity),
+          Price: utils.Decrypt(app.Customer.CustomerDetails[i].UnitPrice),
+          ProductName: utils.Decrypt(app.Customer.CustomerDetails[i].ProductName),
+          ProductId: app.Customer.CustomerDetails[i].ProductId
         }
-        this_.setData({
-          CustomerName: utils.Decrypt(res.data.CustomerName),
-          CustomerPhone: utils.Decrypt(res.data.CustomerPhone),
-          CustomerAddress: utils.Decrypt(res.data.CustomerAddress),
-          EnterpriseName: res.data.EnterpriseName,
-          EnterprisePhone: res.data.EnterprisePhone[0],
-          EnterpriseAddress: res.data.EnterpriseAddress,
-          CustomerId: res.data.CustomerId,
-          EnterpriseId: res.data.EnterpriseId,
-          CustomerLatitude: res.data.CustomerLatitude,
-          CustomerLongitude: res.data.CustomerLongitude,
-          AccountId: res.data.AccountId,
-        })
-        this_.userData()
-      },
+        arr.push(obj)
+      }
+      this.setData({
+        commodityList: arr
+      })
+    } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
+      for (let j = 0; j < app.Customer.CustomerDetails.length; j++) {
+        let obj = {
+          Quantity: utils.Decrypt(app.Customer.CustomerDetails[j].Quantity),
+          Price: utils.Decrypt(app.Customer.CustomerDetails[j].KilogramPrice),
+          ProductName: utils.Decrypt(app.Customer.CustomerDetails[j].ProductName),
+          ProductId: app.Customer.CustomerDetails[j].ProductId
+        }
+        arr.push(obj)
+      }
+      this.setData({
+        commodityList: arr
+      })
+    }
+    this.setData({
+      CustomerName: utils.Decrypt(app.Customer.CustomerName),
+      CustomerPhone: utils.Decrypt(app.Customer.CustomerPhone),
+      CustomerAddress: utils.Decrypt(app.Customer.CustomerAddress),
+      EnterpriseName: app.Customer.EnterpriseName,
+      EnterprisePhone: app.Customer.EnterprisePhone[0],
+      EnterpriseAddress: app.Customer.EnterpriseAddress,
+      CustomerId: app.Customer.CustomerId,
+      EnterpriseId: app.Customer.EnterpriseId,
+      CustomerLatitude: app.Customer.CustomerLatitude,
+      CustomerLongitude: app.Customer.CustomerLongitude,
+      AccountId: app.Customer.AccountId,
     })
-
+    this.userData()
   },
   //瓶和公斤选项框点击事件
   OptionsBox: function (e) {

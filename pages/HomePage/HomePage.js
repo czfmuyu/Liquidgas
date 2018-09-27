@@ -1,6 +1,6 @@
-let { baseUrl} = getApp().globalData
+let { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
-let app=getApp().globalData
+let app = getApp().globalData
 // pages/HomePage.js
 Page({
 
@@ -52,26 +52,7 @@ Page({
       showModalTwo: false,
       index: index
     })
-    wx.getStorage({//选中的用气编号数据替换
-      key: 'Information',
-      success: function (res) {
-        let data = res.data[index]
-        wx.setStorage({
-          key: 'Information',
-          data: data,
-          success: function (res) {
-            // success
-          },
-        })
-      },
-    })
-    wx.setStorage({
-      key: 'index',
-      data: index,
-      success: function (res) {
-        // success
-      },
-    })
+    app.Customer=app.Customer[index]
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
@@ -92,27 +73,22 @@ Page({
           return
         } else {
           for (let i = 0; i < res.data.Data.length; i++) {
-            arr.push(res.data.Data[i].GasNo)
+            arr.push(res.data.Data[i].GasNo)//遍历用户所有的用气编号
+            app.GasNo=arr
+            if (res.data.Data[i].IsMainAccount == false) {//遍历用户的子账号
+              let data = res.data.Data[i]
+              app.Subaccount=data//子账号存储
+            }
           }
           this_.setData({
             GasNo: arr
           })
         }
         this_.Tips()
-        if (res.data.Data.length > 0 && res.data.Data.length < 2) {
-          wx.setStorage({//个人信息存本地
-            key: 'Information',
-            data: data[0],
-            success: function (res) {
-            },
-          })
+        if (res.data.Data.length == 0) {
+          app.Customer = data[0]
         } else {
-          wx.setStorage({//个人信息存本地
-            key: 'Information',
-            data: data,
-            success: function (res) {
-            },
-          })
+          app.Customer = data
         }
 
       },
