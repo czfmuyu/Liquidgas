@@ -1,4 +1,4 @@
-// pages/SublevelAccount.js
+let app=getApp()
 Page({
 
   /**
@@ -10,22 +10,13 @@ Page({
   * 生命周期函数--监听页面加载
   */
  onLoad: function (options) {
-  let data=wx.getStorageSync('Information')
-  this.setData({
-    Information:data
-  })
+   let AccountId= app.globalData.CustomerId.AccountId
+   
  },
-  /**
-   * 对话框取消按钮点击事件
-   */
-  onCancel: function () {
-    this.hideModal();
-  },
-  /**
-   * 对话框确认按钮点击事件
-   */
-  onConfirm: function () {
-    this.hideModal();
+// 删除指帐号
+  delet:function(){
+    console.log(app.globalData.CustomerId.AccountId)
+    
   },
   
 

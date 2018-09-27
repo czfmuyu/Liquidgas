@@ -2,6 +2,7 @@ let {
   baseUrl,
   CustomerId
 } = getApp().globalData
+let app=getApp()
 const baseUrls = `${baseUrl}/Api/Login/AccountLogin` //登录接口
 const utils = require("../../utils/util.js")
 
@@ -40,8 +41,9 @@ Page({
       },
       method: 'post',
       success:res=> {
-        CustomerId=res.data.Data
-        console.log(CustomerId)
+        //  CustomerId=res.data.Data
+         console.log(CustomerId)
+         app.globalData.CustomerId=res.data.Data
       },
     })
     wx.switchTab({

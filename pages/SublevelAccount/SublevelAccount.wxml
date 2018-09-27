@@ -6,7 +6,7 @@
         <view class="wrap">
             <text>{{Information.AccountPhone}}</text>
             <view style="margin-left: 16rpx;">
-                <view style="color:#2269d4;">删除绑定</view>
+                <view style="color:#2269d4;" bindtap='delet'>删除绑定</view>
             </view>
         </view>
     </view>
