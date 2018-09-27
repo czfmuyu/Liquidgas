@@ -1,6 +1,7 @@
 // pages/ReceivingAddress/ReceivingAddress.js
 var util = require('../../utils/util.js')
 var formatLocation = util.formatLocation
+let { Orderaddress } = getApp().globalData
 Page({
 
   /**
@@ -43,14 +44,16 @@ Page({
     let _this=this
     let addressD = _this.data.address
     let location = _this.data.locationAddress
+    // 拼接获取到的地址
     let locations = location + addressD
     let longitude = _this.data.location
     let longitudes = longitude.longitude[0] + "." + longitude.longitude[1]
     let latitudes = longitude.latitude[0] + "." + longitude.latitude[1]
-
-
+    Orderaddress.Address = locations
+    Orderaddress.Longitude = longitudes
+    Orderaddress.Latitude = latitudes
     wx.navigateTo({
-      url: '/pages/GasInformation/GasInformation?locations=' + locations + "&longitudes=" + longitudes + "&latitudes=" + latitudes,
+      url: '/pages/GasInformation/GasInformation',
     })
   },
   /**

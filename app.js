@@ -19,6 +19,6 @@ App({
     CustomerId:"",
     Customer:"",
     CustomerList:"",
-    Orderaddress:"",
+    Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude:""},
   }
 })
