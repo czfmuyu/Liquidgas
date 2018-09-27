@@ -32,10 +32,9 @@ Page({
     })
   },
   // 获取用户输入地址
-  assignment:function(e){
-    let _this=this
+  assignment(e){
     let text = e.detail.value
-    _this.setData({
+    this.setData({
       address:text
     })
 

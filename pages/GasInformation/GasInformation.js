@@ -1,5 +1,5 @@
 
-let { Orderaddress }= getApp().globalData
+let { Orderaddress } = getApp().globalData
 Page({
   /**
    * 页面的初始数据
@@ -17,16 +17,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    this.getData()//获取有信息数据
+  onLoad: function (options) {
+
     this.page()//判断页面跳转index
 
     this.setData({//获取全局变量值
-      storename:Orderaddress.Contact,
+      storename: Orderaddress.Contact,
       telephone: Orderaddress.Phone,
       address: Orderaddress.Address,
     })
-  
+    this.getData()//获取有信息数据
+
   },
 
   //获取页面传的值
@@ -34,7 +35,7 @@ Page({
     let this_ = this
     wx.getStorage({
       key: 'page',
-      success: function(res) {
+      success: function (res) {
         this_.setData({
           index: res.data
         })
@@ -46,7 +47,7 @@ Page({
     let _this = this
     wx.getStorage({
       key: 'Information',
-      success: function(res) {
+      success: function (res) {
         let storename = res.data.AccountName
         let telephone = res.data.AccountPhone
         let address = res.data.address
@@ -61,34 +62,36 @@ Page({
   },
   // 提交地址
   submission() {
-   
+
     console.log(Orderaddress)
-    // if (indexs == 0) {
-    //   wx.navigateTo({
-    //     url: '/pages/OrderAddress/OrderAddress',
-    //   })
-    // } else if (indexs == 1) {
-    //   console.log("i")
-    //   wx.switchTab({
-    //     url: '/pages/My/My',
-    //   })
-    // } else {
-    //   wx.navigateTo({
-    //     url: '/pages/Repair/Repair',
-    //   })
-    // }
+    if (indexs == 0) {
+      wx.navigateTo({
+        url: '/pages/OrderAddress/OrderAddress',
+      })
+    } else if (indexs == 1) {
+      console.log("i")
+      wx.switchTab({
+        url: '/pages/My/My',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/Repair/Repair',
+      })
+    }
   },
   // 获取姓名保存到全局
-  GasNumber: function(e) {
+  GasNumber: function (e) {
     let value = e.detail.value
     this.setData({
       storename: value
     })
+    console.log(this.data.storename)
     Orderaddress.Contact = this.data.storename
+    console.log("获取名字"+Orderaddress)
   },
 
   // 获取电话保存到全局
-  GasNumbers: function(e) {
+  GasNumbers: function (e) {
     let value = e.detail.value
     this.setData({
       telephone: value
@@ -106,7 +109,7 @@ Page({
   /**
    * 电话弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 电话隐藏模态对话框
    */
@@ -114,9 +117,8 @@ Page({
   /**
    * 电话对话框取消按钮点击事件
    */
-  onPhoneCancel: function() {
+  onPhoneCancel: function () {
     Orderaddress.Phone = ""
-    
     this.setData({
       telephone: "",
       PhoneShowModal: false
@@ -125,11 +127,10 @@ Page({
   /**
    * 电话对话框确认按钮点击事件
    */
-  onPhoneConfirm: function() {
-    Orderaddress.Contact = "",
-    this.setData({
-      PhoneShowModal: false
-    });
+  onPhoneConfirm: function () {
+      this.setData({
+        PhoneShowModal: false
+      });
   },
 
 
@@ -156,12 +157,13 @@ Page({
   /**
    * 名称弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
 
   /**
    * 名称对话框取消按钮点击事件
    */
-  onNameCancel: function() {
+  onNameCancel: function () {
+    Orderaddress.Contact = "",
     this.setData({
       storename: "",
       NameShowModal: false
@@ -170,7 +172,7 @@ Page({
   /**
    * 名称对话框确认按钮点击事件
    */
-  onNameConfirm: function() {
+  onNameConfirm: function () {
     this.setData({
       NameShowModal: false
     });
@@ -180,14 +182,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
 
   },
@@ -195,35 +197,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
