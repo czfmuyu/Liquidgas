@@ -15,9 +15,14 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
+    console.log(app.Customer.GasNo)
     if (app.Customer.GasNo === null) {
       this.setData({
         Gas: "请输入您的用气编号"
+      })
+    }else{
+      this.setData({
+        Gas: app.Customer.GasNo
       })
     }
   },

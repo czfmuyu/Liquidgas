@@ -56,6 +56,7 @@ Page({
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
+    console.log(app.CustomerId.AccountId)
     let this_ = this
     wx.request({//获取个人信息请求
       url: baseUrls,

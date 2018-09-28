@@ -7,7 +7,7 @@
         <text >姓名</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入您的姓名" data-text="Name" bindblur="UserReg"/>
+        <input placeholder="请输入您的姓名" data-text="Name" bindblur="UserReg" maxlength="3"/>
     </view>
 </view>
 <view class="user"style="margin-top: 72rpx;">
@@ -15,7 +15,7 @@
         <text >手机号</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入手机号" data-text="Phone" bindblur="UserReg"/>
+        <input placeholder="请输入手机号" data-text="Phone" bindblur="UserReg" maxlength="11"/>
     </view>
 </view>
 <view class="user"style="margin-top: 52rpx;">

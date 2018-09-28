@@ -1,6 +1,6 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//登录接
-const utils=require("../../utils/util.js")
+const utils = require("../../utils/util.js")
 var app = getApp()
 Page({
 
@@ -70,40 +70,74 @@ Page({
   },
   //注册点击事件
   Register() {
-    let this_=this
+    let this_ = this
     let Tick = this_.data.Tick
-    if (Tick === "√") {
-      if (this_.data.Password === this_.data.confirmPassword) {
-        wx.request({
-          url: baseUrls,
-          data: {
-            Sign: "",
-            Name: utils.Encryption(this_.data.Name),
-            Phone: utils.Encryption(this_.data.Phone),
-            Password: utils.Encryption(this_.data.Password),
-            VerificationCode: utils.Encryption(this_.data.VerificationCode)
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          method: 'post',
-          success: function (res) {
-            wx.switchTab({//登录页面
-              url: "/pages/HomePage/HomePage"
-            })
-          },
-        })
-        
+
+    if (this_.data.Name !== "" && this_.data.Phone !== "" && this_.data.Password !== "" && this_.data.confirmPassword !== "" && this_.data.VerificationCode !== "") {
+      if (/^[\u4e00-\u9fa5]{2,3}$/.test(this_.data.Name)) {
+        if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
+          if (Tick === "√") {
+            if (this_.data.Password === this_.data.confirmPassword) {
+              wx.request({
+                url: baseUrls,
+                data: {
+                  Sign: "",
+                  Name: utils.Encryption(this_.data.Name),
+                  Phone: utils.Encryption(this_.data.Phone),
+                  Password: utils.Encryption(this_.data.Password),
+                  VerificationCode: utils.Encryption(this_.data.VerificationCode)
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: 'post',
+                success: function (res) {
+                  console.log(res)
+                  if (res.data.Code == 200) {
+                    wx.switchTab({//登录页面
+                      url: "/pages/HomePage/HomePage"
+                    })
+                  } else if (res.data.Code == 506) {
+                    wx.showToast({
+                      title: res.data.Msg,
+                      icon: 'none',
+                      duration: 2000
+                    });
+                  }
+
+                },
+              })
+            } else {
+              wx.showToast({
+                title: '密码不一致',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          } else {
+            wx.showToast({
+              title: '未同意条款',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        } else {
+          wx.showToast({
+            title: '手机号码有误',
+            icon: 'none',
+            duration: 2000
+          });
+        }
       } else {
         wx.showToast({
-          title: '密码不一致',
+          title: '姓名有误',
           icon: 'none',
           duration: 2000
         });
       }
     } else {
       wx.showToast({
-        title: '未同意条款',
+        title: '请完善您的信息',
         icon: 'none',
         duration: 2000
       });

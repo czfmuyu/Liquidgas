@@ -38,8 +38,7 @@ Page({
       },
       method: 'post',
       success: res => {
-        //  CustomerId=res.data.Data
-        // console.log(CustomerId)
+        console.log(res.data.Data)
         app.CustomerId = res.data.Data
       },
     })

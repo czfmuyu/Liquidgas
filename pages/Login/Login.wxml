@@ -4,7 +4,7 @@
         <text >手机号</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入手机号/用气编号" data-text="name" bindblur="userName"/>
+        <input placeholder="请输入手机号" data-text="name" bindblur="userName" maxlength="11"/>
     </view>
 </view>
 <view class="user"style="margin-top: 54rpx;">
