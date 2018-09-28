@@ -23,7 +23,7 @@
         <text >设置密码</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入8-16位,数字字母组合" type="password" data-text="Password" bindblur="UserReg"/>
+        <input placeholder="请输入6-16位,数字字母组合" type="password" data-text="Password" bindblur="UserReg"/>
     </view>
 </view>
 <view class="user"style="margin-top: 52rpx;">

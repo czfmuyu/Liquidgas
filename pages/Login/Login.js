@@ -26,25 +26,41 @@ Page({
   onLogin() {
     let Phone = this.data.Phone
     let Password = this.data.Password
-    wx.request({
-      url: baseUrls,
-      data: {
-        Sign: "",
-        Phone: utils.Encryption(Phone),
-        Password: utils.Encryption(Password)
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      success: res => {
-        console.log(res.data.Data)
-        app.CustomerId = res.data.Data
-      },
-    })
-    wx.switchTab({
-      url: '/pages/HomePage/HomePage'
-    })
+    if (Phone !== "" && Password !== "") {
+      wx.request({
+        url: baseUrls,
+        data: {
+          Sign: "",
+          Phone: utils.Encryption(Phone),
+          Password: utils.Encryption(Password)
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'post',
+        success: res => {
+          console.log(res.data.Data)
+          if (res.data.Data == null) {
+            wx.showToast({
+              title: '您输入的账号密码有误',
+              icon: 'none',
+              duration: 2000
+            });
+          } else {
+            app.CustomerId = res.data.Data
+            wx.switchTab({
+              url: '/pages/HomePage/HomePage'
+            })
+          }
+        },
+      })
+    } else {
+      wx.showToast({
+        title: '请输入您的账号密码',
+        icon: 'none',
+        duration: 2000
+      });
+    }
   },
   //找回密码点击事件
   RetrievePassword() {
@@ -62,7 +78,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**

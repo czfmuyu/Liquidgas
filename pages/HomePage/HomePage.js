@@ -84,7 +84,7 @@ Page({
           console.log(arr)
           for (let j = 0; j < arr.length; j++) {
             if (arr[j] === null) {
-              arr[j] = "请输入你的用气编号"
+              arr[j] = "请绑定你的用气编号"
             }
           }
           console.log(arr)
