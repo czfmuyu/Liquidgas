@@ -49,7 +49,7 @@
         >
     </view>
 </view>
-<view class="InformationList" bindtap="SublevelAccount" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
+<view class="InformationList" hidden='{{!state}}' bindtap="SublevelAccount" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
     <view class="InformationList_left">
         <image src="../../imgs/SublevelAccount.png" />
         <view class="InformationList_text">

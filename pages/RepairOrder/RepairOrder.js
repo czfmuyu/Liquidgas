@@ -1,6 +1,6 @@
-let app = getApp()
+let app = getApp().globalData
 var util = require('../../utils/util.js');
-const baseUrl = app.globalData.baseUrl
+const baseUrl = app.baseUrl
 // 获取维修订单
 const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairOrders`
 // 取消订单接口
@@ -95,8 +95,9 @@ Page({
   },
   // 获取本地id
   getID() {
+    console.log(app)
     this.setData({
-      "parameter.CustomerId": app.globalData.Customer.CustomerId
+      "parameter.customerId": app.Customer.CustomerId
     })
   },
   //确认完成点击事件

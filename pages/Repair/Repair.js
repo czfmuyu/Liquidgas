@@ -64,7 +64,7 @@ Page({
 
     // 图片数组
     pics: [],
-    index:"0"
+    index: "0"
   },
 
 
@@ -99,19 +99,19 @@ Page({
       url: baseUrlBd,
       data: {
         Sign: "",
-        Contact: util.Encryption(Contact),
-        Phone: util.Encryption(Phone),
-        Address: util.Encryption(Address),
-        SubscribeTime: SubscribeTime,
-        ProblemDescription: ProblemDescription,
-        AccountId: AccountId,
-        PhotoIds: PhotoIds,
-        RepairLabelIds: RepairLabelIds,
-        ServiceMode: ServiceMode,
-        Latitude: Latitude,
+        EnterpriseId: EnterpriseId,//企业唯一编号
+        CustomerId: CustomerId,//客服唯一编号
+        Contact: util.Encryption(Contact),//名字
+        Phone: util.Encryption(Phone),//电话
+        Address: util.Encryption(Address),//地址
+        Latitude: Latitude,//
         Longitude: Longitude,
-        CustomerId: CustomerId,
-        EnterpriseId: EnterpriseId,
+        ServiceMode: ServiceMode,//服务模式
+        SubscribeTime: SubscribeTime,//预约时间
+        ProblemDescription: ProblemDescription,//问题描述
+        RepairLabelIds: RepairLabelIds,//维修编号
+        PhotoIds: PhotoIds,//照片编号
+        AccountId: AccountId,//帐号唯一编号  
       },
       header: {
         'content-type': 'application/json'
@@ -282,7 +282,7 @@ Page({
   uploadimg: function() {
     let that = this
     let pics = that.data.pics;
-    var i=0
+    var i = 0
     console.log(pics)
     wx.uploadFile({
       url: Urlsimg,
@@ -336,10 +336,7 @@ Page({
   onLoad: function(options) {
     let _this = this
     _this.repair() //获取保修项目
-    console.log(app.Customer.EnterpriseId)
-    console.log(app.Customer.CustomerId)
-    console.log(app.Customer.AccountId)
-
+    console.log(app)
 
     // 企业编号
     let EnterpriseId = app.Customer.EnterpriseId

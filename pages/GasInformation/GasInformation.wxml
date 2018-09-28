@@ -59,4 +59,5 @@
     <text class="right_text">></text>
   </view>
 </view>
+
 <button class="btn" bindtap='submission'>提交</button>

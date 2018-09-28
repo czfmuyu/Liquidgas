@@ -18,7 +18,7 @@
         <input 
         class='inpy_color'
             placeholder="请输入用气编号"
-            bindinput="GasNumber" data-inpt='text'/>
+            bindblur="GasNumber" data-inpt='text'/>
     </view>
     <view class="modal-footer">
         <view class="btn-cancel" bindtap="onGasCancel" >取消</view>

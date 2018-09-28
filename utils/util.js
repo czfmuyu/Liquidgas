@@ -110,7 +110,7 @@ function imgpreview(data_evnt, imgarrs) {  //图片预览
 	 */
   function showError(err_msg,url) {
     wx.showModal({
-      title: '错误提示',
+      title: '提示',
       content: err_msg,
       showCancel: false,
       confirmColor: "#72bf5e",

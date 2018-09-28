@@ -1,13 +1,17 @@
 let app = getApp().globalData
-Page({
+const baseUrls = `${app.baseUrl}/Api/Customers/BindCustomerAccount` 
+			
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
     GasShowModal: false, //弹框按钮操控
-    numberlist: [],
+    numberlist: "",
     numbers: "",
+    // 企业唯一id
+    AccountId: "",
   },
   /**
    * 名字弹窗
@@ -17,10 +21,7 @@ Page({
       GasShowModal: true
     })
   },
-  /**
-   * 弹出框蒙层截断touchmove事件
-   */
-  preventTouchMove: function() {},
+
   /**
    * 隐藏模态对话框
    */
@@ -37,47 +38,57 @@ Page({
     this.GasHideModal();
   },
   /**
-   * 对话框确认按钮点击事件
+   * 对话框确认按钮点击事件上传获取到的用气编号
    */
   onGasConfirm: function() {
-    let _this = this
-    let numberlists = _this.data.numberlist
-    numberlists.push(_this.data.numbers)
-    _this.setData({
-      numberlist: numberlists,
+    this.setData({
       GasShowModal: false
     })
-    wx.redirectTo({
-      url: '/pages/Login/Login',
+    wx.request({
+      url:baseUrls,
+      data: {
+        Sign: "",
+        GasNo: this.data.numbers,
+        AccountId: app.AccountId.AccountId
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'post',
+      success: res => {
+        console.log(res)
+      }
     })
+    // wx.redirectTo({
+    //   url: '/pages/Login/Login',
+    // })
 
   },
   // 获取新增编号
   GasNumber: function(e) {
-    let _this = this
     let text = e.detail.value
-    let gasuses = []
-    gasuses.push(text)
-    _this.setData({
-      numbers: gasuses
+    // let gasuses = []
+    // gasuses.push(text)
+    this.setData({
+      numbers: text
     })
 
   },
 
   // 获取本地储存用气编号
   gasuse: function() {
-    console.log(app.GasNo)
-    // let gasuses = []
-    // if (res.data.length > 0) {
-    //   for (let i = 0; i < res.data.length; i++) {
-    //     gasuses.push(res.data[i].GasNo)
-    //   }
-    // } else {
-    //   gasuse = res.data.GasNo
-    //   gasuses.push(gasuse)
-    // }
+    // let gasn = [["1234456"],["无用气编号请联系服务商添加用气编号"],["748758457"],["45565465"]]
+    let gasn = app.GasNo
+
+    let gasuses = []
+    for (let i = 0; gasn.length > i; i++) {
+      if (gasn[i] !== "无用气编号请联系服务商添加用气编号") {
+        console.log("qqq")
+        gasuses.push(gasn[i])
+      }
+    }
     this.setData({
-      numberlist: app.GasNo
+      numberlist: gasuses,
     })
 
   },
@@ -89,12 +100,6 @@ Page({
     this.gasuse()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -103,38 +108,15 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })
+
+
+// let gasuses = []
+// if (res.data.length > 0) {
+//   for (let i = 0; i < res.data.length; i++) {
+//     gasuses.push(res.data[i].GasNo)
+//   }
+// } else {
+//   gasuse = res.data.GasNo
+//   gasuses.push(gasuse)
+// }

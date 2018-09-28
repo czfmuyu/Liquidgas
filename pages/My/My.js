@@ -9,13 +9,20 @@ Page({
   data: {
     // 用气编号
     index: 0,
-    Gas: ""
+    Gas: "",
+    // 子帐号页面显示与影藏
+    state:false
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    console.log(app.Customer.GasNo)
+    // 判断是否是子帐号显示页面true主帐号页面,false子帐号页面
+    if (app.Customer.IsMainAccount==true){
+      this.setData({
+        state:true
+      })
+    }
     if (app.Customer.GasNo === null) {
       this.setData({
         Gas: "无用气编号请联系服务商添加用气编号"
