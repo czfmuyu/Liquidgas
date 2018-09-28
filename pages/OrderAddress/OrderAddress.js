@@ -269,7 +269,8 @@ Page({
 
   //确定支付点击事件
   ConfirmSuccess() {
-    let OptionsBox = this.data.OptionsBox
+    let this_ = this
+    let OptionsBox = this_.data.OptionsBox
     let PrceType
     let SubscribeTime
     if (OptionsBox[0].checked === true) {//购买模式判断
@@ -278,26 +279,26 @@ Page({
     else if (OptionsBox[1].checked === true) {
       PrceType = 10
     };
-    let array = this.data.array
+    let array = this_.data.array
     let time = "";
-    if (array[this.data.index] === "立即出发") {//预约时间判断
+    if (array[this_.data.index] === "立即出发") {//预约时间判断
       time = 0
       SubscribeTime = ""
     }
-    else if (array[this.data.index] !== "立即出发") {
+    else if (array[this_.data.index] !== "立即出发") {
       time = 10
       let Times = utils.formatTime1(new Date());
       let day = Times.slice(0, 10)
-      SubscribeTime = day + " " + this.data.array[this.data.index]
+      SubscribeTime = day + " " + this_.data.array[this_.data.index]
     };
-    let PayMethod = this.data.radioItems
+    let PayMethod = this_.data.radioItems
     let payment
     if (PayMethod[0].checked === true) {
       payment = 0
     } else if (PayMethod[1].checked === true) {
       payment = 100
     }
-    let commodityList = this.data.commodityList
+    let commodityList = this_.data.commodityList
     let array1 = [];
     if (OptionsBox[0].checked === true) {//瓶
       for (let k = 0; k < commodityList.length; k++) {
@@ -309,7 +310,7 @@ Page({
             Kilogram: 0
           }
           array1.push(OrderItems)
-          this.setData({
+          this_.setData({
             OrderItems: array1
           })
         }
@@ -324,32 +325,32 @@ Page({
             Kilogram: 0
           }
           array1.push(OrderItems)
-          this.setData({
+          this_.setData({
             OrderItems: array1
           })
         }
       }
     }
-    console.log(this.data.OrderItems)
+    console.log(this_.data.OrderItems)
     wx.request({
       url: baseUrls,
       data: {
         Sign: "",
-        EnterpriseId: this.data.EnterpriseId,
-        CustomerId: this.data.CustomerId,
-        Price: utils.Encryption(this.data.Price),
-        Quantity: utils.Encryption(this.data.Quantity),
-        Contact: utils.Encryption(this.data.CustomerName),
-        Phone: utils.Encryption(this.data.CustomerPhone),
-        Address: utils.Encryption(this.data.CustomerAddress),
-        Longitude: this.data.CustomerLatitude,
-        Latitude: this.data.CustomerLongitude,
+        EnterpriseId: this_.data.EnterpriseId,
+        CustomerId: this_.data.CustomerId,
+        Price: utils.Encryption(this_.data.Price),
+        Quantity: utils.Encryption(this_.data.Quantity),
+        Contact: utils.Encryption(this_.data.CustomerName),
+        Phone: utils.Encryption(this_.data.CustomerPhone),
+        Address: utils.Encryption(this_.data.CustomerAddress),
+        Longitude: this_.data.CustomerLatitude,
+        Latitude: this_.data.CustomerLongitude,
         GasBuyMode: PrceType,
         DistributionMode: time,
         SubscribeTime: SubscribeTime,
         PayMethod: payment,
-        AccountId: this.data.AccountId,
-        OrderItems: this.data.OrderItems,
+        AccountId: this_.data.AccountId,
+        OrderItems: this_.data.OrderItems,
       },
       header: {
         'content-type': 'application/json'
@@ -365,7 +366,29 @@ Page({
             duration: 2000
           });
         } else {
-          app.CustomerId=res.data.Date
+          app.CustomerId = res.data.Data
+          app.Customer = {
+            EnterpriseId: this_.data.EnterpriseId,
+            CustomerId: res.data.Data.CustomerId,
+            Price: this_.data.Price,
+            Quantity: this_.data.Quantity,
+            Contact: this_.data.CustomerName,
+            Phone: this_.data.CustomerPhone,
+            Address: this_.data.CustomerAddress,
+            Longitude: this_.data.CustomerLatitude,
+            Latitude: this_.data.CustomerLongitude,
+            GasBuyMode: this.PrceType,
+            DistributionMode: this.time,
+            SubscribeTime: this.SubscribeTime,
+            PayMethod: this.payment,
+            AccountId: this_.data.AccountId,
+            OrderItems: this_.data.OrderItems,
+            EnterpriseName: this_.data.EnterpriseName,
+            EnterprisePhone: this_.data.EnterprisePhone,
+            EnterpriseAddress: this_.data.EnterpriseAddress,
+            EnterpriseProducts: this_.data.EnterpriseProducts,
+          }
+          console.log(getApp().globalData.Customer)
           wx.switchTab({
             url: "/pages/Order/Order",
           })

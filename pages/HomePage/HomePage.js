@@ -1,5 +1,6 @@
 let { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
+const Gas = `${baseUrl}/Api/Customers/BindCustomerAccount`//绑定用气编号接口
 let app = getApp().globalData
 const utils = require("../../utils/util.js")
 // pages/HomePage.js
@@ -14,7 +15,8 @@ Page({
     newuser: false,
     showModalTwo: false,
     user: false,
-    GasNo: []
+    GasNo: [],
+    value: "",//用气编号的值
   },
   OrderAddress() {
     wx.navigateTo({//订气地址页面
@@ -152,12 +154,31 @@ Page({
    * 对话框确认按钮点击事件
    */
   onConfirm: function () {
-    this.hideModal();
+    wx.request({
+      url: Gas,
+      data: {
+        Sign:"",
+        AccountId:app.AccountId.AccountId,
+        GasNo:this.data.value,
+      },
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log(res)
+      },
+    })
+    // this.hideModal();
   },
-
+  //获取编号弹框的值
+  GasNumber(e) {
+    this.setData({
+      value: e.detail.value
+    })
+  },
 
   preventTouchMove: function () {
   },
+
   /**
    * 隐藏模态对话框
    */

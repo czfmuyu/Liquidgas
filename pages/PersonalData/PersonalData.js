@@ -1,3 +1,5 @@
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/Customers/UpdateAccountInfo`//获取个人数据接口
 let app = getApp().globalData
 const utils = require("../../utils/util.js")
 Page({
@@ -66,7 +68,7 @@ Page({
   /**
    * 对话框确认按钮点击事件
    */
-  onNameConfirm: function() {
+  onNameConfirm() {
     let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
     if (!name.test(this.data.modifyname)) {
       wx.showToast({
@@ -80,6 +82,20 @@ Page({
         NameShowModal: false
       });
       app.Customer.AccountName = this.data.modifyname
+      wx.request({
+        url: baseUrls,
+        data: {
+          Sign:"",
+          AccountId:app.AccountId.AccountId,
+          Name:this.data.modifyname,
+          Phone:this.data.AccountPhone
+        },
+        method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        // header: {}, // 设置请求的 header
+        success: function(res){
+          console.log(res)
+        },
+      })
     }
 
   },

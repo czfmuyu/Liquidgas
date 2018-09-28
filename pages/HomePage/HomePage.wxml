@@ -39,7 +39,7 @@
     <view class="modal-ipt">
         <input 
             placeholder="用气编号"
-            bindinput="GasNumber" />
+            bindblur="GasNumber" />
     </view>
     <view class="modal-footer">
         <view class="btn-cancel" bindtap="onCancel" >取消</view>

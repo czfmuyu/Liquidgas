@@ -171,6 +171,7 @@ page{
       margin: 0 auto;
       border:2rpx solid;
       padding-left: 10rpx;
+      color: #000;
   }
   .modal-footer {
     display: flex;

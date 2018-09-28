@@ -119,14 +119,17 @@ Page({
   },
   //获取用户的CustomerId
   CustomerId() {
-    if(app.Customer!==""){
+    console.log(app)
+    if(app.Customer!==null){
       this.setData({
-        CustomerId: app.Customer[0].CustomerId
+        CustomerId: app.Customer.CustomerId
       })
+      console.log(app.Customer.CustomerId)
     }else{
       this.setData({
         CustomerId: app.CustomerId.CustomerId
       })
+      console.log(app.CustomerId.CustomerId)
     }
   },
   //取消订单信息
