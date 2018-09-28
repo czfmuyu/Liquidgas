@@ -52,7 +52,7 @@ Page({
       showModalTwo: false,
       index: index
     })
-    app.Customer=app.Customer[index]
+    app.Customer = app.Customer[index]
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
@@ -74,12 +74,20 @@ Page({
         } else {
           for (let i = 0; i < res.data.Data.length; i++) {
             arr.push(res.data.Data[i].GasNo)//遍历用户所有的用气编号
-            app.GasNo=arr
+
             if (res.data.Data[i].IsMainAccount == false) {//遍历用户的子账号
               let data = res.data.Data[i]
-              app.Subaccount=data//子账号存储
+              app.Subaccount = data//子账号存储
             }
           }
+          console.log(arr)
+          for (let j = 0; j < arr.length; j++) {
+            if (arr[j] === null) {
+              arr[j] = "请输入你的用气编号"
+            }
+          }
+          console.log(arr)
+          app.GasNo = arr
           this_.setData({
             GasNo: arr
           })
