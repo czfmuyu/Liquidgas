@@ -47,9 +47,9 @@ Page({
       numberlist: numberlists,
       GasShowModal: false
     })
-    // wx.redirectTo({
-    //   url: '/pages/Authorized/Authorized',
-    // })
+    wx.redirectTo({
+      url: '/pages/Login/Login',
+    })
 
   },
   // 获取新增编号

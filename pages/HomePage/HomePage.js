@@ -57,13 +57,13 @@ Page({
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
-    console.log(app.CustomerId.AccountId)
+    console.log(app.AccountId.AccountId)
     let this_ = this
     wx.request({//获取个人信息请求
       url: baseUrls,
       data: {
         Sign: "",
-        AccountId: app.CustomerId.AccountId,
+        AccountId: app.AccountId.AccountId,
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
@@ -86,7 +86,7 @@ Page({
           console.log(arr)
           for (let j = 0; j < arr.length; j++) {
             if (arr[j] === null) {
-              arr[j] = "请绑定你的用气编号"
+              arr[j] = "无用气编号请联系服务商添加用气编号"
             }
           }
           console.log(arr)

@@ -3,7 +3,7 @@
     <image class="header_btn" src="../../imgs/btn.png" />
 </view>
 <view class="content_top">
-    <view class="content_ipt">
+    <view class="content_ipt" bindtap="">
         <view class="content_img" >
             <image src="../../imgs/7_03.png" />
         </view>

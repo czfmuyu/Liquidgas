@@ -18,7 +18,7 @@ Page({
     console.log(app.Customer.GasNo)
     if (app.Customer.GasNo === null) {
       this.setData({
-        Gas: "请绑定您的用气编号"
+        Gas: "无用气编号请联系服务商添加用气编号"
       })
     }else{
       this.setData({

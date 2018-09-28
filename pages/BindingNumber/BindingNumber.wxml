@@ -1,4 +1,4 @@
-<view class="content" style="border-bottom: 2rpx solid #f2f2f2;" wx:for="{{numberlist}}" wx:for-item="item" wx:key="numberlist">
+<view class="content" style="border-bottom: 2rpx solid #f2f2f2;font-size:28rpx" wx:for="{{numberlist}}" wx:for-item="item" wx:key="numberlist">
     <view>
         <text>用气编号</text>
     </view>

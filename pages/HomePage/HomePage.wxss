@@ -22,13 +22,11 @@ page{
 .content_ipt{
     display: flex;
     width: 698rpx;
-    height: 122rpx;
     background-color: #fff;
     box-shadow: inset 0px 1px 0px #e7e7e7, 0px 1px 0px #e7e7e7;
 }
 .content_img{
     width: 98rpx;
-    height: 122rpx;
 }
 .content_img>image{
     width: 54rpx;
@@ -42,8 +40,6 @@ page{
 }
 .content_input>text{
     width: 533rpx;
-    height: 54rpx;
-    line-height: 54rpx;
     font-size: 36rpx;
     color: #999;
 }

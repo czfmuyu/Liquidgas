@@ -108,7 +108,7 @@ Page({
   */
   onLoad() {
     this.setData({//新用户没有值获取填该账户的ID
-      AccountId: app.CustomerId.AccountId
+      AccountId: app.AccountId.AccountId
     })
     this.setData({//新用户没有值获取填写好的值
       CustomerAddress: Orderaddress.Address,

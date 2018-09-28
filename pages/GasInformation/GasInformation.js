@@ -19,13 +19,17 @@ Page({
    */
   onLoad: function (options) {
     this.page()//判断页面跳转index
-    this.setData({//获取全局变量值
+    
+    this.setData({//新用户没有数据的时候获取的信息
       storename: Orderaddress.Contact,
       telephone: Orderaddress.Phone,
       address: Orderaddress.Address,
     })
-   
-
+    this.setData({
+      storename: getApp().globalData.Customer.CustomerName,
+      telephone: getApp().globalData.Customer.CustomerPhone,
+      address: getApp().globalData.Customer.CustomerAddress
+    })
   },
 
   //获取页面传的值
@@ -43,7 +47,7 @@ Page({
 
   // 提交地址
   submission() {
-    let indexs=this.data.index
+    let indexs = this.data.index
     if (indexs == 0) {
       wx.redirectTo({
         url: '/pages/OrderAddress/OrderAddress',
@@ -62,20 +66,20 @@ Page({
   // 获取姓名保存到全局
   GasNumber: function (e) {
     let value = e.detail.value
-      this.setData({
-        storename: value
-      })
-      Orderaddress.Contact = this.data.storename
-    
+    this.setData({
+      storename: value
+    })
+    Orderaddress.Contact = this.data.storename
+
   },
 
   // 获取电话保存到全局
   GasNumbers: function (e) {
     let value = e.detail.value
-      this.setData({
-        telephone: value
-      })
-      Orderaddress.Phone = this.data.telephone
+    this.setData({
+      telephone: value
+    })
+    Orderaddress.Phone = this.data.telephone
   },
   /**
    * 电话弹窗
@@ -121,7 +125,7 @@ Page({
       });
     }
 
-      
+
   },
 
 
@@ -155,10 +159,10 @@ Page({
    */
   onNameCancel: function () {
     Orderaddress.Contact = "",
-    this.setData({
-      storename: "",
-      NameShowModal: false
-    });
+      this.setData({
+        storename: "",
+        NameShowModal: false
+      });
   },
   /**
    * 名称对话框确认按钮点击事件
@@ -177,7 +181,7 @@ Page({
         NameShowModal: false
       });
     }
-   
+
   },
 
 
