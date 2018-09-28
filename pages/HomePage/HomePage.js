@@ -96,7 +96,8 @@ Page({
           })
         }
         this_.Tips()
-        if (res.data.Data.length == 0) {
+        if (res.data.Data.length == 1) {
+          console.log()
           app.Customer = data[0]
         } else {
           app.Customer = data

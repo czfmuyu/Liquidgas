@@ -36,9 +36,9 @@ Page({
     Serialnumber: "",
 
   },
-   /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
+  /**
+  * 页面相关事件处理函数--监听用户下拉动作
+  */
   onPullDownRefresh() {
     this.wholeInfo()
     this.DeliveryList()
@@ -100,28 +100,34 @@ Page({
   onLoad(options) {
     this.CustomerId()
   },
-   //导航控制
-   navbarTap(e) {
+  //导航控制
+  navbarTap(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.idx
     })
-    let currentTab=this.data.currentTab
-    if(currentTab=0){//用户点击全部订单页面
+    let currentTab = this.data.currentTab
+    if (currentTab = 0) {//用户点击全部订单页面
       this.wholeInfo()
-    }else if(currentTab=1){//用户点击配送中页面
+    } else if (currentTab = 1) {//用户点击配送中页面
       this.DeliveryList()
-    }else if(currentTab=2){//用户点击已完成页面
+    } else if (currentTab = 2) {//用户点击已完成页面
       this.CompleteList()
-    }else{//用户点击已取消页面
+    } else {//用户点击已取消页面
       this.EvaluateList()
     }
     console.log(currentTab)
   },
   //获取用户的CustomerId
   CustomerId() {
-    this.setData({
-      CustomerId: app.Customer.CustomerId
-    })
+    if(app.Customer!==""){
+      this.setData({
+        CustomerId: app.Customer[0].CustomerId
+      })
+    }else{
+      this.setData({
+        CustomerId: app.CustomerId.CustomerId
+      })
+    }
   },
   //取消订单信息
   EvaluateList() {
@@ -278,14 +284,14 @@ Page({
       url: "/pages/DeliveryDetails/DeliveryDetails?id=" + e.currentTarget.dataset.id,
     })
   },
- 
+
   // 评价跳转页面
   Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
   },
- 
+
 
   // 获取取消原因
   getdata: function (e) {
@@ -370,7 +376,7 @@ Page({
   },
   // 确认收货
   Confirm: function (e) {
-    let this_=this
+    let this_ = this
     let Orderid = e.currentTarget.dataset.orderid
     let Customerid = e.currentTarget.dataset.serial
     wx.request({

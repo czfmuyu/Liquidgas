@@ -365,6 +365,7 @@ Page({
             duration: 2000
           });
         } else {
+          app.CustomerId=res.data.Date
           wx.switchTab({
             url: "/pages/Order/Order",
           })
