@@ -408,10 +408,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.DeliveryList()
     this.wholeInfo()
-    this.CompleteList()
-    this.EvaluateList()
   },
 
   /**

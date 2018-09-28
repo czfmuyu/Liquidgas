@@ -1,6 +1,7 @@
 let { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
 let app = getApp().globalData
+const utils = require("../../utils/util.js")
 // pages/HomePage.js
 Page({
 
@@ -69,6 +70,7 @@ Page({
       success: function (res) {
         console.log(res)
         let data = res.data.Data
+        this_.decryption(data)
         let arr = [];
         if (res.data.Data == null) {
           return
@@ -99,9 +101,20 @@ Page({
         } else {
           app.Customer = data
         }
-
       },
     })
+  },
+  //获取的数据解密
+  decryption(data) {
+    data.map(item => {
+      utils.Decrypt(item.CustomerName)
+      utils.Decrypt(item.CustomerPhone)
+      utils.Decrypt(item.CustomerAddress)
+      utils.Decrypt(item.AccountName)
+      utils.Decrypt(item.AccountPhone)
+      utils.Decrypt(item.CustomerDetails)
+    })
+    return data
   },
   Tips() {
     console.log(this.data.GasNo)

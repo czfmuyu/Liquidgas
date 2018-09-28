@@ -72,7 +72,6 @@ Page({
   Register() {
     let this_ = this
     let Tick = this_.data.Tick
-
     if (this_.data.Name !== "" && this_.data.Phone !== "" && this_.data.Password !== "" && this_.data.confirmPassword !== "" && this_.data.VerificationCode !== "") {
       if (/^[\u4e00-\u9fa5]{2,3}$/.test(this_.data.Name)) {
         if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
