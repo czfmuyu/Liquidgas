@@ -36,7 +36,7 @@
       <view class="whole_bottom">
         <view class="whole_bottom_left">
           <view>申报时间:</view>
-          <view style="margin:0 4rpx;">{{item.FormatSubscribeTime}}</view>
+          <view style="margin:0 4rpx;">{{item.SubscribeTime}}</view>
         </view>
         <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
       </view>
@@ -89,7 +89,7 @@
       <view class="userName">申报人: {{item.Contact}}</view>
       <view class="whole_bottom">
         <view class="whole_bottom_left">
-          <view>申报时间:{{item.FormatSubscribeTime}}</view>
+          <view>申报时间:{{item.SubscribeTime}}</view>
         </view>
         <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
       </view>
@@ -150,7 +150,7 @@
       <view class="userName">申报人: {{item.Contact}}</view>
       <view class="whole_bottom">
         <view class="whole_bottom_left">
-          <view>申报时间:{{item.FormatSubscribeTime}}</view>
+          <view>申报时间:{{item.SubscribeTime}}</view>
         </view>
         <view style="color: #d4223b;font-size: 48rpx;font-weight: 900;"></view>
       </view>

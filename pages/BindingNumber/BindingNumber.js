@@ -26,7 +26,8 @@ Page({
    */
   GasHideModal: function() {
     this.setData({
-      GasShowModal: false
+      GasShowModal: false,
+      numbers: ""
     });
   },
   /**
@@ -43,12 +44,12 @@ Page({
     let numberlists = _this.data.numberlist
     numberlists.push(_this.data.numbers)
     _this.setData({
-      numberlist: numberlists
+      numberlist: numberlists,
+      GasShowModal: false
     })
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/Authorized/Authorized',
     })
-    this.GasHideModal();
   },
   // 获取新增编号
   GasNumber: function(e) {

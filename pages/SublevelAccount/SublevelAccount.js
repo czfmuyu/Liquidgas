@@ -1,22 +1,52 @@
 let app=getApp()
+const baseUrl = app.globalData.baseUrl
+//获取字帐号
+const account = `${baseUrl}/Api/Customers/GetCustomerAccounts`
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    Information:"",
+    // 判断提示语是否显示
+    display:"",
+   listing:"",
+
   },/**
   * 生命周期函数--监听页面加载
   */
  onLoad: function (options) {
+   let _this=this
    let AccountId= app.globalData.CustomerId.AccountId
-   
+   wx.request({
+     url: account,
+     data: {
+       Sign: "",
+       CustomerId: AccountId
+     },
+     header: {
+       'content-type': 'application/json'
+     },
+     method: 'POST',
+     success: res => {
+       let account=res.data.Data
+       console.log(res)
+       if (account.length<=0){
+         _this.setData({
+           display:"1"
+         })
+       }else{
+        let list=res.data.Data
+        _this.setData({
+          listing:list
+        })
+       }
+     },
+   })
  },
+
 // 删除指帐号
   delet:function(){
     console.log(app.globalData.CustomerId.AccountId)
-    
   },
   
 
@@ -24,7 +54,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
+    
   },
 
   /**

@@ -9,3 +9,6 @@
     margin: 50rpx auto;
     border-radius: 50rpx;
 }
+.inpy_color{
+  color:#000;
+}

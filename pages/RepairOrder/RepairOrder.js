@@ -136,46 +136,10 @@ Page({
       method: 'GET',
       success: function(res) {
         let orderData = res.data.Data
+        console.log(orderData)
         _this.setData({
           whole: orderData
         })
-        // for (var i = 0; orderData.length>i;i++){
-        //   let name = util.Decrypt(orderData[i].CustomerName) 
-        //   let Ph = util.Decrypt(orderData[i].Phone) 
-        //   let Addr = util.Decrypt(orderData[i].Address) 
-        //   let Cont = util.Decrypt(orderData[i].Contact) 
-        //   _this.setData({
-        //     "whole.CustomerName": name,
-        //     "whole.Phone": Ph,
-        //     "whole.Address": Addr,
-        //     "whole.Contact": Cont,
-        //   })
-        // }
-
-
-        // let datalist = []
-        // let datalist1 = []
-        // let datalist2 = []
-
-        // for (let i = 0; orderData.length > i; i++) {
-        //   if (orderData[i].Status == 0) { //待维修
-        //     datalist.push(orderData[i])
-        //     _this.setData({
-        //       UntreatedList: datalist
-        //     })
-        //   } else if (orderData[i].Status == 30) { //维修完成
-        //     datalist1.push(orderData[i])
-        //     _this.setData({
-        //       ProcessedList: datalist1
-        //     })
-        //   } else if (orderData[i].Status == 100) { //取消
-        //     datalist2.push(orderData[i])
-        //     _this.setData({
-        //       EvaluateList: datalist2
-        //     })
-        //   }
-        // }
-
       },
     })
   },

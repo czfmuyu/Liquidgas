@@ -1,9 +1,20 @@
-@import"../PersonalData/PersonalData.wxss";
-.info{
-    padding: 0 20rpx;
-    background-color: #fff;
-    font-size: 30rpx;
-    margin-top: 30rpx;
-    
+@import "../PersonalData/PersonalData.wxss";
+
+.info {
+  padding: 0 20rpx;
+  background-color: #fff;
+  font-size: 30rpx;
+  margin-top: 30rpx;
 }
 
+.text {
+  font-size: 50rpx;
+  color: rgb(243, 161, 84);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+}
+.text-margin{
+  margin-right: 40rpx;
+}

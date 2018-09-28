@@ -16,6 +16,7 @@
     <view class="btn-Album" >请输入你要绑定的用气编号</view>
     <view class="modal-ipt">
         <input 
+        class='inpy_color'
             placeholder="请输入用气编号"
             bindinput="GasNumber" data-inpt='text'/>
     </view>
