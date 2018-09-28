@@ -123,48 +123,50 @@ Page({
   },
   Supplier() {
     console.log(app.CustomerList)
-    let arr = []
-    let OptionsBox = this.data.OptionsBox
-    if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-      console.log("i")
-      for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
-        let obj = {
-          Quantity: 0,
-          Price: app.CustomerList.EnterpriseProducts[i].UnitPrice,
-          ProductName: app.CustomerList.EnterpriseProducts[i].ProductName,
-          ProductId: app.CustomerList.EnterpriseProducts[i].ProductId
+    if (app.CustomerList !== null) {
+      let arr = []
+      let OptionsBox = this.data.OptionsBox
+      if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
+        console.log("i")
+        for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
+          let obj = {
+            Quantity: 0,
+            Price: app.CustomerList.EnterpriseProducts[i].UnitPrice,
+            ProductName: app.CustomerList.EnterpriseProducts[i].ProductName,
+            ProductId: app.CustomerList.EnterpriseProducts[i].ProductId
+          }
+          arr.push(obj)
         }
-        arr.push(obj)
-      }
-      console.log(arr)
-      this.setData({
-        commodityList: arr
-      })
-    } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-      console.log("in")
-      for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
-        let obj = {
-          Quantity: 0,
-          Price: app.CustomerList.EnterpriseProducts[j].KilogramPrice,
-          ProductName: app.CustomerList.EnterpriseProducts[j].ProductName,
-          ProductId: app.CustomerList.EnterpriseProducts[j].ProductId
+        console.log(arr)
+        this.setData({
+          commodityList: arr
+        })
+      } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
+        console.log("in")
+        for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
+          let obj = {
+            Quantity: 0,
+            Price: app.CustomerList.EnterpriseProducts[j].KilogramPrice,
+            ProductName: app.CustomerList.EnterpriseProducts[j].ProductName,
+            ProductId: app.CustomerList.EnterpriseProducts[j].ProductId
+          }
+          arr.push(obj)
         }
-        arr.push(obj)
+        console.log(arr)
+        this.setData({
+          commodityList: arr
+        })
       }
-      console.log(arr)
       this.setData({
-        commodityList: arr
+        EnterpriseName: app.CustomerList.Name,
+        EnterprisePhone: app.CustomerList.Phone,
+        EnterpriseAddress: app.CustomerList.Address,
+        EnterpriseProducts: app.CustomerList.EnterpriseProducts,
+        EnterpriseId: app.CustomerList.ID,
+        ProductId: app.CustomerList.ProductId
       })
+      this.userData()
     }
-    this.setData({
-      EnterpriseName: app.CustomerList.Name,
-      EnterprisePhone: app.CustomerList.Phone,
-      EnterpriseAddress: app.CustomerList.Address,
-      EnterpriseProducts: app.CustomerList.EnterpriseProducts,
-      EnterpriseId: app.CustomerList.ID,
-      ProductId: app.CustomerList.ProductId
-    })
-    this.userData()
   },
   //用户数据判断
   userData() {
@@ -355,12 +357,21 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res)
+        console.log(res.data)
+        if (res.data.Code == 506) {
+          wx.showToast({
+            title: '请输入完整的信息',
+            icon: 'none',
+            duration: 2000
+          });
+        } else {
+          wx.switchTab({
+            url: "/pages/Order/Order",
+          })
+        }
       },
     })
-    wx.switchTab({
-      url: "/pages/Order/Order",
-    })
+
   },
 
   /**

@@ -1,6 +1,6 @@
 // pages/Order/Order.js
-let app = getApp()
-const baseUrl = app.globalData.baseUrl
+let app = getApp().globalData
+let { baseUrl } = getApp().globalData
 const utils = require("../../utils/util.js")
 const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders` //获取订单列表接口
 const cancel = `${baseUrl}/Api/GasOrders/GasOrderCancel` //取消订单
@@ -16,7 +16,7 @@ Page({
   data: {
     ShowModal: false, //弹框按钮操控
     navbar: ['全部订单', '配送中', '已完成', '已取消'],
-    currentTab: 0,
+    currentTab: 0,//0全部订单1配送中2已完成3已取消
     wholeList: [],
     DeliveryList: [],
     CompleteList: [],
@@ -36,7 +36,42 @@ Page({
     Serialnumber: "",
 
   },
+   /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 2000
+    });
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+    let CustomerId = this.data.CustomerId
+    let count = this.data.callbackcount * Num
+    this.setData({
+      searchPageNum: this.data.searchPageNum,
+      callbackcount: count,
+    })
+    Num++;
+    this.wholeInfo()
+    this.DeliveryList()
+    this.CompleteList()
+    this.EvaluateList()
+    wx.showToast({
+      title: "加载中",
+      icon: 'loading',
+      duration: 2000
+    });
 
+  },
   //输入框事件，每输入一个字符，就会触发一次
   bindKeywordInput: function (e) {
     this.setData({
@@ -64,16 +99,28 @@ Page({
    */
   onLoad(options) {
     this.CustomerId()
-    this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
-
   },
-  CustomerId() {
-    let data = wx.getStorageSync('Information')
+   //导航控制
+   navbarTap(e) {
     this.setData({
-      CustomerId: data.CustomerId
+      currentTab: e.currentTarget.dataset.idx
+    })
+    let currentTab=this.data.currentTab
+    if(currentTab=0){//用户点击全部订单页面
+      this.wholeInfo()
+    }else if(currentTab=1){//用户点击配送中页面
+      this.DeliveryList()
+    }else if(currentTab=2){//用户点击已完成页面
+      this.CompleteList()
+    }else{//用户点击已取消页面
+      this.EvaluateList()
+    }
+    console.log(currentTab)
+  },
+  //获取用户的CustomerId
+  CustomerId() {
+    this.setData({
+      CustomerId: app.Customer.CustomerId
     })
   },
   //取消订单信息
@@ -100,8 +147,6 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         let data = res.data.Data
-        console.log(data)
-        console.log(data[0].CustomerName)
         if (data.lengty > 0) {
           for (let i = 0; i < data[i].length; i++) {
             utils.Decrypt(data[i].CustomerName)
@@ -213,7 +258,6 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-
         let data = res.data.Data
         if (data.lengty > 0) {
           for (let i = 0; i < data[i].length; i++) {
@@ -228,77 +272,20 @@ Page({
       },
     })
   },
-
-  //确认收货点击事件
-  onconfirm() {
-    wx.showToast({
-      title: '确认成功',
-      icon: 'success',
-      duration: 2000
-    })
-  },
-  //删除订单点击事件
-  onCancel() {
-    wx.showToast({
-      title: '取消成功',
-      icon: 'success',
-      duration: 2000
-    })
-  },
   //详情跳转
   deliveryDetails(e) {
     wx.navigateTo({
       url: "/pages/DeliveryDetails/DeliveryDetails?id=" + e.currentTarget.dataset.id,
     })
   },
-  //导航控制
-  navbarTap: function (e) {
-    this.setData({
-      currentTab: e.currentTarget.dataset.idx
-    })
-  },
+ 
   // 评价跳转页面
   Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
   },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-    this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
-    wx.showToast({
-      title: "加载中",
-      icon: 'loading',
-      duration: 2000
-    });
-  },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-    let CustomerId = this.data.CustomerId
-    let count = this.data.callbackcount * Num
-    this.setData({
-      searchPageNum: this.data.searchPageNum,
-      callbackcount: count,
-    })
-    Num++;
-    this.wholeInfo()
-    this.DeliveryList()
-    this.CompleteList()
-    this.EvaluateList()
-    wx.showToast({
-      title: "加载中",
-      icon: 'loading',
-      duration: 2000
-    });
-
-  },
+ 
 
   // 获取取消原因
   getdata: function (e) {

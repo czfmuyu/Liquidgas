@@ -29,7 +29,7 @@ Page({
       // 页码
       pageIndex: "1",
       // 反回条数
-      pageSize: "5",
+      pageSize: "3",
       // 查询关键字
       queryKeyword: "",
       // 状态列表
@@ -49,6 +49,56 @@ Page({
 
 
   },
+  //页面导航
+  navbarTap(e) {
+    this.setData({
+      currentTab: e.currentTarget.dataset.idx
+    })
+    let currentTab=this.data.currentTab
+    if(currentTab=0){//用户点击维修全部订单页面
+      this.getmaintenance()
+    }else if(currentTab=1){//用户点击配送中页面
+      this.UntreatedList()
+    }else if(currentTab=2){//用户点击维修完成页面
+      this.ProcessedList()
+    }else{//用户点击取消订单页面
+      this.EvaluateList()
+    }
+  },
+  // 搜索
+  queryInput: function (e) {
+    let text = e.detail.value
+    this.setData({
+      queryKeyword: text
+    })
+    this.getmaintenance()
+    this.UntreatedList()
+    this.ProcessedList()
+    this.EvaluateList()
+  },
+  //输入框清空事件
+  Delete() {
+    this.setData({
+      queryKeyword: ""
+    })
+    this.getmaintenance()
+    this.UntreatedList()
+    this.ProcessedList()
+    this.EvaluateList()
+
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.getID()
+  },
+  // 获取本地id
+  getID() {
+    this.setData({
+      "parameter.CustomerId": app.globalData.Customer.CustomerId
+    })
+  },
   //确认完成点击事件
   onconfirm() {
     wx.showToast({
@@ -57,8 +107,6 @@ Page({
       duration: 2000
     })
   },
-
-
   //全部页面详情
   queryBtn(e) {
     let orderId = e.currentTarget.dataset.orderid
@@ -73,46 +121,14 @@ Page({
     })
   },
 
-  navbarTap: function(e) {
-    this.setData({
-      currentTab: e.currentTarget.dataset.idx
-    })
-  },
   // 评价跳转页面
-  Evaluate: function() {
+  Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    let _this = this
-    // 获取订单
-    _this.getmaintenance()
-    _this.UntreatedList()
-    _this.ProcessedList()
-    _this.EvaluateList()
-    _this.getID()
-  },
-  // 搜索
-  queryInput: function(e) {
-    let _this=this
-    let text = e.detail.value
-  _this.setData({
-    queryKeyword: text
-  })
-    _this.getmaintenance()
-    _this.UntreatedList()
-    _this.ProcessedList()
-    _this.EvaluateList()
-    _this.getID()
-    console.log("11")
-  },
   // 获取维修全部订单列表
-  getmaintenance: function() {
+  getmaintenance: function () {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -134,7 +150,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function(res) {
+      success: function (res) {
         let orderData = res.data.Data
         console.log(orderData)
         _this.setData({
@@ -144,7 +160,7 @@ Page({
     })
   },
   // 调用配送中定单
-  UntreatedList: function() {
+  UntreatedList: function () {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -165,7 +181,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function(res) {
+      success: function (res) {
         let orderData = res.data.Data
         _this.setData({
           UntreatedList: orderData
@@ -174,7 +190,7 @@ Page({
     })
   },
   // 维修完成订单
-  ProcessedList: function() {
+  ProcessedList: function () {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -195,7 +211,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function(res) {
+      success: function (res) {
         let orderData = res.data.Data
         _this.setData({
           ProcessedList: orderData
@@ -204,7 +220,7 @@ Page({
     })
   },
   // 取消订单
-  EvaluateList: function() {
+  EvaluateList: function () {
     let _this = this
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
@@ -225,7 +241,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function(res) {
+      success: function (res) {
         let orderData = res.data.Data
         _this.setData({
           EvaluateList: orderData
@@ -233,23 +249,9 @@ Page({
       },
     })
   },
-  // 获取本地id
-  getID: function() {
-    let _this = this
-    wx.getStorage({
-      key: 'Information',
-      success: function(res) {
-        console.log(res)
-        let id = res.data.CustomerId
-        _this.setData({
-          "parameter.CustomerId": id
-        })
 
-      },
-    })
-  },
   // 获取取消原因
-  getdata: function(e) {
+  getdata: function (e) {
     let _this = this
     let getdatas = e.detail.value
     _this.setData({
@@ -259,7 +261,7 @@ Page({
   /**
    * 对话框确认按钮点击事件
    */
-  onConfirm: function(e) {
+  onConfirm: function (e) {
     let _this = this
     // 订单
     let tomerId = _this.data.Serialnumber
@@ -280,13 +282,15 @@ Page({
           'content-type': 'application/json'
         },
         method: 'POST',
-        success: function(res) {
+        success: function (res) {
           if (res.data.Data) {
             wx.showToast({
               title: "提交成功",
               duration: 1000
             });
+            _this.getmaintenance()
             _this.UntreatedList()
+            _this.EvaluateList()
           } else {
             util.showError("提交有误请从新提交")
             return false
@@ -300,7 +304,7 @@ Page({
       });
     }
     // 隐藏弹框
-    this.HideModal()
+    _this.HideModal()
   },
   /**
    * 显示输入狂取消按键
@@ -320,7 +324,7 @@ Page({
   /**
    * 隐藏模态对话框
    */
-  HideModal: function() {
+  HideModal: function () {
     this.setData({
       ShowModal: false
     });
@@ -328,15 +332,16 @@ Page({
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function() {
+  onCancel: function () {
     this.HideModal();
   },
 
 
   // 确认订单
-  Confirm: function(e) {
+  Confirm: function (e) {
     let Orderid = e.currentTarget.dataset.orderid
     let Customerid = e.currentTarget.dataset.serial
+    let this_=this
     wx.request({
       url: Confirm,
       data: {
@@ -348,7 +353,10 @@ Page({
         'content-type': 'application/json'
       },
       method: 'POST',
-      success: function(res) {
+      success: function (res) {
+        this_.getmaintenance()
+        this_.ProcessedList()
+        this_.UntreatedList()
         console.log(res)
       },
     })
@@ -356,35 +364,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     let _this = this
     _this.getmaintenance()
     _this.UntreatedList()
@@ -400,7 +408,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     let _this = this
     let a = 2
     let page = _this.data.parameter.pageIndex
@@ -427,7 +435,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
