@@ -58,12 +58,13 @@ Page({
       ServiceMode: "0",
     },
     // 点击后的保修
-    RepairLabel:[],
+    RepairLabel: [],
     // 渲染的保修列表
     guaranteeList: [],
- 
+
     // 图片数组
     pics: [],
+    index:"0"
   },
 
 
@@ -245,33 +246,6 @@ Page({
   },
 
 
-
-  // 表单验证正确后才可以隐藏表格
-  onConfirm: function() {
-    let fomlist = this.data.frolist
-    let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-    if (!fomlist.Contact || !fomlist.Phone || !fomlist.Address) {
-      wx.showToast({
-        title: '请完整填写信息',
-        duration: 2000
-      })
-      return false
-    }
-    if (!telphone.test(fomlist.phone)) {
-      wx.showToast({
-        title: '电话输入有误',
-
-        duration: 2000
-      })
-      return false
-    }
-    this.setData({
-      isAddress: false,
-    })
-    this.hideModal();
-  },
-
-
   /**
    * 地址无数据隐藏页面弹框
    */
@@ -286,7 +260,7 @@ Page({
 
   pictureuploading() { //这里是选取图片的方法
     var that = this,
-     pics = this.data.pics;
+      pics = this.data.pics;
     wx.chooseImage({
       count: 9, // 最多可以选择的图片张数，默认9
       sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
@@ -308,8 +282,8 @@ Page({
   uploadimg: function() {
     let that = this
     let pics = that.data.pics;
+    var i=0
     console.log(pics)
-    let i=0
     wx.uploadFile({
       url: Urlsimg,
       filePath: pics[i],
@@ -317,22 +291,20 @@ Page({
       formData: null, //这里是上传图片时一起上传的数据
       success: (res) => {
         console.log(res)
+        // i++;
+        // console.log(i)
+        // that.uploadimg()
         // let data = res.data
         //     let imglist = JSON.parse(data);
         //     let datalist = imglist.Data
         // pics = pics.concat(datalist);
+
       },
       fail: (res) => {
 
       },
       complete: () => {
-        i++
-        console.log(i)
-        if (i == pics.length) {
-          return false
-        } else {
-           that.uploadimg()
-        }
+
       }
     });
   },

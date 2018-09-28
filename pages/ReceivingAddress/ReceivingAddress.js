@@ -1,7 +1,9 @@
 // pages/ReceivingAddress/ReceivingAddress.js
 var util = require('../../utils/util.js')
 var formatLocation = util.formatLocation
-let { Orderaddress } = getApp().globalData
+let {
+  Orderaddress
+} = getApp().globalData
 Page({
 
   /**
@@ -9,14 +11,14 @@ Page({
    */
   data: {
     hasLocation: false,
-    location:"",
-    locationAddress:"",
-    address:""
+    location: "",
+    locationAddress: "",
+    address: ""
   },
-  chooseLocation: function () {
+  chooseLocation: function() {
     var that = this
     wx.chooseLocation({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           hasLocation: true,
           location: formatLocation(res.longitude, res.latitude),
@@ -26,21 +28,21 @@ Page({
     })
 
   },
-  clear: function () {
+  clear: function() {
     this.setData({
       hasLocation: false
     })
   },
   // 获取用户输入地址
-  assignment(e){
+  assignment(e) {
     let text = e.detail.value
     this.setData({
-      address:text
+      address: text
     })
 
   },
-  keep:function(){
-    let _this=this
+  keep: function() {
+    let _this = this
     let addressD = _this.data.address
     let location = _this.data.locationAddress
     // 拼接获取到的地址
@@ -51,63 +53,78 @@ Page({
     Orderaddress.Address = locations
     Orderaddress.Longitude = longitudes
     Orderaddress.Latitude = latitudes
-    wx.navigateTo({
-      url: '/pages/GasInformation/GasInformation',
-    })
+    if (addressD == "" || addressD == undefined) {
+      wx.showToast({
+        title: "请输入详细地址！",
+        icon: 'loadlng',
+        duration: 1000
+      });
+    } else if (location == "" || location == undefined){
+      wx.showToast({
+        title: "请选择地址！",
+        icon: 'loadlng',
+        duration: 1000
+      });
+    }else{
+      wx.redirectTo({
+        url: '/pages/GasInformation/GasInformation',
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

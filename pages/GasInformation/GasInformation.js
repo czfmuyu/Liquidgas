@@ -18,15 +18,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     this.page()//判断页面跳转index
-
     this.setData({//获取全局变量值
       storename: Orderaddress.Contact,
       telephone: Orderaddress.Phone,
       address: Orderaddress.Address,
     })
-    this.getData()//获取有信息数据
+   
 
   },
 
@@ -42,31 +40,12 @@ Page({
       },
     })
   },
-  //获取本地储存
-  getData() {
-    let _this = this
-    wx.getStorage({
-      key: 'Information',
-      success: function (res) {
-        let storename = res.data.AccountName
-        let telephone = res.data.AccountPhone
-        let address = res.data.address
-        console.log(address)
-        _this.setData({
-          storename: storename,
-          telephone: telephone,
-          address: address,
-        })
-      },
-    })
-  },
+
   // 提交地址
   submission() {
-
-    console.log(Orderaddress)
     let indexs=this.data.index
     if (indexs == 0) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/OrderAddress/OrderAddress',
       })
     } else if (indexs == 1) {
@@ -75,7 +54,7 @@ Page({
         url: '/pages/My/My',
       })
     } else {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/Repair/Repair',
       })
     }
@@ -83,21 +62,20 @@ Page({
   // 获取姓名保存到全局
   GasNumber: function (e) {
     let value = e.detail.value
-    this.setData({
-      storename: value
-    })
-    console.log(this.data.storename)
-    Orderaddress.Contact = this.data.storename
-    console.log("获取名字"+Orderaddress)
+      this.setData({
+        storename: value
+      })
+      Orderaddress.Contact = this.data.storename
+    
   },
 
   // 获取电话保存到全局
   GasNumbers: function (e) {
     let value = e.detail.value
-    this.setData({
-      telephone: value
-    })
-    Orderaddress.Phone = this.data.telephone
+      this.setData({
+        telephone: value
+      })
+      Orderaddress.Phone = this.data.telephone
   },
   /**
    * 电话弹窗
@@ -129,9 +107,21 @@ Page({
    * 电话对话框确认按钮点击事件
    */
   onPhoneConfirm: function () {
+    let phone = this.data.telephone
+    let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+    if (!telphone.test(phone)) {
+      wx.showToast({
+        title: "电话输入有误！",
+        icon: 'loadlng',
+        duration: 1000
+      });
+    } else {
       this.setData({
         PhoneShowModal: false
       });
+    }
+
+      
   },
 
 
@@ -174,9 +164,20 @@ Page({
    * 名称对话框确认按钮点击事件
    */
   onNameConfirm: function () {
-    this.setData({
-      NameShowModal: false
-    });
+    let storename = this.data.storename
+    let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
+    if (!name.test(storename)) {
+      wx.showToast({
+        title: "姓名输入有误！",
+        icon: 'loadlng',
+        duration: 1000
+      });
+    } else {
+      this.setData({
+        NameShowModal: false
+      });
+    }
+   
   },
 
 

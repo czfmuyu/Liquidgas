@@ -41,7 +41,7 @@
   <view class="btn-Photograph">提示</view>
   <view class="btn-Album">请输入你要更改的电话</view>
   <view class="modal-ipt">
-    <input placeholder="请输入电话" data-type='text' bindblur="GasNumbers" />
+    <input placeholder="请输入电话" data-type='text' bindblur="GasNumbers" maxlength='11' />
   </view>
   <view class="modal-footer">
     <view class="btn-cancel" bindtap="onPhoneCancel">取消</view>

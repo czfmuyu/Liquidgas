@@ -1,4 +1,4 @@
-// pages/ReceivingAddress/ReceivingAddress.js
+let app = getApp().globalData
 Page({
 
   /**
@@ -6,7 +6,7 @@ Page({
    */
   data: {
     GasShowModal: false, //弹框按钮操控
-    numberlist:[],
+    numberlist: [],
     numbers: "",
   },
   /**
@@ -47,9 +47,10 @@ Page({
       numberlist: numberlists,
       GasShowModal: false
     })
-    wx.redirectTo({
-      url: '/pages/Authorized/Authorized',
-    })
+    // wx.redirectTo({
+    //   url: '/pages/Authorized/Authorized',
+    // })
+
   },
   // 获取新增编号
   GasNumber: function(e) {
@@ -60,29 +61,25 @@ Page({
     _this.setData({
       numbers: gasuses
     })
+
   },
 
   // 获取本地储存用气编号
   gasuse: function() {
-    wx.getStorage({
-      key: "wholeGas",
-      success: res => {
-        console.log(res.data)
-        let gasuses = []
-        if(res.data.length>0){
-          for(let i=0;i<res.data.length;i++){
-            gasuses.push(res.data[i].GasNo)
-          }
-        }else{
-          gasuse = res.data.GasNo
-          gasuses.push(gasuse)
-        }
-        this.setData({
-          "numberlist": gasuses
-        })
-
-      }
+    console.log(app.GasNo)
+    // let gasuses = []
+    // if (res.data.length > 0) {
+    //   for (let i = 0; i < res.data.length; i++) {
+    //     gasuses.push(res.data[i].GasNo)
+    //   }
+    // } else {
+    //   gasuse = res.data.GasNo
+    //   gasuses.push(gasuse)
+    // }
+    this.setData({
+      numberlist: app.GasNo
     })
+
   },
 
   /**

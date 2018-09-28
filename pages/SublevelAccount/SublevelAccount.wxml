@@ -1,19 +1,18 @@
-
 <view class='text' wx:if="{{display==1}}">
   你还没有子帐号
 </view>
 
-<view wx:else >
-    <view class="content" wx:for="{{listing}}" wx:key="{{item}}">
-        <view>
-            <text>{{item.Name}}</text>
-            <!-- <text style='color:rgb(245, 175, 70)' wx:if="{{item.Type==0}}">主</text> -->
-        </view>
-        <view class="wrap">
-            <text class='text-margin'>{{item.Phone}}</text>
-            <view style="margin-left: 16rpx;">
-                <view style="color:#2269d4;" bindtap='delet' data-id='{{item.ID}}'>删除绑定</view>
-            </view>
-        </view>
+<view wx:else>
+  <view class="content" wx:for="{{listing}}" wx:key="{{item}}">
+    <view>
+      <text style='color:rgb(245, 175, 70);' wx:if="{{item.Type==0}}">主</text>
+      <text style="margin-left: 30rpx;">{{item.Name}}</text>
     </view>
+    <view class="wrap">
+      <text class='text-margin'>{{item.Phone}}</text>
+      <view style="margin-left: 16rpx;">
+        <view style="color:#2269d4;" bindtap='delet' data-id='{{item.ID}}'>删除绑定</view>
+      </view>
+    </view>
+  </view>
 </view>
