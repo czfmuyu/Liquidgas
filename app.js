@@ -21,7 +21,7 @@ App({
     Customer:null,//个人信息
     CustomerList:null,//商品列表
     Subaccount:null,//子账号信息
-    GasNo:null,//用户所有用气编号
+    GasNo:"",//用户所有用气编号
     Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude:""},//地址信息
   }
 })
