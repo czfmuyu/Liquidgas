@@ -332,6 +332,7 @@ Page({
       }
     }
     console.log(this_.data.OrderItems)
+    console.log(app)
     wx.request({
       url: baseUrls,
       data: {
@@ -349,7 +350,7 @@ Page({
         DistributionMode: time,
         SubscribeTime: SubscribeTime,
         PayMethod: payment,
-        AccountId: this_.data.AccountId,
+        AccountId: app.AccountId.AccountId,
         OrderItems: this_.data.OrderItems,
       },
       header: {
@@ -377,11 +378,11 @@ Page({
             Address: this_.data.CustomerAddress,
             Longitude: this_.data.CustomerLatitude,
             Latitude: this_.data.CustomerLongitude,
-            GasBuyMode: this.PrceType,
-            DistributionMode: this.time,
-            SubscribeTime: this.SubscribeTime,
-            PayMethod: this.payment,
-            AccountId: this_.data.AccountId,
+            GasBuyMode:this_.PrceType,
+            DistributionMode: this_.time,
+            SubscribeTime: this_.SubscribeTime,
+            PayMethod: this_.payment,
+            AccountId: app.AccountId.AccountId,
             OrderItems: this_.data.OrderItems,
             EnterpriseName: this_.data.EnterpriseName,
             EnterprisePhone: this_.data.EnterprisePhone,

@@ -24,9 +24,13 @@ Page({
     })
   },
   Repair() {
-    wx.navigateTo({//维修页面
-      url: "/pages/Repair/Repair"
-    })
+    if (app.GasNo !== null) {
+      wx.navigateTo({//维修页面
+        url: "/pages/Repair/Repair"
+      })
+    } else {
+      utils.showError("无用气编号请联系服务商添加用气编号")
+    }
   },
   Opinion() {
     wx.navigateTo({//意见反馈页面
@@ -74,6 +78,7 @@ Page({
         let data = res.data.Data
         this_.decryption(data)
         let arr = [];
+        this_.Tips()
         if (res.data.Data == null) {
           return
         } else {
@@ -109,14 +114,17 @@ Page({
   },
   //获取的数据解密
   decryption(data) {
-    data.map(item => {
-      utils.Decrypt(item.CustomerName)
-      utils.Decrypt(item.CustomerPhone)
-      utils.Decrypt(item.CustomerAddress)
-      utils.Decrypt(item.AccountName)
-      utils.Decrypt(item.AccountPhone)
-      utils.Decrypt(item.CustomerDetails)
-    })
+    console.log(data)
+    if (data !== null) {
+      data.map(item => {
+        utils.Decrypt(item.CustomerName)
+        utils.Decrypt(item.CustomerPhone)
+        utils.Decrypt(item.CustomerAddress)
+        utils.Decrypt(item.AccountName)
+        utils.Decrypt(item.AccountPhone)
+        utils.Decrypt(item.CustomerDetails)
+      })
+    }
     return data
   },
   Tips() {
@@ -157,17 +165,21 @@ Page({
     wx.request({
       url: Gas,
       data: {
-        Sign:"",
-        AccountId:app.AccountId.AccountId,
-        GasNo:this.data.value,
+        Sign: "",
+        AccountId: app.AccountId.AccountId,
+        GasNo: this.data.value,
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res)
+        if (res.data.Code) {
+          wx.redirectTo({
+            url: '/pages/Login/Login',
+          })
+        }
       },
     })
-    // this.hideModal();
+    this.hideModal();
   },
   //获取编号弹框的值
   GasNumber(e) {

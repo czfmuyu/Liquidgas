@@ -1,7 +1,7 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//登录接
 const utils = require("../../utils/util.js")
-var app = getApp()
+var app = getApp().globalData
 Page({
 
   /**
@@ -94,6 +94,8 @@ Page({
                   success: function (res) {
                     console.log(res)
                     if (res.data.Code == 200) {
+                      console.log(res.data.Data.AccountId)
+                      app.AccountId=res.data.Data
                       wx.switchTab({//登录页面
                         url: "/pages/HomePage/HomePage"
                       })

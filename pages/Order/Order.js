@@ -106,11 +106,11 @@ Page({
       currentTab: e.currentTarget.dataset.idx
     })
     let currentTab = this.data.currentTab
-    if (currentTab = 0) {//用户点击全部订单页面
+    if (currentTab == 0) {//用户点击全部订单页面
       this.wholeInfo()
-    } else if (currentTab = 1) {//用户点击配送中页面
+    } else if (currentTab == 1) {//用户点击配送中页面
       this.DeliveryList()
-    } else if (currentTab = 2) {//用户点击已完成页面
+    } else if (currentTab == 2) {//用户点击已完成页面
       this.CompleteList()
     } else {//用户点击已取消页面
       this.EvaluateList()

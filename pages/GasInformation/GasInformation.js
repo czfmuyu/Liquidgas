@@ -21,10 +21,10 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.page() //判断页面跳转index
     console.log(app)
-    if (Orderaddress.Contact !== "" || Orderaddress.Phone !== ""){
+    if (Orderaddress.Contact !== "" || Orderaddress.Phone !== "") {
       this.setData({ //新用户没有数据的时候获取的信息
         storename: Orderaddress.Contact,
         telephone: Orderaddress.Phone,
@@ -32,7 +32,7 @@ Page({
         longitudes: Orderaddress.Longitude,
         latitudes: Orderaddress.Latitude,
       })
-    }else{
+    } else {
       this.setData({
         storename: getApp().globalData.Customer.CustomerName,
         telephone: getApp().globalData.Customer.CustomerPhone,
@@ -41,8 +41,6 @@ Page({
         longitudes: getApp().globalData.Customer.CustomerLongitude,
       })
     }
-    
-    
   },
 
   //获取页面传的值
@@ -50,7 +48,7 @@ Page({
     let this_ = this
     wx.getStorage({
       key: 'page',
-      success: function(res) {
+      success: function (res) {
         this_.setData({
           index: res.data
         })
@@ -61,26 +59,27 @@ Page({
   // 提交地址
   submission() {
     console.log(this.data)
-    wx.request({
-      url: baseUrls,
-      data: {
-        Sign: "",
-        CustomerId: app.Customer.CustomerId,
-        Name: utils.Encryption(this.data.storename),
-        Phone: utils.Encryption(this.data.telephone),
-        Address: utils.Encryption(this.data.address),
-        Longitude: this.data.longitudes,
-        Latitude: this.data.latitudes,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "POST",
-      success: res => {
-        console.log(res)
-      },
-    })
-
+    if (app.Customer !== null) {
+      wx.request({
+        url: baseUrls,
+        data: {
+          Sign: "",
+          CustomerId: app.Customer.CustomerId,
+          Name: utils.Encryption(this.data.storename),
+          Phone: utils.Encryption(this.data.telephone),
+          Address: utils.Encryption(this.data.address),
+          Longitude: this.data.longitudes,
+          Latitude: this.data.latitudes,
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "POST",
+        success: res => {
+          console.log(res)
+        },
+      })
+    }
     let indexs = this.data.index
     if (indexs == 0) {
       wx.redirectTo({
@@ -97,7 +96,7 @@ Page({
     }
   },
   // 获取姓名保存到全局
-  GasNumber: function(e) {
+  GasNumber: function (e) {
     let value = e.detail.value
     this.setData({
       storename: value
@@ -107,7 +106,7 @@ Page({
   },
 
   // 获取电话保存到全局
-  GasNumbers: function(e) {
+  GasNumbers: function (e) {
     let value = e.detail.value
     this.setData({
       telephone: value
@@ -126,7 +125,7 @@ Page({
   /**
    * 电话对话框取消按钮点击事件
    */
-  onPhoneCancel: function() {
+  onPhoneCancel: function () {
     Orderaddress.Phone = ""
     this.setData({
       telephone: "",
@@ -136,7 +135,7 @@ Page({
   /**
    * 电话对话框确认按钮点击事件
    */
-  onPhoneConfirm: function() {
+  onPhoneConfirm: function () {
     let phone = this.data.telephone
     let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
     if (!telphone.test(phone)) {
@@ -174,12 +173,12 @@ Page({
   /**
    * 名称弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
 
   /**
    * 名称对话框取消按钮点击事件
    */
-  onNameCancel: function() {
+  onNameCancel: function () {
     Orderaddress.Contact = "",
       this.setData({
         storename: "",
@@ -189,7 +188,7 @@ Page({
   /**
    * 名称对话框确认按钮点击事件
    */
-  onNameConfirm: function() {
+  onNameConfirm: function () {
     let storename = this.data.storename
     let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
     if (!name.test(storename)) {
@@ -210,14 +209,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
 
   },
@@ -225,35 +224,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
