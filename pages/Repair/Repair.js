@@ -299,11 +299,11 @@ Page({
   //       //     let imglist = JSON.parse(data);
   //       //     let datalist = imglist.Data
   //       // pics = pics.concat(datalist);
-       
+
   //       console.log(i);
   //     },
   //     fail: (res) => {
-       
+
   //     },
   //     complete: () => {
   //       console.log(i);
@@ -324,10 +324,11 @@ Page({
 
 
   //多张图片上传
-  uploadimg: function (data) {
+  uploadimg: function(data) {
     let that = this
     let pics = that.data.pics;
-    for (let i=0; pics.length>0;i++){
+    console.log(pics)
+    for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
         url: Urlsimg,
         filePath: pics[i],
@@ -338,7 +339,7 @@ Page({
         },
       });
     }
-    
+
   },
 
 
