@@ -1,8 +1,10 @@
 let utils = require('../../utils/util.js');
 let amap = require("../../utils/amap");
-let app = getApp()
-const baseUrl = app.globalData.baseUrl;
+let app = getApp().globalData
+const { baseUrl } = getApp().globalData;
 const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrderInfo`//获取订单详情接口
+const cancel = `${baseUrl}/Api/GasOrders/GasOrderCancel` //取消订单
+const Confirm = `${baseUrl}/Api/GasOrders/GasOrderConfirm` //确认订单
 Page({
   data: {
     //地图参数
@@ -30,7 +32,10 @@ Page({
     Contact: "郑菲",
     Phone: "15000822230",
     OrderTrackList: [],
-    goodsList:[],
+    goodsList: [],
+    ShowModal: false, //弹框按钮操控
+    orderId: "",
+    getdata: "",//取消说明
   },
   onLoad(options) {
     this.queryDetails(options)
@@ -68,15 +73,113 @@ Page({
 
 
   },
+  // 获取取消原因
+  getdata: function (e) {
+    let getdatas = e.detail.value
+    this.setData({
+      getdata: getdatas
+    })
+  },
+  /**
+   * 隐藏模态对话框
+   */
+  HideModal: function () {
+    this.setData({
+      ShowModal: false
+    });
+  },
+  /**
+   * 对话框取消按钮点击事件
+   */
+  onCancel: function () {
+    this.HideModal();
+  },
+  /**
+   * 显示取消框
+   */
+  phoneList(e) {
+    let _this = this
+    let id = e.target.dataset.orderid
+    let orderID = e.target.dataset.serial
+    _this.setData({
+      ShowModal: true,
+      ID: id,
+      Serialnumber: orderID
+    })
+  },
+  // 确认收货
+  Confirm: function (e) {
+    let this_ = this
+    wx.request({
+      url: Confirm,
+      data: {
+        Sign: "",
+        OrderId: this_.data.orderId,
+        CustomerId: app.CustomerId.CustomerId,
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.data)
+        wx.showToast({
+          title: "确认成功",
+          duration: 2000
+        });
+        wx.switchTab({
+          url: '/pages/Order/Order',
+        })
+      },
+    })
+  },
+  //取消订单
+  onConfirm() {
+    let this_ = this
+    console.log(this_.data.OrderTrackList.CustomerId)
+    if (this_.data.getdata !== "") {
+      wx.request({
+        url: cancel,
+        data: {
+          Sign: "",
+          OrderId: this_.data.orderId,
+          CustomerId: this_.data.OrderTrackList.CustomerId,
+          Explain: this_.data.getdata
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+        success: function (res) {
+          wx.showToast({
+            title: "取消成功！",
+            duration: 2000
+          });
+          // 隐藏弹框
+          this_.HideModal()
+          wx.switchTab({
+            url: '/pages/Order/Order',
+          })
+        },
+      })
+    } else {
+      wx.showToast({
+        title: "请填写取消原因",
+        duration: 1000
+      });
+      return false
+    }
+
+  },
   //页面判断改变
-  Pagechange(){
-     // 数据判断页面改动
-     if (this.data.OrderTrackList.Status <30) {//配送中
+  Pagechange() {
+    // 数据判断页面改动
+    if (this.data.OrderTrackList.Status < 30) {//配送中
       this.setData({
         StateControl: 1,
         btn: 1
       })
-    } else if (this.data.OrderTrackList.Status =30) {//配送完成
+    } else if (this.data.OrderTrackList.Status = 30) {//配送完成
       this.setData({
         StateControl: 2,
         btn: 2
@@ -84,13 +187,13 @@ Page({
     } else {
       this.setData({//取消订单
         StateControl: 3,
-        btn:3
+        btn: 3
       })
     }
   },
   //查询订单详情
   queryDetails(options) {
-    let this_=this
+    let this_ = this
     wx.request({
       url: baseUrls,
       data: {
@@ -103,26 +206,28 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        let data=res.data.Data
+        let data = res.data.Data
+        console.log(data)
         utils.Decrypt(data.Address)
         utils.Decrypt(data.Contact)
         utils.Decrypt(data.Phone)
-        let OrderItems=res.data.Data.OrderItems
-        for(let i=0;i<OrderItems.length;i++){
+        let OrderItems = res.data.Data.OrderItems
+        for (let i = 0; i < OrderItems.length; i++) {
           utils.Decrypt(OrderItems.ProductName)
           utils.Decrypt(OrderItems.Price)
           utils.Decrypt(OrderItems.Quantity)
         }
         this_.setData({
-          OrderTrackList:data,
-          goodsList:OrderItems
+          OrderTrackList: data,
+          goodsList: OrderItems,
+          orderId: options.id
         })
         this_.Pagechange()
       },
-    }) 
+    })
   },
-   // 评价跳转页面
-   Evaluate: function () {
+  // 评价跳转页面
+  Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })

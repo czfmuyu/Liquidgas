@@ -80,7 +80,7 @@ Page({
         this_.decryption(data)
         let arr = [];
         if (res.data.Data == null) {
-          this.setData({
+          this_.setData({
             showModal: true
           })
           return
