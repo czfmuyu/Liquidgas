@@ -55,11 +55,11 @@ Page({
       currentTab: e.currentTarget.dataset.idx
     })
     let currentTab=this.data.currentTab
-    if(currentTab=0){//用户点击维修全部订单页面
+    if(currentTab==0){//用户点击维修全部订单页面
       this.getmaintenance()
-    }else if(currentTab=1){//用户点击配送中页面
+    }else if(currentTab==1){//用户点击配送中页面
       this.UntreatedList()
-    }else if(currentTab=2){//用户点击维修完成页面
+    }else if(currentTab==2){//用户点击维修完成页面
       this.ProcessedList()
     }else{//用户点击取消订单页面
       this.EvaluateList()
@@ -130,7 +130,8 @@ Page({
   },
   // 获取维修全部订单列表
   getmaintenance: function () {
-    let _this = this
+    let _this=this
+    console.log("全部")
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
     let pageSizes = parameterlist.pageSize
@@ -373,7 +374,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    let _this = this
+    _this.getmaintenance()
+    _this.UntreatedList()
+    _this.ProcessedList()
+    _this.EvaluateList()
   },
 
   /**
