@@ -18,3 +18,6 @@
 .text-margin{
   margin-right: 40rpx;
 }
+.content{
+  border-bottom: 1rpx solid #f1f1f1;
+}

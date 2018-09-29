@@ -42,7 +42,7 @@ Page({
       // 维修描述
       ProblemDescription: "",
       // 照片编码
-      PhotoIds: "1",
+      PhotoIds: "",
       // 企业编号
       EnterpriseId: "",
       // 用户编号
@@ -277,57 +277,10 @@ Page({
     })
   },
 
-
-  //多张图片上传
-  // uploadimg: function(data) {
-  //   let that = this
-  //   let pics = that.data.pics;
-  //   let i = data;
-  //   console.log(i)
-  //   console.log(pics)
-  //   wx.uploadFile({
-  //     url: Urlsimg,
-  //     filePath: pics[i],
-  //     name: 'image', //这里根据自己的实际情况改key
-  //     formData: null, //这里是上传图片时一起上传的数据
-  //     success: (res) => {
-  //       console.log(res)
-  //       // i++;
-  //       // console.log(i)
-  //       // that.uploadimg()
-  //       // let data = res.data
-  //       //     let imglist = JSON.parse(data);
-  //       //     let datalist = imglist.Data
-  //       // pics = pics.concat(datalist);
-
-  //       console.log(i);
-  //     },
-  //     fail: (res) => {
-
-  //     },
-  //     complete: () => {
-  //       console.log(i);
-  //       i++;//这个图片执行完上传后，开始上传下一张
-  //       if (i == data.path.length) {   //当图片传完时，停止调用          
-  //         console.log('执行完毕');
-  //         console.log('成功：' + success + " 失败：" + fail);
-  //       } else {//若图片还没有传完，则继续调用函数
-  //         console.log(i);
-  //         data = i;
-  //         data.success = success;
-  //         data.fail = fail;
-  //         that.uploadimg(data);
-  //       }
-  //     }
-  //   });
-  // },
-
-
   //多张图片上传
   uploadimg: function(data) {
     let that = this
     let pics = that.data.pics;
-    console.log(pics)
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
         url: Urlsimg,
@@ -336,6 +289,14 @@ Page({
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
           console.log(res)
+          let data = res.data
+          let imglist = JSON.parse(data);
+          let datalist = imglist.Data
+          pics = pics.concat(datalist);
+          console.log(pics)
+          that.setData({
+            "frolist.PhotoIds":pics
+          })
         },
       });
     }
@@ -361,15 +322,12 @@ Page({
   },
 
 
-
   /**
    * 生命周期函数--监听页面加载*******
    */
   onLoad: function(options) {
     let _this = this
     _this.repair() //获取保修项目
-    console.log(app)
-
     // 企业编号
     let EnterpriseId = app.Customer.EnterpriseId
     // 用户编码
@@ -406,7 +364,7 @@ Page({
         "frolist.Longitude": Longitude,
         "frolist.Latitude": Latitude,
       })
-    } else {
+    } else {//老用户渲染
       let name = app.Customer.CustomerName
       let phone = app.Customer.CustomerPhone
       let Address = app.Customer.CustomerAddress
