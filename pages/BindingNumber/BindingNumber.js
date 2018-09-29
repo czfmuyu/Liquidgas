@@ -1,6 +1,6 @@
 let app = getApp().globalData
-const baseUrls = `${app.baseUrl}/Api/Customers/BindCustomerAccount` 
-			
+const baseUrls = `${app.baseUrl}/Api/Customers/BindCustomerAccount`
+
 
 Page({
   /**
@@ -45,7 +45,7 @@ Page({
       GasShowModal: false
     })
     wx.request({
-      url:baseUrls,
+      url: baseUrls,
       data: {
         Sign: "",
         GasNo: this.data.numbers,
@@ -57,11 +57,14 @@ Page({
       method: 'post',
       success: res => {
         console.log(res)
+        if (res.data.Code == 200) {
+          wx.redirectTo({
+            url: '/pages/Login/Login',
+          })
+        }
       }
     })
-    // wx.redirectTo({
-    //   url: '/pages/Login/Login',
-    // })
+
 
   },
   // 获取新增编号

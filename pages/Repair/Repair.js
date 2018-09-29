@@ -279,36 +279,67 @@ Page({
 
 
   //多张图片上传
-  uploadimg: function() {
+  // uploadimg: function(data) {
+  //   let that = this
+  //   let pics = that.data.pics;
+  //   let i = data;
+  //   console.log(i)
+  //   console.log(pics)
+  //   wx.uploadFile({
+  //     url: Urlsimg,
+  //     filePath: pics[i],
+  //     name: 'image', //这里根据自己的实际情况改key
+  //     formData: null, //这里是上传图片时一起上传的数据
+  //     success: (res) => {
+  //       console.log(res)
+  //       // i++;
+  //       // console.log(i)
+  //       // that.uploadimg()
+  //       // let data = res.data
+  //       //     let imglist = JSON.parse(data);
+  //       //     let datalist = imglist.Data
+  //       // pics = pics.concat(datalist);
+       
+  //       console.log(i);
+  //     },
+  //     fail: (res) => {
+       
+  //     },
+  //     complete: () => {
+  //       console.log(i);
+  //       i++;//这个图片执行完上传后，开始上传下一张
+  //       if (i == data.path.length) {   //当图片传完时，停止调用          
+  //         console.log('执行完毕');
+  //         console.log('成功：' + success + " 失败：" + fail);
+  //       } else {//若图片还没有传完，则继续调用函数
+  //         console.log(i);
+  //         data = i;
+  //         data.success = success;
+  //         data.fail = fail;
+  //         that.uploadimg(data);
+  //       }
+  //     }
+  //   });
+  // },
+
+
+  //多张图片上传
+  uploadimg: function (data) {
     let that = this
     let pics = that.data.pics;
-    var i = 0
-    console.log(pics)
-    wx.uploadFile({
-      url: Urlsimg,
-      filePath: pics[i],
-      name: 'image', //这里根据自己的实际情况改key
-      formData: null, //这里是上传图片时一起上传的数据
-      success: (res) => {
-        console.log(res)
-        // i++;
-        // console.log(i)
-        // that.uploadimg()
-        // let data = res.data
-        //     let imglist = JSON.parse(data);
-        //     let datalist = imglist.Data
-        // pics = pics.concat(datalist);
-
-      },
-      fail: (res) => {
-
-      },
-      complete: () => {
-
-      }
-    });
+    for (let i=0; pics.length>0;i++){
+      wx.uploadFile({
+        url: Urlsimg,
+        filePath: pics[i],
+        name: 'image', //这里根据自己的实际情况改key
+        formData: null, //这里是上传图片时一起上传的数据
+        success: (res) => {
+          console.log(res)
+        },
+      });
+    }
+    
   },
-
 
 
   /**
@@ -374,7 +405,7 @@ Page({
         "frolist.Longitude": Longitude,
         "frolist.Latitude": Latitude,
       })
-    }else{
+    } else {
       let name = app.Customer.CustomerName
       let phone = app.Customer.CustomerPhone
       let Address = app.Customer.CustomerAddress

@@ -24,6 +24,7 @@ Page({
     })
   },
   Repair() {
+    console.log(app.GasNo)
     if (app.GasNo !== "") {
       wx.navigateTo({//维修页面
         url: "/pages/Repair/Repair"
