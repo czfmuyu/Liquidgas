@@ -110,17 +110,14 @@ Page({
   },
   //全部页面详情
   queryBtn(e) {
+    console.log(e)
     let orderId = e.currentTarget.dataset.orderid
+    let seriaI = e.currentTarget.dataset.serial
     wx.navigateTo({
-      url: '/pages/RepairDetailsComplete/RepairDetailsComplete?orderId=' + orderId,
+      url: '/pages/RepairDetailsComplete/RepairDetailsComplete?orderId=' + orderId + "&seriaI="+seriaI,
     })
   },
-  //待评价详情
-  onEvaluate() {
-    wx.navigateTo({
-      url: '/pages/RepairDetailsComplete/RepairDetailsComplete',
-    })
-  },
+ 
 
   // 评价跳转页面
   Evaluate: function () {

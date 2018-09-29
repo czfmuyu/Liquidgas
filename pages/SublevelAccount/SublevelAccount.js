@@ -45,8 +45,7 @@ Page({
 
 // 删除指帐号
   delet:function(e){
-    console.log(e)
-    console.log(app.globalData.CustomerId.AccountId)
+    console.log(e.currentTarget.dataset.id)
   },
   
 
