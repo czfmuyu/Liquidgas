@@ -95,7 +95,6 @@ Page({
   },
   // 获取本地id
   getID() {
-    console.log(app)
     this.setData({
       "parameter.customerId": app.Customer.CustomerId
     })
@@ -110,7 +109,6 @@ Page({
   },
   //全部页面详情
   queryBtn(e) {
-    console.log(e)
     let orderId = e.currentTarget.dataset.orderid
     let seriaI = e.currentTarget.dataset.serial
     wx.navigateTo({
@@ -150,6 +148,7 @@ Page({
       method: 'GET',
       success: function (res) {
         let orderData = res.data.Data
+        console.log(orderData)
         for (var i = 0; orderData.length>i;i++){
           orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
           orderData[i].Contact = util.Decrypt(orderData[i].Contact)
@@ -312,6 +311,8 @@ Page({
             _this.getmaintenance()
             _this.UntreatedList()
             _this.EvaluateList()
+            // 隐藏弹框
+            _this.HideModal()
           } else {
             util.showError("提交有误请从新提交")
             return false
@@ -324,8 +325,6 @@ Page({
         duration: 1000
       });
     }
-    // 隐藏弹框
-    _this.HideModal()
   },
   /**
    * 显示输入狂取消按键

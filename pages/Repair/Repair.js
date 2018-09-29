@@ -17,20 +17,31 @@ Page({
   data: {
     array: [
       '立即出发',
-      '09:00-10:00',
-      '10:00-11:00',
-      '11:00-12:00',
-      '12:00-13:00',
-      '13:00-14:00',
-      '14:00-15:00',
-      '15:00-16:00',
-      '16:00-17:00',
-      '17:00-18:00',
-      '18:00-19:00',
-      '19:00-20:00',
+      '09:00',
+      '09:30',
+      '10:00',
+      '10:30',
+      '11:00',
+      '11:30',
+      '12:00',
+      '12:30',
+      '13:00',
+      '13:30',
+      '14:00',
+      '14:30',
+      '15:00',
+      '15:30',
+      '16:00',
+      '16:30',
+      '17:00',
+      '17:30',
+      '18:00',
+      '18:30',
+      '19:00',
+      '19:30',
+      '20:00',
     ], //预定时间弹框
     index: 0,
-
     isAddress: true, //控制地址隐藏显示
     // 要提交的数据
     frolist: {
@@ -64,20 +75,29 @@ Page({
 
     // 图片数组
     pics: [],
-    index: "0"
+    index: "0",
+    // 上传图片编号
+    identifier:[]
   },
 
 
   // 表单提交=========================
   Submit() {
     let _this = this
+    // 上传图片
+    _this.uploadimg()
     let frolists = _this.data.frolist
-    let pics = _this.data.pics
+    let Times = util.formatTime1(new Date());
+    let day = Times.slice(0, 10)
+    let Time = frolists.SubscribeTime
+    // 时间拼接
+    let SubscribeTime = day + " " + Time
+    console.log(SubscribeTime)
     console.log(frolists)
+    let pics = _this.data.pics
     let Contact = frolists.Contact
     let Phone = frolists.Phone
     let Address = frolists.Address
-    let SubscribeTime = frolists.SubscribeTime
     let ProblemDescription = frolists.ProblemDescription
     let ServiceMode = frolists.ServiceMode
     let RepairLabelIds = frolists.RepairLabelIds
@@ -138,6 +158,7 @@ Page({
     let list = _this.data.guaranteeList
     // 拼接点击过的项目
     let prpair = _this.data.RepairLabel
+    console.log(prpair)
     if (list[index].Enabled == true) {
       list[index].Enabled = false
     } else {
@@ -271,8 +292,7 @@ Page({
         that.setData({
           pics: pics
         });
-        // 上传图片
-        that.uploadimg()
+       
       },
     })
   },
@@ -281,6 +301,7 @@ Page({
   uploadimg: function(data) {
     let that = this
     let pics = that.data.pics;
+    let imglist = that.data.identifier
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
         url: Urlsimg,
@@ -288,14 +309,14 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-          console.log(res)
+          var identifier
           let data = res.data
-          let imglist = JSON.parse(data);
-          let datalist = imglist.Data
-          pics = pics.concat(datalist);
-          console.log(pics)
+          let imglists = JSON.parse(data);
+          let datalist = imglists.Data
+          imglist = imglist.concat(datalist)
+          identifier = imglist.join(',');
           that.setData({
-            "frolist.PhotoIds":pics
+            "frolist.PhotoIds": identifier
           })
         },
       });
@@ -364,7 +385,7 @@ Page({
         "frolist.Longitude": Longitude,
         "frolist.Latitude": Latitude,
       })
-    } else {//老用户渲染
+    } else { //老用户渲染
       let name = app.Customer.CustomerName
       let phone = app.Customer.CustomerPhone
       let Address = app.Customer.CustomerAddress

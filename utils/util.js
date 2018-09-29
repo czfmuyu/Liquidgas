@@ -67,44 +67,6 @@ function imgpreview(data_evnt, imgarrs) {  //图片预览
 }
 
 
-
-/**
-  * 图片上传
-  */
- function uploadImg(callback) {
-  let _this = this;
-  wx.chooseImage({
-    count: 1,
-    sizeType: ['compressed'],
-    success: function (res) {
-      let tempFilePaths = res.tempFilePaths;
-      console.log("上传" + tempFilePaths)
-      wx.showLoading({
-        title: '图片上传中...',
-      });
-      wx.uploadFile({
-        url: "http://192.168.0.185:2599/Api/Files/UploadImg",
-        // 要上传的文件资源
-        filePath: tempFilePaths[0],
-        // 对应的key值
-        name: 'image',
-        success: function (res) {
-          console.log(res)
-          imgarr.push(tempFilePaths)
-          res.imgurl = imgarr
-          console.log(imgarr)
-          console.log(res.imgurl)
-          // tempFilePaths
-          // res.imgurl.push(tempFilePaths)
-          if (typeof callback == 'function') {
-            callback(res);
-          }
-          wx.hideLoading();
-        }
-      })
-    }
-  })
-}
 	/**
 	 * 错误消息提示
 	 */
@@ -135,7 +97,6 @@ module.exports = {
   Encryption:Encryption,
   Decrypt:Decrypt,
   imgpreview:imgpreview,
-  uploadImg: uploadImg,
   showError: showError,
   formatTime1:formatTime1,
   formatNumber1:formatNumber1,

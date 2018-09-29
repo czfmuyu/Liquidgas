@@ -15,7 +15,7 @@ App({
     });
   },
   globalData: {
-    baseUrl: "http://192.168.0.66:2599",
+    baseUrl: "http://123.56.14.135:10523",
     AccountId:"",
     CustomerId:"",
     Customer:null,//个人信息

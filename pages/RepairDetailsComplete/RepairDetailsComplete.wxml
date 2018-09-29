@@ -1,85 +1,86 @@
 <!--pages/RepairDetailsComplete.wxml-->
 <scroll-view scroll-y>
-    <view class="header_Order">
-        <view class="Order">
-            <view class="Order_left">
-                <view>维修单号: {{detailedlist.Serialnumber}}</view>
-            </view>
-            <view class="Order_right" wx:if="{{detailedlist.Status==0}}" >待处理</view>
-             <view class="Order_right" wx:elif="{{detailedlist.Status==10}}" >订单确认</view>
-              <view class="Order_right" wx:elif="{{detailedlist.Status==11}}" >分配完成</view>
-              <view class="Order_right" wx:elif="{{detailedlist.Status==20}}" >维修出发</view>
-              <view class="Order_right" wx:elif="{{detailedlist.Status==30}}" >维修完成</view>
-              <view class="Order_right" wx:else="{{detailedlist.Status==100}}" >订单取消</view>
-        </view>
+  <view class="header_Order">
+    <view class="Order">
+      <view class="Order_left">
+        <view>维修单号: {{detailedlist.Serialnumber}}</view>
+      </view>
+      <view class="Order_right" wx:if="{{detailedlist.Status==0}}">待处理</view>
+      <view class="Order_right" wx:elif="{{detailedlist.Status==10}}">订单确认</view>
+      <view class="Order_right" wx:elif="{{detailedlist.Status==11}}">分配完成</view>
+      <view class="Order_right" wx:elif="{{detailedlist.Status==20}}">维修出发</view>
+      <view class="Order_right" wx:elif="{{detailedlist.Status==30}}">维修完成</view>
+      <view class="Order_right" wx:else="{{detailedlist.Status==100}}">订单取消</view>
     </view>
-     <view class="project">
-        <view class="project_top">维修项目</view>
-        <view class="project_bottom">
-            <view class="project_bottom_box">{{problem}}</view>
-        </view>
+  </view>
+  <view class="project">
+    <view class="project_top">维修项目</view>
+    <view class="project_bottom">
+      <view class="project_bottom_box">{{problem}}</view>
     </view>
-    <view class="details">详情描述</view>
-    <view class="details_text">{{detailedlist.ProblemDescription}}</view>
-    <view class='img_flex'>
-      <image src='../../images/map1.png'></image>
-      <image src='../../images/map2.png'></image>
+  </view>
+  <view class="details">详情描述</view>
+  <view class="details_text">{{detailedlist.ProblemDescription}}</view>
+  <view class='img_flex'>
+    <image src='../../images/map1.png'></image>
+    <image src='../../images/map2.png'></image>
+  </view>
+  <view class="details_time">
+    <view>{{detailedlist.FormatSubscribeTime}}</view>
+  </view>
+  <view class="details flex" hidden="{{StateControl!==1}}">
+    <view>处理结果</view>
+    <view class="Order_right" wx:if="{{detailedlist.RepairResult==0}}">已处理</view>
+    <view class="Order_right" wx:elif="{{detailedlist.RepairResult==10}}">维修完成</view>
+    <view class="Order_right" else="{{detailedlist.RepairResult==20}}">无法维修</view>
+  </view>
+  <view class="details_text" hidden="{{StateControl!==1}}">{{detailedlist.RepairOpinion}}</view>
+  <view class="Repair_time" hidden="{{StateControl!==1}}">
+    <view>处理人: {{detailedlist.ServiceUserName}}</view>
+    <view class="Repair_time_right">
+      <view style="margin-right: 12rpx;"></view>
+      <view style="margin-left: 12rpx;"></view>
     </view>
-    <view class="details_time">
-       <view>{{detailedlist.FormatSubscribeTime}}</view>
+  </view>
+  <view class="Repair">维修信息</view>
+  <view class="Repair_time">
+    <view>预约时间</view>
+    <view>{{detailedlist.FormatSubscribeTime}}</view>
+  </view>
+  <view class="Repair_address">
+    <view class="address">收货地址</view>
+    <view class="address_right">{{detailedlist.Address}}</view>
+  </view>
+  <view class="Repair_time">
+    <view>收货人电话</view>
+    <view>{{detailedlist.Contact}}:{{detailedlist.Phone}}</view>
+  </view>
+  <view class="Repair_time">
+    <view>维修工</view>
+    <view class="Repair_time_right">
+      <view style="margin-left: 12rpx;" wx:if="{{!detailedlist.ServiceUserName}}">暂未维修工</view>
+      <view style="margin-left: 12rpx;" wx:else>{{detailedlist.ServiceUserName}}</view>
     </view>
-    <view class="details flex" hidden="{{StateControl!==1}}">
-        <view>处理结果</view>
-        <view class="Order_right" wx:if="{{detailedlist.RepairResult==0}}" >已处理</view>
-             <view class="Order_right" wx:elif="{{detailedlist.RepairResult==10}}" >维修完成</view>
-              <view class="Order_right" else="{{detailedlist.RepairResult==20}}" >无法维修</view>
-    </view>
-    <view class="details_text" hidden="{{StateControl!==1}}">{{detailedlist.RepairOpinion}}</view>
-    <view class="Repair_time" hidden="{{StateControl!==1}}">
-        <view>处理人: {{detailedlist.ServiceUserName}}</view>
-        <view class="Repair_time_right">
-            <view style="margin-right: 12rpx;"></view>
-            <view style="margin-left: 12rpx;"></view>
-        </view>
-    </view>
-     <view class="Repair">维修信息</view>
-    <view class="Repair_time">
-        <view>预约时间</view>
-        <view>{{detailedlist.FormatSubscribeTime}}</view>
-    </view>
-    <view class="Repair_address">
-        <view class="address">收货地址</view>
-        <view class="address_right">{{detailedlist.Address}}</view>
-    </view>
-    <view class="Repair_time">
-        <view>收货人电话</view>
-        <view>{{detailedlist.Contact}}:{{detailedlist.Phone}}</view>
-    </view>
-    <view class="Repair_time">
-        <view>维修工</view>
-        <view class="Repair_time_right">
-            <view style="margin-left: 12rpx;">{{detailedlist.ServiceUserName}}</view>
-        </view>
-    </view>
-    <view class="btn" hidden="{{btn!==2}}">
-        <view class="btn_cancel" bindtap="phoneList">取消维修单</view>
-        <view class="btn_complete" bindtap="Confirm">确认完成</view>
-    </view>
-    <view class="btn" hidden="{{btn!==1}}">
-        <view class="btn_complete" bindtap='Evaluate'>去评价</view>
-    </view>
+  </view>
+  <view class="btn" hidden="{{btn!==2}}">
+    <view class="btn_cancel" bindtap="phoneList">取消维修单</view>
+    <view class="btn_complete" bindtap="Confirm">确认完成</view>
+  </view>
+  <view class="btn" hidden="{{btn!==1}}">
+    <view class="btn_complete" bindtap='Evaluate'>去评价</view>
+  </view>
 </scroll-view>
 
 <!-- 取消意见 -->
 <view class="modal-mask" bindtap="HideModal" catchtouchmove="preventTouchMove" wx:if="{{ShowModal}}"></view>
 <view class="modal-dialog" wx:if="{{ShowModal}}">
-   <view>
-   <view class='qux'>请输入取消原因</view>
-   <textarea class='textfont' data-type='text' placeholder='请填写取消原因' bindinput='getdata'>
-   </textarea>
-   </view>
-   <view class='butt'>
-   <view class='butttext textcolor'bindtap="onCancel" >取消</view>
-   <view class='butttext textcolor1' bindtap='onConfirm'>提交</view>
-   </view>
+  <view>
+    <view class='qux'>请输入取消原因</view>
+    <textarea class='textfont' data-type='text' placeholder='请填写取消原因' bindinput='getdata'>
+    </textarea>
+  </view>
+  <view class='butt'>
+    <view class='butttext textcolor' bindtap="onCancel">取消</view>
+    <view class='butttext textcolor1' bindtap='onConfirm'>提交</view>
+  </view>
 </view>
