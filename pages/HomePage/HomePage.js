@@ -15,7 +15,7 @@ Page({
     newuser: false,
     showModalTwo: false,
     user: false,
-    GasNo: [],
+    GasNo: "",
     value: "",//用气编号的值
   },
   OrderAddress() {
@@ -78,13 +78,14 @@ Page({
         let data = res.data.Data
         this_.decryption(data)
         let arr = [];
-        this_.Tips()
         if (res.data.Data == null) {
+          this.setData({
+            showModal: true
+          })
           return
         } else {
           for (let i = 0; i < res.data.Data.length; i++) {
-            arr.push(res.data.Data[i].GasNo)//遍历用户所有的用气编号
-
+              arr.push(res.data.Data[i].GasNo)//遍历用户所有的用气编号
             if (res.data.Data[i].IsMainAccount == false) {//遍历用户的子账号
               let data = res.data.Data[i]
               app.Subaccount = data//子账号存储
@@ -133,11 +134,7 @@ Page({
       this.setData({
         showModalTwo: true
       })
-    } else {
-      this.setData({
-        showModal: true
-      })
-    }
+    } 
   },
   /**
    * 弹出框蒙层截断touchmove事件
