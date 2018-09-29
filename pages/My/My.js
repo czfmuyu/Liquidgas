@@ -1,5 +1,5 @@
 const { baseUrl } = getApp().globalData
-const baseUrls = `${baseUrl}/Api/Customers/GetAccountCustomers`//获取个人数据接口
+const baseUrls = `${baseUrl}/Api/Customers/GetCustomerInfo`//获取当前信息接口
 let app = getApp().globalData
 Page({
 
@@ -11,27 +11,35 @@ Page({
     index: 0,
     Gas: "",
     // 子帐号页面显示与影藏
-    state:false
+    state: false
   },
   /**
   * 生命周期函数--监听页面加载
   */
-  onLoad: function (options) {
-    // 判断是否是子帐号显示页面true主帐号页面,false子帐号页面
-    if (app.Customer.IsMainAccount==true){
-      this.setData({
-        state:true
-      })
-    }
-    if (app.Customer.GasNo === null) {
-      this.setData({
-        Gas: "无用气编号请联系服务商添加用气编号"
-      })
-    }else{
-      this.setData({
-        Gas: app.Customer.GasNo
-      })
-    }
+  onLoad(options){
+    console.log("监听页面加载")
+  },
+  CurrentInfo() {
+    console.log(app.CustomerId.CustomerId)
+    let this_=this
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        AccountId: app.AccountId.AccountId,
+        CustomerId: app.CustomerId
+      },
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log(res.data.Data)
+        app.Customer=res.data.Data
+        this_.setData({
+          Gas:res.data.Data.GasNo
+        })
+        console.log(res)
+      },
+    })
   },
   SublevelAccount() {
     wx.navigateTo({//子账号页面
@@ -82,28 +90,31 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log("监听页面初次渲染完成")
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log("监听页面显示")
+    this.CurrentInfo()
+    console.log(app)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log("监听页面隐藏")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log("监听页面卸载")
   },
 
   /**

@@ -10,18 +10,29 @@ Page({
   data: {
     array: [
       '立即出发',
-      '08:00-09:00',
-      '09:00-10:00',
-      '10:00-11:00',
-      '11:00-12:00',
-      '12:00-13:00',
-      '13:00-14:00',
-      '14:00-15:00',
-      '15:00-16:00',
-      '16:00-17:00',
-      '17:00-18:00',
-      '18:00-19:00',
-      '19:00-20:00',
+      '09:00',
+      '09:30',
+      '10:00',
+      '10:30',
+      '11:00',
+      '11:30',
+      '12:00',
+      '12:30',
+      '13:00',
+      '13:30',
+      '14:00',
+      '14:30',
+      '15:00',
+      '15:30',
+      '16:00',
+      '16:30',
+      '17:00',
+      '17:30',
+      '18:00',
+      '18:30',
+      '19:00',
+      '19:30',
+      '20:00',
     ],//预定时间弹框
     array2:
       [
@@ -200,6 +211,7 @@ Page({
   //取出本地信息方法
   getData() {
     //判断用户选择的是瓶还是公斤
+    console.log(app)
     let arr = []
     let OptionsBox = this.data.OptionsBox
     if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
@@ -290,6 +302,7 @@ Page({
       let Times = utils.formatTime1(new Date());
       let day = Times.slice(0, 10)
       SubscribeTime = day + " " + this_.data.array[this_.data.index]
+      console.log(SubscribeTime)
     };
     let PayMethod = this_.data.radioItems
     let payment
@@ -367,28 +380,7 @@ Page({
             duration: 2000
           });
         } else {
-          app.CustomerId = res.data.Data
-          app.Customer = {
-            EnterpriseId: this_.data.EnterpriseId,
-            CustomerId: res.data.Data.CustomerId,
-            Price: this_.data.Price,
-            Quantity: this_.data.Quantity,
-            Contact: this_.data.CustomerName,
-            Phone: this_.data.CustomerPhone,
-            Address: this_.data.CustomerAddress,
-            Longitude: this_.data.CustomerLatitude,
-            Latitude: this_.data.CustomerLongitude,
-            GasBuyMode:this_.PrceType,
-            DistributionMode: this_.time,
-            SubscribeTime: this_.SubscribeTime,
-            PayMethod: this_.payment,
-            AccountId: app.AccountId.AccountId,
-            OrderItems: this_.data.OrderItems,
-            EnterpriseName: this_.data.EnterpriseName,
-            EnterprisePhone: this_.data.EnterprisePhone,
-            EnterpriseAddress: this_.data.EnterpriseAddress,
-            EnterpriseProducts: this_.data.EnterpriseProducts,
-          }
+          app.CustomerId = res.data.Data.CustomerId
           console.log(getApp().globalData.Customer)
           wx.switchTab({
             url: "/pages/Order/Order",

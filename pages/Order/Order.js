@@ -119,14 +119,14 @@ Page({
   //获取用户的CustomerId
   CustomerId() {
     console.log(app)
-    if(app.Customer!==null){
+    if (app.Customer !== null) {
       this.setData({
         CustomerId: app.Customer.CustomerId
       })
       console.log(app.Customer.CustomerId)
-    }else{
+    } else {
       this.setData({
-        CustomerId: app.CustomerId.CustomerId
+        CustomerId: app.CustomerId
       })
       console.log(app.CustomerId.CustomerId)
     }
@@ -348,6 +348,8 @@ Page({
             title: "取消成功！",
             duration: 2000
           });
+          // 隐藏弹框
+          _this.HideModal()
         },
       })
     } else {
@@ -357,8 +359,6 @@ Page({
       });
       return false
     }
-    // 隐藏弹框
-    _this.HideModal()
   },
 
   /**
