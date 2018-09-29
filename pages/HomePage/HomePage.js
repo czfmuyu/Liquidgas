@@ -24,14 +24,9 @@ Page({
     })
   },
   Repair() {
-    if (app.GasNo!==null){
-      wx.navigateTo({//维修页面
-        url: "/pages/Repair/Repair"
-      })
-    }else{
-      utils.showError("无用气编号请联系服务商添加用气编号")
-    }
-    
+    wx.navigateTo({//维修页面
+      url: "/pages/Repair/Repair"
+    })
   },
   Opinion() {
     wx.navigateTo({//意见反馈页面
