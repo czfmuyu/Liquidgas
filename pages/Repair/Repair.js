@@ -99,19 +99,19 @@ Page({
       url: baseUrlBd,
       data: {
         Sign: "",
-        EnterpriseId: EnterpriseId,//企业唯一编号
-        CustomerId: CustomerId,//客服唯一编号
-        Contact: util.Encryption(Contact),//名字
-        Phone: util.Encryption(Phone),//电话
-        Address: util.Encryption(Address),//地址
-        Latitude: Latitude,//
+        EnterpriseId: EnterpriseId, //企业唯一编号
+        CustomerId: CustomerId, //客服唯一编号
+        Contact: util.Encryption(Contact), //名字
+        Phone: util.Encryption(Phone), //电话
+        Address: util.Encryption(Address), //地址
+        Latitude: Latitude, //
         Longitude: Longitude,
-        ServiceMode: ServiceMode,//服务模式
-        SubscribeTime: SubscribeTime,//预约时间
-        ProblemDescription: ProblemDescription,//问题描述
-        RepairLabelIds: RepairLabelIds,//维修编号
-        PhotoIds: PhotoIds,//照片编号
-        AccountId: AccountId,//帐号唯一编号  
+        ServiceMode: ServiceMode, //服务模式
+        SubscribeTime: SubscribeTime, //预约时间
+        ProblemDescription: ProblemDescription, //问题描述
+        RepairLabelIds: RepairLabelIds, //维修编号
+        PhotoIds: PhotoIds, //照片编号
+        AccountId: AccountId, //帐号唯一编号  
       },
       header: {
         'content-type': 'application/json'
@@ -359,21 +359,37 @@ Page({
    */
   onShow: function() {
     let _this = this
-    let name = app.Orderaddress.Contact
-    let phone = app.Orderaddress.Phone
-    let Address = app.Orderaddress.Address
-    let Longitude = app.Orderaddress.Longitude
-    let Latitude = app.Orderaddress.Latitude
-    console.log(name)
-    _this.setData({
-      "frolist.Contact": name,
-      "frolist.Phone": phone,
-      "frolist.Address": Address,
-      "frolist.Longitude": Longitude,
-      "frolist.Latitude": Latitude,
-    })
-    let frolist1 = _this.data.frolist
+    console.log(app)
+    //新用户渲染
+    if (app.Orderaddress.Contact !== "" || app.Orderaddress.Phone !== "" || app.Orderaddress.Address !== "") {
+      let name = app.Orderaddress.Contact
+      let phone = app.Orderaddress.Phone
+      let Address = app.Orderaddress.Address
+      let Longitude = app.Orderaddress.Longitude
+      let Latitude = app.Orderaddress.Latitude
+      _this.setData({
+        "frolist.Contact": name,
+        "frolist.Phone": phone,
+        "frolist.Address": Address,
+        "frolist.Longitude": Longitude,
+        "frolist.Latitude": Latitude,
+      })
+    }else{
+      let name = app.Customer.CustomerName
+      let phone = app.Customer.CustomerPhone
+      let Address = app.Customer.CustomerAddress
+      let Longitude = app.Customer.CustomerLongitude
+      let Latitude = app.Customer.CustomerLatitude
+      _this.setData({
+        "frolist.Contact": name,
+        "frolist.Phone": phone,
+        "frolist.Address": Address,
+        "frolist.Longitude": Longitude,
+        "frolist.Latitude": Latitude,
+      })
+    }
 
+    let frolist1 = _this.data.frolist
     if (frolist1.Contact == "" || frolist1.Contact == undefined) { //判断是否有数据页面切换
       this.setData({
         isAddress: true,

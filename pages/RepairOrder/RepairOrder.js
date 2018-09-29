@@ -131,7 +131,6 @@ Page({
   // 获取维修全部订单列表
   getmaintenance: function () {
     let _this=this
-    console.log("全部")
     let parameterlist = _this.data.parameter
     let pageIndexs = parameterlist.pageIndex
     let pageSizes = parameterlist.pageSize
@@ -154,7 +153,12 @@ Page({
       method: 'GET',
       success: function (res) {
         let orderData = res.data.Data
-        console.log(orderData)
+        for (var i = 0; orderData.length>i;i++){
+          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+          orderData[i].Address = util.Decrypt(orderData[i].Address)
+        }
         _this.setData({
           whole: orderData
         })
@@ -185,6 +189,12 @@ Page({
       method: 'GET',
       success: function (res) {
         let orderData = res.data.Data
+        for (var i = 0; orderData.length > i; i++) {
+          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+          orderData[i].Address = util.Decrypt(orderData[i].Address)
+        }
         _this.setData({
           UntreatedList: orderData
         })
@@ -215,6 +225,12 @@ Page({
       method: 'GET',
       success: function (res) {
         let orderData = res.data.Data
+        for (var i = 0; orderData.length > i; i++) {
+          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+          orderData[i].Address = util.Decrypt(orderData[i].Address)
+        }
         _this.setData({
           ProcessedList: orderData
         })
@@ -245,6 +261,12 @@ Page({
       method: 'GET',
       success: function (res) {
         let orderData = res.data.Data
+        for (var i = 0; orderData.length > i; i++) {
+          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+          orderData[i].Address = util.Decrypt(orderData[i].Address)
+        }
         _this.setData({
           EvaluateList: orderData
         })
