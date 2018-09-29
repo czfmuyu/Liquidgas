@@ -16,12 +16,11 @@ Page({
   */
  onLoad: function (options) {
    let _this=this
-   let AccountId= app.globalData.CustomerId.AccountId
    wx.request({
      url: account,
      data: {
        Sign: "",
-       CustomerId: AccountId
+       CustomerId: app.globalData.AccountId.AccountId
      },
      header: {
        'content-type': 'application/json'
