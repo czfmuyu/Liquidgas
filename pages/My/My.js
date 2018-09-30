@@ -16,12 +16,13 @@ Page({
   /**
   * 生命周期函数--监听页面加载
   */
-  onLoad(options){
+  onLoad(options) {
     console.log("监听页面加载")
+
   },
   CurrentInfo() {
     console.log(app.CustomerId.CustomerId)
-    let this_=this
+    let this_ = this
     wx.request({
       url: baseUrls,
       data: {
@@ -33,9 +34,9 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res.data.Data)
-        app.Customer=res.data.Data
+        app.Customer = res.data.Data
         this_.setData({
-          Gas:res.data.Data.GasNo
+          Gas: res.data.Data.GasNo
         })
         console.log(res)
       },
@@ -91,7 +92,7 @@ Page({
    */
   onReady: function () {
     console.log("监听页面初次渲染完成")
-    
+
   },
 
   /**
@@ -101,6 +102,11 @@ Page({
     console.log("监听页面显示")
     this.CurrentInfo()
     console.log(app)
+    if (app.Customer.IsMainAccount == true) {
+      this.setData({
+        state: true
+      })
+    }
   },
 
   /**
