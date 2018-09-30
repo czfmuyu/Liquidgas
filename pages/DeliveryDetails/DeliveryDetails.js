@@ -36,6 +36,8 @@ Page({
     ShowModal: false, //弹框按钮操控
     orderId: "",
     getdata: "",//取消说明
+    day:"",
+    time:""
   },
   onLoad(options) {
     this.queryDetails(options)
@@ -57,7 +59,8 @@ Page({
         longitude,
         width: 23,
         height: 33
-      }, {
+      },
+      {
         iconPath: "/images/mapicon_navi_e.png",
         id: 1,
         latitude: latitude2,
@@ -217,10 +220,20 @@ Page({
           utils.Decrypt(OrderItems.Price)
           utils.Decrypt(OrderItems.Quantity)
         }
+        let Times = data.FormatSubscribeTime
+        if (Times!==null) {
+          let day = Times.slice(0, 10)
+          let time = Times.slice(11, 16)
+          console.log(day, time)
+          this_.setData({
+            day: day,
+            time: time,
+          })
+        }
         this_.setData({
           OrderTrackList: data,
           goodsList: OrderItems,
-          orderId: options.id
+          orderId: options.id,
         })
         this_.Pagechange()
       },

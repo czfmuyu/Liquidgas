@@ -51,7 +51,7 @@
 <view class="Repair_time">
   <view>预约时间</view>
   <view wx:if="{{!OrderTrackList.SubscribeTime}}">立即出发</view>
-  <view wx:else>{{OrderTrackList.SubscribeTime}}</view>
+  <view wx:else>{{day}} {{time}}</view>
 </view>
 <view class="Repair_address">
   <view class="address">收货地址</view>
