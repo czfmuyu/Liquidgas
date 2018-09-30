@@ -2,6 +2,7 @@ let { Orderaddress } = getApp().globalData
 var app = getApp().globalData
 const baseUrls = app.baseUrl + '/Api/GasOrders/NewGasOrder'//一键订气上传接口
 const utils = require("../../utils/util.js")
+let amap = require("../../utils/amap");
 Page({
 
   /**
@@ -118,6 +119,16 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad() {
+    amap.getRegeo()//用户没有先选地址时获取当前定位
+    .then(d => {
+      console.log(d);
+      let { latitude, longitude } = d[0];
+        app.Orderaddress.Latitude=latitude
+        app.Orderaddress.Longitude=longitude
+    })
+    .catch(e => {
+      console.log(e);
+    })
     this.setData({//新用户没有值获取填该账户的ID
       AccountId: app.AccountId.AccountId
     })
@@ -130,7 +141,6 @@ Page({
     })
     this.getData()
     this.userData()
-
   },
   Supplier() {
     console.log(app.CustomerList)
