@@ -1,5 +1,3 @@
-
-
 let app = getApp()
 var util = require('../../utils/util.js');
 const baseUrl = app.globalData.baseUrl
@@ -9,13 +7,17 @@ const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairOrderInfo`
 const cancel = `${baseUrl}/Api/RepairOrders/RepairOrderCancel`
 // 确认订单
 const Confirm = `${baseUrl}/Api/RepairOrders/RepairOrderConfirm`
-			
+const photo = `${baseUrl}/Api/Files/GetRepairPhoto`
+
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     ShowModal: false, //弹框按钮操控
+    // 预览图片数组
+    img: "",
     // 取消原因
     getdata: "",
     // 取消订单id
@@ -23,14 +25,16 @@ Page({
     // 唯一订单编号
     Serialnumber: "",
 
-    StateControl:0,
-    btn:0,
+    StateControl: 0,
+    btn: 0,
     // 要渲染的数据
-    detailedlist:{}
+    detailedlist: {},
+    photo:"",//图片路径
+    imgs:[]
   },
 
-// 跳转评价
-  Evaluate:function(){
+  // 跳转评价
+  Evaluate: function () {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
@@ -124,7 +128,7 @@ Page({
     let tomerId = this.data.Serialnumber
     // 用户
     let orderId = this.data.ID
-    
+
     wx.request({
       url: Confirm,
       data: {
@@ -137,22 +141,33 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        if (res.data.Code==200){
+        if (res.data.Code == 200) {
           wx.switchTab({
             url: '/pages/RepairOrder/RepairOrder',
           })
-       }
+        }
       },
     })
   },
+  // 图片预览------------------------------
+  previewImg: function (e) {
+    var data_evnt = e; //将函数事件对象传入 ，以及图片获取到的数组 
+    console.log(e)
+    util.imgpreview(data_evnt, this.data.imgs)
+  },
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let _this=this
+    this.setData({
+      photo
+    })
+    let _this = this
     // 订单编号
-    let orderIds=options.orderId
+    let orderIds = options.orderId
     // 客服id
     let seriaIs = options.seriaI
     _this.setData({
@@ -160,21 +175,28 @@ Page({
       Serialnumber: seriaIs
     })
     wx.request({
-      url:baseUrls,
-      data:{
-        sign:"",
-        orderId:orderIds,
+      url: baseUrls,
+      data: {
+        sign: "",
+        orderId: orderIds,
       },
       header: {
         'content-type': 'application/json'
       },
       method: 'GET',
-      success:function(res){
-        let detailed=res.data.Data
-        console.log(detailed)
-      _this.setData({
-        detailedlist: detailed
-      })
+      success: function (res) {
+        let detailed = res.data.Data
+        _this.setData({
+          detailedlist: detailed
+        })
+        // 详情图片
+        let imglist = _this.data.detailedlist.RepairPhotos
+        _this.imgs(imglist)
+        console.log(imglist)
+        _this.setData({
+          img: imglist
+        })
+
         let footer = _this.data.detailedlist
         let footerels = footer.Status
         if (footerels == 0) {
@@ -190,8 +212,19 @@ Page({
         }
       }
     })
-
+   
   },
+  imgs(imglist){
+    let arr=[]
+    for (let i = 0; imglist.length > i; i++) {
+      let imgs = photo + "/?photoId=" + imglist[i].PhotoId
+      arr.push(imgs)
+    }
+    this.setData({
+      imgs:arr
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -207,38 +240,4 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

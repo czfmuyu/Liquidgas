@@ -285,16 +285,25 @@ Page({
       pics = this.data.pics;
     wx.chooseImage({
       count: 9, // 最多可以选择的图片张数，默认9
-      sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
+      sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
       sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
       success: function(res) {
+         var tempFilesSize = res.tempFiles[0].size;  //获取图片的大小，单位B
+         if (tempFilesSize <= 2000000) { 
         var imgsrc = res.tempFilePaths;　　　　　　　　　
         pics = pics.concat(imgsrc);
         that.setData({
           pics: pics
         });
-        // 上传图片
-        that.uploadimg()
+           // 上传图片
+           that.uploadimg()
+       }else{
+           wx.showToast({
+             title: '上传图片不能大于2M!',  
+             icon: 'none'       
+           })
+       }
+        
       },
     })
   },

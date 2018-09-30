@@ -46,10 +46,11 @@
   display: flex;
   flex-wrap: wrap;
   background-color: white;
+  flex-direction: row;
 }
 .img_flex image{
-  width: 150rpx;
-  height: 150rpx;
+  width: 146rpx;
+  height: 146rpx;
   margin: 20rpx;
 }
 
@@ -107,4 +108,11 @@
  }
  .textcolor{
    color: rgba(45, 218, 111, 0.616)
+ }
+
+ .project_bottom{
+   display: flex;
+   flex-direction: row;
+   margin-right: 20rpx;
+   flex-wrap: wrap;
  }
