@@ -10,7 +10,7 @@
       <view class="Order_right" wx:elif="{{detailedlist.Status==11}}">分配完成</view>
       <view class="Order_right" wx:elif="{{detailedlist.Status==20}}">维修出发</view>
       <view class="Order_right" wx:elif="{{detailedlist.Status==30}}">维修完成</view>
-      <view class="Order_right" wx:else="{{detailedlist.Status==100}}">订单取消</view>
+      <view class="Order_right" wx:else>订单取消</view>
     </view>
   </view>
   <view class="project">

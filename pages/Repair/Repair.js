@@ -16,8 +16,8 @@ Page({
    */
   data: {
     array: [
-      '立即出发',
       '09:00',
+      '立即出发',
       '09:30',
       '10:00',
       '10:30',
@@ -49,7 +49,7 @@ Page({
       Phone: "",
       Address: "",
       // 预约时间
-      SubscribeTime: "立即出发",
+      SubscribeTime: "09:00",
       // 维修描述
       ProblemDescription: "",
       // 照片编码
@@ -84,16 +84,14 @@ Page({
   // 表单提交=========================
   Submit() {
     let _this = this
-    // 上传图片
-    _this.uploadimg()
+  
     let frolists = _this.data.frolist
     let Times = util.formatTime1(new Date());
     let day = Times.slice(0, 10)
     let Time = frolists.SubscribeTime
+    console.log(frolists)
     // 时间拼接
     let SubscribeTime = day + " " + Time
-    console.log(SubscribeTime)
-    console.log(frolists)
     let pics = _this.data.pics
     let Contact = frolists.Contact
     let Phone = frolists.Phone
@@ -210,18 +208,21 @@ Page({
     let timelist = this.data.array
     let index = e.detail.value
     let timelists = timelist[index]
+    let Times = util.formatTime1(new Date());
+    let day = Times.slice(10,16)
+    console.log(day)
     if (timelists == "立即出发") {
       this.setData({
-        "frolist.ServiceMode": 0
+        "frolist.ServiceMode": 0,
+        "frolist.SubscribeTime": day
       })
     } else {
       this.setData({
-        "frolist.ServiceMode": 10
+        "frolist.ServiceMode": 10,
+        "frolist.SubscribeTime": timelists
       })
     }
-    this.setData({
-      "frolist.SubscribeTime": timelists
-    })
+   
   },
 
 
@@ -292,7 +293,8 @@ Page({
         that.setData({
           pics: pics
         });
-       
+        // 上传图片
+        that.uploadimg()
       },
     })
   },
