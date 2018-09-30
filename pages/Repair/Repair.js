@@ -16,8 +16,8 @@ Page({
    */
   data: {
     array: [
-      '09:00',
       '立即出发',
+      '09:00',
       '09:30',
       '10:00',
       '10:30',
@@ -210,7 +210,6 @@ Page({
     let timelists = timelist[index]
     let Times = util.formatTime1(new Date());
     let day = Times.slice(10,16)
-    console.log(day)
     if (timelists == "立即出发") {
       this.setData({
         "frolist.ServiceMode": 0,
