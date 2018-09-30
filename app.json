@@ -6,7 +6,6 @@
     "pages/HomePage/HomePage",
     "pages/Repair/Repair",
     "pages/PersonalData/PersonalData",
-    "pages/RepairDetails/RepairDetails",
     "pages/My/My",
     "pages/Authorized/Authorized",
     "pages/DeliveryDetails/DeliveryDetails",
