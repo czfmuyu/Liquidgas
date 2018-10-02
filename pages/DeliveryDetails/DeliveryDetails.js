@@ -36,8 +36,8 @@ Page({
     ShowModal: false, //弹框按钮操控
     orderId: "",
     getdata: "",//取消说明
-    day:"",
-    time:""
+    day: "",
+    time: ""
   },
   onLoad(options) {
     this.queryDetails(options)
@@ -177,17 +177,19 @@ Page({
   //页面判断改变
   Pagechange() {
     // 数据判断页面改动
+    console.log(this.data.OrderTrackList.Status)
     if (this.data.OrderTrackList.Status < 30) {//配送中
       this.setData({
         StateControl: 1,
         btn: 1
       })
-    } else if (this.data.OrderTrackList.Status = 30) {//配送完成
+    } else if (this.data.OrderTrackList.Status == 30) {//配送完成
       this.setData({
         StateControl: 2,
         btn: 2
       })
     } else {
+      console.log("1")
       this.setData({//取消订单
         StateControl: 3,
         btn: 3
@@ -221,7 +223,7 @@ Page({
           utils.Decrypt(OrderItems.Quantity)
         }
         let Times = data.FormatSubscribeTime
-        if (Times!==null) {
+        if (Times !== null) {
           let day = Times.slice(0, 10)
           let time = Times.slice(11, 16)
           console.log(day, time)
