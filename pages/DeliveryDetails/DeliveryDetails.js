@@ -2,9 +2,9 @@ let utils = require('../../utils/util.js');
 let amap = require("../../utils/amap");
 let app = getApp().globalData
 const { baseUrl } = getApp().globalData;
-const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrderInfo`//获取订单详情接口
-const cancel = `${baseUrl}/Api/GasOrders/GasOrderCancel` //取消订单
-const Confirm = `${baseUrl}/Api/GasOrders/GasOrderConfirm` //确认订单
+const baseUrls = `${baseUrl}/Api/GasOrders/GetOrderInfo`//获取订单详情接口
+const cancel = `${baseUrl}/Api/GasOrder/CustomerCancelOrder` //取消订单
+const Confirm = `${baseUrl}/Api/GasOrders/CustomerConfirmOrder` //确认订单
 Page({
   data: {
     //地图参数

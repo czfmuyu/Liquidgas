@@ -1,6 +1,6 @@
 let { Orderaddress } = getApp().globalData
 var app = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/GasOrders/NewGasOrder'//一键订气上传接口
+const baseUrls = app.baseUrl + '/Api/GasOrders/CustomerSubmitOrder'//一键订气上传接口
 const utils = require("../../utils/util.js")
 let amap = require("../../utils/amap");
 Page({

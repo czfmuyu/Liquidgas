@@ -5,7 +5,7 @@ const baseUrl = app.baseUrl
 // 获取维修项目
 const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairLabels`
 // 提交维修订单
-const baseUrlBd = `${baseUrl}/Api/RepairOrders/NewRepairOrder`
+const baseUrlBd = `${baseUrl}/Api/RepairOrders/CustomerSubmitOrder`
 // 提交照片
 const Urlsimg = `${baseUrl}/Api/Files/UploadImg`
 

@@ -1,12 +1,12 @@
 let app = getApp()
 var util = require('../../utils/util.js');
 const baseUrl = app.globalData.baseUrl
-// 获取维修订单
-const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairOrderInfo`
+// 获取维修订单详情
+const baseUrls = `${baseUrl}/Api/RepairOrders/GetOrderInfo`
 // 取消订单接口
-const cancel = `${baseUrl}/Api/RepairOrders/RepairOrderCancel`
+const cancel = `${baseUrl}/Api/RepairOrders/CustomerCancelOrder`
 // 确认订单
-const Confirm = `${baseUrl}/Api/RepairOrders/RepairOrderConfirm`
+const Confirm = `${baseUrl}/Api/RepairOrders/CustomerConfirmOrder`
 const photo = `${baseUrl}/Api/Files/GetRepairPhoto`
 
 

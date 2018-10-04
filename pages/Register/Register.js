@@ -1,5 +1,5 @@
 const { baseUrl } = getApp().globalData
-const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//登录接
+const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//注册接口
 const utils = require("../../utils/util.js")
 var app = getApp().globalData
 Page({

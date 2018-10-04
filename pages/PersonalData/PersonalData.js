@@ -1,5 +1,5 @@
 const { baseUrl } = getApp().globalData
-const baseUrls = `${baseUrl}/Api/Customers/UpdateAccountInfo`//获取个人数据接口
+const baseUrls = `${baseUrl}/Api/Customers/UpdateAccountInfo`//更新账户信息接口
 let app = getApp().globalData
 const utils = require("../../utils/util.js")
 Page({

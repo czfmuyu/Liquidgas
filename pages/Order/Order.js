@@ -2,9 +2,9 @@
 let app = getApp().globalData
 let { baseUrl } = getApp().globalData
 const utils = require("../../utils/util.js")
-const baseUrls = `${baseUrl}/Api/GasOrders/GetGasOrders` //获取订单列表接口
-const cancel = `${baseUrl}/Api/GasOrders/GasOrderCancel` //取消订单
-const Confirm = `${baseUrl}/Api/GasOrders/GasOrderConfirm` //确认订单
+const baseUrls = `${baseUrl}/Api/GasOrders/GetCustomerOrders` //获取订单列表接口
+const cancel = `${baseUrl}/Api/GasOrder/CustomerCancelOrder` //取消订单
+const Confirm = `${baseUrl}/Api/GasOrders/CustomerConfirmOrder` //确认订单
 
 let Num = 2;
 Page({
