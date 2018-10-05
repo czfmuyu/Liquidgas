@@ -1,6 +1,6 @@
 
 <!-- 供应商有数据显示页面 -->
-<view class="header" style='border-bottom:2rpx solid #eee;' hidden="{{isSupplier}}">
+<view class="header" style='border-bottom:2rpx solid #eee;' hidden="{{isSupplier}}" bindtap="reselectionSupplier">
     <view class="header_left">
         <image src="../../imgs/221_03.png" />
     </view>
@@ -24,7 +24,7 @@
 </view> 
 
 <!-- 地址有数据显示的页面 -->
-<view class="header" hidden="{{isAddress}}">
+<view class="header" hidden="{{isAddress}}" bindtap="reselection">
     <view class="header_left">
         <image src="../../imgs/221_03.png" />
     </view>

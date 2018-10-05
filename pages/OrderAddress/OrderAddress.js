@@ -115,6 +115,26 @@ Page({
     day: "",
     OrderItems: ""
   },
+  //供应商重新选择
+  reselectionSupplier(){
+    wx.navigateTo({
+      url: "/pages/SupplierRecommend/SupplierRecommend",
+    })
+  },
+  //地址重新选择
+  reselection(){
+    wx.navigateTo({
+      url: '/pages/GasInformation/GasInformation',
+    })
+    let number = 0;
+    wx.setStorage({
+      key: 'page',
+      data: number,
+      success: function (res) {
+        // success
+      },
+    })
+  },
   /**
   * 生命周期函数--监听页面加载
   */
@@ -712,7 +732,6 @@ Page({
         // success
       },
     })
-
   },
 
 
