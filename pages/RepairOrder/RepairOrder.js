@@ -95,9 +95,12 @@ Page({
   },
   // 获取本地id
   getID() {
-    this.setData({
-      "parameter.customerId": app.Customer.CustomerId
-    })
+    if (app.Customer !==null){
+      this.setData({
+        "parameter.customerId": app.Customer.CustomerId
+      })
+    }
+    return false
   },
   //确认完成点击事件
   onconfirm() {
@@ -109,6 +112,7 @@ Page({
   },
   //全部页面详情
   queryBtn(e) {
+    console.log(e)
     let orderId = e.currentTarget.dataset.orderid
     let seriaI = e.currentTarget.dataset.serial
     wx.navigateTo({

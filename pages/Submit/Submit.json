@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "提交成功"
+    "navigationBarTitleText": "提交成功",
+    "enablePullDownRefresh": false,
+    "disableScroll": true
 }

@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "用气信息"
+    "navigationBarTitleText": "用气信息",
+    "enablePullDownRefresh": false,
+    "disableScroll": true
 }

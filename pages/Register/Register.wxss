@@ -46,6 +46,7 @@
     height: 38rpx;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .Tick{
     margin-top: 4rpx;

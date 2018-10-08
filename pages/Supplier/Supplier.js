@@ -80,16 +80,16 @@ Page({
    */
   onLoad: function(options) {
     let _this = this
-
-    let EnterpriseName = app.Customer.EnterpriseName
-    let EnterpriseAddress = app.Customer.EnterpriseAddress
-    let EnterprisePhone = app.Customer.EnterprisePhone
-    _this.setData({
-      EnterpriseName: EnterpriseName,
-      EnterpriseAddress: EnterpriseAddress,
-      EnterprisePhone: EnterprisePhone
-    })
-
+    if (app.Customer !==null){
+  let EnterpriseName = app.Customer.EnterpriseName
+  let EnterpriseAddress = app.Customer.EnterpriseAddress
+  let EnterprisePhone = app.Customer.EnterprisePhone
+  _this.setData({
+    EnterpriseName: EnterpriseName,
+    EnterpriseAddress: EnterpriseAddress,
+    EnterprisePhone: EnterprisePhone
+  })
+}
     // 判断显示电话
     _this.Phone()
   },

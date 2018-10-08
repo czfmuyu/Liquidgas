@@ -1,7 +1,7 @@
 let app = getApp().globalData
 const baseUrls = `${app.baseUrl}/Api/Customers/BindCustomerAccount`
 
-
+var util = require('../../utils/util.js');
 Page({
   /**
    * 页面的初始数据
@@ -61,6 +61,8 @@ Page({
           wx.redirectTo({
             url: '/pages/Login/Login',
           })
+        }else{
+          util.showError(res.data.Msg)
         }
       }
     })

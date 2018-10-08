@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "维修订单详情"
+    "navigationBarTitleText": "维修订单详情",
+    "enablePullDownRefresh": false,
+    "disableScroll": true
 }

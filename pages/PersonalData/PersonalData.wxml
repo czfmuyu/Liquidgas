@@ -28,7 +28,7 @@
     <view class="modal-ipt">
         <input 
             placeholder="请输入姓名"
-            bindblur="GasNumber" data-type='name'/>
+            bindinput="GasNumber" data-type='name'/>
     </view>
     <view class="modal-footer">
         <view class="btn-cancel" bindtap="onNameCancel" >取消</view>

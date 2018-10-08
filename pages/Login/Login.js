@@ -39,7 +39,6 @@ Page({
         },
         method: 'post',
         success: res => {
-          console.log(res.data.Data)
           if (res.data.Data == null) {
             wx.showToast({
               title: '您输入的账号密码有误',

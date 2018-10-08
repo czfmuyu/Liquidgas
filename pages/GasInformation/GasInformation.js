@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     this.page() //判断页面跳转index
     console.log(app)
-    if (Orderaddress.Contact !== "" || Orderaddress.Phone !== "") {
+    if (Orderaddress.Contact !== "" || Orderaddress.Phone !== "" || Orderaddress.Address !== ""){
       this.setData({ //新用户没有数据的时候获取的信息
         storename: Orderaddress.Contact,
         telephone: Orderaddress.Phone,
@@ -33,13 +33,21 @@ Page({
         latitudes: Orderaddress.Latitude,
       })
     } else {
-      this.setData({
-        storename: getApp().globalData.Customer.CustomerName,
-        telephone: getApp().globalData.Customer.CustomerPhone,
-        address: getApp().globalData.Customer.CustomerAddress,
-        latitudes: getApp().globalData.Customer.CustomerLatitude,
-        longitudes: getApp().globalData.Customer.CustomerLongitude,
-      })
+      if (getApp().globalData.Customer !==null){
+        this.setData({
+          storename: getApp().globalData.Customer.CustomerName,
+          telephone: getApp().globalData.Customer.CustomerPhone,
+          address: getApp().globalData.Customer.CustomerAddress,
+          latitudes: getApp().globalData.Customer.CustomerLatitude,
+          longitudes: getApp().globalData.Customer.CustomerLongitude,
+        })
+        app.Orderaddress.Address = getApp().globalData.Customer.CustomerAddress
+        app.Orderaddress.Contact = getApp().globalData.Customer.CustomerName
+        app.Orderaddress.Latitude = getApp().globalData.Customer.CustomerLatitude
+        app.Orderaddress.Longitude = getApp().globalData.Customer.CustomerLongitude
+        app.Orderaddress.Phone = getApp().globalData.Customer.CustomerPhone
+      }
+      return false
     }
   },
 
@@ -94,6 +102,12 @@ Page({
         url: '/pages/Repair/Repair',
       })
     }
+    // 提交地址的时候修改本地变量
+    app.Orderaddress.Address = this.data.address
+      app.Orderaddress.Contact = this.data.storename
+    app.Orderaddress.Latitude = this.data.latitudes
+      app.Orderaddress.Longitude = this.data.longitudes
+    app.Orderaddress.Phone = this.data.telephone
   },
   // 获取姓名保存到全局
   GasNumber: function (e) {

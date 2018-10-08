@@ -1,6 +1,8 @@
-let { Orderaddress } = getApp().globalData
+let {
+  Orderaddress
+} = getApp().globalData
 var app = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/GasOrders/CustomerSubmitOrder'//一键订气上传接口
+const baseUrls = app.baseUrl + '/Api/GasOrders/CustomerSubmitOrder' //一键订气上传接口
 const utils = require("../../utils/util.js")
 let amap = require("../../utils/amap");
 Page({
@@ -34,67 +36,86 @@ Page({
       '19:00',
       '19:30',
       '20:00',
-    ],//预定时间弹框
-    array2:
-      [
-        '今天',
-        '明天'
-      ],
+    ], //预定时间弹框
+    array2: [
+      '今天',
+      '明天'
+    ],
     index: 0,
     index2: 0,
-    showModal: false,//控制地址弹框按钮
-    isAddress: false,//控制地址隐藏显示
-    showgoods: false,//控制商品弹框隐藏显示
-    isgoods: false,//控制商品列表的显示隐藏
-    isSupplier: false,//控制供应商隐藏显示
-    showPayment: false,//控制支付弹框按钮
-    showPaymentMethod: false,//控制支付方式弹框按钮
-    goodslist: [
-      {
+    showModal: false, //控制地址弹框按钮
+    isAddress: false, //控制地址隐藏显示
+    showgoods: false, //控制商品弹框隐藏显示
+    isgoods: false, //控制商品列表的显示隐藏
+    isSupplier: false, //控制供应商隐藏显示
+    showPayment: false, //控制支付弹框按钮
+    showPaymentMethod: false, //控制支付方式弹框按钮
+    goodslist: [{
         Name: "商品1",
         Price: 120,
-        Quantity: 0,//计数
+        Quantity: 0, //计数
         PrceType: "公斤",
       },
       {
         Name: "商品2",
         Price: 120,
-        Quantity: 0,//计数
+        Quantity: 0, //计数
         PrceType: "公斤",
       },
       {
         Name: "商品3",
         Price: 120,
-        Quantity: 0,//计数
+        Quantity: 0, //计数
         PrceType: "瓶",
       },
       {
         Name: "商品4",
         Price: 120,
-        Quantity: 0,//计数
+        Quantity: 0, //计数
         PrceType: "公斤",
       },
       {
         Name: "商品5",
         Price: 120,
-        Quantity: 0,//计数
+        Quantity: 0, //计数
         PrceType: "瓶",
       }
     ],
     goods: [],
     Quantity: 0,
     Price: 0,
-    addpayment: { name: '在线支付', checked: false, imgs: "../../imgs/66_03.png", },
-    radioItems: [//支付选择
-      { name: '在线支付', checked: false, imgs: "../../imgs/66_03.png", },
-      { name: '货到付款', checked: true, imgs: "../../imgs/66_06.png", },
+    addpayment: {
+      name: '在线支付',
+      checked: false,
+      imgs: "../../imgs/66_03.png",
+    },
+    radioItems: [ //支付选择
+      {
+        name: '在线支付',
+        checked: false,
+        imgs: "../../imgs/66_03.png",
+      },
+      {
+        name: '货到付款',
+        checked: true,
+        imgs: "../../imgs/66_06.png",
+      },
     ],
-    PaymentItems: [//支付方式选择
-      { name: '微信零钱', checked: true },
+    PaymentItems: [ //支付方式选择
+      {
+        name: '微信零钱',
+        checked: true
+      },
     ],
-    OptionsBox: [//瓶和公斤选择
-      { name: '瓶', checked: true },
-      { name: '公斤', checked: false }
+    OptionsBox: [ //瓶和公斤选择
+      {
+        name: '瓶',
+        checked: true
+      },
+      {
+        name: '公斤',
+        checked: false
+      }
     ],
     ProductId: "",
     AccountId: "",
@@ -116,13 +137,13 @@ Page({
     OrderItems: ""
   },
   //供应商重新选择
-  reselectionSupplier(){
+  reselectionSupplier() {
     wx.navigateTo({
       url: "/pages/SupplierRecommend/SupplierRecommend",
     })
   },
   //地址重新选择
-  reselection(){
+  reselection() {
     wx.navigateTo({
       url: '/pages/GasInformation/GasInformation',
     })
@@ -130,29 +151,32 @@ Page({
     wx.setStorage({
       key: 'page',
       data: number,
-      success: function (res) {
+      success: function(res) {
         // success
       },
     })
   },
   /**
-  * 生命周期函数--监听页面加载
-  */
+   * 生命周期函数--监听页面加载
+   */
   onLoad() {
-    amap.getRegeo()//用户没有先选地址时获取当前定位
-    .then(d => {
-      console.log(d);
-      let { latitude, longitude } = d[0];
-        app.Orderaddress.Latitude=latitude
-        app.Orderaddress.Longitude=longitude
-    })
-    .catch(e => {
-      console.log(e);
-    })
-    this.setData({//新用户没有值获取填该账户的ID
+    amap.getRegeo() //用户没有先选地址时获取当前定位
+      .then(d => {
+        console.log(d);
+        let {
+          latitude,
+          longitude
+        } = d[0];
+        app.Orderaddress.Latitude = latitude
+        app.Orderaddress.Longitude = longitude
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    this.setData({ //新用户没有值获取填该账户的ID
       AccountId: app.AccountId.AccountId
     })
-    this.setData({//新用户没有值获取填写好的值
+    this.setData({ //新用户没有值获取填写好的值
       CustomerAddress: Orderaddress.Address,
       CustomerLatitude: Orderaddress.Latitude,
       CustomerLongitude: Orderaddress.Longitude,
@@ -213,7 +237,7 @@ Page({
   userData() {
     let CustomerName = this.data.CustomerName
     console.log(CustomerName)
-    if (CustomerName == "" || CustomerName == undefined) {//判断地址是否有数据页面切换
+    if (CustomerName == "" || CustomerName == undefined) { //判断地址是否有数据页面切换
       this.setData({
         isAddress: true,
       })
@@ -244,6 +268,10 @@ Page({
     console.log(app)
     let arr = []
     let OptionsBox = this.data.OptionsBox
+    // 判断app是否为null，如果是不执行下面的代码
+    if (app.Customer == null) {
+      return false
+    }
     if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
       for (let i = 0; i < app.Customer.CustomerDetails.length; i++) {
         let obj = {
@@ -287,7 +315,7 @@ Page({
     this.userData()
   },
   //瓶和公斤选项框点击事件
-  OptionsBox: function (e) {
+  OptionsBox: function(e) {
     var checked = e.detail.value
     var changed = {}
     for (var i = 0; i < this.data.OptionsBox.length; i++) {
@@ -315,19 +343,17 @@ Page({
     let OptionsBox = this_.data.OptionsBox
     let PrceType
     let SubscribeTime
-    if (OptionsBox[0].checked === true) {//购买模式判断
+    if (OptionsBox[0].checked === true) { //购买模式判断
       PrceType = 0
-    }
-    else if (OptionsBox[1].checked === true) {
+    } else if (OptionsBox[1].checked === true) {
       PrceType = 10
     };
     let array = this_.data.array
     let time = "";
-    if (array[this_.data.index] === "立即出发") {//预约时间判断
+    if (array[this_.data.index] === "立即出发") { //预约时间判断
       time = 0
       SubscribeTime = ""
-    }
-    else if (array[this_.data.index] !== "立即出发") {
+    } else if (array[this_.data.index] !== "立即出发") {
       time = 10
       let Times = utils.formatTime1(new Date());
       let day = Times.slice(0, 10)
@@ -343,7 +369,7 @@ Page({
     }
     let commodityList = this_.data.commodityList
     let array1 = [];
-    if (OptionsBox[0].checked === true) {//瓶
+    if (OptionsBox[0].checked === true) { //瓶
       for (let k = 0; k < commodityList.length; k++) {
         if (commodityList[k].Quantity > 0) {
           let OrderItems = {
@@ -401,7 +427,7 @@ Page({
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.Code == 506) {
           wx.showToast({
@@ -422,14 +448,13 @@ Page({
   },
 
   /**
-     * 支付方式弹出框蒙层截断touchmove事件
-     */
-  preventTouchMove: function () {
-  },
+   * 支付方式弹出框蒙层截断touchmove事件
+   */
+  preventTouchMove: function() {},
   /**
    * 支付方式隐藏模态对话框
    */
-  PaymentMethodhideModal: function () {
+  PaymentMethodhideModal: function() {
     this.setData({
       showPaymentMethod: false
     });
@@ -437,13 +462,13 @@ Page({
   /**
    * 支付方式对话框取消按钮点击事件
    */
-  PaymentMethodCancel: function () {
+  PaymentMethodCancel: function() {
     this.PaymentMethodhideModal();
   },
   /**
    * 支付方式对话框确认按钮点击事件
    */
-  PaymentMethodConfirm: function (e) {
+  PaymentMethodConfirm: function(e) {
     this.PaymentMethodhideModal();
   },
 
@@ -462,7 +487,7 @@ Page({
     this.setData(changed)
   },
   //支付选项框点击事件
-  radioChange: function (e) {
+  radioChange: function(e) {
     var checked = e.detail.value
     var changed = {}
     for (var i = 0; i < this.data.radioItems.length; i++) {
@@ -486,12 +511,11 @@ Page({
   /**
    * 支付弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function () {
-  },
+  preventTouchMove: function() {},
   /**
    * 支付隐藏模态对话框
    */
-  PaymenthideModal: function () {
+  PaymenthideModal: function() {
     this.setData({
       showPayment: false
     });
@@ -499,13 +523,13 @@ Page({
   /**
    * 支付对话框取消按钮点击事件
    */
-  PaymentCancel: function () {
+  PaymentCancel: function() {
     this.PaymenthideModal();
   },
   /**
    * 支付对话框确认按钮点击事件
    */
-  PaymentConfirm: function (e) {
+  PaymentConfirm: function(e) {
     for (let i = 0; i < this.data.radioItems.length; i++) {
       if (this.data.radioItems[i].checked === true) {
         this.setData({
@@ -526,12 +550,11 @@ Page({
   /**
    * 商品弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function () {
-  },
+  preventTouchMove: function() {},
   /**
    * 商品隐藏模态对话框
    */
-  goodsHideModal: function () {
+  goodsHideModal: function() {
     this.setData({
       showgoods: false
     });
@@ -539,13 +562,13 @@ Page({
   /**
    * 商品对话框取消按钮点击事件
    */
-  goodsCancel: function () {
+  goodsCancel: function() {
     this.goodsHideModal();
   },
   /**
    * 商品对话框确认按钮点击事件
    */
-  goodsConfirm: function () {
+  goodsConfirm: function() {
     let commodityList = this.data.commodityList;
     let goods = [];
     for (let i = 0; i < commodityList.length; i++) {
@@ -564,8 +587,7 @@ Page({
           radioItems: radio,
         })
       }
-    }
-    else if (OptionsBox[0].checked === true && OptionsBox[1].checked === false) {
+    } else if (OptionsBox[0].checked === true && OptionsBox[1].checked === false) {
       if (radio.length == 1) {
         radio.unshift(addpayment);
         this.setData({
@@ -588,9 +610,9 @@ Page({
     })
   },
   /**
-  * 用户点击商品减1
-  */
-  subtracttap: function (e) {
+   * 用户点击商品减1
+   */
+  subtracttap: function(e) {
     const index = e.target.dataset.index;
     const commodityList = this.data.commodityList;
     const Quantity = commodityList[index].Quantity;
@@ -605,9 +627,9 @@ Page({
     this.calculateTotal();
   },
   /**
-    * 用户点击商品加1
-    */
-  addtap: function (e) {
+   * 用户点击商品加1
+   */
+  addtap: function(e) {
     const index = e.target.dataset.index;
     const commodityList = this.data.commodityList;
     const Quantity = commodityList[index].Quantity;
@@ -618,14 +640,14 @@ Page({
     this.calculateTotal();
   },
   /**
-  * 计算商品总数
-  */
-  calculateTotal: function () {
+   * 计算商品总数
+   */
+  calculateTotal: function() {
     let commodityList = this.data.commodityList;
     let Count = 0;
     let Price = 0;
     let OptionsBox = this.data.OptionsBox
-    if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {//瓶
+    if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) { //瓶
       for (let i = 0; i < commodityList.length; i++) {
         let good = commodityList[i];
         Count += parseInt(good.Quantity);
@@ -635,7 +657,7 @@ Page({
         Quantity: Count,
         Price: Price
       })
-    } else {//公斤
+    } else { //公斤
       for (let i = 0; i < commodityList.length; i++) {
         let good = commodityList[i];
         Count += parseInt(good.Quantity);
@@ -648,7 +670,7 @@ Page({
     }
   },
   //预约时间Picker索引值
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
@@ -656,7 +678,7 @@ Page({
   },
 
   //预约那天Picker索引值
-  bindDayPickerChange: function (e) {
+  bindDayPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index2: e.detail.value
@@ -667,12 +689,11 @@ Page({
   /**
    * 地址弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function () {
-  },
+  preventTouchMove: function() {},
   /**
    * 地址隐藏模态对话框
    */
-  hideModal: function () {
+  hideModal: function() {
     this.setData({
       showModal: false
     });
@@ -680,7 +701,7 @@ Page({
   /**
    * 地址对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: function() {
     this.hideModal();
   },
 
@@ -702,7 +723,7 @@ Page({
   /**
    * 地址对话框确认按钮点击事件
    */
-  onConfirm: function (e) {
+  onConfirm: function(e) {
     //地址判断
     let name = this.data.name
     if (name === "") {
@@ -728,7 +749,7 @@ Page({
     wx.setStorage({
       key: 'page',
       data: number,
-      success: function (res) {
+      success: function(res) {
         // success
       },
     })
@@ -738,49 +759,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     this.calculateTotal();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.Supplier()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

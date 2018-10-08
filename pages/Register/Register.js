@@ -8,10 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    checked:true,
     text: "获取验证码",
     currentTime: 60, //倒计时
     disabled: false, //按钮是否禁用
-    Tick: "",
     Name: "",
     Phone: "",
     Password: "",
@@ -26,16 +26,16 @@ Page({
   },
   //点击条款打钩事件
   Tick() {
-    let T = this.data.Tick
-    if (T === "√") {
+    if (this.data.checked==false){
       this.setData({
-        Tick: ""
+        checked:true
       })
-    } else {
+    }else{
       this.setData({
-        Tick: "√"
+        checked: false
       })
     }
+    
   },
   //点击短信验证码发送事件
   bindButtonTap() {
@@ -71,12 +71,12 @@ Page({
   //注册点击事件
   Register() {
     let this_ = this
-    let Tick = this_.data.Tick
+    let Tick = this_.data.checked
     if (this_.data.Name !== "" && this_.data.Phone !== "" && this_.data.Password !== "" && this_.data.confirmPassword !== "" && this_.data.VerificationCode !== "") {
       if (/^[\u4e00-\u9fa5]{2,3}$/.test(this_.data.Name)) {
         if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
           if (/^[\w_-]{6,16}$/.test(this_.data.Password)) {
-            if (Tick === "√") {
+            if (Tick) {
               if (this_.data.Password === this_.data.confirmPassword) {
                 wx.request({
                   url: baseUrls,

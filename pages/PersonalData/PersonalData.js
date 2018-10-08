@@ -24,11 +24,15 @@ Page({
   //获取本地储存
   getData() {
     let this_ = this
-    this_.setData({
-      AccountName: utils.Decrypt(app.Customer.AccountName),
-      AccountPhone: utils.Decrypt(app.Customer.AccountPhone)
-    })
+    if (app.Customer !==null){
+      this_.setData({
+        AccountName: utils.Decrypt(app.Customer.AccountName),
+        AccountPhone: utils.Decrypt(app.Customer.AccountPhone)
+      })
+    }
+    
   },
+
   GasNumber: function(e) {
     this.setData({
       modifyname: e.detail.value

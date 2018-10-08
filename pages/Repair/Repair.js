@@ -156,7 +156,6 @@ Page({
     let list = _this.data.guaranteeList
     // 拼接点击过的项目
     let prpair = _this.data.RepairLabel
-    console.log(prpair)
     if (list[index].Enabled == true) {
       list[index].Enabled = false
     } else {
@@ -273,7 +272,7 @@ Page({
   Add() {
     let num = 2
     wx.setStorageSync("page", num)
-    wx.navigateTo({
+    wx.redirectTo({
       url: '/pages/GasInformation/GasInformation',
     })
   },
@@ -287,8 +286,6 @@ Page({
       sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
       sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
       success: function(res) {
-         var tempFilesSize = res.tempFiles[0].size;  //获取图片的大小，单位B
-         if (tempFilesSize <= 2000000) { 
         var imgsrc = res.tempFilePaths;　　　　　　　　　
         pics = pics.concat(imgsrc);
         that.setData({
@@ -296,13 +293,6 @@ Page({
         });
            // 上传图片
            that.uploadimg()
-       }else{
-           wx.showToast({
-             title: '上传图片不能大于2M!',  
-             icon: 'none'       
-           })
-       }
-        
       },
     })
   },
@@ -311,6 +301,7 @@ Page({
   uploadimg: function(data) {
     let that = this
     let pics = that.data.pics;
+    console.log(pics)
     let imglist = that.data.identifier
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
@@ -319,6 +310,7 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
+          console.log("ww"+res)
           var identifier
           let data = res.data
           let imglists = JSON.parse(data);
@@ -365,9 +357,6 @@ Page({
     let CustomerId = app.Customer.CustomerId
     // 用户唯一编码
     let AccountId = app.Customer.AccountId
-    // name1:util.Decrypt(name)
-    // phone1: util.Decrypt(phone)
-    // address1: util.Decrypt(address)
     _this.setData({
       "frolist.EnterpriseId": EnterpriseId,
       "frolist.CustomerId": CustomerId,

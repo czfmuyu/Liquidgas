@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "故障维修"
+    "navigationBarTitleText": "故障维修",
+   "enablePullDownRefresh": false,
+  "disableScroll": true
 }

@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "安全宣传"
+    "navigationBarTitleText": "安全宣传",
+    "enablePullDownRefresh": false,
+    "disableScroll": true
 }

@@ -17,30 +17,30 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad(options) {
-    console.log("监听页面加载")
 
   },
   CurrentInfo() {
-    console.log(app.CustomerId.CustomerId)
     let this_ = this
-    wx.request({
-      url: baseUrls,
-      data: {
-        Sign: "",
-        AccountId: app.AccountId.AccountId,
-        CustomerId: app.CustomerId
-      },
-      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function (res) {
-        console.log(res.data.Data)
-        app.Customer = res.data.Data
-        this_.setData({
-          Gas: res.data.Data.GasNo
-        })
-        console.log(res)
-      },
-    })
+    if (app.CustomerId.CustomerId !== undefined){
+      wx.request({
+        url: baseUrls,
+        data: {
+          Sign: "",
+          AccountId: app.AccountId.AccountId,
+          CustomerId: app.CustomerId
+        },
+        method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        // header: {}, // 设置请求的 header
+        success: function (res) {
+          console.log(res.data.Data)
+          app.Customer = res.data.Data
+          this_.setData({
+            Gas: res.data.Data.GasNo
+          })
+        },
+      })
+    }
+    return false
   },
   SublevelAccount() {
     wx.navigateTo({//子账号页面
@@ -81,8 +81,8 @@ Page({
     })
   },
   Cancellation() {
-    wx.navigateTo({//授权登录页面
-      url: "/pages/Authorized/Authorized"
+    wx.redirectTo({
+      url: '/pages/Login/Login',
     })
   },
 
@@ -99,13 +99,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("监听页面显示")
     this.CurrentInfo()
-    console.log(app)
-    if (app.Customer.IsMainAccount == true) {
-      this.setData({
-        state: true
-      })
+    if (app.Customer !== null){
+      if (app.Customer.IsMainAccount == true) {
+        this.setData({
+          state: true
+        })
+      }
     }
   },
 
@@ -113,14 +113,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log("监听页面隐藏")
+   
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log("监听页面卸载")
+   
   },
 
   /**

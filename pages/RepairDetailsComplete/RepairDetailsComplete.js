@@ -7,6 +7,7 @@ const baseUrls = `${baseUrl}/Api/RepairOrders/GetOrderInfo`
 const cancel = `${baseUrl}/Api/RepairOrders/CustomerCancelOrder`
 // 确认订单
 const Confirm = `${baseUrl}/Api/RepairOrders/CustomerConfirmOrder`
+// 图片路径
 const photo = `${baseUrl}/Api/Files/GetRepairPhoto`
 
 
@@ -186,6 +187,7 @@ Page({
       method: 'GET',
       success: function (res) {
         let detailed = res.data.Data
+        console.log(detailed)
         _this.setData({
           detailedlist: detailed
         })
