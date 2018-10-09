@@ -77,14 +77,14 @@ Page({
     pics: [],
     index: "0",
     // 上传图片编号
-    identifier:[]
+    identifier: []
   },
 
 
   // 表单提交=========================
   Submit() {
     let _this = this
-  
+
     let frolists = _this.data.frolist
     let Times = util.formatTime1(new Date());
     let day = Times.slice(0, 10)
@@ -109,6 +109,7 @@ Page({
     if (pics.length < 1) {
       wx.showToast({
         title: "请添加照片",
+        image: "../../imgs/xcit.png",
         duration: 2000
       })
       return false
@@ -143,6 +144,7 @@ Page({
         } else {
           wx.showToast({
             title: "请重新提交！",
+            image: "../../imgs/xcit.png",
             duration: 1000
           });
         }
@@ -208,7 +210,7 @@ Page({
     let index = e.detail.value
     let timelists = timelist[index]
     let Times = util.formatTime1(new Date());
-    let day = Times.slice(10,16)
+    let day = Times.slice(10, 16)
     if (timelists == "立即出发") {
       this.setData({
         "frolist.ServiceMode": 0,
@@ -220,7 +222,7 @@ Page({
         "frolist.SubscribeTime": timelists
       })
     }
-   
+
   },
 
 
@@ -291,8 +293,8 @@ Page({
         that.setData({
           pics: pics
         });
-           // 上传图片
-           that.uploadimg()
+        // 上传图片
+        that.uploadimg()
       },
     })
   },
@@ -310,7 +312,6 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-          console.log("ww"+res)
           var identifier
           let data = res.data
           let imglists = JSON.parse(data);

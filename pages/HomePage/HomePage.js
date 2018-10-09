@@ -175,14 +175,16 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        if (res.data.Code) {
+        console.log(res)
+        if (res.data.Data) {
           wx.redirectTo({
             url: '/pages/Login/Login',
           })
+        }else{
+          utils.showError("输入的用气编号不存在，请重新输入")
         }
       },
     })
-    this.hideModal();
   },
   //获取编号弹框的值
   GasNumber(e) {
@@ -213,7 +215,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+console.log(app)
   },
 
   /**

@@ -4,7 +4,7 @@
         <text >手机号</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入手机号" data-text="name" bindblur="userName" maxlength="11"/>
+        <input placeholder="请输入手机号" data-text="name" bindinput="userName" maxlength="11"/>
     </view>
 </view>
 <view class="user"style="margin-top: 54rpx;">
@@ -12,7 +12,7 @@
         <text >登录密码</text>
     </view>
     <view class="user_right">
-        <input placeholder="请输入密码" type="password" data-text="password" bindblur="password"/>
+        <input placeholder="请输入密码" type="password" data-text="password" bindinput="password"/>
     </view>
 </view>
 <view class="userBtn" style="margin-top: 30rpx;">

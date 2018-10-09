@@ -206,6 +206,7 @@ Page({
     let storename = this.data.storename
     let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
     if (!name.test(storename)) {
+      console.log(storename)
       wx.showToast({
         title: "姓名输入有误！",
         icon: 'loadlng',

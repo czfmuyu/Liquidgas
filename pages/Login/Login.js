@@ -39,9 +39,10 @@ Page({
         },
         method: 'post',
         success: res => {
+          console.log(res)
           if (res.data.Data == null) {
             wx.showToast({
-              title: '您输入的账号密码有误',
+              title: '您输入的账号或密码有误',
               icon: 'none',
               duration: 2000
             });
@@ -55,7 +56,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '请输入您的账号密码',
+        title: '帐号密码不能为空！',
         icon: 'none',
         duration: 2000
       });
