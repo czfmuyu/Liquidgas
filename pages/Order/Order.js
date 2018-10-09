@@ -53,7 +53,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    let CustomerId = this.data.CustomerId
     let count = this.data.callbackcount * Num
     this.setData({
       searchPageNum: this.data.searchPageNum,
@@ -305,14 +304,13 @@ Page({
   /**
    * 显示输入狂
    */
-  phoneList(e) {
-    let _this = this
-    let id = e.target.dataset.orderid
-    let orderID = e.target.dataset.serial
-    _this.setData({
+  cancel(e) {
+    let orderid = e.target.dataset.orderid
+    let Serialnumber = e.target.dataset.serial
+    this.setData({
       ShowModal: true,
-      ID: id,
-      Serialnumber: orderID
+      ID: orderid,
+      Serialnumber: Serialnumber
     })
   },
   /**
