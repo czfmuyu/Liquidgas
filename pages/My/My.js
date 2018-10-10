@@ -43,14 +43,20 @@ Page({
     return false
   },
   SublevelAccount() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({//子账号页面
       url: "/pages/SublevelAccount/SublevelAccount"
     })
+    }
   },
   GasInformation() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({//用气信息页面
       url: "/pages/GasInformation/GasInformation",
     })
+    }
     let number = 1;
     wx.setStorage({
       key: 'page',
@@ -61,29 +67,44 @@ Page({
     })
   },
   PersonalData() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({//个人信息页面
       url: "/pages/PersonalData/PersonalData"
     })
+    }
   },
   Supplier() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({//供应商信息页面
       url: "/pages/Supplier/Supplier"
     })
+    }
   },
   BindingNumber() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({//绑定用气编号页面
       url: "/pages/BindingNumber/BindingNumber"
     })
+    }
   },
   AccountSecurity() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({//账号安全页面
       url: "/pages/AccountSecurity/AccountSecurity"
     })
+    }
   },
   Cancellation() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.redirectTo({
       url: '/pages/Login/Login',
     })
+    }
   },
 
 
@@ -107,6 +128,7 @@ Page({
         })
       }
     }
+    this.pageLoading = !1;
   },
 
   /**

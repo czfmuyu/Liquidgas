@@ -16,7 +16,7 @@
   <view class="btn-Photograph">提示</view>
   <view class="btn-Album">请输入你要更改的名称</view>
   <view class="modal-ipt">
-    <input placeholder="请输入名称" data-type='text' bindblur="GasNumber" />
+    <input placeholder="请输入名称" data-type='text' bindinput="GasNumber" />
   </view>
   <view class="modal-footer">
     <view class="btn-cancel" bindtap="onNameCancel">取消</view>

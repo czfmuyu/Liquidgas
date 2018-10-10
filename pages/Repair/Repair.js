@@ -105,7 +105,22 @@ Page({
     let Latitude = frolists.Latitude
     let CustomerId = frolists.CustomerId
     let EnterpriseId = frolists.EnterpriseId
-
+    if (RepairLabelIds == "") {
+      wx.showToast({
+        title: "请选择维修项目",
+        image: "../../imgs/xcit.png",
+        duration: 2000
+      })
+      return false
+    }
+    if (ProblemDescription == "") {
+      wx.showToast({
+        title: "请添加问题描述",
+        image: "../../imgs/xcit.png",
+        duration: 2000
+      })
+      return false
+    }
     if (pics.length < 1) {
       wx.showToast({
         title: "请添加照片",
@@ -290,6 +305,14 @@ Page({
       success: function(res) {
         var imgsrc = res.tempFilePaths;　　　　　　　　　
         pics = pics.concat(imgsrc);
+        if (pics.length > 9) {
+          wx.showToast({
+            title: "最多上传9张图片！",
+            image: "../../imgs/xcit.png",
+            duration: 2000
+          });
+          return false
+        }
         that.setData({
           pics: pics
         });

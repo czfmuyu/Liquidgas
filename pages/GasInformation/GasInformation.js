@@ -153,9 +153,12 @@ Page({
     let phone = this.data.telephone
     let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
     if (!telphone.test(phone)) {
+      this.setData({
+        storename: ""
+      })
       wx.showToast({
         title: "电话输入有误！",
-        icon: 'loadlng',
+        icon: 'none',
         duration: 1000
       });
     } else {
@@ -206,10 +209,12 @@ Page({
     let storename = this.data.storename
     let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
     if (!name.test(storename)) {
-      console.log(storename)
+      this.setData({
+        storename:""
+      })
       wx.showToast({
         title: "姓名输入有误！",
-        icon: 'loadlng',
+        icon: 'none',
         duration: 1000
       });
     } else {
@@ -217,7 +222,6 @@ Page({
         NameShowModal: false
       });
     }
-
   },
 
 
