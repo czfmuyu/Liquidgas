@@ -47,6 +47,7 @@ Page({
               duration: 2000
             });
           } else {
+            console.log(res.data.Data)
             app.AccountId = res.data.Data
             wx.switchTab({
               url: '/pages/HomePage/HomePage'

@@ -89,7 +89,6 @@ Page({
     let Times = util.formatTime1(new Date());
     let day = Times.slice(0, 10)
     let Time = frolists.SubscribeTime
-    console.log(frolists)
     // 时间拼接
     let SubscribeTime = day + " " + Time
     let pics = _this.data.pics
@@ -289,7 +288,7 @@ Page({
   Add() {
     let num = 2
     wx.setStorageSync("page", num)
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/GasInformation/GasInformation',
     })
   },
@@ -326,7 +325,6 @@ Page({
   uploadimg: function(data) {
     let that = this
     let pics = that.data.pics;
-    console.log(pics)
     let imglist = that.data.identifier
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
@@ -393,7 +391,6 @@ Page({
    */
   onShow: function() {
     let _this = this
-    console.log(app)
     //新用户渲染
     if (app.Orderaddress.Contact !== "" || app.Orderaddress.Phone !== "" || app.Orderaddress.Address !== "") {
       let name = app.Orderaddress.Contact
