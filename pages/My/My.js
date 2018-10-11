@@ -21,7 +21,7 @@ Page({
   },
   CurrentInfo() {
     let this_ = this
-    if (app.CustomerId.CustomerId !== undefined){
+    if (app.Customer.CustomerId !== null){
       wx.request({
         url: baseUrls,
         data: {
@@ -32,7 +32,6 @@ Page({
         method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         // header: {}, // 设置请求的 header
         success: function (res) {
-          console.log(res.data.Data)
           app.Customer = res.data.Data
           this_.setData({
             Gas: res.data.Data.GasNo
@@ -129,6 +128,7 @@ Page({
       }
     }
     this.pageLoading = !1;
+    
   },
 
   /**

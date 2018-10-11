@@ -49,7 +49,7 @@ Page({
       Phone: "",
       Address: "",
       // 预约时间
-      SubscribeTime: "09:00",
+      SubscribeTime: "立即出发",
       // 维修描述
       ProblemDescription: "",
       // 照片编码
@@ -88,7 +88,11 @@ Page({
     let frolists = _this.data.frolist
     let Times = util.formatTime1(new Date());
     let day = Times.slice(0, 10)
+    let days = Times.slice(10, 16)
     let Time = frolists.SubscribeTime
+    if (Time=="立即出发"){
+      Time=days
+    }
     // 时间拼接
     let SubscribeTime = day + " " + Time
     let pics = _this.data.pics
@@ -223,12 +227,9 @@ Page({
     let timelist = this.data.array
     let index = e.detail.value
     let timelists = timelist[index]
-    let Times = util.formatTime1(new Date());
-    let day = Times.slice(10, 16)
     if (timelists == "立即出发") {
       this.setData({
         "frolist.ServiceMode": 0,
-        "frolist.SubscribeTime": day
       })
     } else {
       this.setData({
