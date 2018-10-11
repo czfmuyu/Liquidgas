@@ -317,6 +317,7 @@ Page({
    * 对话框确认按钮点击事件
    */
   onConfirm: function (e) {
+    console.log(e)
     let _this = this
     // 订单
     let tomerId = _this.data.Serialnumber
@@ -339,20 +340,31 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          _this.DeliveryList()
-          _this.wholeInfo()
-          _this.EvaluateList()
-          wx.showToast({
-            title: "取消成功！",
-            duration: 2000
-          });
-          // 隐藏弹框
-          _this.HideModal()
+          console.log(res)
+          if(res.data.Data){
+            _this.DeliveryList()
+            _this.wholeInfo()
+            _this.EvaluateList()
+            wx.showToast({
+              title: "取消成功！",
+              icon: "none",
+              duration: 2000
+            });
+            // 隐藏弹框
+            _this.HideModal()
+          }else{
+            wx.showToast({
+              title: "取消失败！",
+              icon:"none",
+              duration: 2000
+            });
+          }
         },
       })
     } else {
       wx.showToast({
         title: "请填写取消原因",
+        icon: "none",
         duration: 1000
       });
       return false

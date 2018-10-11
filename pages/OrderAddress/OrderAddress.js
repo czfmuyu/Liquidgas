@@ -51,35 +51,35 @@ Page({
     showPayment: false, //控制支付弹框按钮
     showPaymentMethod: false, //控制支付方式弹框按钮
     goodslist: [{
-        Name: "商品1",
-        Price: 120,
-        Quantity: 0, //计数
-        PrceType: "公斤",
-      },
-      {
-        Name: "商品2",
-        Price: 120,
-        Quantity: 0, //计数
-        PrceType: "公斤",
-      },
-      {
-        Name: "商品3",
-        Price: 120,
-        Quantity: 0, //计数
-        PrceType: "瓶",
-      },
-      {
-        Name: "商品4",
-        Price: 120,
-        Quantity: 0, //计数
-        PrceType: "公斤",
-      },
-      {
-        Name: "商品5",
-        Price: 120,
-        Quantity: 0, //计数
-        PrceType: "瓶",
-      }
+      Name: "商品1",
+      Price: 120,
+      Quantity: 0, //计数
+      PrceType: "公斤",
+    },
+    {
+      Name: "商品2",
+      Price: 120,
+      Quantity: 0, //计数
+      PrceType: "公斤",
+    },
+    {
+      Name: "商品3",
+      Price: 120,
+      Quantity: 0, //计数
+      PrceType: "瓶",
+    },
+    {
+      Name: "商品4",
+      Price: 120,
+      Quantity: 0, //计数
+      PrceType: "公斤",
+    },
+    {
+      Name: "商品5",
+      Price: 120,
+      Quantity: 0, //计数
+      PrceType: "瓶",
+    }
     ],
     goods: [],
     Quantity: 0,
@@ -151,7 +151,7 @@ Page({
     wx.setStorage({
       key: 'page',
       data: number,
-      success: function(res) {
+      success: function (res) {
         // success
       },
     })
@@ -162,7 +162,6 @@ Page({
   onLoad() {
     amap.getRegeo() //用户没有先选地址时获取当前定位
       .then(d => {
-        console.log(d);
         let {
           latitude,
           longitude
@@ -187,12 +186,11 @@ Page({
     this.userData()
   },
   Supplier() {
-    console.log(app.CustomerList)
     if (app.CustomerList !== null) {
       let arr = []
       let OptionsBox = this.data.OptionsBox
       if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-        console.log("i")
+        
         for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
           let obj = {
             Quantity: 0,
@@ -202,12 +200,10 @@ Page({
           }
           arr.push(obj)
         }
-        console.log(arr)
         this.setData({
           commodityList: arr
         })
       } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-        console.log("in")
         for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
           let obj = {
             Quantity: 0,
@@ -217,7 +213,6 @@ Page({
           }
           arr.push(obj)
         }
-        console.log(arr)
         this.setData({
           commodityList: arr
         })
@@ -236,7 +231,6 @@ Page({
   //用户数据判断
   userData() {
     let CustomerName = this.data.CustomerName
-    console.log(CustomerName)
     if (CustomerName == "" || CustomerName == undefined) { //判断地址是否有数据页面切换
       this.setData({
         isAddress: true,
@@ -249,7 +243,6 @@ Page({
     }
     //判断供应商是否有数据页面切换
     let EnterpriseName = this.data.EnterpriseName
-    console.log(EnterpriseName)
     if (EnterpriseName == "" || EnterpriseName == undefined) {
 
       this.setData({
@@ -265,7 +258,6 @@ Page({
   //取出本地信息方法
   getData() {
     //判断用户选择的是瓶还是公斤
-    console.log(app)
     let arr = []
     let OptionsBox = this.data.OptionsBox
     // 判断app是否为null，如果是不执行下面的代码
@@ -299,23 +291,34 @@ Page({
         commodityList: arr
       })
     }
-    this.setData({
-      CustomerName: utils.Decrypt(app.Customer.CustomerName),
-      CustomerPhone: utils.Decrypt(app.Customer.CustomerPhone),
-      CustomerAddress: utils.Decrypt(app.Customer.CustomerAddress),
-      EnterpriseName: app.Customer.EnterpriseName,
-      EnterprisePhone: app.Customer.EnterprisePhone[0],
-      EnterpriseAddress: app.Customer.EnterpriseAddress,
-      CustomerId: app.Customer.CustomerId,
-      EnterpriseId: app.Customer.EnterpriseId,
-      CustomerLatitude: app.Customer.CustomerLatitude,
-      CustomerLongitude: app.Customer.CustomerLongitude,
-      AccountId: app.Customer.AccountId,
-    })
+    if(app.Orderaddress.Contact ==""){
+      this.setData({
+        CustomerName: utils.Decrypt(app.Customer.CustomerName),
+        CustomerPhone: utils.Decrypt(app.Customer.CustomerPhone),
+        CustomerAddress: utils.Decrypt(app.Customer.CustomerAddress),
+        CustomerLatitude: app.Customer.CustomerLatitude,
+        CustomerLongitude: app.Customer.CustomerLongitude,
+        EnterpriseName: app.Customer.EnterpriseName,
+        EnterprisePhone: app.Customer.EnterprisePhone[0],
+        EnterpriseAddress: app.Customer.EnterpriseAddress,
+        CustomerId: app.Customer.CustomerId,
+        EnterpriseId: app.Customer.EnterpriseId,
+        AccountId: app.Customer.AccountId,
+      })
+    }else{
+      this.setData({
+        EnterpriseName: app.Customer.EnterpriseName,
+        EnterprisePhone: app.Customer.EnterprisePhone[0],
+        EnterpriseAddress: app.Customer.EnterpriseAddress,
+        CustomerId: app.Customer.CustomerId,
+        EnterpriseId: app.Customer.EnterpriseId,
+        AccountId: app.Customer.AccountId,
+      })
+    }
     this.userData()
   },
   //瓶和公斤选项框点击事件
-  OptionsBox: function(e) {
+  OptionsBox: function (e) {
     var checked = e.detail.value
     var changed = {}
     for (var i = 0; i < this.data.OptionsBox.length; i++) {
@@ -400,8 +403,6 @@ Page({
         }
       }
     }
-    console.log(this_.data.OrderItems)
-    console.log(app)
     wx.request({
       url: baseUrls,
       data: {
@@ -427,8 +428,7 @@ Page({
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function(res) {
-        console.log(res.data)
+      success: function (res) {
         if (res.data.Code == 506) {
           wx.showToast({
             title: '请输入完整的信息',
@@ -437,7 +437,6 @@ Page({
           });
         } else {
           app.CustomerId = res.data.Data.CustomerId
-          console.log(getApp().globalData.Customer)
           wx.switchTab({
             url: "/pages/Order/Order",
           })
@@ -450,11 +449,11 @@ Page({
   /**
    * 支付方式弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 支付方式隐藏模态对话框
    */
-  PaymentMethodhideModal: function() {
+  PaymentMethodhideModal: function () {
     this.setData({
       showPaymentMethod: false
     });
@@ -462,13 +461,13 @@ Page({
   /**
    * 支付方式对话框取消按钮点击事件
    */
-  PaymentMethodCancel: function() {
+  PaymentMethodCancel: function () {
     this.PaymentMethodhideModal();
   },
   /**
    * 支付方式对话框确认按钮点击事件
    */
-  PaymentMethodConfirm: function(e) {
+  PaymentMethodConfirm: function (e) {
     this.PaymentMethodhideModal();
   },
 
@@ -487,7 +486,7 @@ Page({
     this.setData(changed)
   },
   //支付选项框点击事件
-  radioChange: function(e) {
+  radioChange: function (e) {
     var checked = e.detail.value
     var changed = {}
     for (var i = 0; i < this.data.radioItems.length; i++) {
@@ -511,11 +510,11 @@ Page({
   /**
    * 支付弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 支付隐藏模态对话框
    */
-  PaymenthideModal: function() {
+  PaymenthideModal: function () {
     this.setData({
       showPayment: false
     });
@@ -523,13 +522,13 @@ Page({
   /**
    * 支付对话框取消按钮点击事件
    */
-  PaymentCancel: function() {
+  PaymentCancel: function () {
     this.PaymenthideModal();
   },
   /**
    * 支付对话框确认按钮点击事件
    */
-  PaymentConfirm: function(e) {
+  PaymentConfirm: function (e) {
     for (let i = 0; i < this.data.radioItems.length; i++) {
       if (this.data.radioItems[i].checked === true) {
         this.setData({
@@ -550,11 +549,11 @@ Page({
   /**
    * 商品弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 商品隐藏模态对话框
    */
-  goodsHideModal: function() {
+  goodsHideModal: function () {
     this.setData({
       showgoods: false
     });
@@ -562,13 +561,13 @@ Page({
   /**
    * 商品对话框取消按钮点击事件
    */
-  goodsCancel: function() {
+  goodsCancel: function () {
     this.goodsHideModal();
   },
   /**
    * 商品对话框确认按钮点击事件
    */
-  goodsConfirm: function() {
+  goodsConfirm: function () {
     let commodityList = this.data.commodityList;
     let goods = [];
     for (let i = 0; i < commodityList.length; i++) {
@@ -612,7 +611,7 @@ Page({
   /**
    * 用户点击商品减1
    */
-  subtracttap: function(e) {
+  subtracttap: function (e) {
     const index = e.target.dataset.index;
     const commodityList = this.data.commodityList;
     const Quantity = commodityList[index].Quantity;
@@ -629,7 +628,7 @@ Page({
   /**
    * 用户点击商品加1
    */
-  addtap: function(e) {
+  addtap: function (e) {
     const index = e.target.dataset.index;
     const commodityList = this.data.commodityList;
     const Quantity = commodityList[index].Quantity;
@@ -642,7 +641,7 @@ Page({
   /**
    * 计算商品总数
    */
-  calculateTotal: function() {
+  calculateTotal: function () {
     let commodityList = this.data.commodityList;
     let Count = 0;
     let Price = 0;
@@ -670,16 +669,14 @@ Page({
     }
   },
   //预约时间Picker索引值
-  bindPickerChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value
     })
   },
 
   //预约那天Picker索引值
-  bindDayPickerChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindDayPickerChange: function (e) {
     this.setData({
       index2: e.detail.value
     })
@@ -689,11 +686,11 @@ Page({
   /**
    * 地址弹出框蒙层截断touchmove事件
    */
-  preventTouchMove: function() {},
+  preventTouchMove: function () { },
   /**
    * 地址隐藏模态对话框
    */
-  hideModal: function() {
+  hideModal: function () {
     this.setData({
       showModal: false
     });
@@ -701,7 +698,7 @@ Page({
   /**
    * 地址对话框取消按钮点击事件
    */
-  onCancel: function() {
+  onCancel: function () {
     this.hideModal();
   },
 
@@ -723,7 +720,7 @@ Page({
   /**
    * 地址对话框确认按钮点击事件
    */
-  onConfirm: function(e) {
+  onConfirm: function (e) {
     //地址判断
     let name = this.data.name
     if (name === "") {
@@ -749,7 +746,7 @@ Page({
     wx.setStorage({
       key: 'page',
       data: number,
-      success: function(res) {
+      success: function (res) {
         // success
       },
     })
@@ -759,49 +756,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     this.calculateTotal();
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.Supplier()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

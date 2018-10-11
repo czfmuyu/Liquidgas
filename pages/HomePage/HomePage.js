@@ -24,7 +24,6 @@ Page({
     })
   },
   Repair() {
-    console.log(app.GasNo)
     if (app.GasNo !== "") {
       wx.navigateTo({//维修页面
         url: "/pages/Repair/Repair"
@@ -61,12 +60,10 @@ Page({
       index: index
     })
     app.Customer = app.Customer[index]
-    console.log(app.Customer[index])
     app.CustomerId = app.Customer[index].CustomerId
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
-    console.log(app.AccountId.AccountId)
     let this_ = this
     wx.request({//获取个人信息请求
       url: baseUrls,
@@ -77,11 +74,8 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res)
         let data = res.data.Data
-        console.log(data)
         this_.decryption(data)
-        console.log(data)
         let arr = [];
         if (res.data.Data == null) {
           this_.setData({
@@ -108,10 +102,8 @@ Page({
         }
         this_.Tips()
         if (res.data.Data.length == 1) {
-          console.log(data[0])
           app.Customer = data[0]
           app.CustomerId = data[0].CustomerId
-          console.log(app)
         } else {
           app.Customer = data
           app.CustomerId = data.CustomerId
@@ -121,7 +113,6 @@ Page({
   },
   //获取的数据解密
   decryption(data) {
-    console.log(data)
     if (data !== null) {
       data.map(item => {
         utils.Decrypt(item.CustomerName)
@@ -135,7 +126,6 @@ Page({
     return data
   },
   Tips() {
-    console.log(this.data.GasNo)
     if (this.data.GasNo.length > 1) {
       this.setData({
         showModalTwo: true
@@ -175,7 +165,6 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res)
         if (res.data.Data) {
           wx.redirectTo({
             url: '/pages/Login/Login',
@@ -215,7 +204,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-console.log(app)
   },
 
   /**
