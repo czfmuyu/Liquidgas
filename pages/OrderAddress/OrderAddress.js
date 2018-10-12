@@ -190,7 +190,6 @@ Page({
       let arr = []
       let OptionsBox = this.data.OptionsBox
       if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-        
         for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
           let obj = {
             Quantity: 0,
@@ -291,7 +290,7 @@ Page({
         commodityList: arr
       })
     }
-    if(app.Orderaddress.Contact ==""){
+    if (app.Orderaddress.Contact == "") {
       this.setData({
         CustomerName: utils.Decrypt(app.Customer.CustomerName),
         CustomerPhone: utils.Decrypt(app.Customer.CustomerPhone),
@@ -305,7 +304,7 @@ Page({
         EnterpriseId: app.Customer.EnterpriseId,
         AccountId: app.Customer.AccountId,
       })
-    }else{
+    } else {
       this.setData({
         EnterpriseName: app.Customer.EnterpriseName,
         EnterprisePhone: app.Customer.EnterprisePhone[0],
@@ -366,7 +365,11 @@ Page({
     let PayMethod = this_.data.radioItems
     let payment
     if (PayMethod[0].checked === true) {
-      payment = 0
+      if (PayMethod.length == 1) {
+        payment = 100
+      } else {
+        payment = 0
+      }
     } else if (PayMethod[1].checked === true) {
       payment = 100
     }
