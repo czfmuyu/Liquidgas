@@ -21,7 +21,7 @@ Page({
   },
   CurrentInfo() {
     let this_ = this
-    if (app.Customer.CustomerId !== null){
+    if (app.Customer !== null){
       wx.request({
         url: baseUrls,
         data: {

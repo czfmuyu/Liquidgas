@@ -23,7 +23,8 @@
                     配送中
                 </view>
                 <view style="color: #2269d4;" wx:elif="{{item.Status==30}}">已完成</view>
-                <view style="color: #2269d4;" wx:else>已取消</view>
+                <view style="color: #2269d4;" wx:elif="{{item.Status==100}}">已取消</view>
+                <view style="color: #f5a357;" wx:elif="{{item.Status==-10}}">支付未完成</view>
             </view>
             <view class="userName">订购人: {{item.CustomerName}}</view>
             <view class="whole_bottom">
