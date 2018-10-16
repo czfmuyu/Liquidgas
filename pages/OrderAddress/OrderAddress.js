@@ -5,6 +5,8 @@ var app = getApp().globalData
 const baseUrls = app.baseUrl + '/Api/GasOrders/CustomerSubmitOrder' //一键订气上传接口
 const utils = require("../../utils/util.js")
 let amap = require("../../utils/amap");
+// 控制用户连续点击变量
+let frequency=0
 Page({
 
   /**
@@ -338,6 +340,14 @@ Page({
       url: "/pages/SupplierRecommend/SupplierRecommend",
     })
   },
+  // 判断用户连续点击多次
+  Submission(){
+    if (frequency==0){
+      frequency++
+      this.ConfirmSuccess()
+    }
+  },
+
 
   //确定支付点击事件
   ConfirmSuccess() {
@@ -432,6 +442,9 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        // 判断用户点击重新赋值
+        frequency=0
+        
         if (res.data.Code == 506) {
           wx.showToast({
             title: '请输入完整的信息',

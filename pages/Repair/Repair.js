@@ -9,7 +9,8 @@ const baseUrlBd = `${baseUrl}/Api/RepairOrders/CustomerSubmitOrder`
 // 提交照片
 const Urlsimg = `${baseUrl}/Api/Files/UploadImg`
 let j=0
-
+// 控制用户不可以多次点击
+let frequency=0
 Page({
   /**
    * 页面的初始数据
@@ -84,12 +85,13 @@ Page({
     Disable:false,
   },
 
-  // 提交订单
+  // 提交订单控制不能连续多次点击
   Beforesubmission() {
-    this.uploadimg()
-    // this.setData({
-    //   Disable:true
-    // })
+    if (frequency==0){
+      frequency++
+      this.uploadimg()
+    }
+    
   },
 
   // 表单提交=========================
@@ -344,6 +346,7 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
+          frequency=0//用户提交后在让其可点击
           var identifier
           let data = res.data
           let imglists = JSON.parse(data);

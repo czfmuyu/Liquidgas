@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checked:true,
+    checked:false,
     text: "获取验证码",
     currentTime: 60, //倒计时
     disabled: false, //按钮是否禁用

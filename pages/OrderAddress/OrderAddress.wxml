@@ -224,5 +224,5 @@
 <!-- footer确定支付 -->
 <view class="footer">
     <view class="footer_left">共{{Quantity}}件商品,共￥{{Price}}</view>
-    <view class="footer_right" bindtap="ConfirmSuccess">确定支付</view>
+    <view class="footer_right" bindtap="Submission">确定支付</view>
 </view>
