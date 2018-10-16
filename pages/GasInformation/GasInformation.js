@@ -66,7 +66,15 @@ Page({
 
   // 提交地址
   submission() {
-    console.log(this.data)
+    if (this.data.storename == "" || this.data.telephone == "" || this.data.address==""){
+      console.log(this.data)
+      wx.showToast({
+        title: "请完整填写信息！",
+        icon: 'none',
+        duration: 2000
+      });
+      return false
+    }
     if (app.Customer !== null) {
       wx.request({
         url: baseUrls,

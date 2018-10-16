@@ -66,5 +66,5 @@ bindtap="Discoloration" data-index='{{item.ID}}' wx:for="{{guaranteeList}}" wx:f
       </view>
     </view>
   </view>
-  <button class="submit" formType="submit" bindtap="Submit">提交</button>
+  <button class="submit" formType="submit"  disabled='{{Disable}}' bindtap="Beforesubmission">提交</button>
 </scroll-view>

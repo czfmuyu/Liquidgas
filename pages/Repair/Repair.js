@@ -8,7 +8,7 @@ const baseUrls = `${baseUrl}/Api/RepairOrders/GetRepairLabels`
 const baseUrlBd = `${baseUrl}/Api/RepairOrders/CustomerSubmitOrder`
 // 提交照片
 const Urlsimg = `${baseUrl}/Api/Files/UploadImg`
-
+let j=0
 
 Page({
   /**
@@ -77,21 +77,31 @@ Page({
     pics: [],
     index: "0",
     // 上传图片编号
-    identifier: []
+    identifier: [],
+    //判断图片是否上传完毕
+    indexs: "",
+    // button禁用
+    Disable:false,
   },
 
+  // 提交订单
+  Beforesubmission() {
+    this.uploadimg()
+    // this.setData({
+    //   Disable:true
+    // })
+  },
 
   // 表单提交=========================
   Submit() {
     let _this = this
-
     let frolists = _this.data.frolist
     let Times = util.formatTime1(new Date());
     let day = Times.slice(0, 10)
     let days = Times.slice(10, 16)
     let Time = frolists.SubscribeTime
-    if (Time=="立即出发"){
-      Time=days
+    if (Time == "立即出发") {
+      Time = days
     }
     // 时间拼接
     let SubscribeTime = day + " " + Time
@@ -132,6 +142,7 @@ Page({
       })
       return false
     }
+
     wx.request({
       url: baseUrlBd,
       data: {
@@ -169,6 +180,7 @@ Page({
       },
     })
   },
+
   // 获取点的什么维修事项===================
   Discoloration: function(e) {
     let _this = this
@@ -305,7 +317,7 @@ Page({
       success: function(res) {
         var imgsrc = res.tempFilePaths;　　　　　　　　　
         pics = pics.concat(imgsrc);
-        if (pics.length > 9) {
+        if (pics.length >= 9) {
           wx.showToast({
             title: "最多上传9张图片！",
             image: "../../imgs/xcit.png",
@@ -316,8 +328,6 @@ Page({
         that.setData({
           pics: pics
         });
-        // 上传图片
-        that.uploadimg()
       },
     })
   },
@@ -341,12 +351,16 @@ Page({
           imglist = imglist.concat(datalist)
           identifier = imglist.join(',');
           that.setData({
-            "frolist.PhotoIds": identifier
+            "frolist.PhotoIds": identifier,
           })
+          // 判断当图片上传完毕后调用表单提交
+          j++
+          if (pics.length == j){
+            that.Submit()
+          }
         },
       });
     }
-
   },
 
 
