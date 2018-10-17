@@ -181,7 +181,7 @@ Page({
           orderData[i].Contact = util.Decrypt(orderData[i].Contact)
           orderData[i].Phone = util.Decrypt(orderData[i].Phone)
           orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.replace('T', ' ')
+          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
         }
         _this.setData({
           whole: orderData,
@@ -228,7 +228,7 @@ Page({
           orderData[i].Contact = util.Decrypt(orderData[i].Contact)
           orderData[i].Phone = util.Decrypt(orderData[i].Phone)
           orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.replace('T', ' ')
+          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
         }
         _this.setData({
           UntreatedList: orderData,
@@ -275,7 +275,7 @@ Page({
           orderData[i].Contact = util.Decrypt(orderData[i].Contact)
           orderData[i].Phone = util.Decrypt(orderData[i].Phone)
           orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.replace('T', ' ')
+          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
         }
         _this.setData({
           ProcessedList: orderData,
@@ -322,7 +322,7 @@ Page({
           orderData[i].Contact = util.Decrypt(orderData[i].Contact)
           orderData[i].Phone = util.Decrypt(orderData[i].Phone)
           orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.replace('T', ' ')
+          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
         }
         _this.setData({
           EvaluateList: orderData,
