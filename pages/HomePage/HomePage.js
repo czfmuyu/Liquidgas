@@ -60,7 +60,7 @@ Page({
       index: index
     })
     app.Customer = app.Customer[index]
-    app.CustomerId = app.Customer[index].CustomerId
+    app.CustomerId = app.Customer.CustomerId
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
@@ -204,7 +204,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app)
+   
   },
 
   /**
