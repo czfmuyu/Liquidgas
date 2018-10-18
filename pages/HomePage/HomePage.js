@@ -60,10 +60,12 @@ Page({
       index: index
     })
     app.Customer = app.Customer[index]
+    console.log(app.Customer[index])
     app.CustomerId = app.Customer.CustomerId
   },
   //获取AccountId本地储存并获取个人数据
   ObtainStorage() {
+    console.log(app.AccountId.AccountId)
     let this_ = this
     wx.request({//获取个人信息请求
       url: baseUrls,
@@ -75,6 +77,7 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         let data = res.data.Data
+        console.log(data)
         this_.decryption(data)
         let arr = [];
         if (res.data.Data == null) {
@@ -95,6 +98,7 @@ Page({
               arr[j] = "无用气编号请联系服务商添加用气编号"
             }
           }
+          console.log(arr)
           app.GasNo = arr
           this_.setData({
             GasNo: arr
@@ -102,6 +106,7 @@ Page({
         }
         this_.Tips()
         if (res.data.Data.length == 1) {
+          console.log(data[0])
           app.Customer = data[0]
           app.CustomerId = data[0].CustomerId
         } else {
@@ -126,6 +131,7 @@ Page({
     return data
   },
   Tips() {
+    console.log(this.data.GasNo)
     if (this.data.GasNo.length > 1) {
       this.setData({
         showModalTwo: true
@@ -165,6 +171,7 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res)
         if (res.data.Data) {
           wx.redirectTo({
             url: '/pages/Login/Login',
@@ -204,7 +211,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+   console.log(app)
   },
 
   /**
