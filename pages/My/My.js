@@ -21,7 +21,7 @@ Page({
   },
   CurrentInfo() {
     let this_ = this
-    if (app.Customer !== null){
+    if (app.Customer !== null) {
       wx.request({
         url: baseUrls,
         data: {
@@ -44,17 +44,17 @@ Page({
   SublevelAccount() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.navigateTo({//子账号页面
-      url: "/pages/SublevelAccount/SublevelAccount"
-    })
+      wx.navigateTo({//子账号页面
+        url: "/pages/SublevelAccount/SublevelAccount"
+      })
     }
   },
   GasInformation() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.navigateTo({//用气信息页面
-      url: "/pages/GasInformation/GasInformation",
-    })
+      wx.navigateTo({//用气信息页面
+        url: "/pages/GasInformation/GasInformation",
+      })
     }
     let number = 1;
     wx.setStorage({
@@ -68,101 +68,111 @@ Page({
   PersonalData() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.navigateTo({//个人信息页面
-      url: "/pages/PersonalData/PersonalData"
-    })
+      wx.navigateTo({//个人信息页面
+        url: "/pages/PersonalData/PersonalData"
+      })
     }
   },
   Supplier() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.navigateTo({//供应商信息页面
-      url: "/pages/Supplier/Supplier"
-    })
+      wx.navigateTo({//供应商信息页面
+        url: "/pages/Supplier/Supplier"
+      })
     }
   },
   BindingNumber() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.navigateTo({//绑定用气编号页面
-      url: "/pages/BindingNumber/BindingNumber"
-    })
+      wx.navigateTo({//绑定用气编号页面
+        url: "/pages/BindingNumber/BindingNumber"
+      })
     }
   },
   AccountSecurity() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.navigateTo({//账号安全页面
-      url: "/pages/AccountSecurity/AccountSecurity"
-    })
+      wx.navigateTo({//账号安全页面
+        url: "/pages/AccountSecurity/AccountSecurity"
+      })
     }
   },
   Cancellation() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-    wx.redirectTo({
-      url: '/pages/Login/Login',
-    })
-    }
-  },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    console.log("监听页面初次渲染完成")
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.CurrentInfo()
-    if (app.Customer !== null){
-      if (app.Customer.IsMainAccount == true) {
-        this.setData({
-          state: true
+      app = {
+        AccountId: "",
+        CustomerId: "",
+        Customer: null,
+        CustomerList: null,
+        Subaccount: null,
+        GasNo: "",
+        Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
+      }
+      console.log(app)
+        wx.reLaunch({
+          url: '/pages/Login/Login',
         })
       }
+    },
+
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+      console.log("监听页面初次渲染完成")
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+      this.CurrentInfo()
+      if (app.Customer !== null) {
+        if (app.Customer.IsMainAccount == true) {
+          this.setData({
+            state: true
+          })
+        }
+      }
+      this.pageLoading = !1;
+
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
     }
-    this.pageLoading = !1;
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-   
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-   
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
-})
+  })

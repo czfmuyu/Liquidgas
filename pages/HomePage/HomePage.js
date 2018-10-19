@@ -51,6 +51,7 @@ Page({
   //用气编号选择点击事件
   onGasNo(e) {
     let index = e.currentTarget.dataset.index;
+    console.log(index)
     let GasNo = this.data.GasNo;
     let Gas = [];
     Gas.push(GasNo[index])
@@ -59,8 +60,8 @@ Page({
       showModalTwo: false,
       index: index
     })
-    app.Customer = app.Customer[index]
     console.log(app.Customer[index])
+    app.Customer = app.Customer[index]
     app.CustomerId = app.Customer.CustomerId
   },
   //获取AccountId本地储存并获取个人数据
@@ -110,6 +111,7 @@ Page({
           app.Customer = data[0]
           app.CustomerId = data[0].CustomerId
         } else {
+          console.log(data)
           app.Customer = data
           app.CustomerId = data.CustomerId
         }
