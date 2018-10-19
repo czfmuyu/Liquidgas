@@ -189,10 +189,12 @@ Page({
     this.userData()
   },
   Supplier() {
+    console.log(app.CustomerList)
     if (app.CustomerList !== null) {
       let arr = []
       let OptionsBox = this.data.OptionsBox
       if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
+        console.log("i")
         for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
           let obj = {
             Quantity: 0,
@@ -202,10 +204,12 @@ Page({
           }
           arr.push(obj)
         }
+        console.log(arr)
         this.setData({
           commodityList: arr
         })
       } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
+        console.log("in")
         for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
           let obj = {
             Quantity: 0,
@@ -215,6 +219,7 @@ Page({
           }
           arr.push(obj)
         }
+        console.log(arr)
         this.setData({
           commodityList: arr
         })
@@ -233,6 +238,7 @@ Page({
   //用户数据判断
   userData() {
     let CustomerName = this.data.CustomerName
+    console.log(CustomerName)
     if (CustomerName == "" || CustomerName == undefined) { //判断地址是否有数据页面切换
       this.setData({
         isAddress: true,
@@ -246,7 +252,7 @@ Page({
     //判断供应商是否有数据页面切换
     let EnterpriseName = this.data.EnterpriseName
     if (EnterpriseName == "" || EnterpriseName == undefined) {
-
+    console.log(EnterpriseName)
       this.setData({
         isSupplier: true,
       })
@@ -260,6 +266,7 @@ Page({
   //取出本地信息方法
   getData() {
     //判断用户选择的是瓶还是公斤
+    console.log(app)
     let arr = []
     let OptionsBox = this.data.OptionsBox
     // 判断app是否为null，如果是不执行下面的代码
@@ -417,6 +424,8 @@ Page({
         }
       }
     }
+    console.log(this_.data.OrderItems)
+    console.log(app)
     wx.request({
       url: baseUrls,
       data: {
@@ -445,7 +454,7 @@ Page({
       success: function (res) {
         // 判断用户点击重新赋值
         frequency=0
-        
+        console.log(res.data)
         if (res.data.Code == 506) {
           wx.showToast({
             title: '请输入完整的信息',
@@ -687,6 +696,7 @@ Page({
   },
   //预约时间Picker索引值
   bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
@@ -694,6 +704,7 @@ Page({
 
   //预约那天Picker索引值
   bindDayPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index2: e.detail.value
     })
