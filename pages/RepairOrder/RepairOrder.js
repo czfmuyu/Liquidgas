@@ -73,23 +73,24 @@ Page({
   queryInput: function(e) {
     let text = e.detail.value
     this.setData({
-      queryKeyword: text
+      'parameter.queryKeyword': text
     })
-    this.getmaintenance()
-    this.UntreatedList()
-    this.ProcessedList()
-    this.EvaluateList()
+    // this.getmaintenance()
+    // this.UntreatedList()
+    // this.ProcessedList()
+    // this.EvaluateList()
+    this.onPullDownRefresh()
   },
   //输入框清空事件
   Delete() {
     this.setData({
-      queryKeyword: ""
+      'parameter.queryKeyword': ""
     })
-    this.getmaintenance()
-    this.UntreatedList()
-    this.ProcessedList()
-    this.EvaluateList()
-
+    // this.getmaintenance()
+    // this.UntreatedList()
+    // this.ProcessedList()
+    // this.EvaluateList()
+    this.onPullDownRefresh()
   },
   /**
    * 生命周期函数--监听页面加载

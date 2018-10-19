@@ -58,7 +58,17 @@ Page({
       success: res => {
         console.log(res)
         if (res.data.Code == 200) {
-          wx.redirectTo({
+          app = {
+            AccountId: "",
+            CustomerId: "",
+            Customer: null,
+            CustomerList: null,
+            Subaccount: null,
+            GasNo: "",
+            Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
+          }
+          console.log(app)
+          wx.reLaunch({
             url: '/pages/Login/Login',
           })
         }else{

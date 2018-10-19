@@ -339,6 +339,8 @@ Page({
     let that = this
     let pics = that.data.pics;
     let imglist = that.data.identifier
+    frequency = 0//用户提交后在让其可点击
+    console.log("啊")
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
         url: Urlsimg,
@@ -346,7 +348,7 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-          frequency=0//用户提交后在让其可点击
+         
           var identifier
           let data = res.data
           let imglists = JSON.parse(data);
