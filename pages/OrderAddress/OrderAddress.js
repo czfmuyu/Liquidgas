@@ -360,6 +360,8 @@ Page({
   //确定支付点击事件
   ConfirmSuccess() {
     let this_ = this
+    // 判断用户点击重新赋值
+    frequency = 0
     let OptionsBox = this_.data.OptionsBox
     let PrceType
     let SubscribeTime

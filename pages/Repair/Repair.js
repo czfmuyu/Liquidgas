@@ -362,6 +362,7 @@ Page({
           j++
           if (pics.length == j){
             that.Submit()
+            j=0
           }
         },
       });
@@ -454,3 +455,5 @@ Page({
 
 
 })
+
+
