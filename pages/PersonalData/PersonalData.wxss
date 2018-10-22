@@ -91,7 +91,15 @@ page {
   text-align: center;
 }
 
-.btn-Photograph, .btn-Album {
+.btn-Photograph{
+   width: 680rpx;
+  height: 89rpx;
+  text-align: center;
+  line-height: 89rpx;
+  color: #fff;
+  background-color: #2269d4;
+}
+.btn-Album {
   width: 680rpx;
   height: 89rpx;
   text-align: center;
