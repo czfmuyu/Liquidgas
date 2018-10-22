@@ -4,9 +4,7 @@
   </view>
   <view class="wrap">
     <text>{{storename}}</text>
-    <view style="margin-left: 16rpx;">
       <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
-    </view>
   </view>
 </view>
 <!-- 名称弹窗 -->

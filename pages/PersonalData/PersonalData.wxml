@@ -5,9 +5,7 @@
     </view>
     <view class="wrap">
         <text>{{AccountName}}</text>
-        <view style="margin-left: 16rpx;">
-           <image style='width:40rpx;height:40rpx;' src='../../imgs/dayu.png'></image>
-        </view>
+           <image style='width:36rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
     </view>
 </view>
 <view class="content" style="margin-top: 9rpx;  border-bottom: 2rpx solid #f2f2f2;">

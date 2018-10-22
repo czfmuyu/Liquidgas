@@ -14,7 +14,7 @@ text{
 }
 .wraps{
   display: flex;
-  
+  align-items: center;
   
 }
 .textfont{

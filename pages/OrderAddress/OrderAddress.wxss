@@ -205,7 +205,8 @@ page{
     justify-content: space-between;
     line-height: 92rpx;
     font-size:28rpx;
-}
+    align-items: center;
+    }
 .goods_right{
     display: flex;
 }

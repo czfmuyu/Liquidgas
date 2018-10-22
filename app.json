@@ -54,8 +54,8 @@
             {
               "pagePath": "pages/RepairOrder/RepairOrder",
               "text": "维修订单",
-              "iconPath": "/imgs/ddicon.png",
-              "selectedIconPath": "/imgs/ddicon-hover.png"
+              "iconPath": "/imgs/2222.png",
+              "selectedIconPath": "/imgs/1111.png"
             },
             {
               "pagePath": "pages/My/My",
