@@ -30,7 +30,9 @@ Page({
   },
   clear: function() {
     this.setData({
-      hasLocation: false
+      hasLocation: false,
+      locationAddress: "",
+      address:""
     })
   },
   // 获取用户输入地址

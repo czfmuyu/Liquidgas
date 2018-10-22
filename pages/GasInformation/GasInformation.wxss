@@ -15,10 +15,13 @@ text{
 .wraps{
   display: flex;
   align-items: center;
-  
+  justify-content: space-between;
+}
+.text_m{
+  margin-right: 20rpx;
 }
 .textfont{
-  width: 400rpx;
+  width: 500rpx;
    word-wrap:break-word; 
    word-break:break-all; 
 }

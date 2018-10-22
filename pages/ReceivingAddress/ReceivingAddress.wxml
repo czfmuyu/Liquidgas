@@ -1,22 +1,22 @@
 <view class="page-body">
-    <view class="page-section">
-        <view class="page-body-info">
-            <text class="page-body-text-small">当前选择位置信息: </text>
-            <block wx:if="{{hasLocation === false}}">
-                <text class="page-body-text"></text>
-            </block>
-            <block wx:if="{{hasLocation === true}}">
-                <text class="page-body-text">{{locationAddress}}</text>
-            </block>
-            <view class="ipt">
-                <text>请完善您的地址:</text>
-                <input class='inputsty' data-text='text' placeholder="如几栋几单元几号" bindinput="assignment"/>
-            </view>
-        </view>
-        <view class="btn-area">
-            <button type="primary" bindtap="chooseLocation">选择位置</button>
-            <button bindtap="clear">清空</button>
-            <button bindtap="keep">保存</button>
-        </view>
+  <view class="page-section">
+    <view class="page-body-info">
+      <view class='position' bindtap="chooseLocation">
+        <text class='address_text'> 点击选择位置</text>
+        <image style='width:50rpx;height:50rpx;' src='../../images/weiz.png'></image>
+      </view>
+        <view class='address'>{{locationAddress}}</view>
+      <block wx:if="{{hasLocation === false}}">
+        <text class="page-body-text"></text>
+      </block>
+      <view class="ipt">
+        <text class='address_text'>请填写详细地址:</text>
+        <input class='inputsty' data-text='text' placeholder="如几栋几单元几号" bindinput="assignment" />
+      </view>
     </view>
+    <view class="btn-area">
+      <button bindtap="clear">清空</button>
+      <button class='keep' bindtap="keep">保存</button>
+    </view>
+  </view>
 </view>

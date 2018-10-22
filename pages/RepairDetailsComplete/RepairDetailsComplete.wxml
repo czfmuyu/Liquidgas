@@ -43,7 +43,7 @@
     <view>处理结果</view>
     <view class="Order_right" wx:if="{{detailedlist.RepairResult==0}}">已处理</view>
     <view class="Order_right" wx:elif="{{detailedlist.RepairResult==10}}">维修完成</view>
-    <view class="Order_right" else="{{detailedlist.RepairResult==20}}">无法维修</view>
+    <view class="Order_right" wx:else="{{detailedlist.RepairResult==20}}">无法维修</view>
   </view>
   <view class="details_text" hidden="{{StateControl!==1}}">{{detailedlist.RepairOpinion}}</view>
   <view class="Repair_time" hidden="{{StateControl!==1}}">

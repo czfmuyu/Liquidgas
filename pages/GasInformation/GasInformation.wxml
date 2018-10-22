@@ -3,7 +3,7 @@
     <text>名称</text>
   </view>
   <view class="wrap">
-    <text>{{storename}}</text>
+    <text class='text_m'>{{storename}}</text>
       <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
   </view>
 </view>
@@ -26,10 +26,8 @@
     <text>联系电话</text>
   </view>
   <view class="wrap">
-    <text>{{telephone}}</text>
-    <view style="margin-left: 16rpx;">
+    <text class='text_m'>{{telephone}}</text>
       <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
-    </view>
   </view>
 </view>
 <!-- 电话弹窗 -->
@@ -51,11 +49,10 @@
     <text>地址</text>
   </view>
   <view class="wraps">
-    <text class='textfont'>{{address}}</text>
-  </view>
-  <view style="margin-left: 16rpx;">
+    <text class='textfont text_m'>{{address}}</text>
     <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
   </view>
+    
 </view>
 
 <button class="btn" bindtap='submission'>提交</button>
