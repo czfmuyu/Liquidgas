@@ -183,7 +183,7 @@ Page({
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
-        status: 30
+        status: 31
       },
       header: {
         'content-type': 'application/json'
@@ -310,6 +310,7 @@ Page({
    */
   cancel(e) {
     let orderid = e.target.dataset.orderid
+    console.log(orderid)
     let Serialnumber = e.target.dataset.serial
     this.setData({
       ShowModal: true,

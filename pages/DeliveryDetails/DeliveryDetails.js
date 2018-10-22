@@ -178,12 +178,12 @@ Page({
   Pagechange() {
     // 数据判断页面改动
     console.log(this.data.OrderTrackList.Status)
-    if (this.data.OrderTrackList.Status < 30) {//配送中
+    if (this.data.OrderTrackList.Status < 31) {//配送中
       this.setData({
         StateControl: 1,
         btn: 1
       })
-    } else if (this.data.OrderTrackList.Status == 30) {//配送完成
+    } else if (this.data.OrderTrackList.Status == 31) {//配送完成
       this.setData({
         StateControl: 2,
         btn: 2
@@ -222,7 +222,7 @@ Page({
           utils.Decrypt(OrderItems.Price)
           utils.Decrypt(OrderItems.Quantity)
         }
-        let Times = data.FormatSubscribeTime
+        let Times = data.CreateTime
         if (Times !== null) {
           let day = Times.slice(0, 10)
           let time = Times.slice(11, 16)

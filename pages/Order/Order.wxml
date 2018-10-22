@@ -19,10 +19,10 @@
         <view class="whole" wx:for="{{wholeList}}" wx:for-item="item" wx:key="wholeList">
             <view class="whole_top">
                 <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
-                <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 30}}">
+                <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 31}}">
                     配送中
                 </view>
-                <view style="color: #2269d4;" wx:elif="{{item.Status==30}}">已完成</view>
+                <view style="color: #2269d4;" wx:elif="{{item.Status==31}}">已完成</view>
                 <view style="color: #2269d4;" wx:elif="{{item.Status==100}}">已取消</view>
                 <view style="color: #f5a357;" wx:elif="{{item.Status==-10}}">支付未完成</view>
             </view>
@@ -45,7 +45,7 @@
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                         查看详情
                     </view>
-                    <view class="btn" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
+                    <view class="btn" wx:if="{{item.Status==30}}" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
                         确认收货
                     </view>
                 </view>
@@ -73,7 +73,7 @@
         <view class="whole" wx:for="{{DeliveryList}}" wx:for-item="item" wx:key="DeliveryList">
             <view class="whole_top">
                 <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
-                <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 30}}">
+                <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 31}}">
                     配送中
                 </view>
             </view>
@@ -95,7 +95,7 @@
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
+                <view class="btn" wx:if="{{item.Status==30}}" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
                     确认收货
                 </view>
             </view>
@@ -109,7 +109,7 @@
         <view class="whole" wx:for="{{CompleteList}}" wx:for-item="item" wx:key="CompleteList">
             <view class="whole_top">
                 <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
-                <view style="color: #2269d4;" wx:if="{{item.Status==30}}">已完成</view>
+                <view style="color: #2269d4;" wx:if="{{item.Status==31}}">已完成</view>
             </view>
             <view class="userName">订购人: {{item.CustomerName}}</view>
             <view class="whole_bottom">
@@ -126,7 +126,9 @@
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">待评价</view>
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">
+                    待评价
+                </view>
             </view>
         </view>
     </scroll-view>
@@ -158,18 +160,15 @@
         </view>
     </scroll-view>
 </view>
-
-
 <!-- 取消意见 -->
 <view class="modal-mask" bindtap="HideModal" catchtouchmove="preventTouchMove" wx:if="{{ShowModal}}"></view>
 <view class="modal-dialog" wx:if="{{ShowModal}}">
-   <view>
-   <view class='qux'>请输入取消原因</view>
-   <textarea class='textfont' data-type='text' placeholder='请填写取消原因' bindinput='getdata'>
-   </textarea>
-   </view>
-   <view class='butt'>
-   <view class='butttext textcolor'bindtap="onCancel" >取消</view>
-   <view class='butttext textcolor1' bindtap='onConfirm'>提交</view>
-   </view>
+    <view>
+        <view class='qux'>请输入取消原因</view>
+        <textarea class='textfont' data-type='text' placeholder='请填写取消原因' bindinput='getdata'></textarea>
+    </view>
+    <view class='butt'>
+        <view class='butttext textcolor' bindtap="onCancel">取消</view>
+        <view class='butttext textcolor1' bindtap='onConfirm'>提交</view>
+    </view>
 </view>

@@ -61,6 +61,12 @@
   <view>收货人电话</view>
   <view>{{OrderTrackList.Contact}}({{OrderTrackList.Phone}})</view>
 </view>
+<view class="Repair">订单信息</view>
+<view class="info">
+  <view >订单号: {{OrderTrackList.Serialnumber}}</view>
+  <view >下单时间: {{day}} {{time}}</view>
+  <view >订购人: {{OrderTrackList.CustomerName}}</view>
+</view>
 <view class="btn" hidden="{{btn!==1}}">
   <view class="btn_cancel" bindtap="phoneList">取消订单</view>
   <view class="btn_complete" bindtap="Confirm">确认收货</view>
