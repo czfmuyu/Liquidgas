@@ -3,7 +3,7 @@
 .btn{
   width: 90%;
   margin: 50rpx auto;
-  background-color: #6348da;
+  background-color: #2269d4;
   height: 80rpx;
   border-radius: 50rpx 50rpx;
   color:white;
