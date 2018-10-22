@@ -28,13 +28,13 @@ page{
     display: flex;
     justify-content: space-between;
     font-size: 28rpx;
-    padding: 0 12rpx;
+    padding: 20rpx 12rpx;
 }
 .header_right_bottom{
     width: 666rpx;
     height: 118rpx;
     font-size: 32rpx;
-    padding:20rpx 12rpx;
+    padding:10rpx 12rpx;
 }
 .content{
     height: 88rpx;
@@ -95,7 +95,7 @@ page{
     left: 0;
     z-index: 9999;
     background: #f9f9f9;
-    margin: -180rpx 34rpx;
+    margin:-42rpx 34rpx;
     border-radius: 36rpx;
   }
   .modal-title {
@@ -109,8 +109,8 @@ page{
     height: 81rpx;
     text-align: center;
     line-height: 89rpx;
-    color: #666;
-    background-color: #eeeeee;
+    color: #fff;
+    background-color: #2269d4;
     font-size: 46rpx;
     font-weight: 900;
   }
@@ -222,7 +222,7 @@ page{
     padding: 0 24rpx;
     height: 100rpx;
     display:flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 .goodsList{
     padding: 0 24rpx;

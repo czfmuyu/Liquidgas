@@ -2,7 +2,6 @@
 @import "../RepairDetailsComplete/RepairDetailsComplete.wxss";
 page{
     background-color: #f5f5f5;
-    
 }
 .header_Order{
   width: 100%;
@@ -111,7 +110,7 @@ page{
 }
 .address_right{
   margin-top: 28rpx;
-  width: 406rpx;
+  width: 410rpx;
 }
 .Repair_time_right{
   display: flex;
