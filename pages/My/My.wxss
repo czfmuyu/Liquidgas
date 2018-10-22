@@ -77,7 +77,7 @@ page{
 }
 .InformationList_left>image{
     width: 50rpx;
-    height: 50rpx;
+    height: 47rpx;
     margin-right: 20rpx;
 }
 .InformationList_text{
