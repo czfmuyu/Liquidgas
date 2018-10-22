@@ -188,6 +188,7 @@ Page({
           whole: orderData,
           Maximum: res.data.Count //反回的数据条数
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
@@ -235,6 +236,7 @@ Page({
           UntreatedList: orderData,
           TreatedMaxi: res.data.Count //反回的数据条数
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
@@ -282,6 +284,7 @@ Page({
           ProcessedList: orderData,
           completeMaxi: res.data.Count //反回的数据条数
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
@@ -329,6 +332,7 @@ Page({
           EvaluateList: orderData,
           cancelMaxi: res.data.Count //反回的数据条数
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },

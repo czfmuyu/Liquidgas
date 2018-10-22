@@ -55,15 +55,15 @@
   </view>
   <view class="Repair">维修信息</view>
   <view class="Repair_time">
-    <view>预约时间:</view>
-    <view>{{detailedlist.FormatSubscribeTime}}</view>
+    <view>预约时间 : </view>
+    <view style="margin-left: 12rpx;">{{detailedlist.FormatSubscribeTime}}</view>
   </view>
   <view class="Repair_time">
-    <view>收货人电话:</view>
-    <view>{{detailedlist.Contact}}:{{detailedlist.Phone}}</view>
+    <view>收货人电话 : </view>
+    <view style="margin-left: 12rpx;">{{detailedlist.Phone}}</view>
   </view>
   <view class="Repair_time">
-    <view>维修工:</view>
+    <view>维修工 : </view>
     <view class="Repair_time_right">
       <view style="margin-left: 12rpx;" wx:if="{{!detailedlist.ServiceUserName}}">暂未维修工</view>
       <view style="margin-left: 12rpx;" wx:else>{{detailedlist.ServiceUserName}}</view>
