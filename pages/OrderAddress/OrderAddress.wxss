@@ -17,7 +17,7 @@ page{
 .header_left>image{
     width: 33rpx;
     height: 44rpx;
-    margin-top: 102rpx;
+    margin-top:85rpx;
 }
 .header_right{
     width: 666rpx;
@@ -27,14 +27,14 @@ page{
     width: 666rpx;
     display: flex;
     justify-content: space-between;
-    font-size: 36rpx;
+    font-size: 28rpx;
     padding: 0 12rpx;
 }
 .header_right_bottom{
     width: 666rpx;
     height: 118rpx;
     font-size: 32rpx;
-    padding: 0 12rpx;
+    padding:20rpx 12rpx;
 }
 .content{
     height: 88rpx;
@@ -204,6 +204,7 @@ page{
     display: flex;
     justify-content: space-between;
     line-height: 92rpx;
+    font-size:28rpx;
 }
 .goods_right{
     display: flex;
@@ -334,6 +335,8 @@ page{
 .footer_left{
     height: 98rpx;
     font-size: 28rpx;
+    display: flex;
+    margin-right:20rpx;
 }
 .footer_right{
     width: 200rpx;

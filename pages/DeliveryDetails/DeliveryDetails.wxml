@@ -29,7 +29,7 @@
     <image src="../../imgs/76_03.png" />
   </view>
 </view>
-<view class="Repair">配件信息</view>
+<view class="Repair">订单商品</view>
 <view class="from">
   <view class="from_top">
     <view style="margin-left: 64rpx;">名称</view>
@@ -60,14 +60,6 @@
 <view class="Repair_time">
   <view>收货人电话</view>
   <view>{{OrderTrackList.Contact}}({{OrderTrackList.Phone}})</view>
-</view>
-<view class="Repair_time">
-  <view>配送工</view>
-  <view class="Repair_time_right">
-    <view style="color:#2269d4;margin-right: 12rpx;"></view>
-    <view style="margin-left: 12rpx;" wx:if="{{!OrderTrackList.ServiceUserName}}"></view>
-    <view style="margin-left: 12rpx;" wx:else>{{OrderTrackList.ServiceUserName}}</view>
-  </view>
 </view>
 <view class="btn" hidden="{{btn!==1}}">
   <view class="btn_cancel" bindtap="phoneList">取消订单</view>

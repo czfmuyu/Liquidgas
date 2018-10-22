@@ -154,10 +154,11 @@
     display: flex;
     justify-content: space-between;
     height: 64rpx;
-    background-color: #f5f5f5;
+    background-color: #2269d4;
     font-size: 28rpx;
     font-weight: 900;
     line-height: 64rpx;
+    color:#fff;
 }
 .from_bottom{
     display: flex;

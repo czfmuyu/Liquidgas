@@ -153,6 +153,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res.data.Data)
         let data = res.data.Data
         if (data.lengty > 0) {
           for (let i = 0; i < data[i].length; i++) {
@@ -190,6 +191,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res.data.Data)
         let data = res.data.Data
         if (data.lengty > 0) {
           for (let i = 0; i < data[i].length; i++) {
@@ -227,6 +229,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res.data.Data)
         let data = res.data.Data
         if (data.lengty > 0) {
           for (let i = 0; i < data[i].length; i++) {
@@ -265,6 +268,7 @@ Page({
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
+        console.log(res.data.Data)
         let data = res.data.Data
         if (data.lengty > 0) {
           for (let i = 0; i < data[i].length; i++) {

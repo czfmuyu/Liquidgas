@@ -101,7 +101,7 @@
     <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
             <image class="content_left" src="../../imgs/221_06.png" />
-            <view class="weui-label">预约那天</view>
+            <view class="weui-label">预约日期</view>
             <view class="content_right">></view>
         </view>
         <view class="weui-cell__bd">
@@ -223,6 +223,9 @@
 <view class="goods" style="background-color: #f5f5f5;"></view>
 <!-- footer确定支付 -->
 <view class="footer">
-    <view class="footer_left">共{{Quantity}}件商品,共￥{{Price}}</view>
+    <view class="footer_left">
+        <view >共{{Quantity}}件商品,共￥</view>
+        <view style="color:#D87070">{{Price}}</view>
+    </view>
     <view class="footer_right" bindtap="Submission">确定支付</view>
 </view>

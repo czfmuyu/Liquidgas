@@ -1,68 +1,68 @@
       {
-  "pages": [
-    "pages/Login/Login",
-    "pages/OrderAddress/OrderAddress",
-    "pages/Order/Order",
-    "pages/HomePage/HomePage",
-    "pages/Repair/Repair",
-    "pages/PersonalData/PersonalData",
-    "pages/My/My",
-    "pages/Authorized/Authorized",
-    "pages/DeliveryDetails/DeliveryDetails",
-    "pages/GasInformation/GasInformation",
-    "pages/RepairOrder/RepairOrder",
-    "pages/CompleteDetails/CompleteDetails",
-    "pages/RepairDetailsComplete/RepairDetailsComplete",
-    "pages/Opinion/Opinion",
-    "pages/Submit/Submit",
-    "pages/Security/Security",
-    "pages/AccountSecurity/AccountSecurity",
-    "pages/Register/Register",
-    "pages/RetrievePassword/RetrievePassword",
-    "pages/ReceivingAddress/ReceivingAddress",
-    "pages/SupplierRecommend/SupplierRecommend",
-    "pages/ReplacePhone/ReplacePhone",
-    "pages/SublevelAccount/SublevelAccount",
-    "pages/Supplier/Supplier",
-    "pages/ChangePassword/ChangePassword",
-    "pages/BindingNumber/BindingNumber",
-    "pages/Evaluate/Evaluate"
-  ],
-  "window": {
-    "enablePullDownRefresh": true,
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#2269d4",
-    "navigationBarTitleText": "液化气",
-    "navigationBarTextStyle": "#fff"
-  },
-  "tabBar": {
-    "color": "#cacacc",
-    "selectedColor": "#3275d7",
-    "list": [
-      {
-        "pagePath": "pages/HomePage/HomePage",
-        "text": "首页",
-        "iconPath": "/imgs/ssicon.png",
-        "selectedIconPath": "/imgs/ssicon-hover.png"
-      },
-      {
-        "pagePath": "pages/Order/Order",
-        "text": "订气订单",
-        "iconPath": "/imgs/ddicon.png",
-        "selectedIconPath": "/imgs/ddicon-hover.png"
-      },
-      {
-        "pagePath": "pages/RepairOrder/RepairOrder",
-        "text": "维修订单",
-        "iconPath": "/imgs/ddicon.png",
-        "selectedIconPath": "/imgs/ddicon-hover.png"
-      },
-      {
-        "pagePath": "pages/My/My",
-        "text": "我的",
-        "iconPath": "/imgs/myicon.png",
-        "selectedIconPath": "/imgs/myicon-hover.png"
+        "pages": [
+          "pages/Login/Login",
+          "pages/HomePage/HomePage",
+          "pages/OrderAddress/OrderAddress",
+          "pages/Order/Order",
+          "pages/Repair/Repair",
+          "pages/PersonalData/PersonalData",
+          "pages/My/My",
+          "pages/Authorized/Authorized",
+          "pages/DeliveryDetails/DeliveryDetails",
+          "pages/GasInformation/GasInformation",
+          "pages/RepairOrder/RepairOrder",
+          "pages/CompleteDetails/CompleteDetails",
+          "pages/RepairDetailsComplete/RepairDetailsComplete",
+          "pages/Opinion/Opinion",
+          "pages/Submit/Submit",
+          "pages/Security/Security",
+          "pages/AccountSecurity/AccountSecurity",
+          "pages/Register/Register",
+          "pages/RetrievePassword/RetrievePassword",
+          "pages/ReceivingAddress/ReceivingAddress",
+          "pages/SupplierRecommend/SupplierRecommend",
+          "pages/ReplacePhone/ReplacePhone",
+          "pages/SublevelAccount/SublevelAccount",
+          "pages/Supplier/Supplier",
+          "pages/ChangePassword/ChangePassword",
+          "pages/BindingNumber/BindingNumber",
+          "pages/Evaluate/Evaluate"
+        ],
+        "window": {
+          "enablePullDownRefresh": true,
+          "backgroundTextStyle": "light",
+          "navigationBarBackgroundColor": "#2269d4",
+          "navigationBarTitleText": "液化气",
+          "navigationBarTextStyle": "#fff"
+        },
+        "tabBar": {
+          "color": "#000",
+          "selectedColor": "#2269d4",
+          "list": [
+            {
+              "pagePath": "pages/HomePage/HomePage",
+              "text": "首页",
+              "iconPath": "/imgs/ssicon.png",
+              "selectedIconPath": "/imgs/ssicon-hover.png"
+            },
+            {
+              "pagePath": "pages/Order/Order",
+              "text": "订气订单",
+              "iconPath": "/imgs/ddicon.png",
+              "selectedIconPath": "/imgs/ddicon-hover.png"
+            },
+            {
+              "pagePath": "pages/RepairOrder/RepairOrder",
+              "text": "维修订单",
+              "iconPath": "/imgs/ddicon.png",
+              "selectedIconPath": "/imgs/ddicon-hover.png"
+            },
+            {
+              "pagePath": "pages/My/My",
+              "text": "我的",
+              "iconPath": "/imgs/myicon.png",
+              "selectedIconPath": "/imgs/myicon-hover.png"
+            }
+          ]
+        }
       }
-    ]
-  }
-}

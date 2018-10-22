@@ -1,75 +1,84 @@
 /* pages/Register/Register.wxss */
-.header{
-    display: flex;
-    justify-content: center;
-    font-size: 32rpx;
-    color: #b8b8b8;
-    margin-top: 55rpx;
+
+.header {
+  display: flex;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 55rpx;
 }
-.user{
-    margin: 0 auto;
-    width: 620rpx;
-    height: 70rpx;
-    display:flex;
-    line-height: 70rpx;
-    
+
+.user {
+  margin: 0 auto;
+  width: 600rpx;
+  height: 60rpx;
+  display: flex;
+  line-height: 70rpx;
+  font-size: 28rpx;
 }
-.user_left{
-    width: 160rpx;
-    height: 70rpx;
-    color: #aaaaaa;
-    text-align: center;
+
+.user_left {
+  width: 160rpx;
+  height: 60rpx;
+  text-align: center;
 }
-.user_right{
-    width: 480rpx;
-    height: 70rpx;
+
+.user_right {
+  width: 474rpx;
+  height: 60rpx;
 }
-.user_right>input{
-    width: 440rpx;
-    height: 70rpx;
-    border-bottom: 2rpx solid #aaaaaa;
-    font-size: 32rpx;
-    padding-left: 28rpx;
+
+.user_right>input {
+  width: 418rpx;
+  height: 60rpx;
+  border-bottom: 2rpx solid #aaa;
+  font-size: 28rpx;
+  padding-left: 28rpx;
 }
-.user_validate{
-    width: 160rpx;
-    height: 70rpx;
-    position: relative;
-    top:2rpx;
-    right: 0rpx;
-    font-size: 32rpx;
-    color: #2269d4;
-    text-align: center;
+
+.user_validate {
+  width: 160rpx;
+  height: 60rpx;
+  position: relative;
+  top: -7rpx;
+  right: 0rpx;
+  font-size: 28rpx;
+  color: #2269d4;
+  text-align: center;
 }
-.clause{
-    margin-top: 82rpx;
-    height: 38rpx;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.clause {
+  margin-top: 82rpx;
+  height: 38rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.Tick{
-    margin-top: 4rpx;
-    width: 24rpx;
-    height: 24rpx;
-    border: 2rpx solid #999;
-    border-radius: 5rpx;
-    font-size: 24rpx;
-    font-weight: 900;
-    color: red;
+
+.Tick {
+  margin-top: 4rpx;
+  width: 24rpx;
+  height: 24rpx;
+  border: 2rpx solid #999;
+  border-radius: 5rpx;
+  font-size: 24rpx;
+  font-weight: 900;
+  color: red;
 }
-.clause_text{
-    font-size: 26rpx;
-    color: #999;
-    padding-left: 14rpx;
+
+.clause_text {
+  font-size: 26rpx;
+  color: #999;
+  padding-left: 14rpx;
 }
-.loginBtn{
-    width: 578rpx;
-    height: 80rpx;
-    margin: 0 auto;
-    background-color: #2269d4;
-    border-radius: 50rpx;
-    color: #fff;
-    line-height: 80rpx;
-    text-align: center;
+
+.loginBtn {
+  width: 578rpx;
+  height: 80rpx;
+  margin: 0 auto;
+  background-color: #2269d4;
+  border-radius: 50rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
 }
