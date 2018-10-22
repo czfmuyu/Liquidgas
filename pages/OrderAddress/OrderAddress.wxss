@@ -178,14 +178,16 @@ page{
   }
   /* 预定时间弹框 */
 .weui-cell__hd{
-    text-align: center;
+    display: flex;
+    align-items: center;
 }
 .content_left{
     width: 33rpx;
     height: 43rpx;
-    position: absolute;
+    margin-right: 10rpx;
+    /* position: absolute;
     top: 22rpx;
-    left: 20rpx;
+    left: 20rpx; */
 }
 .content_right{
     position: absolute;
@@ -209,6 +211,7 @@ page{
     }
 .goods_right{
     display: flex;
+    align-items: center;
 }
 .goods_right_text{
     height: 92rpx;
