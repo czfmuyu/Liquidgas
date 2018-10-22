@@ -61,36 +61,39 @@ page{
 }
 .InformationList{
     width: 713rpx;
-    height: 92rpx;
+    height: 86rpx;
     padding: 0 23rpx;
     background-color: #fff;
     display: flex;
+    align-items: center;
+    font-size: 30rpx;
+    font-weight: 500;
     justify-content: space-between;
     
 }
 .InformationList_left{
     display: flex;
-    height: 92rpx;
+     align-items: center;
 }
 .InformationList_left>image{
-    width: 70rpx;
-    height: 54rpx;
-    margin-top: 23rpx;
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 20rpx;
 }
 .InformationList_text{
     width: 300rpx;
-    height: 92rpx;
-    line-height: 92rpx;
+    height: 86rpx;
+    line-height: 86rpx;
     margin-left: 20rpx;
 }
 .InformationList_right{
     display: flex;
     color: #ccc;
     font-size: 80rpx;
-    line-height: 92rpx;
+    line-height: 86rpx;
 }
 .InformationList_right_text{
     color: #000;
     font-size: 30rpx;
-    line-height: 92rpx;
+    line-height: 86rpx;
 }

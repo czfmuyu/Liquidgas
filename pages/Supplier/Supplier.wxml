@@ -23,9 +23,9 @@
     <view class="text">
       <text>{{Phone}}</text>
     </view>
-    <view class="text_right">
-      >
-    </view>
+    
+     <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+   
   </view>
 </view>
 

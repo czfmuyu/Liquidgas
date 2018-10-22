@@ -13,5 +13,5 @@
             建议您定期修改密码以保护账号安全
         </view>
     </view>
-    <view class="securtyList_right">></view>
+   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>

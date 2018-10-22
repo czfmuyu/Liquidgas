@@ -8,6 +8,7 @@ page{
     padding: 0 23rpx;
     border-bottom: 2rpx solid #eeeeee;
     display:flex;
+    align-items: center;
 }
 .securityList_left{
     width: 667rpx;

@@ -9,6 +9,7 @@ page{
     justify-content: space-between;
     background-color: #fff;
     line-height: 96rpx;
+    font-size: 30rpx;
 }
 .text{
     font-size: 29rpx;
@@ -26,13 +27,9 @@ page{
 }
 .DetailsList_right{
     display: flex;
+    align-items: center;
 }
-.text_right{
-    color: #ccc;
-    font-size: 84rpx;
-    line-height: 96rpx;
-    margin-left: 10rpx;
-}
+
 /* 电话弹窗 */
 .show-btn {
     margin-top: 100rpx;

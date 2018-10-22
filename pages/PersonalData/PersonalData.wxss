@@ -30,17 +30,15 @@ page{
     margin-top: 34rpx;
     margin-left: -40rpx;
 }
-.right_text{
-    color: #ccc;
-    font-size: 80rpx;
-}
+
 .content{
-    height: 94rpx;
-    padding: 0 30rpx;
+    height: 90rpx;
     display: flex;
     justify-content: space-between;
     background-color: #fff;
     line-height: 94rpx;
+    font-size: 35rpx;
+    padding: 0 20rpx;
 }
 .wrap{
     display: flex;
@@ -61,7 +59,7 @@ page{
     opacity: 0.5;
     overflow: hidden;
     z-index: 9000;
-    color: #fff;
+    color: #F2F2F2;
   }
   
   .modal-dialog {
@@ -119,13 +117,13 @@ page{
   
   .btn-cancel {
     width: 50%;
-    color: #666;
+    color: #087AFE;
     text-align: center;
     border-right: 1px solid #dedede;
   }
   .btn-confirm {
     width: 50%;
-    color: #ec5300;
+    color: #087AFE;
     text-align: center;
   }
   

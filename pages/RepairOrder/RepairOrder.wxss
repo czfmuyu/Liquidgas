@@ -57,7 +57,7 @@ page{
     position: relative;
     flex: auto;
     text-align: center;
-    line-height: 80rpx;
+   padding-bottom: 20rpx;
   }
   .navbar .item.active{
     color: #2269d4;
