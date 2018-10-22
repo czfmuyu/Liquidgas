@@ -1,13 +1,40 @@
 /* pages/RepairDetailsComplete.wxss */
 .header_Order{
   width: 100%;
-  height: 150rpx;
+
   background-color: #fff;
 }
-.Order{
-  padding: 40rpx 38rpx;
-  height: 70rpx;
+/* 地址 */
+.Addressbox{
   display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  align-items: center;
+  background-color: white;
+  font-size: 30rpx;
+  margin-top: 10rpx;
+}
+.Addressvalue{
+  display: flex;
+  justify-content: space-between;
+}
+.Addresimg{
+  width: 35rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+.Addresstext{
+  margin-top: 20rpx;
+}
+
+
+page {
+  background-color: #F5F5F5;
+}
+.Order{
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 .Order_left{
@@ -23,6 +50,7 @@
   padding: 0 20rpx;
   height: 152rpx;
   background-color: #fff;
+  border-bottom: 1rpx solid #F8F8F8;
 }
 .project_top{
   height: 58rpx;
@@ -44,6 +72,7 @@
   line-height: 52rpx;
   background-color: #2269d4;
   color: #fff;
+  margin-right: 20rpx;
 }
 .details{
   background-color: #fff;
@@ -56,7 +85,8 @@
   background-color: #fff;
   padding: 0 20rpx;
   height: 86rpx;
-  font-size: 26rpx;
+  font-size: 30rpx;
+  line-height: 86rpx;
   color: #999;
   border-bottom: 2rpx solid #f5f5f5;
 }
@@ -83,7 +113,6 @@
 }
 .Repair_time{
   display: flex;
-  justify-content: space-between;
   height: 88rpx;
   line-height: 88rpx;
   padding: 0 20rpx;

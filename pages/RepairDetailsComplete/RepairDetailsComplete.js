@@ -200,12 +200,13 @@ Page({
         })
 
         let footer = _this.data.detailedlist
+        console.log(footer)
         let footerels = footer.Status
-        if (footerels == 0) {
+        if (footerels == 10) {
           _this.setData({
             btn: 2
           })
-        } else if (footerels == 30) {
+        } else if (footerels == 31) {
           _this.setData({
             btn: 1
           })

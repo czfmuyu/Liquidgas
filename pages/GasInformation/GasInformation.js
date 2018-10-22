@@ -66,6 +66,7 @@ Page({
 
   // 提交地址
   submission() {
+    console.log("222")
     if (this.data.storename == "" || this.data.telephone == "" || this.data.address==""){
       console.log(this.data)
       wx.showToast({
@@ -76,6 +77,7 @@ Page({
       return false
     }
     if (app.Customer !== null) {
+      console.log("111")
       wx.request({
         url: baseUrls,
         data: {
