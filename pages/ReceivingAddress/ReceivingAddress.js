@@ -12,7 +12,7 @@ Page({
   data: {
     hasLocation: false,
     location: "",
-    locationAddress: "",
+    locationAddress: null,
     address: ""
   },
   chooseLocation: function() {
