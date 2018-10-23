@@ -69,7 +69,7 @@
 </view>
 <view class="btn" hidden="{{btn!==1}}">
   <view class="btn_cancel" bindtap="phoneList">取消订单</view>
-  <view class="btn_complete" bindtap="Confirm">确认收货</view>
+  <view class="btn_complete" bindtap="Confirm" wx:if="{{OrderTrackList.Status==30}}">确认收货</view>
 </view>
 <view class="btn" hidden="{{btn!==2}}">
   <view class="btn_complete" bindtap="Evaluate">去评价</view>
