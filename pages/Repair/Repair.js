@@ -88,7 +88,9 @@ Page({
   // 提交订单控制不能连续多次点击
   Beforesubmission() {
     if (frequency==0){
-      frequency++
+      if (this.data.pics.length!=0){
+        frequency++
+      }
       this.uploadimg()
     }
     
@@ -126,6 +128,7 @@ Page({
         image: "../../imgs/xcit.png",
         duration: 2000
       })
+      frequency = 0//用户提交后在让其可点击
       return false
     }
     if (ProblemDescription == "") {
@@ -134,6 +137,7 @@ Page({
         image: "../../imgs/xcit.png",
         duration: 2000
       })
+      frequency = 0//用户提交后在让其可点击
       return false
     }
     if (pics.length < 1) {
@@ -142,6 +146,7 @@ Page({
         image: "../../imgs/xcit.png",
         duration: 2000
       })
+      frequency = 0//用户提交后在让其可点击
       return false
     }
 
@@ -317,7 +322,8 @@ Page({
       sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
       sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
       success: function(res) {
-        var imgsrc = res.tempFilePaths;　　　　　　　　　
+        var imgsrc = res.tempFilePaths;　
+        console.log(imgsrc)　　　　　　　　
         pics = pics.concat(imgsrc);
         if (pics.length >= 9) {
           wx.showToast({
@@ -330,6 +336,7 @@ Page({
         that.setData({
           pics: pics
         });
+        console.log(this.data.pics)
       },
     })
   },
@@ -339,7 +346,14 @@ Page({
     let that = this
     let pics = that.data.pics;
     let imglist = that.data.identifier
-    frequency = 0//用户提交后在让其可点击
+    if (pics.length == 0){
+      wx.showToast({
+        title: "请上传照片！",
+        image: "../../imgs/xcit.png",
+        duration: 1000
+      });
+      return false;
+    }
     console.log("啊")
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
@@ -348,7 +362,7 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-         
+          frequency = 0//用户提交后在让其可点击
           var identifier
           let data = res.data
           let imglists = JSON.parse(data);

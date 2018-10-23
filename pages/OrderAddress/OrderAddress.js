@@ -360,8 +360,6 @@ Page({
   //确定支付点击事件
   ConfirmSuccess() {
     let this_ = this
-    // 判断用户点击重新赋值
-    frequency = 0
     let OptionsBox = this_.data.OptionsBox
     let PrceType
     let SubscribeTime
@@ -455,6 +453,7 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         // 判断用户点击重新赋值
+        console.log("提交过")
         frequency=0
         console.log(res.data)
         if (res.data.Code == 506) {
