@@ -180,7 +180,16 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.Data) {
-          wx.redirectTo({
+          app = {
+            AccountId: "",
+            CustomerId: "",
+            Customer: null,
+            CustomerList: null,
+            Subaccount: null,
+            GasNo: "",
+            Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
+          }
+          wx.reLaunch({
             url: '/pages/Login/Login',
           })
         }else{

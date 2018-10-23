@@ -21,25 +21,29 @@ Page({
   },
   CurrentInfo() {
     let this_ = this
-    if (app.Customer !== null) {
-      wx.request({
-        url: baseUrls,
-        data: {
-          Sign: "",
-          AccountId: app.AccountId.AccountId,
-          CustomerId: app.CustomerId
-        },
-        method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        // header: {}, // 设置请求的 header
-        success: function (res) {
-          app.Customer = res.data.Data
-          this_.setData({
-            Gas: res.data.Data.GasNo
-          })
-        },
-      })
+    console.log(app.Customer.length)
+    if (app.Customer.length==1){
+      if (app.Customer != null) {
+        wx.request({
+          url: baseUrls,
+          data: {
+            Sign: "",
+            AccountId: app.AccountId.AccountId,
+            CustomerId: app.CustomerId
+          },
+          method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+          // header: {}, // 设置请求的 header
+          success: function (res) {
+            app.Customer = res.data.Data
+            this_.setData({
+              Gas: res.data.Data.GasNo
+            })
+          },
+        })
+      }
+      return false
     }
-    return false
+   
   },
   SublevelAccount() {
     if (!this.pageLoading) {
@@ -109,7 +113,6 @@ Page({
         GasNo: "",
         Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
       }
-      console.log(app)
         wx.reLaunch({
           url: '/pages/Login/Login',
         })
@@ -145,7 +148,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+      console.log(app)
     },
 
     /**

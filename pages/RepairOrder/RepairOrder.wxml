@@ -21,7 +21,7 @@
         <view style="color: #999;">维修单号: {{item.Serialnumber}}</view>
         <view style="color: #2269d4;" wx:if="{item.RepairResult==0}}">未维修</view>
         <view style="color: #2269d4;" wx:elif="{item.RepairResult==10}}">维修完成</view>
-        <view style="color: #2269d4;" wx:else>无法维修</view>
+        <view style="color: #2269d4;" wx:elif="{{item.Status == 100}}">已取消</view>
       </view>
       <view class="whole_middle">
         <view class="whole_middle_text">
@@ -76,6 +76,9 @@
       </view>
     </view>
   </scroll-view>
+  <view wx:if="{{whole.length<=0}}">
+    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    </view>
 </view>
 
 <!-- 待维修 -->
@@ -111,6 +114,9 @@
       </view>
     </view>
   </scroll-view>
+  <view wx:if="{{UntreatedList.length<=0}}">
+    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    </view>
 </view>
 <!-- 维修完成 -->
 <view hidden="{{currentTab!==2}}">
@@ -141,6 +147,9 @@
       </view>
     </view>
   </scroll-view>
+  <view wx:if="{{ProcessedList.length<=0}}">
+    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    </view>
 </view>
 <!-- 已取消 -->
 <view hidden="{{currentTab!==3}}">
@@ -170,6 +179,9 @@
       </view>
     </view>
   </scroll-view>
+  <view wx:if="{{EvaluateList.length<=0}}">
+    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    </view>
 </view>
 
 <!-- 取消意见 -->

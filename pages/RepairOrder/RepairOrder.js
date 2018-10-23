@@ -107,14 +107,7 @@ Page({
     }
     return false
   },
-  //确认完成点击事件
-  onconfirm() {
-    wx.showToast({
-      title: '确认成功',
-      icon: 'success',
-      duration: 2000
-    })
-  },
+ 
   //全部页面详情
   queryBtn(e) {
     console.log(e)
@@ -375,9 +368,7 @@ Page({
               title: "提交成功",
               duration: 1000
             });
-            _this.getmaintenance()
-            _this.UntreatedList()
-            _this.EvaluateList()
+            _this.onPullDownRefresh()
             // 隐藏弹框
             _this.HideModal()
           } else {

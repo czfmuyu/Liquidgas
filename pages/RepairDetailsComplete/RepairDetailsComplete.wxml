@@ -71,7 +71,7 @@
   </view>
   <view class="btn" hidden="{{btn!==2}}">
     <view class="btn_cancel" bindtap="phoneList">取消维修单</view>
-    <view class="btn_complete" bindtap="Confirm">确认完成</view>
+    <view class="btn_complete" wx:if="{{detailedlist.Status==30}}" bindtap="Confirm">确认完成</view>
   </view>
   <view class="btn" hidden="{{btn!==1}}">
     <view class="btn_complete" bindtap='Evaluate'>去评价</view>
