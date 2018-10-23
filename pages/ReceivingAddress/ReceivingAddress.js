@@ -1,4 +1,4 @@
-// pages/ReceivingAddress/ReceivingAddress.js
+
 var util = require('../../utils/util.js')
 var formatLocation = util.formatLocation
 let {

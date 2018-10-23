@@ -121,16 +121,19 @@ page{
 .btn-list{
     height: 74rpx;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
 }
 .btn{
-    margin-top: 18rpx;
-    width: 142rpx;
-    height: 56rpx;
+     margin-top: 18rpx;
     font-size: 24rpx;
-    text-align: center;
-    line-height: 56rpx;
+    /* text-align: center;
+    line-height: 56rpx; */
     border-radius: 50rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10rpx 20rpx;
 }
 
 

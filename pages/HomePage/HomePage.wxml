@@ -49,7 +49,6 @@
 <!-- 新用户弹窗 -->
 <view class="modal-mask" bindtap="hideModaltwo" catchtouchmove="preventTouchMove" wx:if="{{showModalTwo}}"></view>
 <view class="modal-dialog" wx:if="{{showModalTwo}}">
-    <view class="modal-title"></view>
     <view class="btn-Photograph" >请选择绑定用气编号</view>
     <view class="btn-Number" style="border-top: 2rpx solid;" wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}" bindtap="onGasNo">{{item}}</view>
     <view class="modal-footer">

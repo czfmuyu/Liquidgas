@@ -225,6 +225,7 @@ page{
     padding: 0 24rpx;
     height: 100rpx;
     display:flex;
+    margin-top: 20rpx;
     justify-content: space-around;
 }
 .goodsList{
@@ -282,6 +283,7 @@ page{
     margin-left: 102rpx;
     margin-right: 40rpx;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 .online{

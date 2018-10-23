@@ -54,12 +54,12 @@
   <view wx:else>{{day}} {{time}}</view>
 </view>
 <view class="Repair_address">
-  <view class="address">收货地址</view>
-  <view class="address_right">{{OrderTrackList.Address}}</view>
+  <view>收货地址</view>
+  <view class="address_righ">{{OrderTrackList.Address}}</view>
 </view>
 <view class="Repair_time">
   <view>收货人电话</view>
-  <view>{{OrderTrackList.Contact}}({{OrderTrackList.Phone}})</view>
+  <view>{{OrderTrackList.Phone}}</view>
 </view>
 <view class="Repair">订单信息</view>
 <view class="info">

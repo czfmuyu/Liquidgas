@@ -14,7 +14,7 @@ background-color: #f5f5f5;
 color: #999;
 }
 .address1>image{
-width: 19rpx;
+width: 35rpx;
 height: 35rpx;
 }
 .address_text{

@@ -153,6 +153,7 @@ page{
       text-align: center;
       line-height: 89rpx;
       color: #666;
+      margin-bottom: 20rpx;
   }
   .btn-Photograph{
     font-size: 46rpx;

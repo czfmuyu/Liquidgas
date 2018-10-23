@@ -117,18 +117,17 @@ page{
     color: #999;  
 }
 .btn-list{
-  
     display: flex;
      justify-content: flex-end;
      flex-direction: row;
 }
 .btn{
     margin-top: 18rpx;
-    width: 142rpx;
-    height: 56rpx;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 10rpx 20rpx;
     font-size: 24rpx;
-    text-align: center;
-    line-height: 56rpx;
     border-radius: 50rpx;
 }
 

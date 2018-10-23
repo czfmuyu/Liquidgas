@@ -98,19 +98,15 @@ page{
 .Repair_address{
   display: flex;
   justify-content: space-between;
-  padding: 0 20rpx;
-  height: 114rpx;
+  padding: 20rpx;
   font-size: 26rpx;
+  align-items: center;
   background-color: #fff;
   border-bottom: 2rpx solid #f5f5f5;
 }
-.address{
-  width: 108rpx;
-  line-height: 114rpx;
-}
-.address_right{
-  margin-top: 28rpx;
-  width: 410rpx;
+
+.address_righ{
+  width: 500rpx;
 }
 .Repair_time_right{
   display: flex;

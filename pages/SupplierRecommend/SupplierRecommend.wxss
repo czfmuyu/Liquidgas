@@ -132,6 +132,7 @@
 .SupplierList_left{
     width: 632rpx;
     height: 170rpx;
+    margin-top: 30rpx;
 }
 .SupplierList_right{
     width: 85rpx;
