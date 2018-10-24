@@ -66,7 +66,7 @@
         </view>
     </scroll-view>
      <view wx:if="{{wholeList.length<=0}}">
-    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    <image class='Backgroundmap' style='width:100%;' src='../../imgs/wudindan.png'></image>
     </view>
 </view>
 <!-- 配送中 -->
@@ -105,7 +105,7 @@
         </view>
     </scroll-view>
      <view wx:if="{{DeliveryList.length<=0}}">
-    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    <image class='Backgroundmap' style='width:100%;' src='../../imgs/wudindan.png'></image>
     </view>
 </view>
 <!-- 完成 -->
@@ -139,7 +139,7 @@
         </view>
     </scroll-view>
     <view wx:if="{{CompleteList.length<=0}}">
-    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    <image class='Backgroundmap' style='width:100%;' src='../../imgs/wudindan.png'></image>
     </view>
 </view>
 <!-- 已取消 -->
@@ -169,7 +169,7 @@
         </view>
     </scroll-view>
     <view wx:if="{{EvaluateList.length<=0}}">
-    <image style='width:100%;height:334px;' src='../../imgs/wudindan.png'></image>
+    <image class='Backgroundmap' style='width:100%;' src='../../imgs/wudindan.png'></image>
     </view>
 </view>
 <!-- 取消意见 -->
