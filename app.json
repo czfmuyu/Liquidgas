@@ -29,7 +29,6 @@
           "pages/Evaluate/Evaluate"
         ],
         "window": {
-          "enablePullDownRefresh": true,
           "backgroundTextStyle": "light",
           "navigationBarBackgroundColor": "#2269d4",
           "navigationBarTitleText": "液化气",
