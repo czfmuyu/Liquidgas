@@ -232,9 +232,12 @@ page{
     padding: 0 24rpx;
     height: 108rpx;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     line-height: 108rpx;
     text-align: center;
+}
+.goodsList>view{
+  width: 33.33%
 }
 .goodsList_text{
     font-size: 24rpx;

@@ -138,12 +138,12 @@ Page({
     day: "",
     OrderItems: ""
   },
-  //供应商重新选择
-  reselectionSupplier() {
-    wx.navigateTo({
-      url: "/pages/SupplierRecommend/SupplierRecommend",
-    })
-  },
+  // //供应商重新选择
+  // reselectionSupplier() {
+  //   wx.navigateTo({
+  //     url: "/pages/SupplierRecommend/SupplierRecommend",
+  //   })
+  // },
   //地址重新选择
   reselection() {
     wx.navigateTo({
