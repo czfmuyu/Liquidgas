@@ -83,12 +83,15 @@ page {
 }
 .details_text{
   background-color: #fff;
-  padding: 0 20rpx;
-  height: 86rpx;
   font-size: 30rpx;
-  line-height: 86rpx;
   color: #999;
   border-bottom: 2rpx solid #f5f5f5;
+}
+.details_text_head{
+margin: 0 auto;
+padding: 20rpx;
+ word-wrap:break-word;
+ width: 710rpx;
 }
 .details_time{
   padding: 0 20rpx;

@@ -32,7 +32,11 @@
     </view>
   </view>
   <view class="details">详情描述</view>
-  <view class="details_text">{{detailedlist.ProblemDescription}}</view>
+  <view class="details_text">
+    <view class='details_text_head'>
+      {{detailedlist.ProblemDescription}}
+    </view>
+  </view>
   <view class='img_flex'>
     <image wx:for="{{imgs}}" wx:key="{{item}}" src='{{item}}' mode='aspectFill' data-index='{{index}}' bindtap='previewImg' data-src='{{photo}}/?photoId={{item.PhotoId}}'></image>
   </view>

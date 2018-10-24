@@ -165,7 +165,9 @@ Page({
         this_.setData({
           EvaluateList: data
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
+      
     })
   },
   //已完成信息
@@ -203,6 +205,7 @@ Page({
         this_.setData({
           CompleteList: data
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
@@ -241,6 +244,7 @@ Page({
         this_.setData({
           DeliveryList: data
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
@@ -280,6 +284,7 @@ Page({
         this_.setData({
           wholeList: data
         })
+        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
