@@ -24,7 +24,7 @@ Page({
     })
   },
   Repair() {
-    if (app.Customer !== null){
+    if (app.Customer !== null) {
       if (app.Customer.GasNo !== null) {
         wx.navigateTo({//维修页面
           url: "/pages/Repair/Repair"
@@ -35,7 +35,7 @@ Page({
     } else {
       utils.showError("无用气编号请联系服务商添加用气编号")
     }
-   
+
   },
   Opinion() {
     wx.navigateTo({//意见反馈页面
@@ -116,6 +116,7 @@ Page({
           app.Customer = data[0]
           app.CustomerId = data[0].CustomerId
         } else {
+          console.log("多个数据")
           console.log(data)
           app.Customer = data
           app.CustomerId = data.CustomerId
@@ -192,7 +193,7 @@ Page({
           wx.reLaunch({
             url: '/pages/Login/Login',
           })
-        }else{
+        } else {
           utils.showError("输入的用气编号不存在，请重新输入")
         }
       },
@@ -227,14 +228,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   console.log(app)
+    console.log(app)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    if (app.Customer == null) {
+      this.onLoad()
+    }
   },
 
   /**

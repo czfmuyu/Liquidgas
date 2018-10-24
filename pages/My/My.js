@@ -21,29 +21,24 @@ Page({
   },
   CurrentInfo() {
     let this_ = this
-    console.log(app.Customer.length)
-    if (app.Customer.length==1){
-      if (app.Customer != null) {
-        wx.request({
-          url: baseUrls,
-          data: {
-            Sign: "",
-            AccountId: app.AccountId.AccountId,
-            CustomerId: app.CustomerId
-          },
-          method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-          // header: {}, // 设置请求的 header
-          success: function (res) {
-            app.Customer = res.data.Data
-            this_.setData({
-              Gas: res.data.Data.GasNo
-            })
-          },
-        })
-      }
-      return false
+    if (app.Customer != null) {
+      wx.request({
+        url: baseUrls,
+        data: {
+          Sign: "",
+          AccountId: app.AccountId.AccountId,
+          CustomerId: app.CustomerId
+        },
+        method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        // header: {}, // 设置请求的 header
+        success: function (res) {
+          app.Customer = res.data.Data
+          this_.setData({
+            Gas: res.data.Data.GasNo
+          })
+        },
+      })
     }
-   
   },
   SublevelAccount() {
     if (!this.pageLoading) {
@@ -113,69 +108,69 @@ Page({
         GasNo: "",
         Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
       }
-        wx.reLaunch({
-          url: '/pages/Login/Login',
+      wx.reLaunch({
+        url: '/pages/Login/Login',
+      })
+    }
+  },
+
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    console.log("监听页面初次渲染完成")
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.CurrentInfo()
+    if (app.Customer !== null) {
+      if (app.Customer.IsMainAccount == true) {
+        this.setData({
+          state: true
         })
       }
-    },
-
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-      console.log("监听页面初次渲染完成")
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-      this.CurrentInfo()
-      if (app.Customer !== null) {
-        if (app.Customer.IsMainAccount == true) {
-          this.setData({
-            state: true
-          })
-        }
-      }
-      this.pageLoading = !1;
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-      console.log(app)
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
     }
-  })
+    this.pageLoading = !1;
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    console.log(app)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})
