@@ -1,3 +1,4 @@
 {
-    "navigationBarTitleText": "绑定用气编号"
+    "navigationBarTitleText": "绑定用气编号",
+    "disableScroll": true
 }

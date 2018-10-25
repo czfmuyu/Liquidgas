@@ -194,6 +194,5 @@ page{
  }
 /* 背景图 */
  .Backgroundmap{
-   margin-left: 44rpx;
    height: 600rpx;
  }

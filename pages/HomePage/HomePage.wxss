@@ -5,12 +5,15 @@ page{
 .header_background{
   width:100%;
   height:490rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #245cd7;
 }
 .header_btn{
-  width: 427rpx;
+  width: 413rpx;
   height: 413rpx;
-  padding-left: 161rpx;
+  margin-bottom: 40rpx;
 }
 .content_top{
     width: 698rpx;

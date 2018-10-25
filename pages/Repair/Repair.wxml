@@ -54,7 +54,7 @@ bindtap="Discoloration" data-index='{{item.ID}}' wx:for="{{guaranteeList}}" wx:f
   <view class='picture'>
     <view>
       <text style='font-size:35rpx;'>上传照片</text>
-      <text style='color:#f3f3f3;'>（最多上传9张）</text>
+      <text style='color:#CCCCCC;'>（最多上传9张）</text>
     </view>
     <view class='picture_flex'>
       <view class='picture_img' wx:for="{{pics}}" wx:key="index" wx:for-item="item">
