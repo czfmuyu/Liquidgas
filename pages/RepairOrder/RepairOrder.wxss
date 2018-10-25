@@ -190,7 +190,6 @@ page{
 
  /* 背景图 */
  .Backgroundmap{
-   margin-left: 44rpx;
    height: 600rpx;
  }
 /* 维修描述英文字母换行 */
