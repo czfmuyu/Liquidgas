@@ -1,6 +1,7 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Common/InsertEvaluate`//添加一条评价信息接口
-const getEva =`${baseUrl}/Api/Common/GetEvaluateById`//获取一条评价信息接口
+// const getEva =`${baseUrl}/Api/Common/GetEvaluateById`//获取一条评价信息接口
+let app = getApp().globalData
 Page({
 
   /**
@@ -50,7 +51,22 @@ Page({
   submission: function() {
     console.log(this.data.inpt)
     console.log(this.data.star)
-    console.log(this.data.star1)
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign:"",
+        ObjectId:app.AccountId.AccountId,
+        Type:10,
+        Score:this.data.star,
+        CustomerId:app.Customer.CustomerId,
+        Content:this.data.inpt
+      },
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        console.log(res)
+      },
+    })
     // wx.switchTab({
     //   url: "/pages/HomePage/HomePage"
     // })
@@ -59,19 +75,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options.id)
-    wx.request({
-      url: getEva,
-      data: {
-        Sign:"",
-        ID:options.id
-      },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      success: function(res){
-        console.log(res)
-      },
-    })
+    // console.log(options.id)
+    // wx.request({
+    //   url: getEva,
+    //   data: {
+    //     Sign:"",
+    //     ID:options.id
+    //   },
+    //   method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+    //   // header: {}, // 设置请求的 header
+    //   success: function(res){
+    //     console.log(res)
+    //   },
+    // })
   },
 
   /**
