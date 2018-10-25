@@ -1,4 +1,7 @@
-// pages/RetrievePassword/RetrievePassword.js
+let app = getApp().globalData
+const baseUrls = app.baseUrl + '/Api/Login/AccountLogin' //修改密码接口
+const utils = require("../../utils/util.js")
+
 Page({
 
   /**
@@ -8,13 +11,17 @@ Page({
     text: "获取验证码",
     currentTime: 60, //倒计时
     disabled: false, //按钮是否禁用
+    // 电话
+    phone: "",
+    Verification: "",
+    Password: "",
+    confirmation: "",
   },
   bindButtonTap() {
     let this_ = this
     this_.setData({
       disabled: true
     })
-
     let currentTime = this_.data.currentTime
     let text = this_.data.text
     if (text === "获取验证码" || text === "重新发送") {
@@ -39,11 +46,69 @@ Page({
       }, 1000)
     }
   },
-  Confirm(){
-    wx.navigateTo({//找回密码页面
-      url: "/pages/Login/Login"
+  Confirm() {
+    if (!this.data.phone || !this.data.Verification || !this.data.Password || !this.data.confirmation) {
+      wx.showToast({
+        title: '密码不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+  }else{
+      if (this.data.Password !== this.data.confirmation) {
+        wx.showToast({
+          title: '密码不一致',
+          icon: 'none',
+          duration: 2000
+        });
+      }else{
+        // wx.request({
+        //   url: baseUrls,
+        //   data: {
+        //     Sign: "",
+        //     Phone: "",
+        //     Password: ""
+        //   },
+        //   header: {
+        //     'content-type': 'application/json'
+        //   },
+        //   method: 'post',
+        //   success: res => {
+        //     console.log(res)
+        //   }
+        // });
+      }
+  }
+  console.log("1111")
+
+  // wx.navigateTo({//找回密码页面
+  //   url: "/pages/Login/Login"
+  // })
+},
+  // 获取电话
+  phone(e){
+    this.setData({
+      phone: e.detail.value
     })
   },
+  // 获取验证码
+  Verification(e){
+    this.setData({
+      Verification: e.detail.value
+    })
+  },
+  // 获取第一次输入的密码
+  Password(e){
+    this.setData({
+      Password: e.detail.value
+    })
+  },
+  // 获取确认的密码
+  confirmation(e){
+    this.setData({
+      Password: e.detail.value
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
