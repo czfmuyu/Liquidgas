@@ -194,7 +194,7 @@
 </view>
 <!-- 支付方式弹框 -->
 <view class="modal-mask" bindtap="PaymentMethodhideModal" catchtouchmove="preventTouchMove" wx:if="{{showPaymentMethod}}"></view>
-<view class="modal-dialog" wx:if="{{showPaymentMethod}}">
+<view class="modal-dialog2" wx:if="{{showPaymentMethod}}">
   <view class="modal-title"></view>
   <view class="btn-Photograph">请选择支付方式</view>
   <view class="page-section page-section-gap">

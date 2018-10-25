@@ -98,6 +98,17 @@ page{
     margin:-42rpx 34rpx;
     border-radius: 36rpx;
   }
+  .modal-dialog2 {
+    width: 680rpx;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 9999;
+    background: #f9f9f9;
+    margin:-196rpx 34rpx;
+    border-radius: 36rpx;
+  }
   .modal-title {
     /* padding-top: 42rpx; */
     font-size: 36rpx;
