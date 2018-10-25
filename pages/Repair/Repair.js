@@ -325,18 +325,17 @@ Page({
         var imgsrc = res.tempFilePaths;　
         console.log(imgsrc)　　　　　　　　
         pics = pics.concat(imgsrc);
-        if (pics.length >= 9) {
+        if (pics.length > 9) {
           wx.showToast({
             title: "最多上传9张图片！",
             image: "../../imgs/xcit.png",
             duration: 2000
           });
-          return false
         }
         that.setData({
           pics: pics
         });
-        console.log(this.data.pics)
+        console.log(that.data.pics)
       },
     })
   },
@@ -352,6 +351,15 @@ Page({
         image: "../../imgs/xcit.png",
         duration: 1000
       });
+      frequency = 0//用户提交后在让其可点击
+      return false;
+    } else if (pics.length > 9){
+      wx.showToast({
+        title: "最多上传9张图片！",
+        image: "../../imgs/xcit.png",
+        duration: 1000
+      });
+      frequency = 0//用户提交后在让其可点击
       return false;
     }
     console.log("啊")
