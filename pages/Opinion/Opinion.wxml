@@ -1,4 +1,4 @@
-<!-- pages/Opinion/Opinion.wxml -->
+133<!-- pages/Opinion/Opinion.wxml -->
 <form bindsubmit="formSubmit">
     <view class="section section_gap">
         <!-- <view class="section__title">radio</view> -->
@@ -12,7 +12,7 @@
     <view class="page-section">
       <view class="page-section-title"></view>
       <view class="textarea-wrp">
-        <textarea auto-focus="true" style="height: 3em" placeholder="请输入你想说的话" auto-height/>
+        <textarea auto-focus="true" maxlength="200" style="height: 3em" placeholder="请输入你想说的话" auto-height/>
       </view>
     </view>
     <button class="submit" formType="submit" bindtap="Submit">提交</button>

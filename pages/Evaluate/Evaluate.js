@@ -1,4 +1,6 @@
-// pages/Evaluate/Evaluate.js
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/Common/InsertEvaluate`//添加一条评价信息接口
+const getEva =`${baseUrl}/Api/Common/GetEvaluateById`//获取一条评价信息接口
 Page({
 
   /**
@@ -49,18 +51,27 @@ Page({
     console.log(this.data.inpt)
     console.log(this.data.star)
     console.log(this.data.star1)
-    console.log(this.data.star2)
-    wx.switchTab({
-      url: "/pages/HomePage/HomePage"
-    })
-
-
+    // wx.switchTab({
+    //   url: "/pages/HomePage/HomePage"
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad(options) {
+    console.log(options.id)
+    wx.request({
+      url: getEva,
+      data: {
+        Sign:"",
+        ID:options.id
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        console.log(res)
+      },
+    })
   },
 
   /**

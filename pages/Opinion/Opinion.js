@@ -1,4 +1,6 @@
-let app=getApp()
+const { baseUrl } = getApp().globalData
+// const baseUrls = `${baseUrl}/Api/Common/GetSuggestionFeedbackByObjectId`//提交建议接口
+let app = getApp().globalData
 Page({
 
   /**
@@ -9,6 +11,18 @@ Page({
       { name: '平台建议', checked: true},
       { name: '服务建议', checked: false}
     ],
+  },
+  //提交建议
+  Submission(){
+    wx.request({
+      url: baseUrls,
+      data: {},
+      method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        console.log(res)
+      },
+    })
   },
   //建议选项框点击事件
   radioChange: function (e) {

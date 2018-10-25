@@ -296,9 +296,9 @@ Page({
   },
 
   // 评价跳转页面
-  Evaluate: function () {
+  Evaluate(e) {
     wx.navigateTo({
-      url: '/pages/Evaluate/Evaluate',
+      url: '/pages/Evaluate/Evaluate?id='+ e.currentTarget.dataset.id,
     })
   },
 

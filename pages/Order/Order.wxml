@@ -53,7 +53,7 @@
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                         查看详情
                     </view>
-                    <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="onfirm">
+                    <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate" data-id="{{item.ID}}">
                         待评价
                     </view>
                 </view>
@@ -132,7 +132,7 @@
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">
+                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate" data-id="{{item.ID}}">
                     待评价
                 </view>
             </view>

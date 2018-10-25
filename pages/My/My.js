@@ -1,5 +1,5 @@
 const { baseUrl } = getApp().globalData
-const baseUrls = `${baseUrl}/Api/Customers/GetCustomerInfo`//获取当前信息接口
+const baseUrls = `${baseUrl}/Api/Customers/GetCustomerInfo`//获取当前信息接口/Api/Common/GetSuggestionFeedbackByObjectId
 let app = getApp().globalData
 Page({
 
