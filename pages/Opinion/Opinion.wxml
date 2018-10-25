@@ -1,4 +1,4 @@
-133<!-- pages/Opinion/Opinion.wxml -->
+<!-- pages/Opinion/Opinion.wxml -->
 <form bindsubmit="formSubmit">
     <view class="section section_gap">
         <!-- <view class="section__title">radio</view> -->
