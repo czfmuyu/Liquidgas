@@ -1,5 +1,5 @@
 let app = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/Login/AccountLogin' //修改密码接口
+const baseUrls = app.baseUrl + '/Api/Login/AccountLogin' //忘记密码接口
 const utils = require("../../utils/util.js")
 
 Page({
@@ -65,8 +65,9 @@ Page({
         //   url: baseUrls,
         //   data: {
         //     Sign: "",
-        //     Phone: "",
-        //     Password: ""
+        // Phone: this.data.phone,
+        // VerificationCode:this.data.Verification,
+        //     Password: this.data.Password
         //   },
         //   header: {
         //     'content-type': 'application/json'

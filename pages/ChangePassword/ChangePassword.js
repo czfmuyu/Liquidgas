@@ -1,5 +1,5 @@
 let app = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/Login/AccountLogin' //修改密码接口
+const baseUrls = app.baseUrl + '/Api/Customer/ResetPassword' //修改密码接口
 const utils = require("../../utils/util.js")
 
 Page({
@@ -46,8 +46,8 @@ Page({
         url: baseUrls,
         data: {
           Sign: "",
-          Phone:"",
-          Password: ""
+          CustomerId: app.Customer.CustomerId,
+          Password: this.data.Setthepassword
         },
         header: {
           'content-type': 'application/json'
@@ -62,9 +62,9 @@ Page({
         icon: 'none',
         duration: 2000
       });
-      // wx.switchTab({
-      //   url: "/pages/My/My"
-      // })
+      wx.switchTab({
+        url: "/pages/My/My"
+      })
     } else {
       wx.showToast({
         title: "确认密码不一致!",
