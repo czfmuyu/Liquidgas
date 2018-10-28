@@ -101,7 +101,7 @@ Page({
           }
           for (let j = 0; j < arr.length; j++) {
             if (arr[j] === null) {
-              arr[j] = "无用气编号请联系服务商添加用气编号"
+              arr[j] = "请联系服务商添加用气编号"
             }
           }
           console.log(arr)
