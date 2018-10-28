@@ -17,7 +17,16 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad(options) {
-
+    // 判断用户是否选择用气编号,如果没有跳会首页
+    console.log(app.GasNo.length)
+    console.log(app.Customer)
+    if (app.GasNo.length > 1 && app.Customer.length > 1) {
+      wx.switchTab({
+        url: '/pages/HomePage/HomePage'
+      })
+      return;
+    }
+    this.CurrentInfo()
   },
   CurrentInfo() {
     let this_ = this
@@ -127,7 +136,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.CurrentInfo()
+   
     if (app.Customer !== null) {
       if (app.Customer.IsMainAccount == true) {
         this.setData({

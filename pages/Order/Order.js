@@ -96,7 +96,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    // 判断用户是否选择用气编号,如果没有跳会首页
+    console.log(app.GasNo.length)
+    console.log(app.Customer.length)
+    if (app.GasNo.length > 1 && app.Customer.length >1) {
+      console.log("进来")
+      wx.switchTab({
+        url: '/pages/HomePage/HomePage'
+      })
+      return;
+    }
     this.CustomerId()
+    
   },
   //导航控制
   navbarTap(e) {

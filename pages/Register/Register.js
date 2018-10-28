@@ -1,5 +1,6 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//注册接口
+const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
 const utils = require("../../utils/util.js")
 var app = getApp().globalData
 Page({
@@ -43,7 +44,28 @@ Page({
     this_.setData({
       disabled: true
     })
-
+    if (this_.data.Phone==""){
+      wx.showToast({
+        title: '请输入手机号!',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    wx.request({
+      url: VerificationUrls,
+      data: {
+        Sign: "0",
+        Mobile: this_.data.Phone
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log(res)
+      }
+      })
     let currentTime = this_.data.currentTime
     let text = this_.data.text
     if (text === "获取验证码" || text === "重新发送") {

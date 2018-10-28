@@ -1,5 +1,7 @@
 let app = getApp().globalData
+const { baseUrl } = getApp().globalData
 const baseUrls = app.baseUrl + '/Api/Login/AccountLogin' //忘记密码接口
+const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
 const utils = require("../../utils/util.js")
 
 Page({
@@ -21,6 +23,28 @@ Page({
     let this_ = this
     this_.setData({
       disabled: true
+    })
+    if (this_.data.Phone == "") {
+      wx.showToast({
+        title: '请输入手机号!',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    wx.request({
+      url: VerificationUrls,
+      data: {
+        Sign: "0",
+        Mobile: this_.data.Phone
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log(res)
+      }
     })
     let currentTime = this_.data.currentTime
     let text = this_.data.text

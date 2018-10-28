@@ -52,7 +52,7 @@ Page({
     wx.request({
       url: baseUrls,
       data: {
-        Sign:"",
+        Sign:"0",
         ObjectId:app.AccountId.AccountId,
         Type:Type,
         CustomerId:app.Customer.CustomerId,
