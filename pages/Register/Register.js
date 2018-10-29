@@ -97,7 +97,7 @@ Page({
     let this_ = this
     let Tick = this_.data.checked
     if (this_.data.Name !== "" && this_.data.Phone !== "" && this_.data.Password !== "" && this_.data.confirmPassword !== "" && this_.data.VerificationCode !== "") {
-      if (/^[\u4e00-\u9fa5]{2,3}$/.test(this_.data.Name)) {
+      if (/^[\u4e00-\u9fa5]{2,6}$/.test(this_.data.Name)) {
         if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
           if (/^[\w_-]{6,16}$/.test(this_.data.Password)) {
             if (Tick) {

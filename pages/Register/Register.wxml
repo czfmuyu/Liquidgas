@@ -7,7 +7,7 @@
     <text>姓名</text>
   </view>
   <view class="user_right">
-    <input placeholder="请输入您的姓名" data-text="Name" bindblur="UserReg" maxlength="3" />
+    <input placeholder="请输入您的姓名" data-text="Name" bindblur="UserReg"  />
   </view>
 </view>
 <view class="user" style="margin-top: 52rpx;">
