@@ -7,7 +7,7 @@
     <text>姓名</text>
   </view>
   <view class="user_right">
-    <input placeholder="请输入您的姓名" data-text="Name" bindblur="UserReg"  />
+    <input placeholder="请输入您的姓名" data-text="Name" bindinput="UserReg"  />
   </view>
 </view>
 <view class="user" style="margin-top: 52rpx;">
@@ -15,7 +15,7 @@
     <text>手机号</text>
   </view>
   <view class="user_right">
-    <input placeholder="请输入手机号" data-text="Phone" bindblur="UserReg" maxlength="11" />
+    <input placeholder="请输入手机号" data-text="Phone" bindinput="UserReg" maxlength="11" />
   </view>
 </view>
 <view class="user" style="margin-top: 52rpx;">
@@ -23,7 +23,7 @@
     <text>验证码</text>
   </view>
   <view class="user_right" style="width: 300rpx;">
-    <input placeholder="请输入验证码" style="width: 260rpx;" data-text="VerificationCode" bindblur="UserReg" />
+    <input placeholder="请输入验证码" style="width: 260rpx;" data-text="VerificationCode" bindinput="UserReg" />
   </view>
   <view class="user_validate" bindtap="bindButtonTap">{{text}}</view>
 </view>
@@ -32,7 +32,7 @@
     <text>设置密码</text>
   </view>
   <view class="user_right">
-    <input placeholder="请输入6-16位,数字字母组合" type="password" data-text="Password" bindblur="UserReg" />
+    <input placeholder="请输入6-16位,数字字母组合" type="password" data-text="Password" bindinput="UserReg" />
   </view>
 </view>
 <view class="user" style="margin-top: 52rpx;">
@@ -40,7 +40,7 @@
     <text>确认密码</text>
   </view>
   <view class="user_right">
-    <input placeholder="请再次输入密码" type="password" data-text="confirmPassword" bindblur="UserReg" />
+    <input placeholder="请再次输入密码" type="password" data-text="confirmPassword" bindinput="UserReg" />
   </view>
 </view>
 

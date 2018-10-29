@@ -96,7 +96,7 @@ Page({
           // Longitude: data.Longitude,
           // ServiceUserId: data.ServiceUserId
         })
-        if (this.data.OrderTrackList.Status > 19) {
+        if (this_.data.OrderTrackList.Status > 19) {
           this_.map()
         }
         this_.Pagechange()

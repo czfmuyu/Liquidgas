@@ -20,6 +20,7 @@ Page({
     VerificationCode: ""
   },
   UserReg(e) {
+    console.log(e)
     let data = this.data
     let value = e.detail.value
     let index = e.target.dataset.text
@@ -79,11 +80,12 @@ Page({
   },
   //获取验证码
   getVerification() {
+    let this_=this
     wx.request({
       url: VerificationUrls,
       data: {
         Sign: "a",
-        Mobile: this.data.phone,
+        Mobile: this_.data.Phone,
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
@@ -97,7 +99,7 @@ Page({
     let this_ = this
     let Tick = this_.data.checked
     if (this_.data.Name !== "" && this_.data.Phone !== "" && this_.data.Password !== "" && this_.data.confirmPassword !== "" && this_.data.VerificationCode !== "") {
-      if (/^[\u4e00-\u9fa5]{2,6}$/.test(this_.data.Name)) {
+      // if (/^[\u4e00-\u9fa5]{2,6}$/.test(this_.data.Name)) {
         if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
           if (/^[\w_-]{6,16}$/.test(this_.data.Password)) {
             if (Tick) {
@@ -161,13 +163,13 @@ Page({
             duration: 2000
           });
         }
-      } else {
-        wx.showToast({
-          title: '姓名有误',
-          icon: 'none',
-          duration: 2000
-        });
-      }
+      // } else {
+      //   wx.showToast({
+      //     title: '姓名有误',
+      //     icon: 'none',
+      //     duration: 2000
+      //   });
+      // }
     } else {
       wx.showToast({
         title: '请完善您的信息',
