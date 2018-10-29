@@ -97,14 +97,11 @@ Page({
    */
   onLoad(options) {
     // 判断用户是否选择用气编号,如果没有跳会首页
-    console.log(app.GasNo.length)
-    console.log(app.Customer.length)
     if (app.GasNo.length > 1 && app.Customer.length >1) {
       console.log("进来")
       wx.switchTab({
         url: '/pages/HomePage/HomePage'
       })
-      return;
     }
     this.CustomerId()
     
@@ -327,11 +324,9 @@ Page({
   cancel(e) {
     let orderid = e.target.dataset.orderid
     console.log(orderid)
-    let Serialnumber = e.target.dataset.serial
     this.setData({
       ShowModal: true,
       ID: orderid,
-      Serialnumber: Serialnumber
     })
   },
   /**
@@ -340,20 +335,17 @@ Page({
   onConfirm: function (e) {
     console.log(e)
     let _this = this
-    // 订单
-    let tomerId = _this.data.Serialnumber
     // 用户
     let orderId = _this.data.ID
     // tu款说明
     let Explain = _this.data.getdata
-    console.log(Explain + tomerId + orderId)
     if (Explain !== "") {
       wx.request({
         url: cancel,
         data: {
           Sign: "",
           OrderId: orderId,
-          CustomerId: tomerId,
+          CustomerId: app.Customer.CustomerId,
           Explain: Explain
         },
         header: {
@@ -362,7 +354,7 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res)
-          if(res.data.Data){
+          if(res.data.Data==true){
             _this.DeliveryList()
             _this.wholeInfo()
             _this.EvaluateList()
@@ -388,7 +380,6 @@ Page({
         icon: "none",
         duration: 1000
       });
-      return false
     }
   },
 

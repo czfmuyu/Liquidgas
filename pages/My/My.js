@@ -18,13 +18,10 @@ Page({
   */
   onLoad(options) {
     // 判断用户是否选择用气编号,如果没有跳会首页
-    console.log(app.GasNo.length)
-    console.log(app.Customer)
     if (app.GasNo.length > 1 && app.Customer.length > 1) {
       wx.switchTab({
         url: '/pages/HomePage/HomePage'
       })
-      return;
     }
     this.CurrentInfo()
   },
@@ -41,6 +38,7 @@ Page({
         method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         // header: {}, // 设置请求的 header
         success: function (res) {
+          console.log(res.data.Data)
           app.Customer = res.data.Data
           this_.setData({
             Gas: res.data.Data.GasNo
@@ -108,7 +106,7 @@ Page({
   Cancellation() {
     if (!this.pageLoading) {
       this.pageLoading = !0;
-      app = {
+      getApp().globalData= {
         AccountId: "",
         CustomerId: "",
         Customer: null,
@@ -136,7 +134,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
     if (app.Customer !== null) {
       if (app.Customer.IsMainAccount == true) {
         this.setData({

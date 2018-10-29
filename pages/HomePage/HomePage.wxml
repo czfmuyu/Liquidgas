@@ -1,30 +1,30 @@
-<!--pages/HomePage.wxml-->
+<!-- pages/HomePage.wxml -->
 <view class="header_background" catchtap="OrderAddress" style="background-image:url(../../imgs/bj.jpg)">
     <image class="header_btn" src="../../imgs/btn.png" />
 </view>
 <view class="content_top">
     <view class="content_ipt" bindtap="">
-        <view class="content_img" >
+        <view class="content_img">
             <image src="../../imgs/7_03.png" />
         </view>
         <view class="content_input">
-            <text >用气编号:  {{GasNo[0]}}</text>
+            <text>用气编号:  {{GasNo[0]}}</text>
         </view>
     </view>
 </view>
 <view class="content_bottom">
     <view class="nav">
         <view class="nav_left" catchtap="Repair">
-            <text >故障维修</text>
+            <text>故障维修</text>
             <image src="../../imgs/7_11.png" />
         </view>
         <view class="nav_right">
             <view class="opinion" catchtap="Opinion">
-                <text >意见反馈</text>
+                <text>意见反馈</text>
                 <image src="../../imgs/7_07.png" />
             </view>
             <view class="security" catchtap="Security">
-                <text >安全宣传</text>
+                <text>安全宣传</text>
                 <image src="../../imgs/7_14.png" />
             </view>
         </view>
@@ -33,31 +33,26 @@
 <!-- 新用户弹窗 -->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-    <view class="modal-title"></view>
-    <view class="btn-Photograph" >提示</view>
-    <view class="btn-Album" >请绑定用气编号</view>
+    <view class="modal-title">提示</view>
+    <view class="btn-Photograph"></view>
+    <view class="btn-Album">请绑定用气编号</view>
     <view class="modal-ipt">
-        <input 
-            placeholder="用气编号"
-            bindblur="GasNumber" />
+        <input placeholder="用气编号" bindblur="GasNumber" />
     </view>
     <view class="modal-footer">
-        <view class="btn-cancel" bindtap="onCancel" >取消</view>
-        <view class="btn-confirm" bindtap="onConfirm" >确定</view>
+        <view class="btn-cancel" bindtap="onCancel">取消</view>
+        <view class="btn-confirm" bindtap="onConfirm">确定</view>
     </view>
 </view>
 <!-- 新用户弹窗 -->
 <view class="modal-mask" bindtap="hideModaltwo" catchtouchmove="preventTouchMove" wx:if="{{showModalTwo}}"></view>
 <view class="modal-dialog" wx:if="{{showModalTwo}}">
-    <button class='modal-title' bindtap="onGasNo"data-index="{{index}}">请选择用气编号</button>
-    <!-- <view class="btn-Number" style="border-top: 2rpx solid;" wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}" bindtap="onGasNo">{{item}}</view>
-    <view class="modal-footer"> -->
-    <!-- </view> -->
+    <button class='modal-title' bindtap="onGasNo" data-index="{{index}}">请选择用气编号</button>
     <picker-view indicator-style="height: 50px;" style="text-align: center;width: 100%; height: 300px;" value="{{value}}" bindchange="Enterprise">
-    <picker-view-column>
-      <view wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}"  style="line-height: 50px">
-      {{item}}
-      </view>
-    </picker-view-column>
-  </picker-view>
+        <picker-view-column>
+            <view wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}" style="line-height: 50px">
+                {{item}}
+            </view>
+        </picker-view-column>
+    </picker-view>
 </view>
