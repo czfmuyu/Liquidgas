@@ -140,14 +140,17 @@ page{
     left: 0;
     z-index: 9999;
     background: #f9f9f9;
-    margin: -180rpx 34rpx;
+    margin: -340rpx 34rpx;
     border-radius: 36rpx;
   }
   .modal-title {
-    padding-top: 42rpx;
-    font-size: 36rpx;
-    color: #030303;
+    font-size: 30rpx;
+    color: #fff;
+    background-color: #2269d4;
     text-align: center;
+    height: 11vw;
+    line-height: 11vw;
+    border-radius:0;
   }
   .btn-Photograph,
   .btn-Album{

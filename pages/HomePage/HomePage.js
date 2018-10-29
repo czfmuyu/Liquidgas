@@ -100,7 +100,7 @@ Page({
             }
           }
           for (let j = 0; j < arr.length; j++) {
-            if (arr[j] === null) {
+            if (arr[j] == ""||arr[j] == null) {
               arr[j] = "请联系服务商添加用气编号"
             }
           }
