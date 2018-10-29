@@ -2,7 +2,7 @@
 <view class="header">
   <text>请输入您的手机号码和密码进行注册</text>
 </view>
-<view class="user" style="margin-top: 72rpx;">
+<view class="user" style="margin-top: 52rpx;">
   <view class="user_left">
     <text>姓名</text>
   </view>
@@ -10,7 +10,7 @@
     <input placeholder="请输入您的姓名" data-text="Name" bindblur="UserReg" maxlength="3" />
   </view>
 </view>
-<view class="user" style="margin-top: 72rpx;">
+<view class="user" style="margin-top: 52rpx;">
   <view class="user_left">
     <text>手机号</text>
   </view>

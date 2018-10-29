@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checked:false,
+    checked: false,
     text: "获取验证码",
     currentTime: 60, //倒计时
     disabled: false, //按钮是否禁用
@@ -27,16 +27,16 @@ Page({
   },
   //点击条款打钩事件
   Tick() {
-    if (this.data.checked==false){
+    if (this.data.checked == false) {
       this.setData({
-        checked:true
+        checked: true
       })
-    }else{
+    } else {
       this.setData({
         checked: false
       })
     }
-    
+
   },
   //点击短信验证码发送事件
   bindButtonTap() {
@@ -44,51 +44,53 @@ Page({
     this_.setData({
       disabled: true
     })
-    if (this_.data.Phone==""){
+    if (this_.data.Phone == "" ) {
       wx.showToast({
-        title: '请输入手机号!',
+        title: '请输入手机号码',
         icon: 'none',
         duration: 2000
       });
-      return;
+    } else {
+      let currentTime = this_.data.currentTime
+      let text = this_.data.text
+      if (text === "获取验证码" || text === "重新发送") {
+        this_.getVerification()
+        wx.showToast({
+          title: '短信验证码已发送',
+          icon: 'none',
+          duration: 2000
+        });
+        const interval = setInterval(function () {
+          currentTime--; //每执行一次让倒计时秒数减一
+          this_.setData({
+            text: currentTime + "s",
+          })
+          if (currentTime <= 0) {
+            clearInterval(interval)
+            this_.setData({
+              text: '重新发送',
+              currentTime: 60,
+              disabled: false,
+            })
+          }
+        }, 1000)
+      }
     }
+  },
+  //获取验证码
+  getVerification() {
     wx.request({
       url: VerificationUrls,
       data: {
-        Sign: "0",
-        Mobile: this_.data.Phone
+        Sign: "a",
+        Mobile: this.data.phone,
       },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res)
-      }
-      })
-    let currentTime = this_.data.currentTime
-    let text = this_.data.text
-    if (text === "获取验证码" || text === "重新发送") {
-      wx.showToast({
-        title: '短信验证码已发送',
-        icon: 'none',
-        duration: 2000
-      });
-      const interval = setInterval(function () {
-        currentTime--; //每执行一次让倒计时秒数减一
-        this_.setData({
-          text: currentTime + "s",
-        })
-        if (currentTime <= 0) {
-          clearInterval(interval)
-          this_.setData({
-            text: '重新发送',
-            currentTime: 60,
-            disabled: false,
-          })
-        }
-      }, 1000)
-    }
+      },
+    })
   },
   //注册点击事件
   Register() {
@@ -117,7 +119,7 @@ Page({
                     console.log(res)
                     if (res.data.Code == 200) {
                       console.log(res.data.Data.AccountId)
-                      app.AccountId=res.data.Data
+                      app.AccountId = res.data.Data
                       wx.switchTab({//登录页面
                         url: "/pages/HomePage/HomePage"
                       })
@@ -145,27 +147,27 @@ Page({
                 duration: 2000
               });
             }
-          }else {
+          } else {
             wx.showToast({
               title: '请输入6-16位数字和字母的组合密码',
               icon: 'none',
               duration: 2000
             });
           }
-         } else {
-            wx.showToast({
-              title: '手机号码有误',
-              icon: 'none',
-              duration: 2000
-            });
-          }
         } else {
           wx.showToast({
-            title: '姓名有误',
+            title: '手机号码有误',
             icon: 'none',
             duration: 2000
           });
         }
+      } else {
+        wx.showToast({
+          title: '姓名有误',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     } else {
       wx.showToast({
         title: '请完善您的信息',
