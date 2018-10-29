@@ -45,6 +45,10 @@ Page({
           })
         },
       })
+    }else{
+      this_.setData({
+        Gas: app.Customer.GasNo
+      })
     }
   },
   SublevelAccount() {

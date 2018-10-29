@@ -58,7 +58,7 @@ Page({
       success: res => {
         console.log(res)
         if (res.data.Code == 200) {
-          app = {
+          getApp().globalData = {
             AccountId: "",
             CustomerId: "",
             Customer: null,

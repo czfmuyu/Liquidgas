@@ -23,5 +23,10 @@ App({
     Subaccount:null,//子账号信息
     GasNo:"",//用户所有用气编号
     Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude:""},//地址信息
+    Latitude: null,
+    Longitude: null,
+    ServiceUserId:null,
+    EnterpriseId:null,
+    // Address:null,
   }
 })

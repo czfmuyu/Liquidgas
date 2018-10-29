@@ -52,37 +52,7 @@ Page({
     isSupplier: false, //控制供应商隐藏显示
     showPayment: false, //控制支付弹框按钮
     showPaymentMethod: false, //控制支付方式弹框按钮
-    goodslist: [{
-      Name: "商品1",
-      Price: 120,
-      Quantity: 0, //计数
-      PrceType: "公斤",
-    },
-    {
-      Name: "商品2",
-      Price: 120,
-      Quantity: 0, //计数
-      PrceType: "公斤",
-    },
-    {
-      Name: "商品3",
-      Price: 120,
-      Quantity: 0, //计数
-      PrceType: "瓶",
-    },
-    {
-      Name: "商品4",
-      Price: 120,
-      Quantity: 0, //计数
-      PrceType: "公斤",
-    },
-    {
-      Name: "商品5",
-      Price: 120,
-      Quantity: 0, //计数
-      PrceType: "瓶",
-    }
-    ],
+    goodslist: [],
     goods: [],
     Quantity: 0,
     Price: 0,
@@ -123,7 +93,7 @@ Page({
     AccountId: "",
     CustomerId: "",
     EnterpriseId: "",
-    PaymentName: "",
+    PaymentName: "货到付款",
     EnterpriseName: "",
     EnterprisePhone: "",
     EnterpriseAddress: "",
@@ -530,9 +500,9 @@ Page({
    * 支付弹出框点击事件事件
    */
   goodsPayment() {
-    this.setData({
-      showPayment: true
-    });
+    // this.setData({
+    //   showPayment: true
+    // });
   },
   /**
    * 支付弹出框蒙层截断touchmove事件

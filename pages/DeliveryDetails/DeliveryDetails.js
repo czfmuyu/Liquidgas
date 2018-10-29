@@ -5,6 +5,7 @@ const { baseUrl } = getApp().globalData;
 const baseUrls = `${baseUrl}/Api/GasOrders/GetOrderInfo`//获取订单详情接口
 const cancel = `${baseUrl}/Api/GasOrder/CustomerCancelOrder` //取消订单
 const Confirm = `${baseUrl}/Api/GasOrders/CustomerConfirmOrder` //确认订单
+const Coordinate = `${baseUrl}/Api/Common/GetUserLastCoordinate` //获取配送工定位接口
 Page({
   data: {
     //地图参数
@@ -18,6 +19,8 @@ Page({
     city: "",
     name: "",
     desc: "",
+    Latitude: "",
+    Longitude: "",
     //每个状态的显示和隐藏
     StateControl: 0,
     btn: 0,
@@ -41,39 +44,112 @@ Page({
   },
   onLoad(options) {
     this.queryDetails(options)
-    //地图逻辑
-    // console.log(e)
-    // let { latitude, longitude, latitude2, longitude2, city, name, desc } = e;
-    let latitude = "30.641904";
-    let longitude = "104.043243";
-    let latitude2 = "30.642839";
-    let longitude2 = "104.044046";
-    let city = "成都市";
-    let name = "卫味盐帮菜";
-    let desc = "蜀汉街武侯祠大街258号";
-    let markers = [
-      {
-        iconPath: "/images/mapicon_navi_s.png",
-        id: 0,
-        latitude,
-        longitude,
-        width: 23,
-        height: 33
-      },
-      {
-        iconPath: "/images/mapicon_navi_e.png",
-        id: 1,
-        latitude: latitude2,
-        longitude: longitude2,
-        width: 24,
-        height: 34
-      }
-    ];
-    this.setData({
-      latitude, longitude, latitude2, longitude2, markers, city, name, desc
-    });
     this.getRoute();
-
+    // this.map()
+  },
+  //查询订单详情
+  queryDetails(options) {
+    let this_ = this
+    wx.request({
+      url: baseUrls,
+      data: {
+        sign: "",
+        orderId: options.id
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        let data = res.data.Data
+        console.log(data)
+        utils.Decrypt(data.Address)
+        utils.Decrypt(data.Contact)
+        utils.Decrypt(data.Phone)
+        let OrderItems = res.data.Data.OrderItems
+        for (let i = 0; i < OrderItems.length; i++) {
+          utils.Decrypt(OrderItems.ProductName)
+          utils.Decrypt(OrderItems.Price)
+          utils.Decrypt(OrderItems.Quantity)
+        }
+        let Times = data.CreateTime
+        if (Times !== null) {
+          let day = Times.slice(0, 10)
+          let time = Times.slice(11, 16)
+          console.log(day, time)
+          this_.setData({
+            day: day,
+            time: time,
+          })
+        }
+        app.Latitude = data.Latitude;
+        app.Longitude = data.Longitude;
+        app.ServiceUserId = data.ServiceUserId;
+        app.EnterpriseId = data.EnterpriseId;
+        // app.Address = data.Address;
+        this_.setData({
+          OrderTrackList: data,
+          goodsList: OrderItems,
+          orderId: options.id,
+          // Latitude: data.Latitude,
+          // Longitude: data.Longitude,
+          // ServiceUserId: data.ServiceUserId
+        })
+        if (this.data.OrderTrackList.Status > 19) {
+          this_.map()
+        }
+        this_.Pagechange()
+      },
+    })
+  },
+  //地图功能渲染
+  map() {
+    let this_ = this
+    //地图逻辑
+    wx.request({
+      url: Coordinate,
+      data: {
+        sign: "0",
+        userId: app.ServiceUserId,
+        enterpriseId: app.EnterpriseId
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log(res)
+        let data = res.data.Data
+        let latitude = app.Latitude;
+        let longitude = app.Longitude;
+        let latitude2 = data.Latitude;
+        let longitude2 = data.Longitude;
+        let city = "";
+        let name = "";
+        let desc = "";
+        let markers = [
+          {
+            iconPath: "/images/mapicon_navi_s.png",
+            id: 0,
+            latitude,
+            longitude,
+            width: 23,
+            height: 33
+          },
+          {
+            iconPath: "/images/mapicon_navi_e.png",
+            id: 1,
+            latitude: latitude2,
+            longitude: longitude2,
+            width: 24,
+            height: 34
+          }
+        ];
+        this_.setData({
+          latitude, longitude, latitude2, longitude2, markers, city, name, desc
+        });
+        this_.getRoute();
+      },
+    })
 
   },
   // 获取取消原因
@@ -178,7 +254,7 @@ Page({
   Pagechange() {
     // 数据判断页面改动
     console.log(this.data.OrderTrackList.Status)
-    if (this.data.OrderTrackList.Status < 31) {//配送中
+    if (this.data.OrderTrackList.Status > 19 && this.data.OrderTrackList.Status < 31) {//配送中
       this.setData({
         StateControl: 1,
         btn: 1
@@ -188,7 +264,7 @@ Page({
         StateControl: 2,
         btn: 2
       })
-    } else {
+    } else if (this.data.OrderTrackList.Status == 100) {
       console.log("1")
       this.setData({//取消订单
         StateControl: 3,
@@ -196,51 +272,7 @@ Page({
       })
     }
   },
-  //查询订单详情
-  queryDetails(options) {
-    let this_ = this
-    wx.request({
-      url: baseUrls,
-      data: {
-        sign: "",
-        orderId: options.id
-      },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      // header: {}, // 设置请求的 header
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        let data = res.data.Data
-        console.log(data)
-        utils.Decrypt(data.Address)
-        utils.Decrypt(data.Contact)
-        utils.Decrypt(data.Phone)
-        let OrderItems = res.data.Data.OrderItems
-        for (let i = 0; i < OrderItems.length; i++) {
-          utils.Decrypt(OrderItems.ProductName)
-          utils.Decrypt(OrderItems.Price)
-          utils.Decrypt(OrderItems.Quantity)
-        }
-        let Times = data.CreateTime
-        if (Times !== null) {
-          let day = Times.slice(0, 10)
-          let time = Times.slice(11, 16)
-          console.log(day, time)
-          this_.setData({
-            day: day,
-            time: time,
-          })
-        }
-        this_.setData({
-          OrderTrackList: data,
-          goodsList: OrderItems,
-          orderId: options.id,
-        })
-        this_.Pagechange()
-      },
-    })
-  },
+
   // 评价跳转页面
   Evaluate: function () {
     wx.navigateTo({

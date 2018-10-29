@@ -1,6 +1,6 @@
 let app = getApp().globalData
 const { baseUrl } = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/Login/AccountLogin' //忘记密码接口
+const baseUrls = app.baseUrl + '/Api/Customers/ResetPassword' //忘记密码接口
 const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
 const utils = require("../../utils/util.js")
 
@@ -74,43 +74,43 @@ Page({
   },
   //修改密码提交
   Confirm() {
-    //   if (!this.data.phone || !this.data.Verification || !this.data.Password || !this.data.confirmation) {
-    //     wx.showToast({
-    //       title: '密码不能为空',
-    //       icon: 'none',
-    //       duration: 2000
-    //     });
-    // }else{
-    //     if (this.data.Password !== this.data.confirmation) {
-    //       wx.showToast({
-    //         title: '密码不一致',
-    //         icon: 'none',
-    //         duration: 2000
-    //       });
-    //     }else{
-    wx.request({
-      url: baseUrls,
-      data: {
-        Sign: "",
-        Phone: this.data.phone,
-        VerificationCode: this.data.Verification,
-        Password: this.data.Password
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      success: res => {
-        console.log(res)
+    if (this.data.phone == "" || this.data.Verification == "" || this.data.Password == "" || this.data.confirmation == "") {
+      wx.showToast({
+        title: '信息不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      if (this.data.Password !== this.data.confirmation) {
+        wx.showToast({
+          title: '密码不一致',
+          icon: 'none',
+          duration: 2000
+        });
+      } else {
+        wx.request({
+          url: baseUrls,
+          data: {
+            Sign: "",
+            Phone: this.data.phone,
+            VerificationCode: this.data.Verification,
+            Password: this.data.Password
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: 'post',
+          success: res => {
+            console.log(res)
+            if (res.data.Data == true) {
+              wx.redirectTo({
+                url: "/pages/Login/Login",
+              })
+            }
+          }
+        });
       }
-    });
-    // }
-    // }
-    // console.log("1111")
-
-    // wx.navigateTo({//找回密码页面
-    //   url: "/pages/Login/Login"
-    // })
+    }
   },
   // 获取电话
   phone(e) {
@@ -133,7 +133,7 @@ Page({
   // 获取确认的密码
   confirmation(e) {
     this.setData({
-      Password: e.detail.value
+      confirmation: e.detail.value
     })
   },
 

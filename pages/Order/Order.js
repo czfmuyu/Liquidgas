@@ -1,4 +1,4 @@
-// pages/Order/Order.js
+    // pages/Order/Order.js
 let app = getApp().globalData
 let { baseUrl } = getApp().globalData
 const utils = require("../../utils/util.js")
@@ -193,7 +193,7 @@ Page({
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
-        status: 31
+        status: "30,31",
       },
       header: {
         'content-type': 'application/json'
