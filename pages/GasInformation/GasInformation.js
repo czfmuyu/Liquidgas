@@ -24,36 +24,30 @@ Page({
   onLoad: function (options) {
     this.page() //判断页面跳转index
     console.log(app)
-    if (Orderaddress.Contact !== undefined){
-      if (Orderaddress.Contact !== "") {
-        console.log("名称地址")
-        this.setData({ //新用户没有数据的时候获取的信息
-          storename: Orderaddress.Contact,
-          telephone: Orderaddress.Phone,
-          address: Orderaddress.Address,
-          longitudes: Orderaddress.Longitude,
-          latitudes: Orderaddress.Latitude,
-        })
-      } else {
-        if (getApp().globalData.Customer !== null) {
-          console.log("第二个")
-          this.setData({
-            storename: getApp().globalData.Customer.CustomerName,
-            telephone: getApp().globalData.Customer.CustomerPhone,
-            address: getApp().globalData.Customer.CustomerAddress,
-            latitudes: getApp().globalData.Customer.CustomerLatitude,
-            longitudes: getApp().globalData.Customer.CustomerLongitude,
-          })
-          app.Orderaddress.Address = getApp().globalData.Customer.CustomerAddress
-          app.Orderaddress.Contact = getApp().globalData.Customer.CustomerName
-          app.Orderaddress.Latitude = getApp().globalData.Customer.CustomerLatitude
-          app.Orderaddress.Longitude = getApp().globalData.Customer.CustomerLongitude
-          app.Orderaddress.Phone = getApp().globalData.Customer.CustomerPhone
-        }
-        return false
-      }
+    if (Orderaddress.Contact !== "") {
+      console.log("名称地址")
+      this.setData({ //新用户没有数据的时候获取的信息
+        storename: Orderaddress.Contact,
+        telephone: Orderaddress.Phone,
+        address: Orderaddress.Address,
+        longitudes: Orderaddress.Longitude,
+        latitudes: Orderaddress.Latitude,
+      })
+    } else if (getApp().globalData.Customer !== null) {
+      console.log("第二个")
+      this.setData({
+        storename: getApp().globalData.Customer.CustomerName,
+        telephone: getApp().globalData.Customer.CustomerPhone,
+        address: getApp().globalData.Customer.CustomerAddress,
+        latitudes: getApp().globalData.Customer.CustomerLatitude,
+        longitudes: getApp().globalData.Customer.CustomerLongitude,
+      })
+      app.Orderaddress.Address = getApp().globalData.Customer.CustomerAddress
+      app.Orderaddress.Contact = getApp().globalData.Customer.CustomerName
+      app.Orderaddress.Latitude = getApp().globalData.Customer.CustomerLatitude
+      app.Orderaddress.Longitude = getApp().globalData.Customer.CustomerLongitude
+      app.Orderaddress.Phone = getApp().globalData.Customer.CustomerPhone
     }
-   
   },
 
   //获取页面传的值
@@ -72,7 +66,7 @@ Page({
   // 提交地址
   submission() {
     console.log("222")
-    if (this.data.storename == "" || this.data.telephone == "" || this.data.address==""){
+    if (this.data.storename == "" || this.data.telephone == "" || this.data.address == "") {
       console.log(this.data)
       wx.showToast({
         title: "请完整填写信息！",
@@ -119,9 +113,9 @@ Page({
     }
     // 提交地址的时候修改本地变量
     app.Orderaddress.Address = this.data.address
-      app.Orderaddress.Contact = this.data.storename
+    app.Orderaddress.Contact = this.data.storename
     app.Orderaddress.Latitude = this.data.latitudes
-      app.Orderaddress.Longitude = this.data.longitudes
+    app.Orderaddress.Longitude = this.data.longitudes
     app.Orderaddress.Phone = this.data.telephone
   },
   // 获取姓名保存到全局
@@ -225,7 +219,7 @@ Page({
     let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
     if (!name.test(storename)) {
       this.setData({
-        storename:""
+        storename: ""
       })
       wx.showToast({
         title: "姓名输入有误！",

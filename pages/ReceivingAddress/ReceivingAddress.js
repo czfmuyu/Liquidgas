@@ -49,12 +49,14 @@ Page({
     let location = _this.data.locationAddress
     // 拼接获取到的地址
     let locations = location + addressD
+    console.log(locations)
     let longitude = _this.data.location
     let longitudes = longitude.longitude[0] + "." + longitude.longitude[1]
     let latitudes = longitude.latitude[0] + "." + longitude.latitude[1]
     Orderaddress.Address = locations
     Orderaddress.Longitude = longitudes
     Orderaddress.Latitude = latitudes
+    console.log(getApp().globalData.Orderaddress.Address)
     if (addressD == "" || addressD == undefined) {
       wx.showToast({
         title: "请输入详细地址！",

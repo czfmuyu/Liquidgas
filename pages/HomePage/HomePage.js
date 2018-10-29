@@ -100,7 +100,7 @@ Page({
             }
           }
           for (let j = 0; j < arr.length; j++) {
-            if (arr[j] == ""||arr[j] == null) {
+            if (arr[j] == "" || arr[j] == null) {
               arr[j] = "请联系服务商添加用气编号"
             }
           }
@@ -181,7 +181,7 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.Data) {
-          app = {
+          getApp().globalData = {
             AccountId: "",
             CustomerId: "",
             Customer: null,

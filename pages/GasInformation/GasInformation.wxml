@@ -52,7 +52,6 @@
     <text class='textfont text_m'>{{address}}</text>
     <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
   </view>
-    
 </view>
 
 <button class="btn" bindtap='submission'>提交</button>
