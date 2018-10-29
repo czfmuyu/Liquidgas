@@ -41,6 +41,7 @@ Page({
 
   //提交点击事件
   Submit() {
+    let this_=this
     let value = this.data.name
     let Type
     console.log(value)
@@ -61,7 +62,16 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function(res){
-        console.log(res)
+        if(res.data.Data==true){
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000
+          });
+          this_.setData({
+            text:""
+          }) 
+        }
       },
     })
     // wx.navigateTo({

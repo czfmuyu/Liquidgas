@@ -1,5 +1,5 @@
 let app = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/Customer/ResetPassword' //修改密码接口
+const baseUrls = app.baseUrl + '/Api/Customers/ChangePassword' //修改密码接口
 const utils = require("../../utils/util.js")
 
 Page({

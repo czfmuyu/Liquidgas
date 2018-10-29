@@ -24,111 +24,114 @@ Page({
     this_.setData({
       disabled: true
     })
-    if (this_.data.Phone == "") {
+    if (this_.data.phone == "") {
       wx.showToast({
-        title: '请输入手机号!',
+        title: '请填写手机号码',
         icon: 'none',
         duration: 2000
       });
-      return;
+    } else {
+      let currentTime = this_.data.currentTime
+      let text = this_.data.text
+      if (text === "获取验证码" || text === "重新发送") {
+        this_.getVerification()
+        wx.showToast({
+          title: '短信验证码已发送',
+          icon: 'none',
+          duration: 2000
+        });
+        const interval = setInterval(function () {
+          currentTime--; //每执行一次让倒计时秒数减一
+          this_.setData({
+            text: currentTime + "s",
+          })
+          if (currentTime <= 0) {
+            clearInterval(interval)
+            this_.setData({
+              text: '重新发送',
+              currentTime: 60,
+              disabled: false,
+            })
+          }
+        }, 1000)
+      }
     }
+  },
+  //获取验证码
+  getVerification() {
     wx.request({
       url: VerificationUrls,
       data: {
-        Sign: "0",
-        Mobile: this_.data.Phone
+        Sign: "a",
+        Mobile: this.data.phone,
+      },
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function (res) {
+        console.log(res)
+      },
+    })
+  },
+  //修改密码提交
+  Confirm() {
+    //   if (!this.data.phone || !this.data.Verification || !this.data.Password || !this.data.confirmation) {
+    //     wx.showToast({
+    //       title: '密码不能为空',
+    //       icon: 'none',
+    //       duration: 2000
+    //     });
+    // }else{
+    //     if (this.data.Password !== this.data.confirmation) {
+    //       wx.showToast({
+    //         title: '密码不一致',
+    //         icon: 'none',
+    //         duration: 2000
+    //       });
+    //     }else{
+    wx.request({
+      url: baseUrls,
+      data: {
+        Sign: "",
+        Phone: this.data.phone,
+        VerificationCode: this.data.Verification,
+        Password: this.data.Password
       },
       header: {
         'content-type': 'application/json'
       },
-      method: "GET",
-      success: function (res) {
+      method: 'post',
+      success: res => {
         console.log(res)
       }
-    })
-    let currentTime = this_.data.currentTime
-    let text = this_.data.text
-    if (text === "获取验证码" || text === "重新发送") {
-      wx.showToast({
-        title: '短信验证码已发送',
-        icon: 'none',
-        duration: 2000
-      });
-      const interval = setInterval(function () {
-        currentTime--; //每执行一次让倒计时秒数减一
-        this_.setData({
-          text: currentTime + "s",
-        })
-        if (currentTime <= 0) {
-          clearInterval(interval)
-          this_.setData({
-            text: '重新发送',
-            currentTime: 60,
-            disabled: false,
-          })
-        }
-      }, 1000)
-    }
-  },
-  Confirm() {
-    if (!this.data.phone || !this.data.Verification || !this.data.Password || !this.data.confirmation) {
-      wx.showToast({
-        title: '密码不能为空',
-        icon: 'none',
-        duration: 2000
-      });
-  }else{
-      if (this.data.Password !== this.data.confirmation) {
-        wx.showToast({
-          title: '密码不一致',
-          icon: 'none',
-          duration: 2000
-        });
-      }else{
-        // wx.request({
-        //   url: baseUrls,
-        //   data: {
-        //     Sign: "",
-        // Phone: this.data.phone,
-        // VerificationCode:this.data.Verification,
-        //     Password: this.data.Password
-        //   },
-        //   header: {
-        //     'content-type': 'application/json'
-        //   },
-        //   method: 'post',
-        //   success: res => {
-        //     console.log(res)
-        //   }
-        // });
-      }
-  }
-  console.log("1111")
+    });
+    // }
+    // }
+    // console.log("1111")
 
-  // wx.navigateTo({//找回密码页面
-  //   url: "/pages/Login/Login"
-  // })
-},
+    // wx.navigateTo({//找回密码页面
+    //   url: "/pages/Login/Login"
+    // })
+  },
   // 获取电话
-  phone(e){
+  phone(e) {
     this.setData({
       phone: e.detail.value
     })
   },
   // 获取验证码
-  Verification(e){
+  Verification(e) {
     this.setData({
       Verification: e.detail.value
     })
   },
   // 获取第一次输入的密码
-  Password(e){
+  Password(e) {
     this.setData({
       Password: e.detail.value
     })
   },
   // 获取确认的密码
-  confirmation(e){
+  confirmation(e) {
     this.setData({
       Password: e.detail.value
     })
