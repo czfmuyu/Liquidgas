@@ -1,37 +1,56 @@
-/* pages/GasInformation/GasInformation.wxss */
-@import "../PersonalData/PersonalData.wxss";
-.btn{
+/* @import "../PersonalData/PersonalData.wxss"; */
+
+.btn {
   width: 90%;
   margin: 50rpx auto;
   background-color: #2269d4;
   height: 80rpx;
   border-radius: 50rpx 50rpx;
-  color:white;
+  color: white;
 }
 
-text{
-  font-size: 28rpx;
-}
-.wraps{
+
+.wraps {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
-.text_m{
+
+.text_m {
   margin-right: 20rpx;
 }
-.textfont{
+
+.textfont {
   width: 500rpx;
-   word-wrap:break-word; 
-   word-break:break-all; 
+  word-wrap: break-word;
+  word-break: break-all;
 }
-.contents{
+
+.wrap {
+  display: flex;
+  align-items: center;
+}
+
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f7f7f7;
+  font-size: 28rpx;
+}
+
+.contents {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20rpx;
-  background-color: white
+  background-color: white;
+  border-bottom: 1rpx solid #f7f7f7;
+  font-size: 28rpx;
 }
-input{
+
+/* input {
   color: #000;
-}
+  font-size: 30rpx;
+  padding-left: 20rpx;
+} */

@@ -13,6 +13,7 @@
     background-color: #f5f5f5;
     padding-left: 62rpx;
     color: #999;
+    align-items: center;
 }
 .header_ipt>input{
     width: 459rpx;
@@ -22,25 +23,12 @@
 .header_ipt>image{
     width: 36rpx;
     height: 36rpx;
-    position: relative;
+    /* position: relative;
     top:20rpx;
     left:-18rpx;
-    z-index: 55;
+    z-index: 55; */
 }
-.header_ipt_x{
-    width: 36rpx;
-    height: 36rpx;
-    border-radius: 50rpx;
-    background-color:#cccccc;
-    color:  #f5f5f5;
-    line-height: 36rpx;
-    text-align: center;
-    font-size: 24rpx;
-    position: relative;
-    top: 16rpx;
-    right: 2rpx;
-    z-index: 55;
-}
+
 
 /* 供应商弹窗 */
 .show-btn {

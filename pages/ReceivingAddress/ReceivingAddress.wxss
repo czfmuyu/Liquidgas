@@ -48,3 +48,7 @@ margin-left: 50rpx;
   text-align: center;
   margin: 0 auto;
 }
+.Addressselection{
+  display: flex;
+  align-items: center;
+}

@@ -62,6 +62,7 @@ Page({
   getSupplierInfo() {
     let this_ = this;
     let {Longitude,Latitude } = Orderaddress;
+    console.log(Longitude)
     let TotalCount = this.data.TotalCount;
     wx.request({
       url: baseUrls,
@@ -74,7 +75,7 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log(res.data.Data)
+        console.log(res)
         let data = res.data.Data
         for (let i = 0; i < data.length; i++) {
           let Distance = Math.round(data[i].Distance)

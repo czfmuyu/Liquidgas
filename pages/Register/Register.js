@@ -20,7 +20,6 @@ Page({
     VerificationCode: ""
   },
   UserReg(e) {
-    console.log(e)
     let data = this.data
     let value = e.detail.value
     let index = e.target.dataset.text

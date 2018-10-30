@@ -1,14 +1,16 @@
 <view class="address1" bindtap="chooseLocation">
-  <view style="width:100rpx;">地址</view>
-  <view wx:if="{{locationAddress==null}}">请点击选择收货地址</view>
-  <view wx:else>{{locationAddress}}</view>
+  <view class='Addressselection'>
+    <view style="width:100rpx;">地址 :</view>
+    <view wx:if="{{locationAddress==null}}">请点击选择收货地址</view>
+    <view wx:else>{{locationAddress}}</view>
+  </view>
   <image src="../../imgs/dayu.png" />
 </view>
 <block wx:if="{{hasLocation === false}}">
   <text class="page-body-text"></text>
 </block>
 <view class="address_text">
-  <view>详细地址</view>
+  <view>详细地址 :</view>
   <input class='inputsty' data-text='text' value="{{address}}" placeholder="例: 5号楼203室" bindinput="assignment" />
 </view>
 <view class="clear" bindtap="clear">清空</view>

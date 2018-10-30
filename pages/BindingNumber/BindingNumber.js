@@ -82,8 +82,6 @@ Page({
   // 获取新增编号
   GasNumber: function(e) {
     let text = e.detail.value
-    // let gasuses = []
-    // gasuses.push(text)
     this.setData({
       numbers: text
     })

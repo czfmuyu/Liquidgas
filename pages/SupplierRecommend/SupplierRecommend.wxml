@@ -3,12 +3,9 @@
     <view class="header_ipt">
         <image src="../../imgs/5_03.png" />
         <input placeholder="请输入要查询的内容" bindinput="queryInput" />
-        <view class="header_ipt_x" bindtap="Delete">
-            X
-        </view>
+        <image style='width:45rpx;height:45rpx;' bindtap="Delete" src='../../imgs/chacha.png'></image>
     </view>
 </view>
-<scroll-view scroll-y>
     <view class="SupplierList" bindtap="SupplierDialogBtn" data-index="{{index}}" wx:for="{{Suppliers}}" wx:for-item="item" wx:key="SupplierList">
         <view class="SupplierList_left">
             <view>
@@ -25,7 +22,7 @@
             <text class="gray">{{item.Distance}}km</text>
         </view>
     </view>
-</scroll-view>
+
 <!-- 供应商选择弹窗 -->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">

@@ -267,7 +267,7 @@ Page({
         pageIndex: pageIndexs,
         pageSize: pageSizes,
         queryKeyword: queryKeywords,
-        status: 31,
+        status: 30,
       },
       header: {
         'content-type': 'application/json'

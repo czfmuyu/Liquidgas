@@ -1,5 +1,5 @@
 <!-- 供应商有数据显示页面 -->
-<view class="header" style='border-bottom:2rpx solid #eee;' hidden="{{isSupplier}}" >
+<view class="header" style='border-bottom:2rpx solid #eee;' bindtap='reselectionSupplier' hidden="{{isSupplier}}" >
   <view class="header_left">
     <image src="../../imgs/221_03.png" />
   </view>

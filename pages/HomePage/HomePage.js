@@ -19,9 +19,12 @@ Page({
     value: "",//用气编号的值
   },
   OrderAddress() {
-    wx.navigateTo({//订气地址页面
-      url: "/pages/OrderAddress/OrderAddress"
-    })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({//订气地址页面
+        url: "/pages/OrderAddress/OrderAddress"
+      })
+    }
   },
   Repair() {
     if (app.Customer !== null) {
@@ -38,14 +41,21 @@ Page({
 
   },
   Opinion() {
-    wx.navigateTo({//意见反馈页面
-      url: "/pages/Opinion/Opinion"
-    })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({//意见反馈页面
+        url: "/pages/Opinion/Opinion"
+      })
+    }
   },
   Security() {
-    wx.navigateTo({//安全宣传页面
-      url: "/pages/Security/Security"
-    })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({//安全宣传页面
+        url: "/pages/Security/Security"
+      })
+    }
+   
   },
   /**
    * 生命周期函数--监听页面加载
@@ -229,6 +239,8 @@ Page({
    */
   onShow: function () {
     console.log(app)
+    // 控制用户不能重复点击
+    this.pageLoading = !1;
   },
 
   /**

@@ -9,8 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    NameShowModal: false, //名称弹框控制
-    PhoneShowModal: false, //电话弹框控制
+    // NameShowModal: false, //名称弹框控制
+    // PhoneShowModal: false, //电话弹框控制
     index: 0,
     longitudes: "",
     latitudes: "",
@@ -65,7 +65,7 @@ Page({
 
   // 提交地址
   submission() {
-    console.log("222")
+    console.log(this.data)
     if (this.data.storename == "" || this.data.telephone == "" || this.data.address == "") {
       console.log(this.data)
       wx.showToast({
@@ -73,7 +73,20 @@ Page({
         icon: 'none',
         duration: 2000
       });
-      return false
+      return;
+    }
+    let phone = this.data.telephone
+    let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+    if (!telphone.test(phone)) {
+      this.setData({
+        telephone: ""
+      })
+      wx.showToast({
+        title: "电话输入有误！",
+        icon: 'none',
+        duration: 2000
+      });
+      return;
     }
     if (app.Customer !== null) {
       console.log("111")
@@ -136,47 +149,6 @@ Page({
     })
     Orderaddress.Phone = this.data.telephone
   },
-  /**
-   * 电话弹窗
-   */
-  Phone() {
-    this.setData({
-      PhoneShowModal: true
-    })
-  },
-
-  /**
-   * 电话对话框取消按钮点击事件
-   */
-  onPhoneCancel: function () {
-    Orderaddress.Phone = ""
-    this.setData({
-      telephone: "",
-      PhoneShowModal: false
-    });
-  },
-  /**
-   * 电话对话框确认按钮点击事件
-   */
-  onPhoneConfirm: function () {
-    let phone = this.data.telephone
-    let telphone = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-    if (!telphone.test(phone)) {
-      this.setData({
-        telephone: ""
-      })
-      wx.showToast({
-        title: "电话输入有误！",
-        icon: 'none',
-        duration: 1000
-      });
-    } else {
-      this.setData({
-        PhoneShowModal: false
-      });
-    }
-  },
-
 
   /**
    * 地址跳转页面
@@ -189,59 +161,6 @@ Page({
 
 
   /**
-   * 名称弹窗
-   */
-  ReplaceName() {
-    this.setData({
-      NameShowModal: true
-    })
-  },
-  /**
-   * 名称弹出框蒙层截断touchmove事件
-   */
-  preventTouchMove: function () { },
-
-  /**
-   * 名称对话框取消按钮点击事件
-   */
-  onNameCancel: function () {
-    Orderaddress.Contact = "",
-      this.setData({
-        storename: "",
-        NameShowModal: false
-      });
-  },
-  /**
-   * 名称对话框确认按钮点击事件
-   */
-  onNameConfirm: function () {
-    let storename = this.data.storename
-    let name = /^[\u4E00-\u9FA5A-Za-z]{2,18}$/;
-    if (!name.test(storename)) {
-      this.setData({
-        storename: ""
-      })
-      wx.showToast({
-        title: "姓名输入有误！",
-        icon: 'none',
-        duration: 1000
-      });
-    } else {
-      this.setData({
-        NameShowModal: false
-      });
-    }
-  },
-
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
@@ -249,38 +168,4 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

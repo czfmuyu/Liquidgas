@@ -18,7 +18,7 @@
         <!-- 全部订单 -->
         <view class="whole" wx:for="{{wholeList}}" wx:for-item="item" wx:key="wholeList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #999;">订单号: {{item.Serialnumber}}</view>
                 <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 31}}">
                     配送中
                 </view>
@@ -75,7 +75,7 @@
     <scroll-view>
         <view class="whole" wx:for="{{DeliveryList}}" wx:for-item="item" wx:key="DeliveryList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #999;">订单号: {{item.Serialnumber}}</view>
                 <view style="color: #2269d4;" wx:if="{{item.Status>= 0 && item.Status< 31}}">
                     配送中
                 </view>
@@ -111,7 +111,7 @@
     <scroll-view scroll-y>
         <view class="whole" wx:for="{{CompleteList}}" wx:for-item="item" wx:key="CompleteList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #999;">订单号: {{item.Serialnumber}}</view>
                 <view style="color: #2269d4;" wx:if="{{item.Status==31}}">已完成</view>
             </view>
             <view class="userName">订购人: {{item.CustomerName}}</view>
@@ -147,7 +147,7 @@
     <scroll-view scroll-y>
         <view class="whole" wx:for="{{EvaluateList}}" wx:for-item="item" wx:key="EvaluateList">
             <view class="whole_top">
-                <view style="color: #999;">订单号 {{item.Serialnumber}}</view>
+                <view style="color: #999;">订单号: {{item.Serialnumber}}</view>
                 <view style="color: #2269d4;" wx:if="{{item.Status==100}}">已取消</view>
             </view>
             <view class="userName">订购人: {{item.CustomerName}}</view>

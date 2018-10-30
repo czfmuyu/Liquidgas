@@ -3,7 +3,7 @@ let app = getApp().globalData
 let { baseUrl } = getApp().globalData
 const utils = require("../../utils/util.js")
 const baseUrls = `${baseUrl}/Api/GasOrders/GetCustomerOrders` //获取订单列表接口
-const cancel = `${baseUrl}/Api/GasOrder/CustomerCancelOrder` //取消订单
+const cancel = `${baseUrl}/Api/GasOrders/CustomerCancelOrder` //取消订单
 const Confirm = `${baseUrl}/Api/GasOrders/CustomerConfirmOrder` //确认订单
 
 let Num = 2;
@@ -163,13 +163,14 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.lengty > 0) {
+        if (data.length > 0) {
           for (let i = 0; i < data[i].length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
-        } else if (data.lengty == 0) {
-          utils.Decrypt(data[0].CustomerName)
         }
+        //  else if (data.length == 0) {
+        //   utils.Decrypt(data[0].CustomerName)
+        // }
         this_.setData({
           EvaluateList: data
         })
@@ -193,7 +194,7 @@ Page({
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
-        status: "30,31",
+        status: "30",
       },
       header: {
         'content-type': 'application/json'
@@ -203,13 +204,14 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.lengty > 0) {
+        if (data.length > 0) {
           for (let i = 0; i < data[i].length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
-        } else if (data.lengty == 0) {
-          utils.Decrypt(data[0].CustomerName)
         }
+        //  else if (data.length == 0) {
+        //   utils.Decrypt(data[0].CustomerName)
+        // }
         this_.setData({
           CompleteList: data
         })
@@ -242,13 +244,14 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.lengty > 0) {
+        if (data.length > 0) {
           for (let i = 0; i < data[i].length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
-        } else if (data.lengty == 0) {
-          utils.Decrypt(data[0].CustomerName)
-        }
+        } 
+        // else if (data.length == 0) {
+        //   utils.Decrypt(data[0].CustomerName)
+        // }
         this_.setData({
           DeliveryList: data
         })
@@ -282,13 +285,14 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.lengty > 0) {
+        if (data.length > 0) {
           for (let i = 0; i < data[i].length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
-        } else if (data.lengty == 0) {
-          utils.Decrypt(data[0].CustomerName)
-        }
+        } 
+        // else if (data.length == 0) {
+        //   utils.Decrypt(data[0].CustomerName)
+        // }
         this_.setData({
           wholeList: data
         })
