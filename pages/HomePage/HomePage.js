@@ -65,15 +65,21 @@ Page({
   },
   //用气编号选择点击事件
   onGasNo(e) {
-    let index = e.currentTarget.dataset.index;
-    console.log(index)
+    this.setData({
+      showModalTwo: false,
+    })
+  },
+  //用气编号chenge事件
+  Enterprise(e){
+    console.log(e)
+    let index=e.detail.value
     let GasNo = this.data.GasNo;
     let Gas = [];
     Gas.push(GasNo[index])
     this.setData({
       GasNo: Gas,
       showModalTwo: false,
-      index: index
+      index:index
     })
     console.log(app.Customer[index])
     app.Customer = app.Customer[index]

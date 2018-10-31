@@ -91,7 +91,6 @@ Page({
         wx.request({
           url: baseUrls,
           data: {
-            Sign: "",
             Phone: this.data.phone,
             VerificationCode: this.data.Verification,
             Password: this.data.Password

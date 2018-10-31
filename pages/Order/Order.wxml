@@ -45,9 +45,6 @@
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                         查看详情
                     </view>
-                    <view class="btn" wx:if="{{item.Status==30}}" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
-                        确认收货
-                    </view>
                 </view>
                 <view class="btn-list" wx:elif="{{item.Status==31}}">
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
@@ -60,6 +57,9 @@
                 <view class="btn-list" wx:else>
                     <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                         查看详情
+                    </view>
+                     <view class="btn" wx:if="{{item.Status==30}}" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
+                        确认收货
                     </view>
                 </view>
             </view>
@@ -129,9 +129,9 @@
                 <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" bindtap="deliveryDetails" data-id="{{item.ID}}">
                     查看详情
                 </view>
-                <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate" data-id="{{item.ID}}">
+                <!-- <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate" data-id="{{item.ID}}">
                     待评价
-                </view>
+                </view> -->
                  <view class="btn" wx:if="{{item.Status==30}}" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' data-serial='{{item.Serialnumber}}' bindtap="Confirm">
                     确认收货
                 </view>

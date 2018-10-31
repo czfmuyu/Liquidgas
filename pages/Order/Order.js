@@ -126,17 +126,12 @@ Page({
   //获取用户的CustomerId
   CustomerId() {
     console.log(app)
-    if (app.Customer !== null) {
-      this.setData({
-        CustomerId: app.Customer.CustomerId
-      })
-      console.log(app.Customer.CustomerId)
-    } else {
-      this.setData({
-        CustomerId: app.CustomerId
-      })
-      console.log(app.CustomerId.CustomerId)
-    }
+    // else {
+    //   this.setData({
+    //     CustomerId: app.CustomerId
+    //   })
+    //   console.log(app.CustomerId.CustomerId)
+    // }
   },
   //取消订单信息
   EvaluateList() {
@@ -182,7 +177,6 @@ Page({
   //已完成信息
   CompleteList() {
     let this_ = this
-    let CustomerId = this_.data.CustomerId
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -190,7 +184,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId: CustomerId,
+        CustomerId: app.CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -222,7 +216,6 @@ Page({
   //配送中订单信息
   DeliveryList() {
     let this_ = this
-    let CustomerId = this_.data.CustomerId
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -230,7 +223,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId: CustomerId,
+        CustomerId: app.CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -262,8 +255,6 @@ Page({
   //请求全部订单信息
   wholeInfo() {
     let this_ = this
-    let CustomerId = this_.data.CustomerId
-    console.log(CustomerId)
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -271,7 +262,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId: CustomerId,
+        CustomerId: app.CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
@@ -349,7 +340,7 @@ Page({
         data: {
           Sign: "",
           OrderId: orderId,
-          CustomerId: app.Customer.CustomerId,
+          CustomerId: app.CustomerId,
           Explain: Explain
         },
         header: {

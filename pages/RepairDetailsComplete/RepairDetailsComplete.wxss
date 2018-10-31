@@ -7,7 +7,7 @@
 /* 地址 */
 .Addressbox{
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 20rpx;
   align-items: center;
   background-color: white;
@@ -17,6 +17,7 @@
 .Addressvalue{
   display: flex;
   justify-content: space-between;
+  width: 660rpx;
 }
 .Addresimg{
   width: 35rpx;

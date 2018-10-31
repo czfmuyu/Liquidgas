@@ -47,12 +47,21 @@
 <!-- 新用户弹窗 -->
 <view class="modal-mask" bindtap="hideModaltwo" catchtouchmove="preventTouchMove" wx:if="{{showModalTwo}}"></view>
 <view class="modal-dialog" wx:if="{{showModalTwo}}">
-    <button class='modal-title' bindtap="onGasNo" data-index="{{index}}">请选择用气编号</button>
-    <picker-view indicator-style="height: 50px;" style="text-align: center;width: 100%; height: 300px;" value="{{value}}" bindchange="Enterprise">
+    <view class='modal-title' bindtap="onGasNo" data-index="{{index}}"></view>
+    <picker bindchange="Enterprise" value="{{index}}" range="{{GasNo}}">
+        <view class="picker" bindtap="onGasNo">请选择用气编号</view>
+    </picker>
+    <view class="modal-footer"></view>
+    <!-- <picker-view indicator-style="height: 50px;" style="text-align: center;width: 100%; height: 300px;" value="{{index}}" bindchange="Enterprise" range="{{GasNo}}">
         <picker-view-column>
-            <view wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}" style="line-height: 50px">
-                {{item}}
+            <view wx:for="{{GasNo}}" wx:key="GasNo" style="line-height: 50px">
+                {{GasNo[index]}}
             </view>
         </picker-view-column>
-    </picker-view>
+    </picker-view> -->
+    <!-- <view class="modal-title">请选择用气编号</view>
+    <view class="btn-Number" style="border-top: 2rpx solid;" wx:for="{{GasNo}}" wx:key="GasNo" data-index="{{index}}" bindtap="onGasNo">
+        {{item}}
+    </view>
+    <view class="modal-footer"></view> -->
 </view>

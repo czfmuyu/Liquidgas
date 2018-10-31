@@ -15,7 +15,7 @@ App({
     // });
   },
   globalData: {
-    baseUrl: "http://app.haiouhui.cn",
+    baseUrl: "http://192.168.0.77:2599",
     AccountId:"",
     CustomerId:"",
     Customer:null,//个人信息

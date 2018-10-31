@@ -1,4 +1,4 @@
-  /* pages/HomePage.wxss */
+    /* pages/HomePage.wxss */
 page{
     background-color: #f7f7f7;
 }
@@ -43,7 +43,7 @@ page{
 }
 .content_input>text{
     width: 533rpx;
-    font-size: 36rpx;
+    font-size: 33rpx;
     color: #999;
 }
 .content_bottom{
@@ -140,17 +140,19 @@ page{
     left: 0;
     z-index: 9999;
     background: #f9f9f9;
-    margin: -340rpx 34rpx;
+    margin: -150rpx 34rpx;
     border-radius: 36rpx;
   }
   .modal-title {
     font-size: 30rpx;
-    color: #fff;
-    background-color: #2269d4;
+    background-color: #f9f9f9;
     text-align: center;
     height: 11vw;
     line-height: 11vw;
     border-radius:0;
+  }
+  .picker{
+      text-align: center;
   }
   .btn-Photograph,
   .btn-Album{
@@ -184,7 +186,7 @@ page{
     display: flex;
     flex-direction: row;
     height: 86rpx;
-    border-top: 1px solid #dedede;
+    /* border-top: 1px solid #dedede; */
     font-size: 34rpx;
     line-height: 86rpx;
   }

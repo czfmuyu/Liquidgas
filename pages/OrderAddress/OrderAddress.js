@@ -200,7 +200,7 @@ Page({
         EnterpriseAddress: app.CustomerList.Address,
         EnterpriseProducts: app.CustomerList.EnterpriseProducts,
         EnterpriseId: app.CustomerList.ID,
-        ProductId: app.CustomerList.ProductId
+        // ProductId: app.CustomerList.ProductId
       })
       this.userData()
     }
@@ -246,7 +246,7 @@ Page({
     if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
       for (let i = 0; i < app.Customer.CustomerDetails.length; i++) {
         let obj = {
-          Quantity: utils.Decrypt(app.Customer.CustomerDetails[i].Quantity),
+          Quantity: 0,
           Price: utils.Decrypt(app.Customer.CustomerDetails[i].UnitPrice),
           ProductName: utils.Decrypt(app.Customer.CustomerDetails[i].ProductName),
           ProductId: app.Customer.CustomerDetails[i].ProductId
@@ -259,7 +259,7 @@ Page({
     } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
       for (let j = 0; j < app.Customer.CustomerDetails.length; j++) {
         let obj = {
-          Quantity: utils.Decrypt(app.Customer.CustomerDetails[j].Quantity),
+          Quantity: 0,
           Price: utils.Decrypt(app.Customer.CustomerDetails[j].KilogramPrice),
           ProductName: utils.Decrypt(app.Customer.CustomerDetails[j].ProductName),
           ProductId: app.Customer.CustomerDetails[j].ProductId

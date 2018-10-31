@@ -62,6 +62,7 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
+        console.log(res)
         let data = res.data.Data
         console.log(data)
         utils.Decrypt(data.Address)
@@ -119,10 +120,10 @@ Page({
       success: function (res) {
         console.log(res)
         let data = res.data.Data
-        let latitude = app.Latitude;
-        let longitude = app.Longitude;
-        let latitude2 = data.Latitude;
-        let longitude2 = data.Longitude;
+        let latitude = data.Latitude;
+        let longitude = data.Longitude;
+        let latitude2 = app.Latitude;
+        let longitude2 = app.Longitude;
         let city = "";
         let name = "";
         let desc = "";
