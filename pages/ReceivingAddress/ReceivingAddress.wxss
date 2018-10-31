@@ -31,9 +31,9 @@ padding-left: 10rpx;
 margin-left: 50rpx;
 height: 60rpx;
 } */
-/* .address_text view{
+.address_text view{
   width: 150rpx;
-} */
+}
 .clear{
   width: 640rpx;
   height: 88rpx;
