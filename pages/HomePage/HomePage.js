@@ -55,7 +55,7 @@ Page({
         url: "/pages/Security/Security"
       })
     }
-   
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -179,12 +179,13 @@ Page({
    * 对话框确认按钮点击事件
    */
   onConfirm: function () {
+    let this_ = this
     wx.request({
       url: Gas,
       data: {
         Sign: "",
         AccountId: app.AccountId.AccountId,
-        GasNo: this.data.value,
+        GasNo: this_.data.value,
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
