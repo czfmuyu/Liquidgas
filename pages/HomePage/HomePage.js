@@ -97,9 +97,11 @@ Page({
         this_.decryption(data)
         let arr = [];
         if (res.data.Data == null) {
-          this_.setData({
-            showModal: true
-          })
+          if (app.GasState == true) {
+            this_.setData({
+              showModal: true
+            })
+          }
           return
         } else {
           for (let i = 0; i < res.data.Data.length; i++) {
@@ -173,6 +175,7 @@ Page({
    * 对话框取消按钮点击事件
    */
   onCancel: function () {
+    app.GasState = false
     this.hideModal();
   },
   /**

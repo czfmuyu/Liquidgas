@@ -16,7 +16,7 @@
 }
 
 .text_m {
-  margin-right: 20rpx;
+  margin-left: 20rpx;
 }
 
 .textfont {
@@ -29,7 +29,9 @@
   display: flex;
   align-items: center;
 }
-
+.wrap view{
+  width: 90rpx;
+}
 
 .content {
   display: flex;
@@ -37,6 +39,7 @@
   padding: 20rpx;
   border-bottom: 1rpx solid #f7f7f7;
   font-size: 28rpx;
+  align-items: center;
 }
 
 .contents {

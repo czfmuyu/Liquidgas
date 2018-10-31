@@ -10,6 +10,9 @@ margin-top: 20rpx;
 page{
 background-color: #f5f5f5;
 }
+.text_color{
+  color: #8B9095
+}
 
 .address1>image{
 width: 35rpx;
@@ -23,10 +26,14 @@ display: flex;
 align-items: center;
 margin-bottom: 200rpx
 }
-.inputsty{
+/* .inputsty{
 padding-left: 10rpx;
 margin-left: 50rpx;
-}
+height: 60rpx;
+} */
+/* .address_text view{
+  width: 150rpx;
+} */
 .clear{
   width: 640rpx;
   height: 88rpx;

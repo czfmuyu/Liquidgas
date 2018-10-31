@@ -97,6 +97,14 @@ Page({
       })
     }
   },
+  AddGesNum() {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({ //绑定用气编号页面
+        url: "/pages/BindingNumber/BindingNumber"
+      })
+    }
+  },
   BindingNumber() {
     if (!this.pageLoading) {
       this.pageLoading = !0;

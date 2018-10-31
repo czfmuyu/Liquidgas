@@ -28,5 +28,6 @@ App({
     ServiceUserId:null,
     EnterpriseId:null,
     // Address:null,
+    GasState: true,//是否绑定用气编号状态
   }
 })

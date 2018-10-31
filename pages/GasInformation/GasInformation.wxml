@@ -13,13 +13,11 @@
   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 <view class="contents" bindtap="address">
-  <view>
-    <text>地址:</text>
-  </view>
   <view class="wraps">
+    <view>地址:</view>
     <text class='textfont text_m'>{{address}}</text>
-    <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
   </view>
+    <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 
 <button class="btn" bindtap='submission'>提交</button>

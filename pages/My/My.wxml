@@ -15,7 +15,7 @@
       <text>个人中心</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 <view class="InformationList" bindtap="GasInformation" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
   <view class="InformationList_left">
@@ -24,7 +24,7 @@
       <text>用气信息</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 <view class="InformationList" bindtap="Supplier" style='border-bottom: 2rpx solid #f2f2f2;'>
   <view class="InformationList_left">
@@ -33,7 +33,7 @@
       <text>供应商信息</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 <view class="InformationList" hidden='{{!state}}' bindtap="SublevelAccount" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
   <view class="InformationList_left">
@@ -42,7 +42,16 @@
       <text>子账号管理</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+</view>
+<view class="InformationList" bindtap="AddGesNum" style='border-bottom: 2rpx solid #f2f2f2;'>
+  <view class="InformationList_left">
+    <image src="../../imgs/add.png" />
+    <view class="InformationList_text">
+      <text>新增用气编号</text>
+    </view>
+  </view>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 <view class="InformationList" bindtap="BindingNumber">
   <view class="InformationList_left">
@@ -51,7 +60,7 @@
       <text>绑定用气编号</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 <view class="InformationList" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;" bindtap="AccountSecurity">
   <view class="InformationList_left">
@@ -60,7 +69,7 @@
       <text>账号安全</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
 
 <view class="InformationList" bindtap="Cancellation">
@@ -70,5 +79,5 @@
       <text>退出登录</text>
     </view>
   </view>
-   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
