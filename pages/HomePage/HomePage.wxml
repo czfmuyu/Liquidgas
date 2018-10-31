@@ -37,7 +37,7 @@
     <view class="btn-Photograph"></view>
     <view class="btn-Album">请绑定用气编号</view>
     <view class="modal-ipt">
-        <input placeholder="用气编号" bindblur="GasNumber" />
+        <input placeholder="用气编号" bindinput="GasNumber" />
     </view>
     <view class="modal-footer">
         <view class="btn-cancel" bindtap="onCancel">取消</view>

@@ -164,7 +164,7 @@ Page({
         console.log(res.data.Data)
         let data = res.data.Data
         if (data.length > 0) {
-          for (let i = 0; i < data[i].length; i++) {
+          for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
         }
@@ -205,7 +205,7 @@ Page({
         console.log(res.data.Data)
         let data = res.data.Data
         if (data.length > 0) {
-          for (let i = 0; i < data[i].length; i++) {
+          for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
         }
@@ -245,7 +245,7 @@ Page({
         console.log(res.data.Data)
         let data = res.data.Data
         if (data.length > 0) {
-          for (let i = 0; i < data[i].length; i++) {
+          for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
         } 
@@ -286,7 +286,7 @@ Page({
         console.log(res.data.Data)
         let data = res.data.Data
         if (data.length > 0) {
-          for (let i = 0; i < data[i].length; i++) {
+          for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
         } 

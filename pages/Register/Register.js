@@ -1,4 +1,4 @@
-const { baseUrl } = getApp().globalData
+  const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//注册接口
 const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
 const utils = require("../../utils/util.js")
