@@ -136,7 +136,6 @@ Page({
   //取消订单信息
   EvaluateList() {
     let this_ = this
-    let CustomerId = this_.data.CustomerId
     let searchKeyword = this_.data.searchKeyword
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
@@ -144,7 +143,7 @@ Page({
       url: baseUrls,
       data: {
         sign: "",
-        CustomerId: CustomerId,
+        CustomerId: app.CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,

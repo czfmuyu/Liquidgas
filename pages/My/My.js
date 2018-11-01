@@ -29,10 +29,10 @@ Page({
   },
   CurrentInfo() {
     let this_ = this
-    if (app.Customer !== null) {
-      this_.setData({
-        Gas: app.Customer.GasNo
-      })
+    if (app.CustomerId !== "") {
+      // this_.setData({
+      //   Gas: app.Customer.GasNo
+      // })
       console.log("查询信息")
       wx.request({
         url: baseUrls,
@@ -51,11 +51,12 @@ Page({
           })
         },
       })
-    } else {
-      // this_.setData({
-      //   Gas: app.Customer.GasNo
-      // })
-    }
+    } 
+    // else {
+    //   // this_.setData({
+    //   //   Gas: app.Customer.GasNo
+    //   // })
+    // }
   },
   SublevelAccount() {
     if (!this.pageLoading) {
