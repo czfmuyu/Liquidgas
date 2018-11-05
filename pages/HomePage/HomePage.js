@@ -201,15 +201,25 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.Data) {
-          getApp().globalData = {
-            AccountId: "",
-            CustomerId: "",
-            Customer: null,
-            CustomerList: null,
-            Subaccount: null,
-            GasNo: "",
-            Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
+          // getApp().globalData = {
+          //   AccountId: "",
+          //   CustomerId: "",
+          //   Customer: null,
+          //   CustomerList: null,
+          //   Subaccount: null,
+          //   GasNo: "",
+          //   Orderaddress: { Contact: "", Phone: "", Address: "", Longitude: "", Latitude: "" }
+          // }
+          // 循环将对象赋值为空
+          let obj = app.Orderaddress
+          console.log(obj)
+          for (let key in obj) {
+            obj[key] = ''
           }
+          for (let key in app) {
+            app[key] = ''
+          }
+          app.Orderaddress = obj
           wx.reLaunch({
             url: '/pages/Login/Login',
           })
