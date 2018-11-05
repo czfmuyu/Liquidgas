@@ -20,7 +20,7 @@ Page({
      url: account,
      data: {
        Sign: "",
-       CustomerId: app.globalData.AccountId.AccountId
+       CustomerId: app.globalData.Customer.CustomerId
      },
      header: {
        'content-type': 'application/json'
