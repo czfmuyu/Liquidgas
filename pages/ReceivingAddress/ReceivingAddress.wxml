@@ -1,8 +1,8 @@
 <view class="address1" bindtap="chooseLocation">
   <view class='Addressselection'>
     <view style="width:100rpx;">地址 :</view>
-    <view class='text_color' wx:if="{{locationAddress==null}}">请点击选择收货地址</view>
-    <view wx:else>{{locationAddress}}</view>
+    <view class='text_color'  wx:if="{{locationAddress==null}}">请点击选择收货地址</view>
+    <view wx:else style='color:#8B9095;'>{{locationAddress}}</view>
   </view>
   <image src="../../imgs/dayu.png" />
 </view>

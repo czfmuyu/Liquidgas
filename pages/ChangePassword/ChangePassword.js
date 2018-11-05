@@ -65,6 +65,12 @@ Page({
               wx.switchTab({
                 url: "/pages/My/My"
               })
+            }else{
+              wx.showToast({
+                title: res.data.Msg,
+                icon: 'none',
+                duration: 2000
+              });
             }
           }
         });
