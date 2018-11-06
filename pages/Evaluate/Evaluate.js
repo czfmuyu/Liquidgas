@@ -64,7 +64,7 @@ Page({
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        if (res.data.Data == true) {
+        if (res.data.Code == 200) {
           wx.switchTab({
             url: "/pages/Order/Order"
           })
