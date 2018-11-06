@@ -1,6 +1,6 @@
 let app = getApp().globalData
 const { baseUrl } = getApp().globalData
-const baseUrls = app.baseUrl + '/Api/Customers/ResetPassword' //忘记密码接口
+const baseUrls = app.baseUrl + '/Api/Login/ResetPassword' //忘记密码接口
 const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
 const utils = require("../../utils/util.js")
 
@@ -91,6 +91,7 @@ Page({
         wx.request({
           url: baseUrls,
           data: {
+            Sign:"aa",
             Phone: this.data.phone,
             VerificationCode: this.data.Verification,
             Password: this.data.Password
