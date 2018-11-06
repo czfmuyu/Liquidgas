@@ -19,7 +19,8 @@
     <view class="whole" wx:for="{{whole}}" wx:for-item="item" wx:key="UntreatedList">
       <view class="whole_top">
         <view style="color: #999;">维修单号: {{item.Serialnumber}}</view>
-        <view style="color: #2269d4;" wx:if="{{item.Status == 10}}">待维修</view>
+        <view style="color: #2269d4;" wx:if="{{item.Status == 0}}">待维修</view>
+         <view style="color: #2269d4;" wx:elif="{{item.Status == 11}}">分配完成</view>
         <view style="color: #2269d4;" wx:elif="{{item.Status == 30}}">维修完成</view>
         <view style="color: #2269d4;" wx:elif="{{item.Status == 100}}">已取消</view>
       </view>
@@ -71,7 +72,6 @@
       <view wx:elif="{{item.Status==11}}">
         <view class="btn-list">
           <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
-          <view class="btn" style="color: #fff;background-color: #2269d4;" >正在派单</view>
         </view>
       </view>
     </view>
@@ -87,10 +87,7 @@
     <view class="whole" wx:for="{{UntreatedList}}" wx:for-item="item" wx:key="UntreatedList">
       <view class="whole_top">
         <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
-
-        <view style="color: #2269d4;" wx:if="{item.RepairResult==0}}">待维修</view>
-        <view style="color: #2269d4;" wx:elif="{item.RepairResult==10}}">维修完成</view>
-        <view style="color: #2269d4;" wx:else>无法维修</view>
+        <view style="color: #2269d4;">待维修</view>
       </view>
       <view class="whole_middle">
         <view class="whole_middle_text">
