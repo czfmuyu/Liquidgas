@@ -3,14 +3,14 @@
     <view>名称 : </view>
     <input placeholder="请输入名称" data-type='text' value='{{storename}}' bindinput="GasNumber" />
   </view>
-  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <view></view>
 </view>
 <view class="content">
   <view class="wrap">
     <view>电话 : </view>
     <input placeholder="请输入电话" data-type='text' value='{{telephone}}' bindblur="GasNumbers" maxlength='11' />
   </view>
-  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+  <view></view>
 </view>
 <view class="contents" bindtap="address">
   <view class="wraps">
