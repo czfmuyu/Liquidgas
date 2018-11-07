@@ -98,6 +98,7 @@ Page({
             star1: res.data.Data[0].Score,
             HiddenBtn:false
           })
+          
         }
         // this.setData({
         //   disabled: "disabled"
