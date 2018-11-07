@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    objectId:"",
-    disabled:"",
+    objectId: "",
+    disabled: "",
+    HiddenBtn:true,
     inpt: "",
     star: 0,
     star1: 0,
@@ -24,24 +25,27 @@ Page({
     ],
   },
 
-  myStarChoose(e) {
-    let star = parseInt(e.target.dataset.star) || 0;
-    this.setData({
-      star: star,
-    });
-  },
+  // myStarChoose(e) {
+  //   let star = parseInt(e.target.dataset.star) || 0;
+  //   console.log(star)
+  //   this.setData({
+  //     star: star,
+  //   });
+  // },
   myStarChoose1(e) {
     let star1 = parseInt(e.target.dataset.star) || 0;
+    console.log(star1)
     this.setData({
       star1: star1,
     });
   },
-  myStarChoose2(e) {
-    let star2 = parseInt(e.target.dataset.star) || 0;
-    this.setData({
-      star2: star2,
-    });
-  },
+  // myStarChoose2(e) {
+  //   let star2 = parseInt(e.target.dataset.star) || 0;
+  //   console.log(star2)
+  //   this.setData({
+  //     star2: star2,
+  //   });
+  // },
   // 获取tetx里面的值
   changeOrderData: function (e) {
     let text = e.detail.value
@@ -60,7 +64,7 @@ Page({
         Sign: "aa",
         ObjectId: this.data.objectId,
         Type: 10,
-        Score: this.data.star,
+        Score: this.data.star1,
         CustomerId: app.Customer.CustomerId,
         Content: this.data.inpt
       },
@@ -76,21 +80,28 @@ Page({
     })
   },
   // 查看是否评价
-  evaluate(id){
+  evaluate(id) {
+    let this_ = this
     wx.request({
       url: EvaluateUrl,
       data: {
-       Sign:"0",
-        objectId:id
+        Sign: "0",
+        objectId: id
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
-        console.log("sssss")
         console.log(res)
+        if (res.data.Data.length == 1) {
+          this_.setData({
+            inpt: res.data.Data[0].Content,
+            star1: res.data.Data[0].Score,
+            HiddenBtn:false
+          })
+        }
         // this.setData({
         //   disabled: "disabled"
-        // })
+        // })inpt
       },
     })
   },
@@ -101,7 +112,7 @@ Page({
     this.setData({
       objectId: options.id
     })
-     this.evaluate(options.id)
+    this.evaluate(options.id)
   },
 
   /**
