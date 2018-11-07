@@ -1,7 +1,7 @@
 const { baseUrl } = getApp().globalData
 const baseUrls = `${baseUrl}/Api/Common/InsertEvaluate`//添加一条评价信息接口
-const EvaluateUrl= `${baseUrl}/Api/Common/GetEvaluateByObjectId`//判断这条信息是否评价过
-// const getEva =`${baseUrl}/Api/Common/GetEvaluateById`//获取一条评价信息接口
+const EvaluateUrl = `${baseUrl}/Api/Common/GetEvaluateByObjectId`//判断这条信息是否评价过
+// const getEva =`${baseUrl}/Api/Common/GetEvaluateById`//获取一条评价信息接口Api/Common/GetEvaluateByObjectId
 let app = getApp().globalData
 Page({
 
@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    objectId:"",
     disabled:"",
     inpt: "",
     star: 0,
@@ -57,7 +58,7 @@ Page({
       url: baseUrls,
       data: {
         Sign: "aa",
-        ObjectId: app.AccountId.AccountId,
+        ObjectId: this.data.objectId,
         Type: 10,
         Score: this.data.star,
         CustomerId: app.Customer.CustomerId,
@@ -80,9 +81,9 @@ Page({
       url: EvaluateUrl,
       data: {
        Sign:"0",
-       Objectld:id
+        objectId:id
       },
-      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log("sssss")
@@ -97,6 +98,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.setData({
+      objectId: options.id
+    })
      this.evaluate(options.id)
   },
 

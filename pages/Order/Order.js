@@ -26,7 +26,7 @@ Page({
     text3: '取消订单',
     searchKeyword: '', //需要搜索的字符
     searchPageNum: 1, // 设置加载的第几次，默认是第一次
-    callbackcount: 3, //返回数据的个数
+    callbackcount: 5, //返回数据的个数
     CustomerId: "",
     // 取消原因
     getdata: "",
