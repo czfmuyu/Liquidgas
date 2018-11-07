@@ -3,6 +3,7 @@ let app = getApp().globalData
 let { baseUrl } = getApp().globalData
 const utils = require("../../utils/util.js")
 const baseUrls = `${baseUrl}/Api/GasOrders/GetCustomerOrders` //获取订单列表接口
+const baseUrl1=`${baseUrl}/Api/GasOrders/GetPagedCustomerOrders`//获取已完成的订单接口
 const cancel = `${baseUrl}/Api/GasOrders/CustomerCancelOrder` //取消订单
 const Confirm = `${baseUrl}/Api/GasOrders/CustomerConfirmOrder` //确认订单
 
@@ -180,14 +181,15 @@ Page({
     let searchPageNum = this_.data.searchPageNum
     let callbackcount = this_.data.callbackcount
     wx.request({
-      url: baseUrls,
+      url: baseUrl1,
       data: {
         sign: "",
         CustomerId: app.CustomerId,
         pageIndex: searchPageNum,
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
-        status: "30",
+        status: "30,31",
+        orderby:"",
       },
       header: {
         'content-type': 'application/json'
