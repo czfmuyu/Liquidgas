@@ -20,12 +20,15 @@ Page({
    */
   onLoad(options) {
     // 判断用户是否选择用气编号,如果没有跳会首页
-    if (app.GasNo.length > 1 && app.Customer.length > 1) {
-      wx.switchTab({
-        url: '/pages/HomePage/HomePage'
-      })
-    }
-    this.CurrentInfo()
+    console.log(app.GasNo.length)
+    console.log(app.Customer.length)
+    // if (app.GasNo.length > 1 && app.Customer.length > 1) {
+    //   wx.switchTab({
+    //     url: '/pages/HomePage/HomePage'
+    //   })
+    // }else{
+    //   this.CurrentInfo()
+    // }
   },
   CurrentInfo() {
     let this_ = this
@@ -169,6 +172,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (app.GasNo.length > 1 && app.Customer.length > 1) {
+      wx.switchTab({
+        url: '/pages/HomePage/HomePage'
+      })
+    } else {
+      this.CurrentInfo()
+    }
     if (app.Customer !== null) {
       if (app.Customer.IsMainAccount == true) {
         this.setData({

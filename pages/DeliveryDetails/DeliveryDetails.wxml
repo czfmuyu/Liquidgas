@@ -54,8 +54,8 @@
   <view wx:else>{{day}} {{time}}</view>
 </view>
 <view class="Repair_address">
-  <view>收货地址</view>
-  <view class="address_righ">{{OrderTrackList.Address}}</view>
+  <view class="address_righ">收货地址</view>
+  <view >{{OrderTrackList.Address}}</view>
 </view>
 <view class="Repair_time">
   <view>收货人电话</view>

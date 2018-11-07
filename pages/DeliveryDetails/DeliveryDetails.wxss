@@ -106,7 +106,7 @@ page{
 }
 
 .address_righ{
-  width: 500rpx;
+  width: 200rpx;
 }
 .Repair_time_right{
   display: flex;

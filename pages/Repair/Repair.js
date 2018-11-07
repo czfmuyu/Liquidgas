@@ -88,12 +88,9 @@ Page({
   // 提交订单控制不能连续多次点击
   Beforesubmission() {
     if (frequency==0){
-      if (this.data.pics.length!=0){
         frequency++
-      }
       this.uploadimg()
     }
-    
   },
 
   // 表单提交=========================
@@ -149,7 +146,6 @@ Page({
       frequency = 0//用户提交后在让其可点击
       return false
     }
-
     wx.request({
       url: baseUrlBd,
       data: {
@@ -173,6 +169,7 @@ Page({
       },
       method: 'POST',
       success: function(res) {
+        frequency = 0//用户提交后在让其可点击
         if (res.data.Code == 200) {
           wx.switchTab({ //主页面
             url: '/pages/RepairOrder/RepairOrder'
@@ -335,7 +332,6 @@ Page({
         that.setData({
           pics: pics
         });
-        console.log(that.data.pics)
       },
     })
   },
@@ -362,7 +358,6 @@ Page({
       frequency = 0//用户提交后在让其可点击
       return false;
     }
-    console.log("啊")
     for (let i = 0; i < pics.length; i++) {
       wx.uploadFile({
         url: Urlsimg,
@@ -370,7 +365,6 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-          frequency = 0//用户提交后在让其可点击
           var identifier
           let data = res.data
           let imglists = JSON.parse(data);
@@ -383,6 +377,7 @@ Page({
           // 判断当图片上传完毕后调用表单提交
           j++
           if (pics.length == j){
+            console.log("吃吃2222")
             that.Submit()
             j=0
           }

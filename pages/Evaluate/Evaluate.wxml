@@ -1,5 +1,5 @@
 <view style='margin-top:10rpx;'>
-  <textarea class='area' placeholder='满足你的期望了吗？说说他美中不足的地方吧！' value='{{inpt}}' maxlength="-1" bindinput='changeOrderData'></textarea>
+  <textarea class='area' placeholder='满足你的期望了吗？说说他美中不足的地方吧！' disabled='{{disabled}}' value='{{inpt}}' maxlength="-1" bindinput='changeOrderData'></textarea>
 </view>
 
 
@@ -38,3 +38,4 @@
 </view> -->
 
 <button class='btton' bindtap='submission'>提交</button>
+<button class='btton'>你已经评价过了</button>
