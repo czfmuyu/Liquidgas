@@ -20,8 +20,9 @@
     </block>
     <text class="zan-c-gray-dark">{{starMap[star1-1]}}</text>
   </view>
+  <button class='btton' bindtap='submission'>提交</button>
 </view>
-<button class='btton' bindtap='submission'>提交</button>
+
 <view wx:else>
   <view class="stars">
     <text>对配送工评价</text>
