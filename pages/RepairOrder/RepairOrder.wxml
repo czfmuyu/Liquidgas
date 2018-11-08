@@ -140,7 +140,7 @@
       </view>
       <view class="btn-list">
         <view class="btn" style="margin-right:12rpx;border: 2rpx solid #999;" data-orderId='{{item.ID}}' bindtap="queryBtn">查看详情</view>
-        <view class="btn" style="color: #fff;background-color: #2269d4;" bindtap="Evaluate">去评价</view>
+        <view class="btn" style="color: #fff;background-color: #2269d4;" data-orderId='{{item.ID}}' bindtap="Evaluate">去评价</view>
       </view>
     </view>
   </scroll-view>

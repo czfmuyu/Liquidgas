@@ -296,7 +296,7 @@ Page({
   // 评价跳转页面
   Evaluate(e) {
     wx.navigateTo({
-      url: '/pages/Evaluate/Evaluate?id='+ e.currentTarget.dataset.id,
+      url: '/pages/Evaluate/Evaluate?id='+ e.currentTarget.dataset.id+"&index="+1,
     })
   },
 

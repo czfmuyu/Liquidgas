@@ -120,9 +120,10 @@ Page({
 
 
   // 评价跳转页面
-  Evaluate: function() {
+  Evaluate: function(e) {
+    let id = e.currentTarget.dataset.orderid
     wx.navigateTo({
-      url: '/pages/Evaluate/Evaluate',
+      url: '/pages/Evaluate/Evaluate?id=' + id+"&index="+0,
     })
   },
   // 获取维修全部订单列表

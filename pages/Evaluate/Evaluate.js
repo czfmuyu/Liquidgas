@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 判断跳回维修还是订单
+    index:"",
     objectId: "",
     disabled: "",
     HiddenBtn:true,
@@ -54,27 +56,31 @@ Page({
     })
   },
   // 提交表单
-
   submission: function () {
-    console.log(this.data.inpt)
-    console.log(this.data.star)
+   let _this=this
     wx.request({
       url: baseUrls,
       data: {
         Sign: "aa",
-        ObjectId: this.data.objectId,
+        ObjectId: _this.data.objectId,
         Type: 10,
-        Score: this.data.star1,
+        Score: _this.data.star1,
         CustomerId: app.Customer.CustomerId,
-        Content: this.data.inpt
+        Content: _this.data.inpt
       },
       method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
       success: function (res) {
         if (res.data.Code == 200) {
-          wx.switchTab({
-            url: "/pages/Order/Order"
-          })
+          if (_this.data.index==1){
+            wx.switchTab({
+              url: "/pages/Order/Order"
+            })
+          }else{
+            wx.switchTab({
+              url: "/pages/RepairOrder/RepairOrder"
+            })
+          }
         }
       },
     })
@@ -111,7 +117,8 @@ Page({
    */
   onLoad(options) {
     this.setData({
-      objectId: options.id
+      objectId: options.id,
+      index: options.index,
     })
     this.evaluate(options.id)
   },
