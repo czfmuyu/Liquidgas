@@ -1,5 +1,5 @@
 <!-- 供应商有数据显示页面 -->
-<view class="header" style='border-bottom:2rpx solid #eee;' bindtap='reselectionSupplier' hidden="{{isSupplier}}" >
+<view class="header" style='border-bottom:2rpx solid #eee;' bindtap='reselectionSupplier' hidden="{{isSupplier}}">
   <view class="header_left">
     <image src="../../imgs/221_03.png" />
   </view>
@@ -11,7 +11,6 @@
     <view class="header_right_bottom">{{EnterpriseAddress}}</view>
   </view>
 </view>
-
 <!-- 供应商没有数据显示的页面 -->
 <view class="hidden_header" style='border-bottom:2rpx solid #eee;' bindtap="SupplierAdd" hidden="{{!isSupplier}}">
   <view class="hidden_header_left">
@@ -21,7 +20,6 @@
     <image src="../../imgs/44_05.png" />
   </view>
 </view>
-
 <!-- 地址有数据显示的页面 -->
 <view class="header" hidden="{{isAddress}}" bindtap="reselection">
   <view class="header_left">
@@ -35,7 +33,6 @@
     <view class="header_right_bottom">{{CustomerAddress}}</view>
   </view>
 </view>
-
 <!-- 地址没有数据显示的页面 -->
 <view class="hidden_header" hidden="{{!isAddress}}" bindtap="Addaddress">
   <view class="hidden_header_left">
@@ -45,7 +42,6 @@
     <image src="../../imgs/44_05.png" />
   </view>
 </view>
-
 <!-- 新增地址弹框 -->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
@@ -101,7 +97,6 @@
     <view class="weui-cell__hd">
       <image class="content_left" src="../../imgs/221_06.png" />
       <view class="weui-label">预约日期</view>
-
     </view>
     <view class="weui-cell__bd">
       <picker bindchange="bindDayPickerChange" value="{{index2}}" range="{{array2}}">
@@ -112,7 +107,7 @@
   </view>
 </view>
 <!-- 商品选择 -->
-<view class="goods" style="border-bottom: 2rpx solid #eee;" bindtap="goodsDisplay">
+<view class="goods" style="border-bottom: 2rpx solid #eee;" bindtap="goodsDisplay" wx:if="{{PurchaseType==0||PurchaseType==null}}">
   <view>商品选择</view>
   <view class="goods_right">
     <view style="margin-left: 12rpx;"></view>
@@ -133,13 +128,14 @@
 <view class="modal-dialog" wx:if="{{showgoods}}" style=" top:20%;">
   <view class="modal-title"></view>
   <view class="btn-Photograph">商品列表</view>
-  <view class="OptionsBox">
+  <!-- <view class="OptionsBox">
     <radio-group name="radio-group" wx:for="{{OptionsBox}}" wx:key="OptionsBox" bindchange="OptionsBox">
       <label>
-        <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" /> {{item.name}}
+        <radio id="{{item.name}}" value="{{item.name}}" checked="{{item.checked}}" />
+        {{item.name}}
       </label>
     </radio-group>
-  </view>
+  </view> -->
   <view class="title">
     <view>商品名称</view>
     <view>单价</view>
@@ -151,7 +147,9 @@
     <view class="Counter">
       <view class="Counter_left" data-index='{{index}}' catchtap='subtracttap'>-</view>
       <view class="Counter_middle">
-        <view class='count' data-index='{{index}}' type='number' bindinput="Quantity">{{item.Quantity}}</view>
+        <view class='count' data-index='{{index}}' type='number' bindinput="Quantity">
+          {{item.Quantity}}
+        </view>
       </view>
       <view class="Counter_right" data-index="{{index}}" catchtap='addtap'>+</view>
     </view>

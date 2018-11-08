@@ -20,8 +20,8 @@ Page({
    */
   onLoad(options) {
     // 判断用户是否选择用气编号,如果没有跳会首页
-    console.log(app.GasNo.length)
-    console.log(app.Customer.length)
+    // console.log(app.GasNo.length)
+    // console.log(app.Customer.length)
     // if (app.GasNo.length > 1 && app.Customer.length > 1) {
     //   wx.switchTab({
     //     url: '/pages/HomePage/HomePage'
