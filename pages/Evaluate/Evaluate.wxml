@@ -1,6 +1,4 @@
-<view style='margin-top:10rpx;'>
-  <textarea class='area' placeholder='满足你的期望了吗？说说他美中不足的地方吧！' disabled='{{disabled}}' value='{{inpt}}' maxlength="-1" bindinput='changeOrderData'></textarea>
-</view>
+
 <!-- <view>
   <view class="stars" bindtap="myStarChoose">
    <text>对订单评价</text>
@@ -12,6 +10,9 @@
   </view>
 </view> -->
 <view wx:if="{{HiddenBtn}}">
+<view style='margin-top:10rpx;'>
+  <textarea class='area' placeholder='满足你的期望了吗？说说他美中不足的地方吧！' value='{{inpt}}' maxlength="-1" bindinput='changeOrderData'></textarea>
+</view>
   <view class="stars" bindtap="myStarChoose1">
     <text>对配送工评价</text>
     <block wx:for="{{starMap}}" wx:key="{{item}}">
@@ -24,6 +25,9 @@
 </view>
 
 <view wx:else>
+<view style='margin-top:10rpx;'>
+  <textarea class='area' placeholder='满足你的期望了吗？说说他美中不足的地方吧！' disabled='disabled' value='{{inpt}}' maxlength="-1" bindinput='changeOrderData'></textarea>
+</view>
   <view class="stars">
     <text>对配送工评价</text>
     <block wx:for="{{starMap}}" wx:key="{{item}}">
