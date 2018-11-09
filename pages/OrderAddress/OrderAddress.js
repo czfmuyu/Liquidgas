@@ -467,12 +467,11 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         // 判断用户点击重新赋值
-        console.log("提交过")
         frequency = 0
         console.log(res.data)
         if (res.data.Code == 506) {
           wx.showToast({
-            title: '请输入完整的信息',
+            title: res.data.Msg,
             icon: 'none',
             duration: 2000
           });

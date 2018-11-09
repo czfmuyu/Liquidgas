@@ -1,9 +1,9 @@
-    // pages/Order/Order.js
+// pages/Order/Order.js
 let app = getApp().globalData
 let { baseUrl } = getApp().globalData
 const utils = require("../../utils/util.js")
 const baseUrls = `${baseUrl}/Api/GasOrders/GetCustomerOrders` //获取订单列表接口
-const baseUrl1=`${baseUrl}/Api/GasOrders/GetPagedCustomerOrders`//获取已完成的订单接口
+const baseUrl1 = `${baseUrl}/Api/GasOrders/GetPagedCustomerOrders`//获取已完成的订单接口
 const cancel = `${baseUrl}/Api/GasOrders/CustomerCancelOrder` //取消订单
 const Confirm = `${baseUrl}/Api/GasOrders/CustomerConfirmOrder` //确认订单
 
@@ -97,9 +97,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-   
+
     this.CustomerId()
-    
+
   },
   //导航控制
   navbarTap(e) {
@@ -165,7 +165,7 @@ Page({
         })
         wx.stopPullDownRefresh() //停止下拉刷新
       },
-      
+
     })
   },
   //已完成信息
@@ -183,7 +183,7 @@ Page({
         pageSize: callbackcount,
         queryKeyword: searchKeyword,
         status: "30,31",
-        orderby:"",
+        orderby: "",
       },
       header: {
         'content-type': 'application/json'
@@ -192,19 +192,22 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res.data.Data)
-        let data = res.data.Data
-        if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            utils.Decrypt(data[i].CustomerName)
+        if (res.data.Data !== undefined) {
+          let data = res.data.Data
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              utils.Decrypt(data[i].CustomerName)
+            }
           }
+          this_.setData({
+            CompleteList: data
+          })
+          wx.stopPullDownRefresh() //停止下拉刷新
         }
+
         //  else if (data.length == 0) {
         //   utils.Decrypt(data[0].CustomerName)
         // }
-        this_.setData({
-          CompleteList: data
-        })
-        wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
   },
@@ -236,7 +239,7 @@ Page({
           for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
-        } 
+        }
         // else if (data.length == 0) {
         //   utils.Decrypt(data[0].CustomerName)
         // }
@@ -275,7 +278,7 @@ Page({
           for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
-        } 
+        }
         // else if (data.length == 0) {
         //   utils.Decrypt(data[0].CustomerName)
         // }
@@ -296,7 +299,7 @@ Page({
   // 评价跳转页面
   Evaluate(e) {
     wx.navigateTo({
-      url: '/pages/Evaluate/Evaluate?id='+ e.currentTarget.dataset.id+"&index="+1,
+      url: '/pages/Evaluate/Evaluate?id=' + e.currentTarget.dataset.id + "&index=" + 1,
     })
   },
 
@@ -344,7 +347,7 @@ Page({
         method: 'POST',
         success: function (res) {
           console.log(res)
-          if(res.data.Data==true){
+          if (res.data.Data == true) {
             _this.DeliveryList()
             _this.wholeInfo()
             _this.EvaluateList()
@@ -355,10 +358,10 @@ Page({
             });
             // 隐藏弹框
             _this.HideModal()
-          }else{
+          } else {
             wx.showToast({
               title: "取消失败！",
-              icon:"none",
+              icon: "none",
               duration: 2000
             });
           }
