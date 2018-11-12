@@ -35,6 +35,25 @@
   </view>
   <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
 </view>
+<!-- 新增功能 -->
+<view class="InformationList" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
+  <view class="InformationList_left">
+    <image src="../../imgs/gas.png" />
+    <view class="InformationList_text">
+      <text>钢瓶信息</text>
+    </view>
+  </view>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+</view>
+<view class="InformationList" style='border-bottom: 2rpx solid #f2f2f2;'>
+  <view class="InformationList_left">
+    <image src="../../imgs/Supplier.png" />
+    <view class="InformationList_text">
+      <text>账户信息</text>
+    </view>
+  </view>
+  <image style='width:35rpx;height:35rpx;' src='../../imgs/dayu.png'></image>
+</view>
 <view class="InformationList" hidden='{{!state}}' bindtap="SublevelAccount" style="margin-top: 11rpx; border-bottom: 2rpx solid #f2f2f2;">
   <view class="InformationList_left">
     <image src="../../imgs/SublevelAccount.png" />
