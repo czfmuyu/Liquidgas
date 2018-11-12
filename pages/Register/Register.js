@@ -1,5 +1,5 @@
-  const { baseUrl } = getApp().globalData
-const baseUrls = `  `//注册接口
+const { baseUrl } = getApp().globalData
+const baseUrls = `${baseUrl}/Api/Login/AccountRegister`//注册接口
 const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
 const utils = require("../../utils/util.js")
 var app = getApp().globalData
@@ -44,7 +44,7 @@ Page({
     this_.setData({
       disabled: true
     })
-    if (this_.data.Phone == "" ) {
+    if (this_.data.Phone == "") {
       wx.showToast({
         title: '请输入手机号码',
         icon: 'none',
@@ -79,7 +79,7 @@ Page({
   },
   //获取验证码
   getVerification() {
-    let this_=this
+    let this_ = this
     wx.request({
       url: VerificationUrls,
       data: {
@@ -99,69 +99,69 @@ Page({
     let Tick = this_.data.checked
     if (this_.data.Name !== "" && this_.data.Phone !== "" && this_.data.Password !== "" && this_.data.confirmPassword !== "" && this_.data.VerificationCode !== "") {
       // if (/^[\u4e00-\u9fa5]{2,6}$/.test(this_.data.Name)) {
-        if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
-          if (/^[\w_-]{6,16}$/.test(this_.data.Password)) {
-            if (Tick) {
-              if (this_.data.Password === this_.data.confirmPassword) {
-                wx.request({
-                  url: baseUrls,
-                  data: {
-                    Sign: "",
-                    Name: utils.Encryption(this_.data.Name),
-                    Phone: utils.Encryption(this_.data.Phone),
-                    Password: utils.Encryption(this_.data.Password),
-                    VerificationCode: utils.Encryption(this_.data.VerificationCode)
-                  },
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  method: 'post',
-                  success: function (res) {
-                    console.log(res)
-                    if (res.data.Code == 200) {
-                      console.log(res.data.Data.AccountId)
-                      app.AccountId = res.data.Data
-                      wx.switchTab({//登录页面
-                        url: "/pages/HomePage/HomePage"
-                      })
-                    } else if (res.data.Code == 506) {
-                      wx.showToast({
-                        title: res.data.Msg,
-                        icon: 'none',
-                        duration: 2000
-                      });
-                    }
+      if (/^1[34578]\d{9}$/.test(this_.data.Phone)) {
+        if (/^[\w_-]{6,16}$/.test(this_.data.Password)) {
+          if (Tick) {
+            if (this_.data.Password === this_.data.confirmPassword) {
+              wx.request({
+                url: baseUrls,
+                data: {
+                  Sign: "",
+                  Name: utils.Encryption(this_.data.Name),
+                  Phone: utils.Encryption(this_.data.Phone),
+                  Password: utils.Encryption(this_.data.Password),
+                  VerificationCode: utils.Encryption(this_.data.VerificationCode)
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: 'post',
+                success: function (res) {
+                  console.log(res)
+                  if (res.data.Code == 200) {
+                    console.log(res.data.Data.AccountId)
+                    app.AccountId = res.data.Data
+                    wx.switchTab({//登录页面
+                      url: "/pages/HomePage/HomePage"
+                    })
+                  } else if (res.data.Code == 506) {
+                    wx.showToast({
+                      title: res.data.Msg,
+                      icon: 'none',
+                      duration: 2000
+                    });
+                  }
 
-                  },
-                })
-              } else {
-                wx.showToast({
-                  title: '密码不一致',
-                  icon: 'none',
-                  duration: 2000
-                });
-              }
+                },
+              })
             } else {
               wx.showToast({
-                title: '未同意条款',
+                title: '密码不一致',
                 icon: 'none',
                 duration: 2000
               });
             }
           } else {
             wx.showToast({
-              title: '请输入6-16位数字和字母的组合密码',
+              title: '未同意条款',
               icon: 'none',
               duration: 2000
             });
           }
         } else {
           wx.showToast({
-            title: '手机号码有误',
+            title: '请输入6-16位数字和字母的组合密码',
             icon: 'none',
             duration: 2000
           });
         }
+      } else {
+        wx.showToast({
+          title: '手机号码有误',
+          icon: 'none',
+          duration: 2000
+        });
+      }
       // } else {
       //   wx.showToast({
       //     title: '姓名有误',
