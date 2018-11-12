@@ -18,7 +18,7 @@
     <!-- 待维修 -->
     <view class="whole" wx:for="{{whole}}" wx:for-item="item" wx:key="UntreatedList">
       <view class="whole_top">
-        <view style="color: #999;">维修单号: {{item.Serialnumber}}</view>
+        <view style="color: #999;">维修单号 {{item.Serialnumber}}</view>
         <view style="color: #2269d4;" wx:if="{{item.Status == 10}}">待维修</view>
          <view style="color: #2269d4;" wx:elif="{{item.Status == 11}}">分配完成</view>
         <view style="color: #2269d4;" wx:elif="{{item.Status == 30}}">维修完成</view>

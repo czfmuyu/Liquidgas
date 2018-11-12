@@ -75,10 +75,6 @@ Page({
     this.setData({
       'parameter.queryKeyword': text
     })
-    // this.getmaintenance()
-    // this.UntreatedList()
-    // this.ProcessedList()
-    // this.EvaluateList()
     this.onPullDownRefresh()
   },
   //输入框清空事件
@@ -86,10 +82,6 @@ Page({
     this.setData({
       'parameter.queryKeyword': ""
     })
-    // this.getmaintenance()
-    // this.UntreatedList()
-    // this.ProcessedList()
-    // this.EvaluateList()
     this.onPullDownRefresh()
   },
   /**
@@ -436,7 +428,6 @@ Page({
         this_.getmaintenance()
         this_.ProcessedList()
         this_.UntreatedList()
-        console.log(res)
       },
     })
   },
@@ -452,9 +443,6 @@ Page({
    */
   onShow: function() {
     // 判断用户是否选择用气编号,如果没有跳会首页
-    console.log(app.GasNo.length)
-    console.log(app.Customer)
-
     if (app.GasNo.length > 1 && app.Customer.length > 1) {
       console.log("进来")
       wx.switchTab({
@@ -464,8 +452,7 @@ Page({
     }
     let _this = this
     _this.getID()
-    _this.getmaintenance()
-    
+    _this.onPullDownRefresh()
   },
 
   /**

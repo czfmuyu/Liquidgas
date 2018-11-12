@@ -1,6 +1,6 @@
 <!-- pages/Repair/Repair.wxml -->
 <scroll-view scroll-y>
-  <view class="emergency">如遇紧急安全情况,请直接拨打客服电话XXXXX</view>
+  <view class="emergency">如遇紧急安全情况,请直接拨打客服电话119</view>
   <view class="header" hidden="{{isAddress}}" bindtap="Add">
     <view class="header_left">
       <image src="../../imgs/221_03.png" />
