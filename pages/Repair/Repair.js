@@ -176,10 +176,10 @@ Page({
           })
         } else {
           wx.showToast({
-            title: "请重新提交！",
-            image: "../../imgs/xcit.png",
-            duration: 1000
-          });
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
       },
     })
@@ -232,7 +232,11 @@ Page({
             guaranteeList: guaranteeList
           })
         } else {
-          console.log("错误")
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
       },
     })
@@ -365,21 +369,29 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-          var identifier
-          let data = res.data
-          let imglists = JSON.parse(data);
-          let datalist = imglists.Data
-          imglist = imglist.concat(datalist)
-          identifier = imglist.join(',');
-          that.setData({
-            "frolist.PhotoIds": identifier,
-          })
-          // 判断当图片上传完毕后调用表单提交
-          j++
-          if (pics.length == j){
-            console.log("吃吃2222")
-            that.Submit()
-            j=0
+          if(res.data.Code==200){
+            var identifier
+            let data = res.data
+            let imglists = JSON.parse(data);
+            let datalist = imglists.Data
+            imglist = imglist.concat(datalist)
+            identifier = imglist.join(',');
+            that.setData({
+              "frolist.PhotoIds": identifier,
+            })
+            // 判断当图片上传完毕后调用表单提交
+            j++
+            if (pics.length == j) {
+              console.log("吃吃2222")
+              that.Submit()
+              j = 0
+            }
+          }else{
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              duration: 2000
+            })
           }
         },
       });

@@ -159,21 +159,29 @@ Page({
       method: 'GET',
       success: function(res) {
         console.log(res)
-        let orderData = _this.data.whole
-        let orderDatas = res.data.Data
-        // 旧数据和新数据拼接
-        orderData = orderData.concat(orderDatas)
-        for (var i = 0; orderData.length > i; i++) {
-          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
-          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
-          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
-          orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+        if(res.data.Code==200){
+          let orderData = _this.data.whole
+          let orderDatas = res.data.Data
+          // 旧数据和新数据拼接
+          orderData = orderData.concat(orderDatas)
+          for (var i = 0; orderData.length > i; i++) {
+            orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+            orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+            orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+            orderData[i].Address = util.Decrypt(orderData[i].Address)
+            orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+          }
+          _this.setData({
+            whole: orderData,
+            Maximum: res.data.Count //反回的数据条数
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
-        _this.setData({
-          whole: orderData,
-          Maximum: res.data.Count //反回的数据条数
-        })
         wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
@@ -207,21 +215,30 @@ Page({
       method: 'GET',
       success: function(res) {
         console.log(res)
-        let orderData = _this.data.UntreatedList
-        let orderDatas = res.data.Data
-        // 旧数据和新数据拼接
-        orderData = orderData.concat(orderDatas)
-        for (var i = 0; orderData.length > i; i++) {
-          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
-          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
-          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
-          orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+        if(res.data.Code==200){
+          let orderData = _this.data.UntreatedList
+          let orderDatas = res.data.Data
+          // 旧数据和新数据拼接
+          orderData = orderData.concat(orderDatas)
+          for (var i = 0; orderData.length > i; i++) {
+            orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+            orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+            orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+            orderData[i].Address = util.Decrypt(orderData[i].Address)
+            orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+          }
+          _this.setData({
+            UntreatedList: orderData,
+            TreatedMaxi: res.data.Count //反回的数据条数
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
-        _this.setData({
-          UntreatedList: orderData,
-          TreatedMaxi: res.data.Count //反回的数据条数
-        })
+        
         wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
@@ -255,21 +272,30 @@ Page({
       },
       method: 'GET',
       success: function(res) {
-        let orderData = _this.data.ProcessedList
-        let orderDatas = res.data.Data
-        // 旧数据和新数据拼接
-        orderData = orderData.concat(orderDatas)
-        for (var i = 0; orderData.length > i; i++) {
-          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
-          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
-          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
-          orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+        if(res.data.Code==200){
+          let orderData = _this.data.ProcessedList
+          let orderDatas = res.data.Data
+          // 旧数据和新数据拼接
+          orderData = orderData.concat(orderDatas)
+          for (var i = 0; orderData.length > i; i++) {
+            orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+            orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+            orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+            orderData[i].Address = util.Decrypt(orderData[i].Address)
+            orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+          }
+          _this.setData({
+            ProcessedList: orderData,
+            completeMaxi: res.data.Count //反回的数据条数
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
-        _this.setData({
-          ProcessedList: orderData,
-          completeMaxi: res.data.Count //反回的数据条数
-        })
+     
         wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
@@ -302,22 +328,29 @@ Page({
       },
       method: 'GET',
       success: function(res) {
-        let orderData = _this.data.EvaluateList
-        let orderDatas = res.data.Data
-        // 旧数据和新数据拼接
-        orderData = orderData.concat(orderDatas)
-       
-        for (var i = 0; orderData.length > i; i++) {
-          orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
-          orderData[i].Contact = util.Decrypt(orderData[i].Contact)
-          orderData[i].Phone = util.Decrypt(orderData[i].Phone)
-          orderData[i].Address = util.Decrypt(orderData[i].Address)
-          orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+        if(res.data.Code==200){
+          let orderData = _this.data.EvaluateList
+          let orderDatas = res.data.Data
+          // 旧数据和新数据拼接
+          orderData = orderData.concat(orderDatas)
+          for (var i = 0; orderData.length > i; i++) {
+            orderData[i].CustomerName = util.Decrypt(orderData[i].CustomerName)
+            orderData[i].Contact = util.Decrypt(orderData[i].Contact)
+            orderData[i].Phone = util.Decrypt(orderData[i].Phone)
+            orderData[i].Address = util.Decrypt(orderData[i].Address)
+            orderData[i].CreateTime = orderData[i].CreateTime.slice(0, 16).replace('T', ' ')
+          }
+          _this.setData({
+            EvaluateList: orderData,
+            cancelMaxi: res.data.Count //反回的数据条数
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
-        _this.setData({
-          EvaluateList: orderData,
-          cancelMaxi: res.data.Count //反回的数据条数
-        })
         wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
@@ -356,7 +389,7 @@ Page({
         },
         method: 'POST',
         success: function(res) {
-          if (res.data.Data) {
+          if (res.data.Code==200) {
             wx.showToast({
               title: "提交成功",
               duration: 1000
@@ -366,7 +399,6 @@ Page({
             _this.HideModal()
           } else {
             util.showError("提交有误请从新提交")
-            return false
           }
         },
       })
@@ -425,9 +457,17 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        this_.getmaintenance()
-        this_.ProcessedList()
-        this_.UntreatedList()
+        if(res.data.Code==200){
+          this_.getmaintenance()
+          this_.ProcessedList()
+          this_.UntreatedList()
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       },
     })
   },

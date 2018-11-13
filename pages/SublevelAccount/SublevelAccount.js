@@ -29,16 +29,25 @@ Page({
      success: res => {
        let account=res.data.Data
        console.log(res)
-       if (account.length<=0){
-         _this.setData({
-           display:"1"
-         })
+       if (res.data.Code==200){
+         if (account.length <= 0) {
+           _this.setData({
+             display: "1"
+           })
+         } else {
+           let list = res.data.Data
+           _this.setData({
+             listing: list
+           })
+         }
        }else{
-        let list=res.data.Data
-        _this.setData({
-          listing:list
-        })
+         wx.showToast({
+           title: res.data.Msg,
+           icon: 'none',
+           duration: 2000
+         })
        }
+    
      },
    })
  },

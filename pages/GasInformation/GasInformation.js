@@ -106,30 +106,38 @@ Page({
         },
         method: "POST",
         success: res => {
-          console.log(res)
+          if (res.data.Code==200){
+            let indexs = this.data.index
+            if (indexs == 0) {
+              wx.redirectTo({
+                url: '/pages/OrderAddress/OrderAddress',
+              })
+            } else if (indexs == 1) {
+              wx.switchTab({
+                url: '/pages/My/My',
+              })
+            } else {
+              wx.redirectTo({
+                url: '/pages/Repair/Repair',
+              })
+            }
+            // 提交地址的时候修改本地变量
+            app.Orderaddress.Address = this.data.address
+            app.Orderaddress.Contact = this.data.storename
+            app.Orderaddress.Latitude = this.data.latitudes
+            app.Orderaddress.Longitude = this.data.longitudes
+            app.Orderaddress.Phone = this.data.telephone
+          }else{
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              duration: 2000
+            })
+          }
         },
       })
     }
-    let indexs = this.data.index
-    if (indexs == 0) {
-      wx.redirectTo({
-        url: '/pages/OrderAddress/OrderAddress',
-      })
-    } else if (indexs == 1) {
-      wx.switchTab({
-        url: '/pages/My/My',
-      })
-    } else {
-      wx.redirectTo({
-        url: '/pages/Repair/Repair',
-      })
-    }
-    // 提交地址的时候修改本地变量
-    app.Orderaddress.Address = this.data.address
-    app.Orderaddress.Contact = this.data.storename
-    app.Orderaddress.Latitude = this.data.latitudes
-    app.Orderaddress.Longitude = this.data.longitudes
-    app.Orderaddress.Phone = this.data.telephone
+    
   },
   // 获取姓名保存到全局
   GasNumber: function (e) {

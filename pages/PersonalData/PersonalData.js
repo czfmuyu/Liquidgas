@@ -97,7 +97,19 @@ Page({
         method: 'post', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         // header: {}, // 设置请求的 header
         success: function(res){
-          console.log(res)
+          if(res.data.Code == 200){
+            wx.showToast({
+              title: "修改成功！",
+              icon: 'none',
+              duration: 2000
+            })
+          }else{
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              duration: 2000
+            })
+          }
         },
       })
     }

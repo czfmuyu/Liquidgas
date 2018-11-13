@@ -106,6 +106,12 @@ Page({
               wx.redirectTo({
                 url: "/pages/Login/Login",
               })
+            }else{
+              wx.showToast({
+                title: res.data.Msg,
+                icon: 'none',
+                duration: 2000
+              })
             }
           }
         });

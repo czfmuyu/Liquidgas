@@ -63,44 +63,52 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        let data = res.data.Data
-        console.log(data)
-        utils.Decrypt(data.Address)
-        utils.Decrypt(data.Contact)
-        utils.Decrypt(data.Phone)
-        let OrderItems = res.data.Data.OrderItems
-        for (let i = 0; i < OrderItems.length; i++) {
-          utils.Decrypt(OrderItems.ProductName)
-          utils.Decrypt(OrderItems.Price)
-          utils.Decrypt(OrderItems.Quantity)
-        }
-        let Times = data.CreateTime
-        if (Times !== null) {
-          let day = Times.slice(0, 10)
-          let time = Times.slice(11, 16)
-          console.log(day, time)
+        if (res.data.Code==200){
+          let data = res.data.Data
+          console.log(data)
+          utils.Decrypt(data.Address)
+          utils.Decrypt(data.Contact)
+          utils.Decrypt(data.Phone)
+          let OrderItems = res.data.Data.OrderItems
+          for (let i = 0; i < OrderItems.length; i++) {
+            utils.Decrypt(OrderItems.ProductName)
+            utils.Decrypt(OrderItems.Price)
+            utils.Decrypt(OrderItems.Quantity)
+          }
+          let Times = data.CreateTime
+          if (Times !== null) {
+            let day = Times.slice(0, 10)
+            let time = Times.slice(11, 16)
+            console.log(day, time)
+            this_.setData({
+              day: day,
+              time: time,
+            })
+          }
+          app.Latitude = data.Latitude;
+          app.Longitude = data.Longitude;
+          app.ServiceUserId = data.ServiceUserId;
+          app.EnterpriseId = data.EnterpriseId;
+          // app.Address = data.Address;
           this_.setData({
-            day: day,
-            time: time,
+            OrderTrackList: data,
+            goodsList: OrderItems,
+            orderId: options.id,
+            // Latitude: data.Latitude,
+            // Longitude: data.Longitude,
+            // ServiceUserId: data.ServiceUserId
+          })
+          if (this_.data.OrderTrackList.Status > 19) {
+            this_.map()
+          }
+          this_.Pagechange()
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
           })
         }
-        app.Latitude = data.Latitude;
-        app.Longitude = data.Longitude;
-        app.ServiceUserId = data.ServiceUserId;
-        app.EnterpriseId = data.EnterpriseId;
-        // app.Address = data.Address;
-        this_.setData({
-          OrderTrackList: data,
-          goodsList: OrderItems,
-          orderId: options.id,
-          // Latitude: data.Latitude,
-          // Longitude: data.Longitude,
-          // ServiceUserId: data.ServiceUserId
-        })
-        if (this_.data.OrderTrackList.Status > 19) {
-          this_.map()
-        }
-        this_.Pagechange()
       },
     })
   },
@@ -202,14 +210,22 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        console.log(res.data)
-        wx.showToast({
-          title: "确认成功",
-          duration: 2000
-        });
-        wx.switchTab({
-          url: '/pages/Order/Order',
-        })
+        if(res.data.Code==200){
+          console.log(res.data)
+          wx.showToast({
+            title: "确认成功",
+            duration: 2000
+          });
+          wx.switchTab({
+            url: '/pages/Order/Order',
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       },
     })
   },
@@ -231,15 +247,23 @@ Page({
         },
         method: 'POST',
         success: function (res) {
-          wx.showToast({
-            title: "取消成功！",
-            duration: 2000
-          });
-          // 隐藏弹框
-          this_.HideModal()
-          wx.switchTab({
-            url: '/pages/Order/Order',
-          })
+          if(res.data.Code==200){
+            wx.showToast({
+              title: "取消成功！",
+              duration: 2000
+            });
+            // 隐藏弹框
+            this_.HideModal()
+            wx.switchTab({
+              url: '/pages/Order/Order',
+            })
+          }else{
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              duration: 2000
+            })
+          }
         },
       })
     } else {

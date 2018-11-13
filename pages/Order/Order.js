@@ -203,6 +203,12 @@ Page({
             CompleteList: data
           })
           wx.stopPullDownRefresh() //停止下拉刷新
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
 
         //  else if (data.length == 0) {
@@ -239,6 +245,12 @@ Page({
           for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
         // else if (data.length == 0) {
         //   utils.Decrypt(data[0].CustomerName)
@@ -278,6 +290,12 @@ Page({
           for (let i = 0; i < data.length; i++) {
             utils.Decrypt(data[i].CustomerName)
           }
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
         // else if (data.length == 0) {
         //   utils.Decrypt(data[0].CustomerName)
@@ -407,14 +425,21 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        this_.DeliveryList()
-        this_.wholeInfo()
-        this_.CompleteList()
-        wx.showToast({
-          title: "确认成功",
-          duration: 2000
-        });
-
+        if (res.data.Code==200){
+          this_.DeliveryList()
+          this_.wholeInfo()
+          this_.CompleteList()
+          wx.showToast({
+            title: "确认成功",
+            duration: 2000
+          });
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       },
     })
   },
