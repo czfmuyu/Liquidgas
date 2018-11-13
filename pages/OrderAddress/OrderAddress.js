@@ -607,7 +607,8 @@ Page({
       item.Quantity=0
     });
     this.setData({
-      commodityList
+      commodityList,
+      isgoods: false,
     })
     this.goodsHideModal();
     this.calculateTotal();
