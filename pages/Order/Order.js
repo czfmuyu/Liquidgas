@@ -152,17 +152,25 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            utils.Decrypt(data[i].CustomerName)
+        if(res.data.Code==200){
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              utils.Decrypt(data[i].CustomerName)
+            }
           }
+          //  else if (data.length == 0) {
+          //   utils.Decrypt(data[0].CustomerName)
+          // }
+          this_.setData({
+            EvaluateList: data
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          })
         }
-        //  else if (data.length == 0) {
-        //   utils.Decrypt(data[0].CustomerName)
-        // }
-        this_.setData({
-          EvaluateList: data
-        })
         wx.stopPullDownRefresh() //停止下拉刷新
       },
 
@@ -192,17 +200,18 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res.data.Data)
-        if (res.data.Data !== undefined) {
-          let data = res.data.Data
-          if (data.length > 0) {
-            for (let i = 0; i < data.length; i++) {
-              utils.Decrypt(data[i].CustomerName)
+        if(res.data.Code==200){
+          if (res.data.Data !== undefined) {
+            let data = res.data.Data
+            if (data.length > 0) {
+              for (let i = 0; i < data.length; i++) {
+                utils.Decrypt(data[i].CustomerName)
+              }
             }
+            this_.setData({
+              CompleteList: data
+            })
           }
-          this_.setData({
-            CompleteList: data
-          })
-          wx.stopPullDownRefresh() //停止下拉刷新
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -210,7 +219,7 @@ Page({
             duration: 2000
           })
         }
-
+        wx.stopPullDownRefresh() //停止下拉刷新
         //  else if (data.length == 0) {
         //   utils.Decrypt(data[0].CustomerName)
         // }
@@ -241,23 +250,25 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            utils.Decrypt(data[i].CustomerName)
+        if(res.data.Code==200){
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              utils.Decrypt(data[i].CustomerName)
+            }
           }
-        }else{
+          // else if (data.length == 0) {
+          //   utils.Decrypt(data[0].CustomerName)
+          // }
+          this_.setData({
+            DeliveryList: data
+          })
+        } else {
           wx.showToast({
             title: res.data.Msg,
             icon: 'none',
             duration: 2000
           })
         }
-        // else if (data.length == 0) {
-        //   utils.Decrypt(data[0].CustomerName)
-        // }
-        this_.setData({
-          DeliveryList: data
-        })
         wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
@@ -286,10 +297,18 @@ Page({
       success: function (res) {
         console.log(res.data.Data)
         let data = res.data.Data
-        if (data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            utils.Decrypt(data[i].CustomerName)
+        if(res.data.Code==200){
+          if (data.length > 0) {
+            for (let i = 0; i < data.length; i++) {
+              utils.Decrypt(data[i].CustomerName)
+            }
           }
+          // else if (data.length == 0) {
+          //   utils.Decrypt(data[0].CustomerName)
+          // }
+          this_.setData({
+            wholeList: data
+          })
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -297,12 +316,6 @@ Page({
             duration: 2000
           })
         }
-        // else if (data.length == 0) {
-        //   utils.Decrypt(data[0].CustomerName)
-        // }
-        this_.setData({
-          wholeList: data
-        })
         wx.stopPullDownRefresh() //停止下拉刷新
       },
     })
