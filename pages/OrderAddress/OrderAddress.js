@@ -602,7 +602,15 @@ Page({
    * 商品对话框取消按钮点击事件
    */
   goodsCancel: function () {
+    let commodityList=this.data.commodityList
+    commodityList.forEach(item => {
+      item.Quantity=0
+    });
+    this.setData({
+      commodityList
+    })
     this.goodsHideModal();
+    this.calculateTotal();
   },
   /**
    * 商品对话框确认按钮点击事件

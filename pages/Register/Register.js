@@ -36,7 +36,6 @@ Page({
         checked: false
       })
     }
-
   },
   //点击短信验证码发送事件
   bindButtonTap() {
