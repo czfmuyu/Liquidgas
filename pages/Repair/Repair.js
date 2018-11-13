@@ -342,6 +342,7 @@ Page({
 
   //多张图片上传
   uploadimg: function(data) {
+    console.log("吃吃2222")
     let that = this
     let pics = that.data.pics;
     let imglist = that.data.identifier
@@ -369,10 +370,11 @@ Page({
         name: 'image', //这里根据自己的实际情况改key
         formData: null, //这里是上传图片时一起上传的数据
         success: (res) => {
-          if(res.data.Code==200){
+          console.log(res)
+          let data = res.data
+             let imglists = JSON.parse(data);
+          if(imglists.Code==200){
             var identifier
-            let data = res.data
-            let imglists = JSON.parse(data);
             let datalist = imglists.Data
             imglist = imglist.concat(datalist)
             identifier = imglist.join(',');
@@ -382,7 +384,6 @@ Page({
             // 判断当图片上传完毕后调用表单提交
             j++
             if (pics.length == j) {
-              console.log("吃吃2222")
               that.Submit()
               j = 0
             }
@@ -481,8 +482,6 @@ Page({
       })
     }
   },
-
-
 })
 
 
