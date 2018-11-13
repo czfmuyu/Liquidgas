@@ -1,10 +1,18 @@
 /* pages/Security/Security.wxss */
 .Security_text{
     width: 661rpx;
-    height: 720rpx;
     margin:75rpx auto;
+    font-size:27rpx;
+    line-height:37rpx;
 }
 .Security_text>image{
     width: 661rpx;
     height: 718rpx;
+}
+.text{
+    width: 100%;
+    text-align: center;
+    padding-bottom:40rpx;
+    font-size:38rpx;
+    font-weight:700;
 }

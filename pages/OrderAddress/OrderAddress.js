@@ -685,7 +685,7 @@ Page({
     let commodityList = this.data.commodityList;
     let Count = 0;
     let Price = 0;
-    let OptionsBox = this.data.OptionsBox
+    // let OptionsBox = this.data.OptionsBox
     // if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) { //瓶
     for (let i = 0; i < commodityList.length; i++) {
       let good = commodityList[i];
