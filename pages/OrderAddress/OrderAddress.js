@@ -80,16 +80,6 @@ Page({
         checked: true
       },
     ],
-    // OptionsBox: [ //瓶和公斤选择
-    //   {
-    //     name: '瓶',
-    //     checked: true
-    //   },
-    //   {
-    //     name: '公斤',
-    //     checked: false
-    //   }
-    // ],
     ProductId: "",
     AccountId: "",
     CustomerId: "",
@@ -159,9 +149,6 @@ Page({
     console.log(app.CustomerList)
     if (app.CustomerList !== null) {
       let arr = []
-      // let OptionsBox = this.data.OptionsBox
-      // if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-      //   console.log("i")
       for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
         let obj = {
           Quantity: 0,
@@ -175,29 +162,12 @@ Page({
       this.setData({
         commodityList: arr
       })
-      // } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-      //   console.log("in")
-      //   for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
-      //     let obj = {
-      //       Quantity: 0,
-      //       Price: app.CustomerList.EnterpriseProducts[j].KilogramPrice,
-      //       ProductName: app.CustomerList.EnterpriseProducts[j].ProductName,
-      //       ProductId: app.CustomerList.EnterpriseProducts[j].ProductId
-      //     }
-      //     arr.push(obj)
-      //   }
-      //   console.log(arr)
-      //   this.setData({
-      //     commodityList: arr
-      //   })
-      // }
       this.setData({
         EnterpriseName: app.CustomerList.Name,
         EnterprisePhone: app.CustomerList.Phone,
         EnterpriseAddress: app.CustomerList.Address,
         EnterpriseProducts: app.CustomerList.EnterpriseProducts,
         EnterpriseId: app.CustomerList.ID,
-        // ProductId: app.CustomerList.ProductId
       })
       this.userData()
     }
@@ -237,10 +207,8 @@ Page({
     })
     console.log(this.data)
     let arr = []
-    // let OptionsBox = this.data.OptionsBox
     // 判断app是否为null，如果是不执行下面的代码
     if (app.Customer !== null) {
-      // if (app.Customer.PurchaseType == 0) {
       console.log("渲染商品")
       for (let i = 0; i < app.Customer.CustomerDetails.length; i++) {
         let obj = {
@@ -255,34 +223,6 @@ Page({
       this.setData({
         commodityList: arr
       })
-      // }
-      // if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
-      //   for (let i = 0; i < app.Customer.CustomerDetails.length; i++) {
-      //     let obj = {
-      //       Quantity: 0,
-      //       Price: utils.Decrypt(app.Customer.CustomerDetails[i].UnitPrice),
-      //       ProductName: utils.Decrypt(app.Customer.CustomerDetails[i].ProductName),
-      //       ProductId: app.Customer.CustomerDetails[i].ProductId
-      //     }
-      //     arr.push(obj)
-      //   }
-      //   this.setData({
-      //     commodityList: arr
-      //   })
-      // } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
-      //   for (let j = 0; j < app.Customer.CustomerDetails.length; j++) {
-      //     let obj = {
-      //       Quantity: 0,
-      //       Price: utils.Decrypt(app.Customer.CustomerDetails[j].KilogramPrice),
-      //       ProductName: utils.Decrypt(app.Customer.CustomerDetails[j].ProductName),
-      //       ProductId: app.Customer.CustomerDetails[j].ProductId
-      //     }
-      //     arr.push(obj)
-      //   }
-      //   this.setData({
-      //     commodityList: arr
-      //   })
-      // }
       if (app.Orderaddress.Contact == "") {
         this.setData({
           CustomerName: utils.Decrypt(app.Customer.CustomerName),
@@ -310,22 +250,6 @@ Page({
       this.userData()
     }
   },
-  //瓶和公斤选项框点击事件
-  // OptionsBox: function (e) {////+++++++++++++++++++
-  //   var checked = e.detail.value
-  //   var changed = {}
-  //   for (var i = 0; i < this.data.OptionsBox.length; i++) {
-  //     if (checked.indexOf(this.data.OptionsBox[i].name) !== -1) {
-  //       changed['OptionsBox[' + i + '].checked'] = true
-  //     } else {
-  //       changed['OptionsBox[' + i + '].checked'] = false
-  //     }
-  //   }
-  //   console.log(changed)
-  //   this.setData(changed)
-  //   this.getData()
-  //   this.Supplier()
-  // },
   //供应商点击跳转供应商列表
   SupplierAdd() {
     wx.navigateTo({
@@ -344,13 +268,7 @@ Page({
   ConfirmSuccess() {////+++++++++++++++++++
     let this_ = this
     let PurchaseType = this_.data.PurchaseType
-    // let PrceType
     let SubscribeTime
-    // if (this_.data.PurchaseType == 0) { //购买模式判断
-    //   PrceType = 0
-    // } else if (this_.data.PurchaseType == 0) {
-    //   PrceType = 10
-    // };
     let array = this_.data.array
     let time = "";
     if (array[this_.data.index] === "立即出发") { //预约时间判断
@@ -407,37 +325,6 @@ Page({
         })
       }
     }
-    // if (OptionsBox[0].checked === true) { //瓶
-    //   for (let k = 0; k < commodityList.length; k++) {
-    //     if (commodityList[k].Quantity > 0) {
-    //       let OrderItems = {
-    //         Price: utils.Encryption(commodityList[k].Price),
-    //         Quantity: utils.Encryption(commodityList[k].Quantity),
-    //         ProductId: utils.Encryption(commodityList[k].ProductId),
-    //         Kilogram: 0
-    //       }
-    //       array1.push(OrderItems)
-    //       this_.setData({
-    //         OrderItems: array1
-    //       })
-    //     }
-    //   }
-    // } else if (OptionsBox[1].checked === true) {
-    //   for (let l = 0; l < commodityList.length; l++) {
-    //     if (commodityList[l].Quantity > 0) {
-    //       let OrderItems = {
-    //         Price: utils.Encryption(commodityList[l].Price),
-    //         Quantity: utils.Encryption(commodityList[l].Quantity),
-    //         ProductId: utils.Encryption(commodityList[l].ProductId),
-    //         Kilogram: 0
-    //       }
-    //       array1.push(OrderItems)
-    //       this_.setData({
-    //         OrderItems: array1
-    //       })
-    //     }
-    //   }
-    // }
     console.log(this_.data.OrderItems)
     console.log(app)
     if (this_.data.OrderItems == "") {
@@ -552,9 +439,7 @@ Page({
    * 支付弹出框点击事件事件
    */
   goodsPayment() {
-    // this.setData({
-    //   showPayment: true
-    // });
+    
   },
   /**
    * 支付弹出框蒙层截断touchmove事件
@@ -633,25 +518,6 @@ Page({
         goods.push(commodityList[i])
       }
     }
-    // let radio = this.data.radioItems;
-    // console.log(radio.length)
-    // let OptionsBox = this.data.OptionsBox
-    // let addpayment = this.data.addpayment
-    // if (OptionsBox[1].checked === true && OptionsBox[0].checked === false) {
-    //   if (radio.length == 2) {
-    //     radio.splice(0, 1);
-    //     this.setData({
-    //       radioItems: radio,
-    //     })
-    //   }
-    // } else if (OptionsBox[0].checked === true && OptionsBox[1].checked === false) {
-    //   if (radio.length == 1) {
-    //     radio.unshift(addpayment);
-    //     this.setData({
-    //       radioItems: radio,
-    //     })
-    //   }
-    // }
     this.setData({
       isgoods: true,
       goods: goods
@@ -703,8 +569,6 @@ Page({
     let commodityList = this.data.commodityList;
     let Count = 0;
     let Price = 0;
-    // let OptionsBox = this.data.OptionsBox
-    // if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) { //瓶
     for (let i = 0; i < commodityList.length; i++) {
       let good = commodityList[i];
       Count += parseInt(good.Quantity);
@@ -714,17 +578,6 @@ Page({
       Quantity: Count,
       Price: Price
     })
-    // } else { //公斤
-    //   for (let i = 0; i < commodityList.length; i++) {
-    //     let good = commodityList[i];
-    //     Count += parseInt(good.Quantity);
-    //     Price += good.Quantity * good.Price;
-    //   }
-    //   this.setData({
-    //     Quantity: Count,
-    //     Price: 0
-    //   })
-    // }
   },
   //预约时间Picker索引值
   bindPickerChange: function (e) {
