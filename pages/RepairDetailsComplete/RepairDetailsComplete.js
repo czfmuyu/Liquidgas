@@ -30,19 +30,19 @@ Page({
     btn: 0,
     // 要渲染的数据
     detailedlist: {},
-    photo:"",//图片路径
-    imgs:[]
+    photo: "", //图片路径
+    imgs: []
   },
 
   // 跳转评价
-  Evaluate: function () {
+  Evaluate: function() {
     wx.navigateTo({
       url: '/pages/Evaluate/Evaluate',
     })
   },
 
   // 获取取消原因
-  getdata: function (e) {
+  getdata: function(e) {
     let _this = this
     let getdatas = e.detail.value
     _this.setData({
@@ -53,7 +53,7 @@ Page({
   /**
    * 对话框确认按钮点击事件
    */
-  onConfirm: function () {
+  onConfirm: function() {
     let _this = this
     // 订单
     let tomerId = _this.data.Serialnumber
@@ -74,7 +74,7 @@ Page({
           'content-type': 'application/json'
         },
         method: 'POST',
-        success: function (res) {
+        success: function(res) {
           if (res.data.Data) {
             wx.showToast({
               title: "提交成功",
@@ -110,7 +110,7 @@ Page({
   /**
    * 隐藏模态对话框
    */
-  HideModal: function () {
+  HideModal: function() {
     this.setData({
       ShowModal: false
     });
@@ -118,13 +118,13 @@ Page({
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: function() {
     this.HideModal();
   },
 
 
   // 确认订单
-  Confirm: function () {
+  Confirm: function() {
     // 订单
     let tomerId = this.data.Serialnumber
     // 用户
@@ -141,7 +141,7 @@ Page({
         'content-type': 'application/json'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         if (res.data.Code == 200) {
           wx.switchTab({
             url: '/pages/RepairOrder/RepairOrder',
@@ -151,7 +151,7 @@ Page({
     })
   },
   // 图片预览------------------------------
-  previewImg: function (e) {
+  previewImg: function(e) {
     var data_evnt = e; //将函数事件对象传入 ，以及图片获取到的数组 
     console.log(e)
     util.imgpreview(data_evnt, this.data.imgs)
@@ -162,7 +162,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
       photo
     })
@@ -185,46 +185,52 @@ Page({
         'content-type': 'application/json'
       },
       method: 'GET',
-      success: function (res) {
-        let detailed = res.data.Data
-        console.log(detailed)
-        _this.setData({
-          detailedlist: detailed
-        })
-        // 详情图片
-        let imglist = _this.data.detailedlist.RepairPhotos
-        _this.imgs(imglist)
-        console.log(imglist)
-        _this.setData({
-          img: imglist
-        })
-
-        let footer = _this.data.detailedlist
-        console.log(footer)
-        let footerels = footer.Status
-        if (footerels == 10) {
+      success: function(res) {
+        if (res.data.Code == 200) {
+          let detailed = res.data.Data
           _this.setData({
-            btn: 2
+            detailedlist: detailed
           })
-        } else if (footerels == 31) {
+          // 详情图片
+          let imglist = _this.data.detailedlist.RepairPhotos
+          _this.imgs(imglist)
+          console.log(imglist)
           _this.setData({
-            btn: 1
+            img: imglist
           })
+          let footer = _this.data.detailedlist
+          console.log(footer)
+          let footerels = footer.Status
+          if (footerels == 10) {
+            _this.setData({
+              btn: 2
+            })
+          } else if (footerels == 31) {
+            _this.setData({
+              btn: 1
+            })
+          } else {
+            return false
+          }
         } else {
-          return false
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          });
         }
       }
     })
-   
+
   },
-  imgs(imglist){
-    let arr=[]
+  imgs(imglist) {
+    let arr = []
     for (let i = 0; imglist.length > i; i++) {
       let imgs = photo + "/?photoId=" + imglist[i].PhotoId
       arr.push(imgs)
     }
     this.setData({
-      imgs:arr
+      imgs: arr
     })
   },
 
@@ -232,14 +238,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
