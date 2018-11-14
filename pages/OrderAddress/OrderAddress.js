@@ -162,19 +162,19 @@ Page({
       // let OptionsBox = this.data.OptionsBox
       // if (OptionsBox[0].checked === true || OptionsBox[1].checked === false) {
       //   console.log("i")
-        for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
-          let obj = {
-            Quantity: 0,
-            Price: app.CustomerList.EnterpriseProducts[i].UnitPrice,
-            ProductName: app.CustomerList.EnterpriseProducts[i].ProductName,
-            ProductId: app.CustomerList.EnterpriseProducts[i].ProductId
-          }
-          arr.push(obj)
+      for (let i = 0; i < app.CustomerList.EnterpriseProducts.length; i++) {
+        let obj = {
+          Quantity: 0,
+          Price: app.CustomerList.EnterpriseProducts[i].UnitPrice,
+          ProductName: app.CustomerList.EnterpriseProducts[i].ProductName,
+          ProductId: app.CustomerList.EnterpriseProducts[i].ProductId
         }
-        console.log(arr)
-        this.setData({
-          commodityList: arr
-        })
+        arr.push(obj)
+      }
+      console.log(arr)
+      this.setData({
+        commodityList: arr
+      })
       // } else if (OptionsBox[1].checked === true || OptionsBox[0].checked === false) {
       //   console.log("in")
       //   for (let j = 0; j < app.CustomerList.EnterpriseProducts.length; j++) {
@@ -440,6 +440,15 @@ Page({
     // }
     console.log(this_.data.OrderItems)
     console.log(app)
+    if (this_.data.OrderItems == "") {
+      frequency = 0
+      wx.showToast({
+        title: "请选择商品",
+        icon: 'none',
+        duration: 2000
+      });
+      return
+    }
     wx.request({
       url: baseUrls,
       data: {
@@ -602,9 +611,9 @@ Page({
    * 商品对话框取消按钮点击事件
    */
   goodsCancel: function () {
-    let commodityList=this.data.commodityList
+    let commodityList = this.data.commodityList
     commodityList.forEach(item => {
-      item.Quantity=0
+      item.Quantity = 0
     });
     this.setData({
       commodityList,
