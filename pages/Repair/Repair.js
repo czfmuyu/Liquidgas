@@ -11,6 +11,8 @@ const Urlsimg = `${baseUrl}/Api/Files/UploadImg`
 let j=0
 // 控制用户不可以多次点击
 let frequency=0
+// 维修项目
+let Repairs=0
 Page({
   /**
    * 页面的初始数据
@@ -212,6 +214,19 @@ Page({
         })
       }
     }
+    _this.data.guaranteeList.forEach(item => {
+      if (item.Enabled !== false) {
+        Repairs++
+        if (_this.data.guaranteeList.length == Repairs){
+          Repairs=0
+          _this.setData({
+            "frolist.RepairLabelIds": ""
+          })
+        }
+      }else{
+        Repairs = 0
+      }
+    })
   },
 
 
@@ -227,6 +242,7 @@ Page({
       method: 'GET',
       success: function(res) {
         let guaranteeList = res.data.Data
+        console.log(guaranteeList)
         if (res.data.Code == 200) {
           _this.setData({
             guaranteeList: guaranteeList
