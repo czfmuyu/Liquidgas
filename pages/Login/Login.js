@@ -40,18 +40,26 @@ Page({
         method: 'post',
         success: res => {
           console.log(res)
-          if (res.data.Data == null) {
+          if(res.data.Code==200){
+            if (res.data.Data == null) {
+              wx.showToast({
+                title: '您输入的账号或密码有误',
+                icon: 'none',
+                duration: 2000
+              });
+            } else {
+              console.log(res.data.Data)
+              app.AccountId = res.data.Data
+              wx.switchTab({
+                url: '/pages/HomePage/HomePage'
+              })
+            }
+          }else{
             wx.showToast({
-              title: '您输入的账号或密码有误',
+              title: res.data.Msg,
               icon: 'none',
               duration: 2000
             });
-          } else {
-            console.log(res.data.Data)
-            app.AccountId = res.data.Data
-            wx.switchTab({
-              url: '/pages/HomePage/HomePage'
-            })
           }
         },
       })

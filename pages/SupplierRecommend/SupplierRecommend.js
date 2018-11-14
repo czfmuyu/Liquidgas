@@ -76,14 +76,22 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res)
-        let data = res.data.Data
-        for (let i = 0; i < data.length; i++) {
-          let Distance = Math.round(data[i].Distance)
-          data[i].Distance = Distance
+        if(res.data.Code==200){
+          let data = res.data.Data
+          for (let i = 0; i < data.length; i++) {
+            let Distance = Math.round(data[i].Distance)
+            data[i].Distance = Distance
+          }
+          this_.setData({
+            Suppliers: data
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          });
         }
-        this_.setData({
-          Suppliers: data
-        })
       }
     })
   },

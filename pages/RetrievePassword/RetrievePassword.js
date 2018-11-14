@@ -1,11 +1,11 @@
 let app = getApp().globalData
-const { baseUrl } = getApp().globalData
+const {
+  baseUrl
+} = getApp().globalData
 const baseUrls = app.baseUrl + '/Api/Login/ResetPassword' //忘记密码接口
-const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode`//获取验证码接口
+const VerificationUrls = `${baseUrl}/Api/Common/SendVerificationCode` //获取验证码接口
 const utils = require("../../utils/util.js")
-
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -40,7 +40,7 @@ Page({
           icon: 'none',
           duration: 2000
         });
-        const interval = setInterval(function () {
+        const interval = setInterval(function() {
           currentTime--; //每执行一次让倒计时秒数减一
           this_.setData({
             text: currentTime + "s",
@@ -67,7 +67,7 @@ Page({
       },
       method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       // header: {}, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
         console.log(res)
       },
     })
@@ -91,7 +91,7 @@ Page({
         wx.request({
           url: baseUrls,
           data: {
-            Sign:"aa",
+            Sign: "",
             Phone: this.data.phone,
             VerificationCode: this.data.Verification,
             Password: this.data.Password
@@ -101,12 +101,13 @@ Page({
           },
           method: 'post',
           success: res => {
-            console.log(res)
-            if (res.data.Data == true) {
-              wx.redirectTo({
-                url: "/pages/Login/Login",
-              })
-            }else{
+            if (res.data.Code == 200) {
+              if (res.data.Data == true) {
+                wx.redirectTo({
+                  url: "/pages/Login/Login",
+                })
+              }
+            } else {
               wx.showToast({
                 title: res.data.Msg,
                 icon: 'none',
@@ -147,56 +148,56 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -81,6 +81,12 @@ Page({
               url: "/pages/RepairOrder/RepairOrder"
             })
           }
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          });
         }
       },
     })
@@ -98,17 +104,21 @@ Page({
       // header: {}, // 设置请求的 header
       success: function (res) {
         console.log(res)
-        if (res.data.Data.length == 1) {
-          this_.setData({
-            inpt: res.data.Data[0].Content,
-            star1: res.data.Data[0].Score,
-            HiddenBtn:false
-          })
-          
+        if(res.data.Code==200){
+          if (res.data.Data.length == 1) {
+            this_.setData({
+              inpt: res.data.Data[0].Content,
+              star1: res.data.Data[0].Score,
+              HiddenBtn: false
+            })
+          }
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 2000
+          });
         }
-        // this.setData({
-        //   disabled: "disabled"
-        // })inpt
       },
     })
   },

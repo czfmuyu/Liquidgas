@@ -48,10 +48,18 @@ Page({
         // header: {}, // 设置请求的 header
         success: function(res) {
           console.log(res.data.Data)
-          app.Customer = res.data.Data
-          this_.setData({
-            Gas: res.data.Data.GasNo
-          })
+          if(res.data.Code==200){
+            app.Customer = res.data.Data
+            this_.setData({
+              Gas: res.data.Data.GasNo
+            })
+          }else{
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              duration: 2000
+            });
+          }          
         },
       })
     } 
